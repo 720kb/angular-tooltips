@@ -68,29 +68,29 @@ Angularjs tooltips allows you to use some options via `attribute`  data
 
 ####Tooltip position
 You can set your tooltip to show on `left` or `right` or `top` or `bottom` position
-using the `tooltips-side=""` attribute
+using the `tooltip-side=""` attribute
 ```html
-<a href="#" tooltips tooltips-side="top">Tooltip me</a>
-<a href="#" tooltips tooltips-side="bottom">Tooltip me</a>
-<a href="#" tooltips tooltips-side="left">Tooltip me</a>
-<a href="#" tooltips tooltips-side="right">Tooltip me</a>
+<a href="#" tooltips tooltip-side="top">Tooltip me</a>
+<a href="#" tooltips tooltip-side="bottom">Tooltip me</a>
+<a href="#" tooltips tooltip-side="left">Tooltip me</a>
+<a href="#" tooltips tooltip-side="right">Tooltip me</a>
 ```
 ####Tooltip content
 You can set your tooltip content (text/html doesn't matter)
-using the `tooltips-content=""` attribute
+using the `tooltip-content=""` attribute
 
 ```html
-<a href="#" tooltips tooltips-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips tooltip-content="<i>Woa!</i>">Tooltip me</a>
 ```
 
 ####Tooltip size
 You can set your tooltip size (small || medium || large)
-using the `tooltips-size=""` attribute
+using the `tooltip-size=""` attribute
 
 ```html
-<a href="#" tooltips tooltips-size="small">Tooltip me</a>
-<a href="#" tooltips tooltips-size="medium">Tooltip me</a>
-<a href="#" tooltips tooltips-size="large">Tooltip me</a>
+<a href="#" tooltips tooltip-size="small">Tooltip me</a>
+<a href="#" tooltips tooltip-size="medium">Tooltip me</a>
+<a href="#" tooltips tooltip-size="large">Tooltip me</a>
 ```
 
 ## Example
