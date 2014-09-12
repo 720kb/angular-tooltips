@@ -114,10 +114,10 @@
 
         $scope.initTooltip(side);
 
-        $window.onresize =  function () {
+         angular.element($window).bind('resize', function () {
           
           $scope.initTooltip(side);
-        };
+        });
       }
     };
   }]);
