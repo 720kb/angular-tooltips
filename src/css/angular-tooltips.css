@@ -11,15 +11,15 @@
   border-radius:3px;
 }
 .tooltip.tooltip-small {
-  padding:0.6% 1%;
+  padding:4.5px 10px;
   font-size: 12px;
 }
 .tooltip.tooltip-medium {
-  padding:0.6% 1.2%;
+  padding:7px 15px;
   font-size: 13.5px;
 }
 .tooltip.tooltip-large {
-  padding:1% 2%;
+  padding:10px 20px;
   font-size: 14px;
 }
 .tooltip.tooltip-open {
