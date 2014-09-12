@@ -22,8 +22,8 @@
           , theTooltipMargin //used both for margin top left right bottom
           , theTooltipCaret
           , content = attr.tooltipContent || 'Some content !?'
-          , side = attr.tooltipsSide || 'top'
-          , size = attr.tooltipsSize || 'medium'
+          , side = attr.tooltipSide || 'top'
+          , size = attr.tooltipSize || 'medium'
           , height = element[0].offsetHeight
           , width = element[0].offsetWidth
           , offsetTop = element[0].offsetTop
