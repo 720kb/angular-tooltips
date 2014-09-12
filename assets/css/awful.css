@@ -24,8 +24,12 @@ body {
   max-width: 600px;
 }
 /*Colors*/
-.color-azure{
-  color:#14D6AF;
+.color-purple{
+  color:#8825FA;
+}
+/*Backgrounds*/
+.bg-purple {
+  background-color: #8825FA;
 }
 /*Extra*/
 code.hljs{
