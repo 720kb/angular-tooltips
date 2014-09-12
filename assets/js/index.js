@@ -5,6 +5,13 @@
 
   angular.module('720kb', [
     'ngRoute',
-    '720kb.tooltips'
-  ]);
+    '720kb.tooltips',
+    'hljs'
+  ]).config(['hljsServiceProvider', function (hljsServiceProvider) {
+
+  	hljsServiceProvider.setOptions({
+      // replace tab with 4 spaces
+      tabReplace: ''
+    });
+  }]);
 }(angular));
