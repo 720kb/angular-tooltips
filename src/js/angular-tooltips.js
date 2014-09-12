@@ -4,10 +4,11 @@
 
   angular.module('720kb.tooltips', [])
   .directive('tooltips',[ '$window', '$compile', function manageDirective($window, $compile) {
-
-    var TOOLTIP_X_PADDING = 7 //px
-      ,  TOOLTIP_Y_PADDING = 0; //px
     
+    var TOOLTIP_SMALL_MARGIN = 8 //px
+      , TOOLTIP_MEDIUM_MARGIN = 9 //px
+      , TOOLTIP_LARGE_MARGIN = 10 //px;
+
     return {
       'restrict': 'A',
       'scope': {},
@@ -16,21 +17,29 @@
         var thisElement  = angular.element(element[0])
           , theTooltip
           , theTooltipElement
-          , theTooltipWidth
           , theTooltipHeight
+          , theTooltipWidth
           , theTooltipMargin //used both for margin top left right bottom
+          , theTooltipCaret
+          , content = attr.tooltipContent || 'Some content !?'
           , side = attr.tooltipsSide || 'top'
           , size = attr.tooltipsSize || 'medium'
           , height = element[0].offsetHeight
+          , width = element[0].offsetWidth
           , offsetTop = element[0].offsetTop
           , offsetLeft = element[0].offsetLeft
-          , htmlTemplate = '<div class="tooltip" ng-class="{\'tooltip-small\': tooltipSize === \'small\',\'tooltip-medium\': tooltipSize === \'medium\',\'tooltip-large\': tooltipSize === \'large\' }">tooltip</div>';
+          , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' + content + ' <span class="tooltip-caret"></span></div>';
+
         //create tooltip
         thisElement.after($compile(htmlTemplate)($scope));
         //get tooltip element
         theTooltip = element[0].nextSibling;
         theTooltipElement = angular.element(theTooltip);
-        
+        //get tooltip dimension
+        theTooltipHeight =  theTooltipElement[0].offsetHeight;
+        theTooltipWidth =  theTooltipElement[0].offsetWidth;
+        theTooltipCaret = angular.element(theTooltipElement[0].lastChild);
+
         thisElement.bind('mouseenter mouseover', function () {
           
           $scope.showTooltip();
@@ -51,61 +60,48 @@
           theTooltip.classList.remove('tooltip-open');
         };
 
-        $scope.setTooltipSize = function setTooltipSize (size) {
-          //get tooltip dimension
-          theTooltipWidth =  theTooltipElement[0].offsetWidth + TOOLTIP_X_PADDING /*some padding*/;
-          theTooltipHeight =  theTooltipElement[0].offsetHeight + TOOLTIP_Y_PADDING /*some padding*/;
-          $scope.tooltipSize = size;
-        };
-
         $scope.tooltipPositioning = function tooltipPositioning (side) {
-          console.log(size);
+          
           if (size === 'small') {
 
-              theTooltipMargin = 0 //px
+              theTooltipMargin = TOOLTIP_SMALL_MARGIN
 
           } else if (size === 'medium') {
 
-             theTooltipMargin =  8 //px
+             theTooltipMargin =  TOOLTIP_MEDIUM_MARGIN
 
           } else if (size === 'large') {
 
-             theTooltipMargin = 28 //px
+             theTooltipMargin = TOOLTIP_LARGE_MARGIN
           }
 
           if (side === 'left') {
-            
-            theTooltipElement.css('top', ((offsetTop + (height/2))) + 'px');
+
+            theTooltipElement.css('top', ((offsetTop + (height/2)) - (theTooltipHeight/2)) + 'px');
             theTooltipElement.css('left', offsetLeft + 'px');
-            
-            /*if (height > theTooltipHeight) {
-
-            theTooltipElement.css('margin-top', '-' + ((height/2) - (theTooltipHeight/2)) + 'px');
-            } else {
-
-            theTooltipElement.css('margin-top', '-' + ((height/2) + (theTooltipHeight/2)) + 'px');
-            }*/
-
             theTooltipElement.css('margin-left', '-' + (theTooltipWidth + theTooltipMargin) + 'px');
           }
 
           if (side === 'right') {
-            
-            theTooltipElement.css('top', offsetTop + 'px');
-            theTooltipElement.css('right', offsetLeft + 'px');
-            
-            if (height > theTooltipHeight) {
 
-            theTooltipElement.css('margin-top', '+' + ((height/2) - (theTooltipHeight/4)) + 'px');
-            } else {
-
-            theTooltipElement.css('margin-top', '+' + ((theTooltipHeight/4) - (height/2)) + 'px');
-            }
-
-            theTooltipElement.css('margin-right', '-' + (theTooltipWidth + theTooltipMargin) + 'px');
+            theTooltipElement.css('top', ((offsetTop + (height/2)) - (theTooltipHeight/2)) + 'px');
+            theTooltipElement.css('left', (offsetLeft + width + theTooltipMargin) + 'px');
           }
+
+          if (side === 'top') {
+
+            theTooltipElement.css('top', (offsetTop - theTooltipMargin - theTooltipHeight) + 'px');
+            theTooltipElement.css('left', (offsetLeft + (width/2)) - (theTooltipWidth/2) + 'px');
+          }
+
+          if (side === 'bottom') {
+
+            theTooltipElement.css('top', (offsetTop + height + theTooltipMargin) + 'px');
+            theTooltipElement.css('left', (offsetLeft + (width/2)) - (theTooltipWidth/2) + 'px');
+          }
+
         };
-        $scope.setTooltipSize(size);
+
         $scope.tooltipPositioning(side);
         }
       };
