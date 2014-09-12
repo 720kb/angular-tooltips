@@ -61,50 +61,77 @@
       <div class="separator15"></div>
       <h4>Html</h4>
       <small class="font-medium font-small color-muted">
-        Wrap your input into the tooltips element
+        Add the <b>tooltips</b> attribute to any of your elements
       </small>
       <div class="separator10"></div>
-      <code hljs="">
-        <tooltips> 
-          <input ng-model="date" type="text"/>
-        </tooltips>
-      </code>
+<code hljs="">
+<a href="" tooltips>Hover me</a>
+
+</code>
       <div class="separator15"></div>
       <h4>Javascript</h4>
       <small class="font-medium font-small color-muted">
         Add the tooltips module dependency
       </small>
       <div class="separator10"></div>
-      <code hljs="">
-        angular.module('app', [
-        '720kb.tooltips'
-        ]);
-      </code>
+<code hljs="">
+  angular.module('app', [
+  '720kb.tooltips'
+  ]);
+
+</code>
       <div class="separator30"></div>
       <h2>Options</h2>
       <div class="separator15"></div>
-      <h4>Date format</h4>
+      <h4>Tooltip position</h4>
       <small class=" font-small color-muted">
-        All the accepted date formats can be found  
-        <a class="font-small" href="https://docs.angularjs.org/api/ng/filter/date" target="_blank">
-          here
-        </a>
+        You can set your tooltip to show on
+        <i class="font-bold">left</i> or
+        <i class="font-bold">right</i> or 
+        <i class="font-bold">top</i> or 
+        <i class="font-bold">bottom</i> 
+          position using the <b>tooltips-side=""</b> attribute
       </small>
       <div class="separator15"></div>
-      <code hljs="">
-        date-format="{{pattern}}"
-      </code>
+<code hljs="">
+<a href="#" tooltips tooltips-side="top">Tooltip me</a>
+<a href="#" tooltips tooltips-side="bottom">Tooltip me</a>
+<a href="#" tooltips tooltips-side="left">Tooltip me</a>
+<a href="#" tooltips tooltips-side="right">Tooltip me</a>
+
+</code>
       <div class="separator15"></div>
       <h4>
-        Customize buttons
+        Tooltip content
       </h4>
       <small class="font-small color-muted">
-        Just a FontAwesome buttons example
+        You can set your tooltip content (text/html doesn't matter)
+using the <b>tooltips-content=""</b> attribute
       </small>
-      <code hljs="">
-        button-prev="<i class='fa fa-arrow-left'></i>"
-        button-next="<i class='fa fa-arrow-right'></i>"
-      </code>
+<code hljs="">
+<a href="#" tooltips tooltips-content="<i>Woa!</i>">
+  Hover me
+</a>
+
+</code>
+      <div class="separator15"></div>
+      <h4>
+        Tooltip size
+      </h4>
+      <small class="font-small color-muted">
+        You can set your tooltip size  (
+        <i class="font-bold">small</i> or
+        <i class="font-bold">medium</i> or
+        <i class="font-bold">large</i>
+        )
+using the <b>tooltips-size=""</b> attribute
+      </small>
+<code hljs="">
+<a href="#" tooltips tooltips-size="small">Tooltip me</a>
+<a href="#" tooltips tooltips-size="medium">Tooltip me</a>
+<a href="#" tooltips tooltips-size="large">Tooltip me</a>
+
+</code>
     </div>
   </div>
   <!--footer-->
