@@ -21,25 +21,35 @@
           , theTooltipWidth
           , theTooltipMargin //used both for margin top left right bottom
           , theTooltipCaret
+          , height
+          , width
+          , offsetTop
+          , offsetLeft
           , content = attr.tooltipContent || 'Some content !?'
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
-          , height = element[0].offsetHeight
-          , width = element[0].offsetWidth
-          , offsetTop = element[0].offsetTop
-          , offsetLeft = element[0].offsetLeft
-          , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' + content + ' <span class="tooltip-caret"></span></div>';
-
-        //create tooltip
+          , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' + content + ' <span class="tooltip-caret"></span></div>'
+          
+        //create the tooltip
         thisElement.after($compile(htmlTemplate)($scope));
         //get tooltip element
         theTooltip = element[0].nextSibling;
         theTooltipElement = angular.element(theTooltip);
-        //get tooltip dimension
-        theTooltipHeight =  theTooltipElement[0].offsetHeight;
-        theTooltipWidth =  theTooltipElement[0].offsetWidth;
-        theTooltipCaret = angular.element(theTooltipElement[0].lastChild);
 
+        $scope.initTooltip = function getInfos (side) {
+
+            height = element[0].offsetHeight
+            width = element[0].offsetWidth
+            offsetTop = element[0].offsetTop
+            offsetLeft = element[0].offsetLeft
+            //get tooltip dimension
+            theTooltipHeight =  theTooltipElement[0].offsetHeight;
+            theTooltipWidth =  theTooltipElement[0].offsetWidth;
+            theTooltipCaret = angular.element(theTooltipElement[0].lastChild);
+            
+            $scope.tooltipPositioning(side);
+        };
+        
         thisElement.bind('mouseenter mouseover', function () {
           
           $scope.showTooltip();
@@ -102,8 +112,13 @@
 
         };
 
-        $scope.tooltipPositioning(side);
-        }
-      };
+        $scope.initTooltip(side);
+
+         angular.element($window).bind('resize', function () {
+          
+          $scope.initTooltip(side);
+        });
+      }
+    };
   }]);
 }(angular));
