@@ -68,7 +68,7 @@ Angularjs tooltips allows you to use some options via `attribute`  data
 
 ####Tooltip position
 You can set your tooltip to show on `left` or `right` or `top` or `bottom` position
-via the `tooltips-side=""` attribute
+using the `tooltips-side=""` attribute
 ```html
 <a href="#" tooltips tooltips-side="top">Tooltip me</a>
 <a href="#" tooltips tooltips-side="bottom">Tooltip me</a>
@@ -77,15 +77,15 @@ via the `tooltips-side=""` attribute
 ```
 ####Tooltip content
 You can set your tooltip content (text/html doesn't matter)
-via the `tooltips-content=""` attribute
+using the `tooltips-content=""` attribute
 
 ```html
 <a href="#" tooltips tooltips-content="<i>Woa!</i>">Tooltip me</a>
 ```
 
-####Tooltip content
-You can set your tooltip size
-via the `tooltips-size=""` attribute
+####Tooltip size
+You can set your tooltip size (small || medium || large)
+using the `tooltips-size=""` attribute
 
 ```html
 <a href="#" tooltips tooltips-size="small">Tooltip me</a>
