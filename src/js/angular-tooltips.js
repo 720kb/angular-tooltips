@@ -26,7 +26,7 @@
           , offsetTop
           , offsetLeft
           , title = attr.title || ''
-          , content = attr.tooltipContent || 'Some content !?'
+          , content = attr.tooltipContent || ''
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
           , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '"><div class="tooltip-title"> ' + title + '</div>' + content + ' <span class="tooltip-caret"></span></div>'
