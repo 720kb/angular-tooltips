@@ -31,7 +31,7 @@ IE    ![mmm](http://i.imgur.com/iAIwqCL.png)
 
 ## Load
 
-To use the directive, include the javascript and css files of Angularjs Tooltips in your web page:
+To use the directive, include the angular tooltips's javascript and css files in your web page:
 
 ```html
 <!DOCTYPE HTML>
@@ -95,7 +95,7 @@ using the `tooltip-size=""` attribute
 
 ## Example
 
-###[Live demo](https://720kb.github.io/angularjs-tooltips)
+###[Live demo](https://720kb.github.io/angular-tooltips)
 
 
 ##Contributing
