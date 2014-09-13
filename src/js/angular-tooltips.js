@@ -25,17 +25,18 @@
           , width
           , offsetTop
           , offsetLeft
+          , title = attr.title || ''
           , content = attr.tooltipContent || 'Some content !?'
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
-          , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' + content + ' <span class="tooltip-caret"></span></div>'
+          , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '"><div class="tooltip-title"> ' + title + '</div>' + content + ' <span class="tooltip-caret"></span></div>'
           
         //create the tooltip
         thisElement.after($compile(htmlTemplate)($scope));
         //get tooltip element
         theTooltip = element[0].nextSibling;
         theTooltipElement = angular.element(theTooltip);
-
+        
         $scope.initTooltip = function getInfos (side) {
 
             height = element[0].offsetHeight

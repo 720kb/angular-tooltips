@@ -13,7 +13,7 @@ The Angularjs Tooltips is developed by [720kb](http://720kb.net).
 AngularJS v1.2+
 
 ##Screen
-![Angularjs tooltips](http://i.imgur.com/44ut0ET.png)
+![Angularjs tooltips](http://i.imgur.com/2rOwAbQ.png)
 
 ###Browser support
 
@@ -60,7 +60,7 @@ Call the directive wherever you want in your html page
 
 ```html
 
-<a href="#" tooltips>Tooltip me</a>
+<a href="#" tooltips title="tooltip">Tooltip me</a>
 
 ```
 ##Options
@@ -68,29 +68,29 @@ Angularjs tooltips allows you to use some options via `attribute`  data
 
 ####Tooltip position
 You can set your tooltip to show on `left` or `right` or `top` or `bottom` position
-using the `tooltips-side=""` attribute
+using the `tooltip-side=""` attribute
 ```html
-<a href="#" tooltips tooltips-side="top">Tooltip me</a>
-<a href="#" tooltips tooltips-side="bottom">Tooltip me</a>
-<a href="#" tooltips tooltips-side="left">Tooltip me</a>
-<a href="#" tooltips tooltips-side="right">Tooltip me</a>
+<a href="#" tooltips tooltip-side="top">Tooltip me</a>
+<a href="#" tooltips tooltip-side="bottom">Tooltip me</a>
+<a href="#" tooltips tooltip-side="left">Tooltip me</a>
+<a href="#" tooltips tooltip-side="right">Tooltip me</a>
 ```
 ####Tooltip content
 You can set your tooltip content (text/html doesn't matter)
-using the `tooltips-content=""` attribute
+using the `tooltip-content=""` attribute
 
 ```html
-<a href="#" tooltips tooltips-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips title="Tooltip" tooltip-content="<i>Woa!</i>">Tooltip me</a>
 ```
 
 ####Tooltip size
 You can set your tooltip size (small || medium || large)
-using the `tooltips-size=""` attribute
+using the `tooltip-size=""` attribute
 
 ```html
-<a href="#" tooltips tooltips-size="small">Tooltip me</a>
-<a href="#" tooltips tooltips-size="medium">Tooltip me</a>
-<a href="#" tooltips tooltips-size="large">Tooltip me</a>
+<a href="#" tooltips tooltip-size="small">Tooltip me</a>
+<a href="#" tooltips tooltip-size="medium">Tooltip me</a>
+<a href="#" tooltips tooltip-size="large">Tooltip me</a>
 ```
 
 ## Example

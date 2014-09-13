@@ -10,6 +10,12 @@
   -moz-border-radius:3px;
   border-radius:3px;
 }
+.tooltip-title{
+  color:rgba(255,255,255,0.95);
+  font-weight: 500;
+  width: 100%;
+  clear:both;
+}
 .tooltip.tooltip-small {
   padding:4.5px 10px;
   font-size: 12px;
