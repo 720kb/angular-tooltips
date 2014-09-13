@@ -25,14 +25,14 @@
         <div class="col5">
           <div class="col5">
             <div class="line-compress">
-              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" tooltip-content="Left tooltip" tooltip-side="left">
+              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" title="Left tooltip" tooltip-side="left">
                 Left
               </a>
             </div>
           </div>
           <div class="col5">
             <div class="line-compress">
-              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" tooltip-content="Top tooltip" tooltip-side="top">
+              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" title="Top tooltip" tooltip-side="top" >
                 Top
               </a>
             </div>
@@ -41,14 +41,14 @@
         <div class="col5">
           <div class="col5">
             <div class="line-compress">
-              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" tooltip-content="Bottom tooltip" tooltip-side="bottom">
+              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" title="Bottom tooltip" tooltip-side="bottom">
                 Bottom
               </a>
             </div>
           </div>
           <div class="col5">
             <div class="line-compress">
-              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" tooltip-content="Right tooltip" tooltip-side="right">
+              <a class="btn btn-medium center-content radius3 bg-purple color-white" tooltips tooltip-size="medium" title="Right tooltip" tooltip-side="right">
                 Right
               </a>
             </div>
@@ -65,7 +65,7 @@
       </small>
       <div class="separator10"></div>
 <code hljs="">
-<a href="" tooltips>Hover me</a>
+<a href="" tooltips title="tooltip">Hover me</a>
 
 </code>
       <div class="separator15"></div>
@@ -90,14 +90,14 @@
         <i class="font-bold">right</i> or 
         <i class="font-bold">top</i> or 
         <i class="font-bold">bottom</i> 
-          position using the <b>tooltips-side=""</b> attribute
+          position using the <b>tooltip-side=""</b> attribute
       </small>
       <div class="separator15"></div>
 <code hljs="">
-<a href="#" tooltips tooltips-side="top">Tooltip me</a>
-<a href="#" tooltips tooltips-side="bottom">Tooltip me</a>
-<a href="#" tooltips tooltips-side="left">Tooltip me</a>
-<a href="#" tooltips tooltips-side="right">Tooltip me</a>
+<a href="#" tooltips title="title" tooltip-side="top">Top</a>
+<a href="#" tooltips title="title" tooltip-side="bottom">Bottom</a>
+<a href="#" tooltips title="title" tooltip-side="left">Left</a>
+<a href="#" tooltips title="title" tooltip-side="right">Right</a>
 
 </code>
       <div class="separator15"></div>
@@ -106,10 +106,10 @@
       </h4>
       <small class="font-small color-muted">
         You can set your tooltip content (text/html doesn't matter)
-using the <b>tooltips-content=""</b> attribute
+using the <b>tooltip-content=""</b> attribute
       </small>
 <code hljs="">
-<a href="#" tooltips tooltips-content="<i>Woa!</i>">
+<a href="#" tooltips title="title" tooltip-content="<i>Woa!</i>">
   Hover me
 </a>
 
@@ -124,12 +124,12 @@ using the <b>tooltips-content=""</b> attribute
         <i class="font-bold">medium</i> or
         <i class="font-bold">large</i>
         )
-using the <b>tooltips-size=""</b> attribute
+using the <b>tooltip-size=""</b> attribute
       </small>
 <code hljs="">
-<a href="#" tooltips tooltips-size="small">Tooltip me</a>
-<a href="#" tooltips tooltips-size="medium">Tooltip me</a>
-<a href="#" tooltips tooltips-size="large">Tooltip me</a>
+<a href="#" tooltips title="title" tooltip-size="small">Small</a>
+<a href="#" tooltips title="title" tooltip-size="medium">Medium</a>
+<a href="#" tooltips title="title" tooltip-size="large">Large</a>
 
 </code>
     </div>
