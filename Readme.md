@@ -60,7 +60,7 @@ Call the directive wherever you want in your html page
 
 ```html
 
-<a href="#" tooltips>Tooltip me</a>
+<a href="#" tooltips title="tooltip">Tooltip me</a>
 
 ```
 ##Options
@@ -80,7 +80,7 @@ You can set your tooltip content (text/html doesn't matter)
 using the `tooltip-content=""` attribute
 
 ```html
-<a href="#" tooltips tooltip-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips title="Tooltip" tooltip-content="<i>Woa!</i>">Tooltip me</a>
 ```
 
 ####Tooltip size
