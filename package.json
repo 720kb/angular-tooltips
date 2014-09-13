@@ -2,7 +2,7 @@
   "name": "angular-tooltips",
   "version": "0.1.1",
   "description": "A tooltips directive for angularjs.",
-  "homepage": "none-atm",
+  "homepage": "http://720kb.github.io/angular-tooltips",
   "keywords": [
     "date",
     "tooltips",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "none-atm"
+    "url": "https://github.com/720kb/angular-tooltips.git"
   },
   "license": "MIT",
   "devDependencies": {
