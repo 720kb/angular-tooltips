@@ -1,11 +1,11 @@
-AngularJS Tooltips
+Angular Tooltips
 ==================
 
 
-Angularjs Tooltips is a pure angularjs directive that generates a tooltip calendar on your element.
+Angular Tooltips is an angularjs directive that generates a tooltip on your element.
 
 
-The Angularjs Tooltips is developed by [720kb](http://720kb.net).
+The angular tooltips is developed by [720kb](http://720kb.net).
 
 ##Requirements
 
@@ -13,7 +13,7 @@ The Angularjs Tooltips is developed by [720kb](http://720kb.net).
 AngularJS v1.2+
 
 ##Screen
-![Angularjs tooltips](http://i.imgur.com/2rOwAbQ.png)
+![Angular tooltips](http://i.imgur.com/2rOwAbQ.png)
 
 ###Browser support
 
@@ -37,11 +37,11 @@ To use the directive, include the javascript and css files of Angularjs Tooltips
 <!DOCTYPE HTML>
 <html>
 <head>
-  <script src="src/js/angular-tooltips.js"></script>
   <link href="src/css/angular-tooltips.css" rel="stylesheet" type="text/css" />
 </head>
 <body ng-app="app">
- //.....
+  //.....
+  <script src="src/js/angular-tooltips.js"></script>
 </body>
 </html>
 ```
@@ -64,7 +64,7 @@ Call the directive wherever you want in your html page
 
 ```
 ##Options
-Angularjs tooltips allows you to use some options via `attribute`  data
+Angular tooltips allows you to use some options via `attribute` data
 
 ####Tooltip position
 You can set your tooltip to show on `left` or `right` or `top` or `bottom` position
@@ -100,7 +100,7 @@ using the `tooltip-size=""` attribute
 
 ##Contributing
 
-We will be much greatful if you help us making this project to grow up. 
+We will be much greatful if you help us making this project to grow up.
 Feel free to contribute by forking, opening issues, pull requests etc.
 
 ## License

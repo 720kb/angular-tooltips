@@ -1,6 +1,6 @@
 /*global angular*/
 
-(function (angular) {
+(function withAngular(angular) {
   'use strict';
 
   angular.module('720kb', [

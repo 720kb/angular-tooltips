@@ -20,7 +20,6 @@
           , theTooltipHeight
           , theTooltipWidth
           , theTooltipMargin //used both for margin top left right bottom
-          //, theTooltipCaret
           , height
           , width
           , offsetTop
@@ -49,7 +48,6 @@
             //get tooltip dimension
             theTooltipHeight =  theTooltipElement[0].offsetHeight;
             theTooltipWidth =  theTooltipElement[0].offsetWidth;
-            //theTooltipCaret = angular.element(theTooltipElement[0].lastChild);
 
             $scope.tooltipPositioning(side);
         };
