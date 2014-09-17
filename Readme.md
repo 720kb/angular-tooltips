@@ -97,6 +97,8 @@ using the `tooltip-size=""` attribute
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)
 
+##Theming
+You can edit the default Css file `angular-tooltips.css` if you want to make a new theme for the tooltips.
 
 ##Contributing
 
