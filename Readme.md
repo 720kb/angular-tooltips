@@ -51,7 +51,7 @@ To use the directive, include the angular tooltips's javascript and css files in
 ###Bower installation
 
 ```
-$ bower install angularjs-datepicker --save
+$ bower install angular-tooltips --save
 ```
 
 _then load the js files in your html_
