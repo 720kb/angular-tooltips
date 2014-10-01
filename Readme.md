@@ -47,6 +47,17 @@ To use the directive, include the angular tooltips's javascript and css files in
 ```
 
 ##Install
+
+###Bower installation
+
+```
+$ bower install angularjs-datepicker --save
+```
+
+_then load the js files in your html_
+
+###Add module dependency
+
 Add the 720kb.tooltips module dependency
 
 ```js
