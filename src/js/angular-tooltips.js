@@ -1,6 +1,7 @@
 /*global angular*/
 
 (function withAngular(angular) {
+  'use strict';
 
   angular.module('720kb.tooltips', [])
   .directive('tooltips', ['$window', '$compile', function manageDirective($window, $compile) {
@@ -14,7 +15,7 @@
       'scope': {},
       'link': function linkingFunction($scope, element, attr) {
 
-        var thisElement  = angular.element(element[0])
+        var thisElement = angular.element(element[0])
           , theTooltip
           , theTooltipElement
           , theTooltipHeight
@@ -46,8 +47,8 @@
             offsetTop = element[0].offsetTop;
             offsetLeft = element[0].offsetLeft;
             //get tooltip dimension
-            theTooltipHeight =  theTooltipElement[0].offsetHeight;
-            theTooltipWidth =  theTooltipElement[0].offsetWidth;
+            theTooltipHeight = theTooltipElement[0].offsetHeight;
+            theTooltipWidth = theTooltipElement[0].offsetWidth;
 
             $scope.tooltipPositioning(side);
         };
@@ -82,7 +83,7 @@
 
           } else if (size === 'medium') {
 
-            theTooltipMargin =  TOOLTIP_MEDIUM_MARGIN;
+            theTooltipMargin = TOOLTIP_MEDIUM_MARGIN;
 
           } else if (size === 'large') {
 

@@ -1,5 +1,6 @@
 /*global module, require*/
 (function setUp(module, require) {
+  'use strict';
 
   var banner = ['/*!',
       ' * Angular Tooltips v<%= pkg.version %>',
