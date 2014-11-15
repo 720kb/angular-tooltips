@@ -1,5 +1,6 @@
 /*global module*/
 (function setUp(module) {
+  'use strict';
 
   module.exports = function doGrunt(grunt) {
 
