@@ -1,6 +1,7 @@
 <!doctype html>
 <html ng-app="720kb">
 <head>
+  <meta name="description" content="Angular.js tooltips directive that generates tooltips on your elements, tip tip!">
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="//720kb.github.io/csshelper/assets/ext/src/helper.css">
   <link rel="stylesheet" type="text/css" href="//yastatic.net/highlightjs/8.2/styles/vs.min.css">
@@ -64,22 +65,22 @@
         Add the <b>tooltips</b> attribute to any of your elements
       </small>
       <div class="separator10"></div>
-<code hljs="">
-<a href="" tooltips title="tooltip">Hover me</a>
+      <code hljs="">
+        <a href="" tooltips title="tooltip">Hover me</a>
 
-</code>
+      </code>
       <div class="separator15"></div>
       <h4>Javascript</h4>
       <small class="font-medium font-small color-muted">
         Add the tooltips module dependency
       </small>
       <div class="separator10"></div>
-<code hljs="">
-  angular.module('app', [
-  '720kb.tooltips'
-  ]);
+      <code hljs="">
+        angular.module('app', [
+        '720kb.tooltips'
+        ]);
 
-</code>
+      </code>
       <div class="separator30"></div>
       <h2>Options</h2>
       <div class="separator15"></div>
@@ -90,31 +91,31 @@
         <i class="font-bold">right</i> or
         <i class="font-bold">top</i> or
         <i class="font-bold">bottom</i>
-          position using the <b>tooltip-side=""</b> attribute
+        position using the <b>tooltip-side=""</b> attribute
       </small>
       <div class="separator10"></div>
-<code hljs="">
-<a href="#" tooltips title="title" tooltip-side="top">Top</a>
-<a href="#" tooltips title="title" tooltip-side="bottom">Bottom</a>
-<a href="#" tooltips title="title" tooltip-side="left">Left</a>
-<a href="#" tooltips title="title" tooltip-side="right">Right</a>
+      <code hljs="">
+        <a href="#" tooltips title="title" tooltip-side="top">Top</a>
+        <a href="#" tooltips title="title" tooltip-side="bottom">Bottom</a>
+        <a href="#" tooltips title="title" tooltip-side="left">Left</a>
+        <a href="#" tooltips title="title" tooltip-side="right">Right</a>
 
-</code>
+      </code>
       <div class="separator15"></div>
       <h4>
         Tooltip content
       </h4>
       <small class="font-small color-muted">
         You can set your tooltip content (text/html doesn't matter)
-using the <b>tooltip-content=""</b> attribute
+        using the <b>tooltip-content=""</b> attribute
       </small>
       <div class="separator10"></div>
-<code hljs="">
-<a href="#" tooltips title="title" tooltip-content="<i>Woa!</i>">
-  Hover me
-</a>
+      <code hljs="">
+        <a href="#" tooltips title="title" tooltip-content="<i>Woa!</i>">
+          Hover me
+        </a>
 
-</code>
+      </code>
       <div class="separator15"></div>
       <h4>
         Tooltip size
@@ -125,15 +126,15 @@ using the <b>tooltip-content=""</b> attribute
         <i class="font-bold">medium</i> or
         <i class="font-bold">large</i>
         )
-using the <b>tooltip-size=""</b> attribute
+        using the <b>tooltip-size=""</b> attribute
       </small>
       <div class="separator10"></div>
-<code hljs="">
-<a href="#" tooltips title="title" tooltip-size="small">Small</a>
-<a href="#" tooltips title="title" tooltip-size="medium">Medium</a>
-<a href="#" tooltips title="title" tooltip-size="large">Large</a>
+      <code hljs="">
+        <a href="#" tooltips title="title" tooltip-size="small">Small</a>
+        <a href="#" tooltips title="title" tooltip-size="medium">Medium</a>
+        <a href="#" tooltips title="title" tooltip-size="large">Large</a>
 
-</code>
+      </code>
     </div>
   </div>
   <!--Github fork me ribbon-->
@@ -154,12 +155,12 @@ using the <b>tooltip-size=""</b> attribute
   <script type="text/javascript" src="assets/js/index.js"></script>
   <!--G analytics-->
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-54770488-1', 'auto');
-  ga('send', 'pageview');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-54770488-1', 'auto');
+    ga('send', 'pageview');
   </script>
 </body>
 </body>
