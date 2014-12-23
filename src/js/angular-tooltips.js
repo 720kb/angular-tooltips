@@ -32,7 +32,8 @@
           , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' +
                 '<div class="tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="tooltip-caret"></span>' +
-              '</div>';
+              '</div>'
+          ,initialized = false;
 
         //create the tooltip
         thisElement.after($compile(htmlTemplate)($scope));
@@ -54,6 +55,10 @@
         };
 
         thisElement.bind('mouseenter mouseover', function onMouseEnterAndMouseOver() {
+          if (!initialized) {
+            initialized = true;
+            $scope.initTooltip(side);
+          }
 
           $scope.showTooltip();
         });
@@ -123,9 +128,7 @@
           }
         };
 
-        $scope.initTooltip(side);
-
-         angular.element($window).bind('resize', function onResize() {
+        angular.element($window).bind('resize', function onResize() {
 
           $scope.initTooltip(side);
         });
