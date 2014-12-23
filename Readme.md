@@ -103,7 +103,13 @@ using the `tooltip-size=""` attribute
 <a href="#" tooltips title="tip"tooltip-size="medium">Tooltip me</a>
 <a href="#" tooltips title="tip" tooltip-size="large">Tooltip me</a>
 ```
-
+####Tooltip event triggers
+You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope
+```html
+<a href="#" tooltips title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
+<a href="#" tooltips title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
+<a href="#" tooltips title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
+```
 ## Example
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)
