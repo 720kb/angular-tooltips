@@ -15,7 +15,8 @@
       'scope': {},
       'link': function linkingFunction($scope, element, attr) {
 
-        var thisElement = angular.element(element[0])
+        var initialized = false
+          , thisElement = angular.element(element[0])
           , theTooltip
           , theTooltipElement
           , theTooltipHeight
@@ -27,13 +28,14 @@
           , offsetLeft
           , title = attr.title || ''
           , content = attr.tooltipContent || ''
+          , showTriggers = attr.tooltipShowTrigger || 'mouseenter mouseover'
+          , hideTriggers = attr.tooltipHideTrigger || 'mouseleave mouseout'
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
           , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' +
                 '<div class="tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="tooltip-caret"></span>' +
-              '</div>'
-          ,initialized = false;
+              '</div>';
 
         //create the tooltip
         thisElement.after($compile(htmlTemplate)($scope));
@@ -54,8 +56,10 @@
             $scope.tooltipPositioning(side);
         };
 
-        thisElement.bind('mouseenter mouseover', function onMouseEnterAndMouseOver() {
+        thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
+
           if (!initialized) {
+
             initialized = true;
             $scope.initTooltip(side);
           }
@@ -63,7 +67,7 @@
           $scope.showTooltip();
         });
 
-        thisElement.bind('mouseleave mouseout', function onMouseLeaveAndMouseOut() {
+        thisElement.bind(hideTriggers, function onMouseLeaveAndMouseOut() {
 
           $scope.hideTooltip();
         });
