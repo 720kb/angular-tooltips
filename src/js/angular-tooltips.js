@@ -32,9 +32,9 @@
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave mouseout'
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
-          , htmlTemplate = '<div class="tooltip tooltip-' + side + ' tooltip-' + size + '">' +
-                '<div class="tooltip-title"> ' + title + '</div>' +
-                content + ' <span class="tooltip-caret"></span>' +
+          , htmlTemplate = '<div class="_720kb-tooltip _720kb-tooltip-' + side + ' _720kb-tooltip-' + size + '">' +
+                '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
+                content + ' <span class="_720kb-tooltip-caret"></span>' +
               '</div>';
 
         //create the tooltip
@@ -74,12 +74,12 @@
 
         $scope.showTooltip = function showTooltip () {
 
-          theTooltip.classList.add('tooltip-open');
+          theTooltip.classList.add('_720kb-tooltip-open');
         };
 
         $scope.hideTooltip = function hideTooltip () {
 
-          theTooltip.classList.remove('tooltip-open');
+          theTooltip.classList.remove('_720kb-tooltip-open');
         };
 
         $scope.tooltipPositioning = function tooltipPositioning (side) {
