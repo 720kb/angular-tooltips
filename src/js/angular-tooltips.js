@@ -17,8 +17,8 @@
 
         var initialized = false
           , thisElement = angular.element(element[0])
+          , body = angular.element('body')
           , theTooltip
-          , theTooltipElement
           , theTooltipHeight
           , theTooltipWidth
           , theTooltipMargin //used both for margin top left right bottom
@@ -32,26 +32,27 @@
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave mouseout'
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
+          , tryPosition = attr.tooltipTry || 1  // If set into 0 , the auto-position method will not call
           , htmlTemplate = '<div class="_720kb-tooltip _720kb-tooltip-' + side + ' _720kb-tooltip-' + size + '">' +
                 '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="_720kb-tooltip-caret"></span>' +
               '</div>';
 
         //create the tooltip
-        thisElement.after($compile(htmlTemplate)($scope));
-        //get tooltip element
-        theTooltip = element[0].nextSibling;
-        theTooltipElement = angular.element(theTooltip);
+        theTooltip = $compile(htmlTemplate)($scope);
+        body.append(theTooltip);
+
+        console.log(tryPosition);
 
         $scope.initTooltip = function getInfos (side) {
 
-            height = element[0].offsetHeight;
-            width = element[0].offsetWidth;
-            offsetTop = element[0].offsetTop;
-            offsetLeft = element[0].offsetLeft;
+            height = thisElement.outerHeight();
+            width = thisElement.outerWidth();
+            offsetTop = thisElement.offset().top;
+            offsetLeft = thisElement.offset().left;
             //get tooltip dimension
-            theTooltipHeight = theTooltipElement[0].offsetHeight;
-            theTooltipWidth = theTooltipElement[0].offsetWidth;
+            theTooltipHeight = theTooltip.outerHeight();
+            theTooltipWidth = theTooltip.outerWidth();
 
             $scope.tooltipPositioning(side);
         };
@@ -74,12 +75,12 @@
 
         $scope.showTooltip = function showTooltip () {
 
-          theTooltip.classList.add('_720kb-tooltip-open');
+          theTooltip.addClass('_720kb-tooltip-open');
         };
 
         $scope.hideTooltip = function hideTooltip () {
 
-          theTooltip.classList.remove('_720kb-tooltip-open');
+          theTooltip.removeClass('_720kb-tooltip-open');
         };
 
         $scope.tooltipPositioning = function tooltipPositioning (side) {
@@ -102,35 +103,104 @@
           if (side === 'left') {
 
             topValue = offsetTop + height / 2 - theTooltipHeight / 2;
-            theTooltipElement.css('top', topValue + 'px');
-            theTooltipElement.css('left', offsetLeft + 'px');
-            theTooltipElement.css('margin-left', '-' + (theTooltipWidth + theTooltipMargin) + 'px');
+            leftValue = offsetLeft - (theTooltipWidth + theTooltipMargin) ;
+
+            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            topValue = position.topValue;
+            leftValue = position.leftValue;
+
+            theTooltip.css('top', topValue + 'px');
+            theTooltip.css('left', leftValue + 'px');
           }
 
           if (side === 'right') {
 
             topValue = offsetTop + height / 2 - theTooltipHeight / 2;
             leftValue = offsetLeft + width + theTooltipMargin;
-            theTooltipElement.css('top', topValue + 'px');
-            theTooltipElement.css('left', leftValue + 'px');
+
+            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            topValue = position.topValue;
+            leftValue = position.leftValue;
+
+            theTooltip.css('top', topValue + 'px');
+            theTooltip.css('left', leftValue + 'px');
           }
 
           if (side === 'top') {
 
             topValue = offsetTop - theTooltipMargin - theTooltipHeight;
             leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
-            theTooltipElement.css('top', topValue + 'px');
-            theTooltipElement.css('left', leftValue + 'px');
+
+            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            topValue = position.topValue;
+            leftValue = position.leftValue;
+
+            theTooltip.css('top', topValue + 'px');
+            theTooltip.css('left', leftValue + 'px');
           }
 
           if (side === 'bottom') {
 
             topValue = offsetTop + height + theTooltipMargin;
             leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
-            theTooltipElement.css('top', topValue + 'px');
-            theTooltipElement.css('left', leftValue + 'px');
+
+            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            topValue = position.topValue;
+            leftValue = position.leftValue;
+
+            theTooltip.css('top', topValue + 'px');
+            theTooltip.css('left', leftValue + 'px');
           }
         };
+
+        // try a suitable position when no space to show
+        $scope.trySuitablePosition = function(topValue, leftValue, orgin_position){
+          var _position = {} ;
+          _position.topValue = topValue ; 
+          _position.leftValue = leftValue ; 
+          console.log(tryPosition);
+          if((_position.topValue >= 0 && _position.leftValue >= 0) || tryPosition == 0) 
+            return _position;
+          console.log()
+
+          _position.topValue = offsetTop + height / 2 - theTooltipHeight / 2;
+          _position.leftValue = offsetLeft - (theTooltipWidth + theTooltipMargin) ;
+
+          if(_position.topValue >= 0 && _position.leftValue >= 0){
+            theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+            theTooltip.addClass('_720kb-tooltip-left');
+            return _position;
+          }
+
+          _position.topValue = offsetTop + height / 2 - theTooltipHeight / 2;
+          _position.leftValue = offsetLeft + width + theTooltipMargin;
+
+          if(_position.topValue >= 0 && _position.leftValue >= 0){
+            theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+            theTooltip.addClass('_720kb-tooltip-right');
+            return _position;
+          }
+
+          
+          _position.topValue = offsetTop - theTooltipMargin - theTooltipHeight;
+          _position.leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
+
+          if(_position.topValue >= 0 && _position.leftValue >= 0){
+            theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+            theTooltip.addClass('_720kb-tooltip-top');
+            return _position;
+          }
+
+          
+          _position.topValue = offsetTop + height + theTooltipMargin;
+          _position.leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
+
+
+          theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+          theTooltip.addClass('_720kb-tooltip-bottom');
+
+          return _position;
+        }
 
         angular.element($window).bind('resize', function onResize() {
 
