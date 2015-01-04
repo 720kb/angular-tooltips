@@ -8,6 +8,8 @@
       ' * Released under the MIT license',
       ' * www.opensource.org/licenses/MIT',
       ' *',
+      ' * Brought to you by 720kb.net',
+      ' *',
       ' * <%= grunt.template.today("yyyy-mm-dd") %>',
       ' */\n\n'].join('\n')
     , modRewrite = require('connect-modrewrite');
