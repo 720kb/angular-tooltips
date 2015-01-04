@@ -103,6 +103,17 @@ using the `tooltip-size=""` attribute
 <a href="#" tooltips title="tip"tooltip-size="medium">Tooltip me</a>
 <a href="#" tooltips title="tip" tooltip-size="large">Tooltip me</a>
 ```
+
+####Tooltip try-position
+If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) 
+using the `tooltip-try=""` attribute
+
+```html
+<a href="#" tooltips title="tip" tooltip-try="1">Tooltip me</a>
+<a href="#" tooltips title="tip" tooltip-try="0">Tooltip me</a>
+```
+
+
 ####Tooltip event triggers
 You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope
 ```html
