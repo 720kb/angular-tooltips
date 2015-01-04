@@ -14,10 +14,9 @@
       'restrict': 'A',
       'scope': {},
       'link': function linkingFunction($scope, element, attr) {
-
         var initialized = false
           , thisElement = angular.element(element[0])
-          , body = angular.element('body')
+          , body = angular.element(document.getElementsByTagName('body')[0])
           , theTooltip
           , theTooltipHeight
           , theTooltipWidth
@@ -37,24 +36,37 @@
                 '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="_720kb-tooltip-caret"></span>' +
               '</div>';
+          // return;
 
         //create the tooltip
         theTooltip = $compile(htmlTemplate)($scope);
         body.append(theTooltip);
 
-        console.log(tryPosition);
-
         $scope.initTooltip = function getInfos (side) {
 
-            height = thisElement.outerHeight();
-            width = thisElement.outerWidth();
-            offsetTop = thisElement.offset().top;
-            offsetLeft = thisElement.offset().left;
+            height = thisElement[0].offsetHeight;
+            width = thisElement[0].offsetWidth;
+            offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
+            offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
             //get tooltip dimension
-            theTooltipHeight = theTooltip.outerHeight();
-            theTooltipWidth = theTooltip.outerWidth();
+            theTooltipHeight = theTooltip[0].offsetHeight;
+            theTooltipWidth = theTooltip[0].offsetWidth;
 
             $scope.tooltipPositioning(side);
+        };
+
+        $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
+          if (elem.offsetParent === null){
+            return val + elem.offsetTop ;
+          }
+          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop) ;
+        };
+
+        $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
+          if (elem.offsetParent === null){
+            return val + elem.offsetLeft ;
+          }
+          return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft);
         };
 
         thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
@@ -86,7 +98,8 @@
         $scope.tooltipPositioning = function tooltipPositioning (side) {
 
           var topValue
-            , leftValue;
+            , leftValue
+            , position;
           if (size === 'small') {
 
             theTooltipMargin = TOOLTIP_SMALL_MARGIN;
@@ -103,9 +116,9 @@
           if (side === 'left') {
 
             topValue = offsetTop + height / 2 - theTooltipHeight / 2;
-            leftValue = offsetLeft - (theTooltipWidth + theTooltipMargin) ;
+            leftValue = offsetLeft - (theTooltipWidth + theTooltipMargin);
 
-            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            position = $scope.trySuitablePosition(topValue, leftValue, side);
             topValue = position.topValue;
             leftValue = position.leftValue;
 
@@ -118,7 +131,7 @@
             topValue = offsetTop + height / 2 - theTooltipHeight / 2;
             leftValue = offsetLeft + width + theTooltipMargin;
 
-            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            position = $scope.trySuitablePosition(topValue, leftValue, side);
             topValue = position.topValue;
             leftValue = position.leftValue;
 
@@ -131,7 +144,7 @@
             topValue = offsetTop - theTooltipMargin - theTooltipHeight;
             leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
 
-            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            position = $scope.trySuitablePosition(topValue, leftValue, side);
             topValue = position.topValue;
             leftValue = position.leftValue;
 
@@ -144,7 +157,7 @@
             topValue = offsetTop + height + theTooltipMargin;
             leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
 
-            var position = $scope.trySuitablePosition(topValue, leftValue, side);
+            position = $scope.trySuitablePosition(topValue, leftValue, side);
             topValue = position.topValue;
             leftValue = position.leftValue;
 
@@ -154,53 +167,50 @@
         };
 
         // try a suitable position when no space to show
-        $scope.trySuitablePosition = function(topValue, leftValue, orgin_position){
-          var _position = {} ;
-          _position.topValue = topValue ; 
-          _position.leftValue = leftValue ; 
-          console.log(tryPosition);
-          if((_position.topValue >= 0 && _position.leftValue >= 0) || tryPosition == 0) 
-            return _position;
-          console.log()
+        $scope.trySuitablePosition = function trySuitablePosition (topValue, leftValue, orginPosition){
+          var position = {};
+          position.topValue = topValue;
+          position.leftValue = leftValue;
+          if (tryPosition === 0 || (position.topValue >= 0 && position.leftValue >= 0)){
+            return position;
+          }
 
-          _position.topValue = offsetTop + height / 2 - theTooltipHeight / 2;
-          _position.leftValue = offsetLeft - (theTooltipWidth + theTooltipMargin) ;
+          position.topValue = offsetTop + height / 2 - theTooltipHeight / 2;
+          position.leftValue = offsetLeft - (theTooltipWidth + theTooltipMargin);
 
-          if(_position.topValue >= 0 && _position.leftValue >= 0){
-            theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+          if (position.topValue >= 0 && position.leftValue >= 0){
+            theTooltip.removeClass('_720kb-tooltip-' + orginPosition);
             theTooltip.addClass('_720kb-tooltip-left');
-            return _position;
+            return position;
           }
 
-          _position.topValue = offsetTop + height / 2 - theTooltipHeight / 2;
-          _position.leftValue = offsetLeft + width + theTooltipMargin;
+          position.topValue = offsetTop + height / 2 - theTooltipHeight / 2;
+          position.leftValue = offsetLeft + width + theTooltipMargin;
 
-          if(_position.topValue >= 0 && _position.leftValue >= 0){
-            theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+          if (position.topValue >= 0 && position.leftValue >= 0){
+            theTooltip.removeClass('_720kb-tooltip-' + orginPosition);
             theTooltip.addClass('_720kb-tooltip-right');
-            return _position;
+            return position;
           }
 
-          
-          _position.topValue = offsetTop - theTooltipMargin - theTooltipHeight;
-          _position.leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
+          position.topValue = offsetTop - theTooltipMargin - theTooltipHeight;
+          position.leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
 
-          if(_position.topValue >= 0 && _position.leftValue >= 0){
-            theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+          if (position.topValue >= 0 && position.leftValue >= 0){
+            theTooltip.removeClass('_720kb-tooltip-' + orginPosition);
             theTooltip.addClass('_720kb-tooltip-top');
-            return _position;
+            return position;
           }
 
-          
-          _position.topValue = offsetTop + height + theTooltipMargin;
-          _position.leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
+          position.topValue = offsetTop + height + theTooltipMargin;
+          position.leftValue = offsetLeft + width / 2 - theTooltipWidth / 2;
 
 
-          theTooltip.removeClass('_720kb-tooltip-'+orgin_position);
+          theTooltip.removeClass('_720kb-tooltip-' + orginPosition);
           theTooltip.addClass('_720kb-tooltip-bottom');
 
-          return _position;
-        }
+          return position;
+        };
 
         angular.element($window).bind('resize', function onResize() {
 
