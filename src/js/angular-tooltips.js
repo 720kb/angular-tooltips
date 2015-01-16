@@ -26,7 +26,7 @@
           , width
           , offsetTop
           , offsetLeft
-          , title = attr.title || ''
+          , title = attr.tooltipTitle || ''
           , content = attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseenter mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave mouseout'
@@ -36,10 +36,12 @@
           , htmlTemplate = '<div class="_720kb-tooltip _720kb-tooltip-' + side + ' _720kb-tooltip-' + size + '">' +
                 '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="_720kb-tooltip-caret"></span>' +
-              '</div>';
+              '</div>'
+          , className = attr.tooltipClass || '';
 
         //create the tooltip
         theTooltip = $compile(htmlTemplate)($scope);
+        theTooltip.addClass(className);
         body.append(theTooltip);
 
         $scope.initTooltip = function getInfos (tooltipSide) {
@@ -77,12 +79,7 @@
 
         thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
 
-          if (!initialized) {
-
-            initialized = true;
-            $scope.initTooltip(side);
-          }
-
+          $scope.initTooltip(side);
           $scope.showTooltip();
         });
 
