@@ -26,7 +26,7 @@
           , width
           , offsetTop
           , offsetLeft
-          , title = attr.tooltipTitle || ''
+          , title = attr.tooltipTitle || attr.title || ''
           , content = attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseenter mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave mouseout'
