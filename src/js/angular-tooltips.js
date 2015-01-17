@@ -34,7 +34,7 @@
           , size = attr.tooltipSize || 'medium'
           , tryPosition = attr.tooltipTry || 1  // If set into 0 , the auto-position method will not call
           , className = attr.tooltipClass || ''
-          , lazyMode = attr.tooltipLazy || true
+          , lazyMode = $scope.$eval(attr.tooltipLazy || true)
           , htmlTemplate = '<div class="_720kb-tooltip _720kb-tooltip-' + side + ' _720kb-tooltip-' + size + '">' +
                 '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="_720kb-tooltip-caret"></span>' +
