@@ -48,15 +48,15 @@
   position: absolute;
   width: 0;
   height: 0;
-  border: 5px solid rgba(0, 0, 0, 0.8);
+  border: 5px solid transparent;
 }
 ._720kb-tooltip-left ._720kb-tooltip-caret:before {
   top: 50%;
   left: 100%;
   margin-left:0;
   margin-top: -6px;
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   border-right-width: 0;
 }
 ._720kb-tooltip-left ._720kb-tooltip-caret:after {
@@ -64,8 +64,8 @@
   left: 100%;
   margin-left:0;
   margin-top: -5px;
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   border-right-width: 0;
 }
 ._720kb-tooltip-right ._720kb-tooltip-caret:before {
@@ -73,8 +73,8 @@
   left:0;
   margin-left:-6px;
   margin-top: -6px;
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   border-left-width: 0;
 }
 ._720kb-tooltip-right ._720kb-tooltip-caret:after {
@@ -82,8 +82,8 @@
   left:0;
   margin-left:-5px;
   margin-top: -5px;
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   border-left-width: 0;
 }
 ._720kb-tooltip-top ._720kb-tooltip-caret:before {
@@ -91,8 +91,8 @@
   left: 50%;
   margin-left: -6px;
   margin-bottom:-6px;
-  border-right-color: transparent !important;
-  border-left-color: transparent !important;
+  border-right-color: transparent;
+  border-left-color: transparent;
   border-bottom-width: 0;
 }
 ._720kb-tooltip-top ._720kb-tooltip-caret:after {
@@ -100,23 +100,23 @@
   left: 50%;
   margin-left: -5px;
   margin-bottom:-5px;
-  border-right-color: transparent !important;
-  border-left-color: transparent !important;
+  border-right-color: transparent;
+  border-left-color: transparent;
   border-bottom-width: 0;
 }
 ._720kb-tooltip-bottom ._720kb-tooltip-caret:before {
   bottom: 100%;
   left: 50%;
   margin-left: -6px;
-  border-right-color: transparent !important;
-  border-left-color: transparent !important;
+  border-right-color: transparent;
+  border-left-color: transparent;
   border-top-width: 0;
 }
 ._720kb-tooltip-bottom ._720kb-tooltip-caret:after {
   bottom: 100%;
   left: 50%;
   margin-left: -5px;
-  border-right-color: transparent !important;
-  border-left-color: transparent !important;
+  border-right-color: transparent;
+  border-left-color: transparent;
   border-top-width: 0;
 }
