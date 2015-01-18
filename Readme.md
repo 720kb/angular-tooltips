@@ -86,6 +86,16 @@ using the `tooltip-side=""` attribute
 <a href="#" tooltips title="tip" tooltip-side="left">Tooltip me</a>
 <a href="#" tooltips title="tip" tooltip-side="right">Tooltip me</a>
 ```
+
+####Tooltip title
+You can set your tooltip title (text/html doesn't matter)
+using the `tooltip-title=""` attribute or simply via `title=""` html attribute
+
+```html
+<a href="#" tooltips title="Tooltip" tooltip-title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips title="Tooltip" title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+```
+
 ####Tooltip content
 You can set your tooltip content (text/html doesn't matter)
 using the `tooltip-content=""` attribute
@@ -112,7 +122,18 @@ using the `tooltip-try=""` attribute
 <a href="#" tooltips title="tip" tooltip-try="1">Tooltip me</a>
 <a href="#" tooltips title="tip" tooltip-try="0">Tooltip me</a>
 ```
+####Tooltip Lazy mode
+If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false) 
+using the `tooltip-lazy=""` attribute
 
+```html
+<a href="#" tooltips tooltip-lazy="false" tooltip-content="Hi" tooltip-show-trigger="mouseover">
+I will re-init my position everytime the mouseover event is fired
+</a>
+<a href="#" tooltips tooltip-lazy="true" tooltip-content="Hi" tooltip-show-trigger="mouseover">
+I will init my position on mouseover only the first time event is fired
+</a>
+```
 
 ####Tooltip event triggers
 You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope
