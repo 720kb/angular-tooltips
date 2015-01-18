@@ -26,13 +26,15 @@
           , width
           , offsetTop
           , offsetLeft
-          , title = attr.title || ''
+          , title = attr.tooltipTitle || attr.title || ''
           , content = attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseenter mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave mouseout'
           , side = attr.tooltipSide || 'top'
           , size = attr.tooltipSize || 'medium'
           , tryPosition = attr.tooltipTry || 1  // If set into 0 , the auto-position method will not call
+          , className = attr.tooltipClass || ''
+          , lazyMode = $scope.$eval(attr.tooltipLazy || true)
           , htmlTemplate = '<div class="_720kb-tooltip _720kb-tooltip-' + side + ' _720kb-tooltip-' + size + '">' +
                 '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="_720kb-tooltip-caret"></span>' +
@@ -40,6 +42,9 @@
 
         //create the tooltip
         theTooltip = $compile(htmlTemplate)($scope);
+
+        theTooltip.addClass(className);
+
         body.append(theTooltip);
 
         $scope.initTooltip = function getInfos (tooltipSide) {
@@ -77,7 +82,7 @@
 
         thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
 
-          if (!initialized) {
+          if (!lazyMode || !initialized) {
 
             initialized = true;
             $scope.initTooltip(side);
