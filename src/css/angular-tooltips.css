@@ -29,6 +29,7 @@
   font-size: 14px;
 }
 ._720kb-tooltip._720kb-tooltip-open {
+  visibility: visible;
   visibility: initial;
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
