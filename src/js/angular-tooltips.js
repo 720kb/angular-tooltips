@@ -45,7 +45,6 @@
         theTooltip = $compile(htmlTemplate)($scope);
 
         theTooltip.addClass(className);
-
         theTooltip.addClass(speed);
 
         body.append(theTooltip);
