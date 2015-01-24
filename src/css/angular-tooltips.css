@@ -1,3 +1,11 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 ._720kb-tooltip {
   background: rgba(0, 0, 0, 0.8);
   color:white;
@@ -5,7 +13,7 @@
   z-index:9;
   padding:0.4% 1%;
   opacity:0;
-  visibility: hidden;
+  display: none;
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:3px;
@@ -29,13 +37,20 @@
   font-size: 14px;
 }
 ._720kb-tooltip._720kb-tooltip-open {
-  visibility: visible;
-  visibility: initial;
-  -webkit-transition: opacity 0.2s linear;
-  -moz-transition: opacity 0.2s linear;
-  -o-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear;
-  opacity: 1;
+  display: block;
+  display: initial;
+}
+._720kb-tooltip._720kb-tooltip-open.fast {
+  animation: fadeIn 0.1s linear forwards;
+  -webkit-animation: fadeIn 0.1s linear forwards;
+}
+._720kb-tooltip._720kb-tooltip-open.medium {
+  animation: fadeIn 0.3s linear forwards;
+  -webkit-animation: fadeIn 0.3s linear forwards;
+}
+._720kb-tooltip._720kb-tooltip-open.slow {
+  animation: fadeIn 0.5s linear;
+  -webkit-animation: fadeIn 0.5s linear;
 }
 ._720kb-tooltip-caret:before {
   content:'';
