@@ -9,6 +9,8 @@
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:3px;
+  left: -200%;
+  top: 0;
 }
 ._720kb-tooltip-title{
   color:rgba(255,255,255,0.95);
@@ -31,10 +33,6 @@
 ._720kb-tooltip._720kb-tooltip-open {
   visibility: visible;
   visibility: initial;
-  -webkit-transition: opacity 0.2s linear;
-  -moz-transition: opacity 0.2s linear;
-  -o-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear;
   opacity: 1;
 }
 ._720kb-tooltip-caret:before {
