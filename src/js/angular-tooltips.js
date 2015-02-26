@@ -34,12 +34,30 @@
           , size = attr.tooltipSize || 'medium'
           , tryPosition = attr.tooltipTry || 1  // If set into 0 , the auto-position method will not call
           , className = attr.tooltipClass || ''
+          , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
           , lazyMode = $scope.$eval(attr.tooltipLazy || true)
           , htmlTemplate = '<div class="_720kb-tooltip _720kb-tooltip-' + side + ' _720kb-tooltip-' + size + '">' +
                 '<div class="_720kb-tooltip-title"> ' + title + '</div>' +
                 content + ' <span class="_720kb-tooltip-caret"></span>' +
               '</div>';
 
+        //parse the animation speed of tooltips
+        $scope.parseSpeed = function () {
+
+          switch (speed) {
+            case 'fast':
+              speed = 100;
+              break;
+            case 'medium':
+              speed = 300;
+              break;
+            case 'slow':
+              speed = 500;
+              break;
+            default:
+              speed = parseInt(speed);
+          }
+        };
         //create the tooltip
         theTooltip = $compile(htmlTemplate)($scope);
 
@@ -49,15 +67,17 @@
 
         $scope.initTooltip = function getInfos (tooltipSide) {
 
-            height = thisElement[0].offsetHeight;
-            width = thisElement[0].offsetWidth;
-            offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
-            offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
-            //get tooltip dimension
-            theTooltipHeight = theTooltip[0].offsetHeight;
-            theTooltipWidth = theTooltip[0].offsetWidth;
+          height = thisElement[0].offsetHeight;
+          width = thisElement[0].offsetWidth;
+          offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
+          offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
+          //get tooltip dimension
+          theTooltipHeight = theTooltip[0].offsetHeight;
+          theTooltipWidth = theTooltip[0].offsetWidth;
 
-            $scope.tooltipPositioning(tooltipSide);
+          $scope.parseSpeed();
+
+          $scope.tooltipPositioning(tooltipSide);
         };
 
         $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
@@ -99,11 +119,13 @@
         $scope.showTooltip = function showTooltip () {
 
           theTooltip.addClass('_720kb-tooltip-open');
+          theTooltip[0].style.transition = "opacity " + speed + "ms linear";
         };
 
         $scope.hideTooltip = function hideTooltip () {
 
           theTooltip.removeClass('_720kb-tooltip-open');
+          theTooltip[0].style.transition = "";
         };
 
         $scope.tooltipPositioning = function tooltipPositioning (tooltipSide) {
