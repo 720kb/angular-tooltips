@@ -151,7 +151,7 @@ You can edit the default Css file `angular-tooltips.css` if you want to make a n
 
 ##Contributing
 
-We will be much greatful if you help us making this project to grow up.
+We will be much grateful if you help us making this project to grow up.
 Feel free to contribute by forking, opening issues, pull requests etc.
 
 ## License
