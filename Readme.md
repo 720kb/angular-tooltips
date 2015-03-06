@@ -81,10 +81,10 @@ Angular tooltips allows you to use some options via `attribute` data
 You can set your tooltip to show on `left` or `right` or `top` or `bottom` position
 using the `tooltip-side=""` attribute
 ```html
-<a href="#" tooltips title="tip" tooltip-side="top">Tooltip me</a>
-<a href="#" tooltips title="tip" tooltip-side="bottom">Tooltip me</a>
-<a href="#" tooltips title="tip" tooltip-side="left">Tooltip me</a>
-<a href="#" tooltips title="tip" tooltip-side="right">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-side="top">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-side="bottom">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-side="left">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-side="right">Tooltip me</a>
 ```
 
 ####Tooltip title
@@ -92,8 +92,8 @@ You can set your tooltip title (text/html doesn't matter)
 using the `tooltip-title=""` attribute or simply via `title=""` html attribute
 
 ```html
-<a href="#" tooltips title="Tooltip" tooltip-title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
-<a href="#" tooltips title="Tooltip" title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
 ```
 
 ####Tooltip content
@@ -101,7 +101,7 @@ You can set your tooltip content (text/html doesn't matter)
 using the `tooltip-content=""` attribute
 
 ```html
-<a href="#" tooltips title="Tooltip" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-content="<i>Woa!</i>">Tooltip me</a>
 ```
 
 ####Tooltip size
@@ -109,9 +109,9 @@ You can set your tooltip size (small || medium || large)
 using the `tooltip-size=""` attribute
 
 ```html
-<a href="#" tooltips title="tip" tooltip-size="small">Tooltip me</a>
-<a href="#" tooltips title="tip"tooltip-size="medium">Tooltip me</a>
-<a href="#" tooltips title="tip" tooltip-size="large">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip"  tooltip-size="small">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-size="medium">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-size="large">Tooltip me</a>
 ```
 ####Tooltip speed
 You can set the tooltip transition speed ('fast' || 'medium' || 'slow' || int(milliseconds))
@@ -128,8 +128,8 @@ If space is not available for tooltip , it will automatically search for a simil
 using the `tooltip-try=""` attribute
 
 ```html
-<a href="#" tooltips title="tip" tooltip-try="1">Tooltip me</a>
-<a href="#" tooltips title="tip" tooltip-try="0">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-try="1">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-try="0">Tooltip me</a>
 ```
 ####Tooltip lazy
 If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false) 
@@ -147,9 +147,9 @@ I will init my position on mouseover only the first time event is fired
 ####Tooltip triggers
 You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope
 ```html
-<a href="#" tooltips title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
-<a href="#" tooltips title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
-<a href="#" tooltips title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
 ```
 
 ####Tooltip CSS class
