@@ -118,12 +118,12 @@ You can set the tooltip transition speed ('fast' || 'medium' || 'slow' || int(mi
 using the `tooltip-speed=""` attribute
 
 ```html
-<a href="#" tooltips tooltip-speed="fast">Tooltip fast</a>
-<a href="#" tooltips tooltip-speed="medium">Tooltip medium</a>
-<a href="#" tooltips tooltip-speed="slow">Tooltip slow</a>
+<a href="#" tooltips tooltip-speed="fast" tooltip-title="tip">Tooltip fast</a>
+<a href="#" tooltips tooltip-speed="medium" tooltip-title="tip">Tooltip medium</a>
+<a href="#" tooltips tooltip-speed="slow" tooltip-title="tip">Tooltip slow</a>
 <a href="#" tooltips tooltip-speed="950" tooltip-title="tip">Tooltip custom</a>
 ```
-####Tooltip try-position
+####Tooltip try
 If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) 
 using the `tooltip-try=""` attribute
 
@@ -131,7 +131,7 @@ using the `tooltip-try=""` attribute
 <a href="#" tooltips title="tip" tooltip-try="1">Tooltip me</a>
 <a href="#" tooltips title="tip" tooltip-try="0">Tooltip me</a>
 ```
-####Tooltip Lazy mode
+####Tooltip lazy
 If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false) 
 using the `tooltip-lazy=""` attribute
 
@@ -144,7 +144,7 @@ I will init my position on mouseover only the first time event is fired
 </a>
 ```
 
-####Tooltip event triggers
+####Tooltip triggers
 You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope
 ```html
 <a href="#" tooltips title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
@@ -152,7 +152,7 @@ You can set your tooltip to show/hide on specific event/events, you can use the 
 <a href="#" tooltips title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
 ```
 
-####Tooltip custom CSS class
+####Tooltip CSS class
 You can set a custom CSS class or a set of, using the  `tooltip-class=""` attribute:
 ```html
 <a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
