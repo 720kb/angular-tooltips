@@ -66,7 +66,7 @@
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="" tooltips title="tooltip">Hover me</a>
+  <a href="" tooltips tooltip-title="tip">Hover me</a>
 </code>
 <div class="separator15"></div>
 <h4>Javascript</h4>
@@ -93,10 +93,10 @@
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="#" tooltips title="title" tooltip-side="top">Top</a>
-  <a href="#" tooltips title="title" tooltip-side="bottom">Bottom</a>
-  <a href="#" tooltips title="title" tooltip-side="left">Left</a>
-  <a href="#" tooltips title="title" tooltip-side="right">Right</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-side="top">Top</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-side="bottom">Bottom</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-side="left">Left</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-side="right">Right</a>
 </code>
 <div class="separator15"></div>
 <h4>Tooltip title</h4>
@@ -105,8 +105,7 @@
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="#" tooltips title="Tooltip" tooltip-title="Hey" tooltip-content="<i>Woa!</i>">Tooltip me</a>
-  <a href="#" tooltips title="Tooltip" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+  <a href="#" tooltips tooltip-title="tip">Tooltip me</a>
 </code>
 <div class="separator15"></div>
 <h4>
@@ -118,7 +117,7 @@
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="#" tooltips title="title" tooltip-content="<i>Woa!</i>">
+  <a href="#" tooltips tooltip-title="tip" tooltip-content="<i>Woa!</i>">
    Hover me
  </a>
 </code>
@@ -136,9 +135,9 @@
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="#" tooltips title="title" tooltip-size="small">Small</a>
-  <a href="#" tooltips title="title" tooltip-size="medium">Medium</a>
-  <a href="#" tooltips title="title" tooltip-size="large">Large</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-size="small">Small</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-size="medium">Medium</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-size="large">Large</a>
 </code>
 <div class="separator15"></div>
 <h4>
@@ -155,26 +154,26 @@
 </small>
 <div class="separator10"></div>
 <code hljs="">
- <a href="#" tooltips tooltip-speed="fast" tooltip-title="Hey">Tooltip fast</a>
- <a href="#" tooltips tooltip-speed="medium" tooltip-title="Hey">Tooltip medium</a>
- <a href="#" tooltips tooltip-speed="slow" tooltip-title="Hey">Tooltip slow</a>
- <a href="#" tooltips tooltip-speed="950" tooltip-title="Hey">Tooltip custom</a>
+ <a href="#" tooltips tooltip-speed="fast" tooltip-title="tip">Tooltip fast</a>
+ <a href="#" tooltips tooltip-speed="medium" tooltip-title="tip">Tooltip medium</a>
+ <a href="#" tooltips tooltip-speed="slow" tooltip-title="tip">Tooltip slow</a>
+ <a href="#" tooltips tooltip-speed="950" tooltip-title="tip">Tooltip custom</a>
 </code>
 <div class="separator15"></div>
 <h4>
-  Tooltip try position
+  Tooltip try
 </h4>
 <small class="font-small color-muted">
   If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) using the <b>tooltip-try=""</b> attribute
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="#" tooltips title="tip" tooltip-try="1">Tooltip me</a>
-  <a href="#" tooltips title="tip" tooltip-try="0">Tooltip me</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-try="1">Tooltip me</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-try="0">Tooltip me</a>
 </code>
 <div class="separator15"></div>
 <h4>
-  Tooltip lazy mode
+  Tooltip lazy
 </h4>
 <small class="font-small color-muted">
  If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false) using the <b>tooltip-lazy=""</b> attribute
@@ -189,16 +188,29 @@
 </code>
 <div class="separator15"></div>
 <h4>
-  Tooltip event triggers
+  Tooltip triggers
 </h4>
 <small class="font-small color-muted">
   You can set your tooltip to <i class="font-bold">show/hide</i> on specific event/events, you can use the <b>tooltip-show-trigger=""</b> and the <b>tooltip-hide-trigger=""</b> attribute for this scope
 </small>
 <div class="separator10"></div>
 <code hljs="">
-  <a href="#" tooltips title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
-  <a href="#" tooltips title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
-  <a href="#" tooltips title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
+  <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
+</code>
+<div class="separator15"></div>
+<h4>
+    Tooltip CSS class
+</h4>
+<small class="font-small color-muted">
+    You can set a custom CSS class or a set of, using the  <i class="font-bold">tooltip-class=""</i> attribute:
+</small>
+<div class="separator10"></div>
+<code hljs="">
+ <a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
+    I will show a tooltip with class="tooltip-custom tooltip-for-me"
+ </a>
 </code>
 </div>
 </div>
