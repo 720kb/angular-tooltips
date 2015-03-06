@@ -151,6 +151,15 @@ You can set your tooltip to show/hide on specific event/events, you can use the 
 <a href="#" tooltips title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
 <a href="#" tooltips title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
 ```
+
+####Tooltip custom CSS class
+You can set a custom CSS class or a set of, using the  `tooltip-class-name=""` attribute:
+```html
+<a href="#" tooltips tooltip-class-name="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
+I will show a tooltip with class="tooltip-custom tooltip-for-me"
+</a>
+```
+
 ## Example
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)
