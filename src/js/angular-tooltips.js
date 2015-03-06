@@ -49,10 +49,10 @@
               speed = 100;
               break;
             case 'medium':
-              speed = 300;
+              speed = 450;
               break;
             case 'slow':
-              speed = 500;
+              speed = 800;
               break;
             default:
               speed = Number(speed);
