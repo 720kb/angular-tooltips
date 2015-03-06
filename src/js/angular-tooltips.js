@@ -55,7 +55,7 @@
               speed = 500;
               break;
             default:
-              speed = parseInt(speed);
+              speed = Number(speed);
           }
         };
         //create the tooltip
@@ -84,17 +84,17 @@
 
           if (elem.offsetParent === null){
 
-            return val + elem.offsetTop ;
+            return val + elem.offsetTop;
           }
 
-          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop) ;
+          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop);
         };
 
         $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
 
           if (elem.offsetParent === null){
 
-            return val + elem.offsetLeft ;
+            return val + elem.offsetLeft;
           }
 
           return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft);
@@ -119,13 +119,13 @@
         $scope.showTooltip = function showTooltip () {
 
           theTooltip.addClass('_720kb-tooltip-open');
-          theTooltip[0].style.transition = "opacity " + speed + "ms linear";
+          theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
         };
 
         $scope.hideTooltip = function hideTooltip () {
 
           theTooltip.removeClass('_720kb-tooltip-open');
-          theTooltip[0].style.transition = "";
+          theTooltip.css('transition', '');
         };
 
         $scope.tooltipPositioning = function tooltipPositioning (tooltipSide) {
