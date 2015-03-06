@@ -153,9 +153,9 @@ You can set your tooltip to show/hide on specific event/events, you can use the 
 ```
 
 ####Tooltip custom CSS class
-You can set a custom CSS class or a set of, using the  `tooltip-class-name=""` attribute:
+You can set a custom CSS class or a set of, using the  `tooltip-class=""` attribute:
 ```html
-<a href="#" tooltips tooltip-class-name="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
+<a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
 I will show a tooltip with class="tooltip-custom tooltip-for-me"
 </a>
 ```
