@@ -113,7 +113,16 @@ using the `tooltip-size=""` attribute
 <a href="#" tooltips title="tip"tooltip-size="medium">Tooltip me</a>
 <a href="#" tooltips title="tip" tooltip-size="large">Tooltip me</a>
 ```
+####Tooltip speed
+You can set the tooltip transition speed ('fast' || 'medium' || 'slow' || int(milliseconds))
+using the `tooltip-speed=""` attribute
 
+```html
+<a href="#" tooltips tooltip-speed="fast">Tooltip fast</a>
+<a href="#" tooltips tooltip-speed="medium">Tooltip medium</a>
+<a href="#" tooltips tooltip-speed="slow">Tooltip slow</a>
+<a href="#" tooltips tooltip-speed="950" tooltip-title="tip">Tooltip custom</a>
+```
 ####Tooltip try-position
 If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) 
 using the `tooltip-try=""` attribute
