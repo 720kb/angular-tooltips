@@ -203,79 +203,55 @@
 
         $scope.tooltipTryPosition = function tooltipTryPosition () {
 
-            var topOffset = theTooltip[0].offsetTop
+
+            var theTooltipH = theTooltip[0].offsetHeight
+              , theTooltipW = theTooltip[0].offsetWidth
+              , topOffset = theTooltip[0].offsetTop
               , leftOffset = theTooltip[0].offsetLeft
               , winWidth = $window.outerWidth
               , winHeight = $window.outerHeight
-              , rightOffset = winWidth - (theTooltipWidth + leftOffset)
-              , bottomOffset = winHeight - (theTooltipHeight + topOffset)
-              , obj = {
+              , rightOffset = winWidth - (theTooltipW + leftOffset)
+              , bottomOffset = winHeight - (theTooltipH + topOffset)
+              //element OFFSETS (not tooltip offsets)
+              , elmHeight = thisElement[0].offsetHeight
+              , elmWidth = thisElement[0].offsetWidth
+              , elmOffsetLeft = thisElement[0].offsetLeft
+              , elmOffsetTop = thisElement[0].offsetTop
+              , elmOffsetRight = winWidth - (elmOffsetLeft + elmWidth)
+              , elmOffsetBottom = winHeight - (elmHeight + elmOffsetTop)
+              , offsets = {
                 'left': leftOffset,
                 'top': topOffset,
                 'bottom': bottomOffset,
                 'right': rightOffset
               }
-              //lets get which position has more free space
-              , awesomePosition = Object.keys(obj).reduce(function (largest, key) {
+              , posix = {
+                'left': elmOffsetLeft,
+                'right': elmOffsetRight,
+                'top': elmOffsetTop,
+                'bottom': elmOffsetBottom
+              }
+              , bestPosition = Object.keys(posix).reduce(function (best, key) {
 
-                  return obj[largest] > obj[key] ? largest : key;
+                  return posix[best] > posix[key] ? best : key;
+              })
+              , worstOffset = Object.keys(offsets).reduce(function (worst, key) {
+
+                  return offsets[worst] < offsets[key] ? worst : key;
               });
-            console.log(leftOffset, rightOffset);
-            switch (originSide) {
-              case 'left':
-                if (leftOffset < 8) {
 
-                  side = awesomePosition;
-                  $scope.initTooltip(awesomePosition);
-                } else {
+              if (offsets[worstOffset] < 5) {
 
-                  $scope.initTooltip(originSide);
-                }
-                break;
-              case 'right':
-                if (rightOffset < 8) {
+                side = bestPosition;
 
-                  side = awesomePosition;
-                  $scope.initTooltip(awesomePosition);
-                } else {
-
-                  $scope.initTooltip(originSide);
-                }
-                break;
-              case 'bottom':
-              if (bottomOffset < 8) {
-
-                  side = awesomePosition;
-                  $scope.initTooltip(awesomePosition);
-                } else {
-
-                  $scope.initTooltip(originSide);
-                }
-                break;
-              case 'top':
-              if (topOffset < 8) {
-
-                  side = awesomePosition;
-                  $scope.initTooltip(awesomePosition);
-                } else {
-
-                  $scope.initTooltip(originSide);
-                }
-                break;
-
-              default:
-                $scope.initTooltip(originSide);
-            }
+                $scope.initTooltip(bestPosition);
+              }
         };
 
         angular.element($window).bind('resize', function onResize() {
 
-          if (tryPosition) {
-
-            $scope.tooltipTryPosition();
-          } else {
-            $scope.initTooltip(originSide);
-          }
+          $scope.hideTooltip();
+          $scope.initTooltip(originSide);
         });
       }
     };
