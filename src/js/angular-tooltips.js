@@ -67,18 +67,29 @@
 
         body.append(theTooltip);
 
+        $scope.isTooltipEmpty = function checkEmptyTooltip () {
+
+          if (!title && !content) {
+
+            return true;
+          }
+        };
+
         $scope.initTooltip = function initTooltip (tooltipSide) {
 
-          height = thisElement[0].offsetHeight;
-          width = thisElement[0].offsetWidth;
-          offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
-          offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
-          //get tooltip dimension
-          theTooltipHeight = theTooltip[0].offsetHeight;
-          theTooltipWidth = theTooltip[0].offsetWidth;
+          if (!$scope.isTooltipEmpty()) {
 
-          $scope.parseSpeed();
-          $scope.tooltipPositioning(tooltipSide);
+            height = thisElement[0].offsetHeight;
+            width = thisElement[0].offsetWidth;
+            offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
+            offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
+            //get tooltip dimension
+            theTooltipHeight = theTooltip[0].offsetHeight;
+            theTooltipWidth = theTooltip[0].offsetWidth;
+
+            $scope.parseSpeed();
+            $scope.tooltipPositioning(tooltipSide);
+          }
         };
 
         $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
