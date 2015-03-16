@@ -36,7 +36,7 @@
           , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : true
           , className = attr.tooltipClass || ''
           , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
-          , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null $scope.$eval(attr.tooltipLazy) : true
+          , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
           , htmlTemplate =
               '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">' +
               '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
