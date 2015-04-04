@@ -13,7 +13,7 @@
     return {
       'restrict': 'A',
       'scope': {
-        tooltipContent: '='
+        'tooltipContent': '='
       },
       'link': function linkingFunction($scope, element, attr) {
 
