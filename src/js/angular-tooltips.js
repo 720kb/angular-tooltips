@@ -12,7 +12,9 @@
       , CSS_PREFIX = '_720kb-tooltip-';
     return {
       'restrict': 'A',
-      'scope': {},
+      'scope': {
+        tooltipContent: '='
+      },
       'link': function linkingFunction($scope, element, attr) {
 
         var initialized = false
@@ -27,7 +29,6 @@
           , offsetTop
           , offsetLeft
           , title = attr.tooltipTitle || attr.title || ''
-          , content = attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
           , originSide = attr.tooltipSide || 'top'
@@ -40,7 +41,7 @@
           , htmlTemplate =
               '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">' +
               '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
-              content + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+            '<div ng-bind="tooltipContent"></div> <span class="' + CSS_PREFIX + 'caret"></span>' +
               '</div>';
 
         //parse the animation speed of tooltips
@@ -69,7 +70,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!title && !content) {
+          if (!title && !$scope.tooltipContent) {
 
             return true;
           }
