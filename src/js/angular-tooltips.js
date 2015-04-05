@@ -13,7 +13,8 @@
     return {
       'restrict': 'A',
       'scope': {
-        'tooltipContent': '='
+        'tooltipContent': '=',
+        'tooltipTitle': '='
       },
       'link': function linkingFunction($scope, element, attr) {
 
@@ -28,7 +29,6 @@
           , width
           , offsetTop
           , offsetLeft
-          , title = attr.tooltipTitle || attr.title || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
           , originSide = attr.tooltipSide || 'top'
@@ -40,7 +40,7 @@
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
           , htmlTemplate =
               '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">' +
-              '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
+              '<div class="' + CSS_PREFIX + 'title" ng-bind="tooltipTitle"></div>' +
             '<div ng-bind="tooltipContent"></div> <span class="' + CSS_PREFIX + 'caret"></span>' +
               '</div>';
 
@@ -67,11 +67,14 @@
         theTooltip.addClass(className);
 
         body.append(theTooltip);
+        
+        $scope.$watchGroup(['tooltipContent', 'tooltipTitle'], function() {
+          $scope.initTooltip(originSide);
+        });
 
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!title && !$scope.tooltipContent) {
-
+          if (!$scope.tooltipTitle && !$scope.tooltipContent) {
             return true;
           }
         };
@@ -79,7 +82,6 @@
         $scope.initTooltip = function initTooltip (tooltipSide) {
 
           if (!$scope.isTooltipEmpty()) {
-
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
             offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
