@@ -67,7 +67,6 @@
         theTooltip.addClass(className);
 
         body.append(theTooltip);
-        
         $scope.$watchGroup(['tooltipContent', 'tooltipTitle'], function() {
           $scope.initTooltip(originSide);
         });
