@@ -40,8 +40,8 @@
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
           , htmlTemplate =
               '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">' +
-              '<div class="' + CSS_PREFIX + 'title" ng-bind="tooltipTitle"></div>' +
-            '<div ng-bind="tooltipContent"></div> <span class="' + CSS_PREFIX + 'caret"></span>' +
+              '<div class="' + CSS_PREFIX + 'title" ng-bind-html="tooltipTitle"></div>' +
+            '<div ng-bind-html="tooltipContent"></div> <span class="' + CSS_PREFIX + 'caret"></span>' +
               '</div>';
 
         //parse the animation speed of tooltips
