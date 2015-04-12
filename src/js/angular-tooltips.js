@@ -259,6 +259,9 @@
               }
         };
 
+        //make sure that the tooltip is hidden when the directive is destroyed
+        $scope.$on('$destroy', $scope.hideTooltip);
+
         angular.element($window).bind('resize', function onResize() {
 
           $scope.hideTooltip();
