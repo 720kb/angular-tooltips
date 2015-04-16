@@ -8,8 +8,8 @@
     'ngSanitize',
     '720kb.tooltips'
   ]);
-  
+
   angular.module('720kb').controller('test', function($scope) {
-    $scope.tooltipContent = 'Yeo man<br/>LineBreak!';
+    $scope.tooltipContent = '<div>unsafe HTML!</div><br/><span>really unsafe!</span>';
   });
 }(angular));
