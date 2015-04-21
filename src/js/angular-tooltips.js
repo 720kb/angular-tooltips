@@ -251,7 +251,7 @@
                   return offsets[worst] < offsets[key] ? worst : key;
               });
 
-              if (side != bestPosition && offsets[worstOffset] < 20) {
+              if (side !== bestPosition && offsets[worstOffset] < 20) {
 
                 side = bestPosition;
 
