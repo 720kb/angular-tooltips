@@ -251,12 +251,14 @@
                   return offsets[worst] < offsets[key] ? worst : key;
               });
 
-              if (offsets[worstOffset] < 5) {
+              if (side != bestPosition && offsets[worstOffset] < 20) {
 
                 side = bestPosition;
 
+                $scope.tooltipPositioning(side);
                 $scope.initTooltip(bestPosition);
               }
+
         };
 
         //make sure that the tooltip is hidden when the directive is destroyed
