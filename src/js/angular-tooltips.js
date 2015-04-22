@@ -112,35 +112,46 @@
           return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft);
         };
 
-        thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
+        $scope.bindShowTriggers = function() {
+          thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
+            if (!lazyMode || !initialized) {
 
-          if (!lazyMode || !initialized) {
+              initialized = true;
+              $scope.initTooltip(side);
+            }
+            if (tryPosition) {
 
-            initialized = true;
-            $scope.initTooltip(side);
-          }
-          if (tryPosition) {
+              $scope.tooltipTryPosition();
+            }
+            $scope.showTooltip();
+          });
+        };
 
-            $scope.tooltipTryPosition();
-          }
-          $scope.showTooltip();
-        });
+        $scope.bindHideTriggers = function() {
+          thisElement.bind(hideTriggers, function onMouseLeaveAndMouseOut() {
+            $scope.hideTooltip();
+          });
+        };
 
-        thisElement.bind(hideTriggers, function onMouseLeaveAndMouseOut() {
+        $scope.clearTriggers = function() {
+          thisElement.unbind(showTriggers);
+          thisElement.unbind(hideTriggers);
+        };
 
-          $scope.hideTooltip();
-        });
+        $scope.bindShowTriggers();
 
         $scope.showTooltip = function showTooltip () {
-
           theTooltip.addClass(CSS_PREFIX + 'open');
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
+          $scope.clearTriggers();
+          $scope.bindHideTriggers();
         };
 
         $scope.hideTooltip = function hideTooltip () {
-
           theTooltip.removeClass(CSS_PREFIX + 'open');
           theTooltip.css('transition', '');
+          $scope.clearTriggers();
+          $scope.bindShowTriggers();
         };
 
         $scope.removePosition = function removeTooltipPosition () {
