@@ -4,15 +4,19 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', function manageDirective($window, $compile) {
+  .directive('tooltips', ['$window', '$compile', '$sce', '$injector', function manageDirective($window, $compile, $sce, $injector) {
 
-    var TOOLTIP_SMALL_MARGIN = 8 //px
+    var HAS_NG_SANITIZE = $injector.has('$sanitize')
+      , TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
       , TOOLTIP_LARGE_MARGIN = 10 //px
       , CSS_PREFIX = '_720kb-tooltip-';
     return {
       'restrict': 'A',
-      'scope': {},
+      'scope': {
+        'tooltipContent': '=',
+        'tooltipTitle': '='
+      },
       'link': function linkingFunction($scope, element, attr) {
 
         var initialized = false
@@ -26,8 +30,6 @@
           , width
           , offsetTop
           , offsetLeft
-          , title = attr.tooltipTitle || attr.title || ''
-          , content = attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
           , originSide = attr.tooltipSide || 'top'
@@ -39,8 +41,8 @@
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
           , htmlTemplate =
               '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">' +
-              '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
-              content + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+              '<div class="' + CSS_PREFIX + 'title" ng-bind-html="safeTooltipTitle"></div>' +
+            '<div ng-bind-html="safeTooltipContent"></div> <span class="' + CSS_PREFIX + 'caret"></span>' +
               '</div>';
 
         //parse the animation speed of tooltips
@@ -67,10 +69,30 @@
 
         body.append(theTooltip);
 
+        function updateTooltip(newValues, oldValues) {
+          if (HAS_NG_SANITIZE) {
+            $scope.safeTooltipContent = newValues[0];
+            $scope.safeTooltipTitle = newValues[1];
+          } else {
+            if (newValues[0] !== oldValues[0]) {
+              $scope.safeTooltipContent = $sce.trustAsHtml(newValues[0]);
+            }
+            if (newValues[1] !== oldValues[1]) {
+              $scope.safeTooltipTitle = $sce.trustAsHtml(newValues[1]);
+            }
+          }
+        }
+
+        updateTooltip([$scope.tooltipContent, $scope.tooltipTitle], ['', '']);
+
+        $scope.$watchGroup(['tooltipContent', 'tooltipTitle'], function(newValues, oldValues) {
+          updateTooltip(newValues, oldValues);
+          $scope.initTooltip(originSide);
+        });
+
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!title && !content) {
-
+          if (!$scope.tooltipTitle && !$scope.tooltipContent) {
             return true;
           }
         };
@@ -78,7 +100,6 @@
         $scope.initTooltip = function initTooltip (tooltipSide) {
 
           if (!$scope.isTooltipEmpty()) {
-
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
             offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
