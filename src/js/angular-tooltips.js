@@ -37,11 +37,17 @@
           , className = attr.tooltipClass || ''
           , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
-          , htmlTemplate =
-              '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">' +
-              '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
-              content + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
-              '</div>';
+          , hasCloseButton = typeof attr.closeButton !== 'undefined' && attr.closeButton !== null
+          , closeButtonText = attr.closeButton || ''
+          , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
+
+        if (hasCloseButton) {
+          htmlTemplate = htmlTemplate + '<span ng-click="hideTooltip()"> ' + closeButtonText + ' </span>'
+        }
+
+        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
+                                      content + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+                                      '</div>';
 
         //parse the animation speed of tooltips
         $scope.parseSpeed = function parseSpeed () {
