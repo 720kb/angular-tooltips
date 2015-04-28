@@ -152,7 +152,8 @@ You can set your tooltip to show/hide on specific event/events, you can use the 
 <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
 ```
 
-####_Close button_
+_**Close button**_
+
 If you want to hide on click, you can configure a close button using text or HTML. This allows your users to click the button inside the tooltip instead of clicking on the original trigger.
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button="x" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click, with option to click on the X</a>
