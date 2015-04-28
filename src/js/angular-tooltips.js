@@ -37,8 +37,8 @@
           , className = attr.tooltipClass || ''
           , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
-          , hasCloseButton = typeof attr.closeButton !== 'undefined' && attr.closeButton !== null
-          , closeButtonText = attr.closeButton || ''
+          , hasCloseButton = typeof attr.tooltipCloseButton !== 'undefined' && attr.tooltipCloseButton !== null
+          , closeButtonText = attr.tooltipCloseButton || ''
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
         if (hasCloseButton) {
