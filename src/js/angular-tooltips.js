@@ -42,7 +42,7 @@
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
         if (hasCloseButton) {
-          htmlTemplate = htmlTemplate + '<span ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>'
+          htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
         htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +

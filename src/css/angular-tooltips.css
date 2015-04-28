@@ -119,3 +119,6 @@
   border-left-color: transparent;
   border-top-width: 0;
 }
+._720kb-tooltip-close-button {
+  float: right;
+}
