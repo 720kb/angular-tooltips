@@ -232,50 +232,49 @@
         $scope.tooltipTryPosition = function tooltipTryPosition () {
 
 
-            var theTooltipH = theTooltip[0].offsetHeight
-              , theTooltipW = theTooltip[0].offsetWidth
-              , topOffset = theTooltip[0].offsetTop
-              , leftOffset = theTooltip[0].offsetLeft
-              , winWidth = $window.outerWidth
-              , winHeight = $window.outerHeight
-              , rightOffset = winWidth - (theTooltipW + leftOffset)
-              , bottomOffset = winHeight - (theTooltipH + topOffset)
-              //element OFFSETS (not tooltip offsets)
-              , elmHeight = thisElement[0].offsetHeight
-              , elmWidth = thisElement[0].offsetWidth
-              , elmOffsetLeft = thisElement[0].offsetLeft
-              , elmOffsetTop = thisElement[0].offsetTop
-              , elmOffsetRight = winWidth - (elmOffsetLeft + elmWidth)
-              , elmOffsetBottom = winHeight - (elmHeight + elmOffsetTop)
-              , offsets = {
-                'left': leftOffset,
-                'top': topOffset,
-                'bottom': bottomOffset,
-                'right': rightOffset
-              }
-              , posix = {
-                'left': elmOffsetLeft,
-                'right': elmOffsetRight,
-                'top': elmOffsetTop,
-                'bottom': elmOffsetBottom
-              }
-              , bestPosition = Object.keys(posix).reduce(function (best, key) {
+          var theTooltipH = theTooltip[0].offsetHeight
+            , theTooltipW = theTooltip[0].offsetWidth
+            , topOffset = theTooltip[0].offsetTop
+            , leftOffset = theTooltip[0].offsetLeft
+            , winWidth = $window.outerWidth
+            , winHeight = $window.outerHeight
+            , rightOffset = winWidth - (theTooltipW + leftOffset)
+            , bottomOffset = winHeight - (theTooltipH + topOffset)
+            //element OFFSETS (not tooltip offsets)
+            , elmHeight = thisElement[0].offsetHeight
+            , elmWidth = thisElement[0].offsetWidth
+            , elmOffsetLeft = thisElement[0].offsetLeft
+            , elmOffsetTop = thisElement[0].offsetTop
+            , elmOffsetRight = winWidth - (elmOffsetLeft + elmWidth)
+            , elmOffsetBottom = winHeight - (elmHeight + elmOffsetTop)
+            , offsets = {
+              'left': leftOffset,
+              'top': topOffset,
+              'bottom': bottomOffset,
+              'right': rightOffset
+            }
+            , posix = {
+              'left': elmOffsetLeft,
+              'right': elmOffsetRight,
+              'top': elmOffsetTop,
+              'bottom': elmOffsetBottom
+            }
+            , bestPosition = Object.keys(posix).reduce(function (best, key) {
 
-                  return posix[best] > posix[key] ? best : key;
-              })
-              , worstOffset = Object.keys(offsets).reduce(function (worst, key) {
+                return posix[best] > posix[key] ? best : key;
+            })
+            , worstOffset = Object.keys(offsets).reduce(function (worst, key) {
 
-                  return offsets[worst] < offsets[key] ? worst : key;
-              });
+                return offsets[worst] < offsets[key] ? worst : key;
+            });
 
-              if (side !== bestPosition && offsets[worstOffset] < 20) {
+            if (originSide !== bestPosition && offsets[worstOffset] < 20) {
 
-                side = bestPosition;
+              side = bestPosition;
 
-                $scope.tooltipPositioning(side);
-                $scope.initTooltip(bestPosition);
-              }
-
+              $scope.tooltipPositioning(side);
+              $scope.initTooltip(bestPosition);
+            }
         };
 
         //make sure that the tooltip is hidden when the directive is destroyed
