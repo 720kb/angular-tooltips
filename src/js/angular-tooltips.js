@@ -4,7 +4,7 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', function manageDirective($window, $compile) {
+  .directive('tooltips', ['$window', '$compile', '$interval', function manageDirective($window, $compile, $interval) {
 
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
@@ -12,7 +12,10 @@
       , CSS_PREFIX = '_720kb-tooltip-';
     return {
       'restrict': 'A',
-      'scope': {},
+      'scope': {
+        'tooltipContent': '@',
+        'tooltipTitle': '@'
+      },
       'link': function linkingFunction($scope, element, attr) {
 
         var initialized = false
@@ -26,8 +29,8 @@
           , width
           , offsetTop
           , offsetLeft
-          , title = attr.tooltipTitle || attr.title || ''
-          , content = attr.tooltipContent || ''
+          //, title = $scope.parseTitle()//attr.tooltipTitle || attr.title || ''
+          //, content = $scope.parseContent() // attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
           , originSide = attr.tooltipSide || 'top'
@@ -45,8 +48,8 @@
           htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
-        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
-                                      content + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + '{{tooltipTitle}}' + '</div>' +
+                                      '{{tooltipContent}}' + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
                                       '</div>';
 
         //parse the animation speed of tooltips
@@ -75,7 +78,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!title && !content) {
+          if (!$scope.tooltipTitle && !$scope.tooltipContent) {
 
             return true;
           }
@@ -287,6 +290,21 @@
           $scope.hideTooltip();
           $scope.initTooltip(originSide);
         });
+
+        if (attr.tooltipTitle) {
+          $scope.$watch(function() {
+            return $scope.tooltipTitle;
+          }, function() {
+            $scope.initTooltip(side);
+          });
+        }
+        if (attr.tooltipContent) {
+          $scope.$watch(function() {
+            return $scope.tooltipContent;
+          }, function() {
+            $scope.initTooltip(side);
+          });
+        }
       }
     };
   }]);
