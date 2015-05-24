@@ -4,7 +4,7 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', '$interval', function manageDirective($window, $compile, $interval) {
+  .directive('tooltips', ['$window', '$compile', function manageDirective($window, $compile) {
 
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
@@ -12,10 +12,7 @@
       , CSS_PREFIX = '_720kb-tooltip-';
     return {
       'restrict': 'A',
-      'scope': {
-        'tooltipContent': '@',
-        'tooltipTitle': '@'
-      },
+      'scope': {},
       'link': function linkingFunction($scope, element, attr) {
 
         var initialized = false
@@ -29,8 +26,8 @@
           , width
           , offsetTop
           , offsetLeft
-          //, title = $scope.parseTitle()//attr.tooltipTitle || attr.title || ''
-          //, content = $scope.parseContent() // attr.tooltipContent || ''
+          , title = attr.tooltipTitle || attr.title || ''
+          , content = attr.tooltipContent || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
           , originSide = attr.tooltipSide || 'top'
@@ -48,10 +45,12 @@
           htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
-        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + '{{tooltipTitle}}' + '</div>' +
-                                      '{{tooltipContent}}' + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + '{{title}}' + '</div>' +
+                                      '{{content}}' + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
                                       '</div>';
 
+        $scope.title = title;
+        $scope.content = content;
         //parse the animation speed of tooltips
         $scope.parseSpeed = function parseSpeed () {
 
@@ -78,7 +77,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!$scope.tooltipTitle && !$scope.tooltipContent) {
+          if (!$scope.title && !$scope.content) {
 
             return true;
           }
@@ -291,20 +290,26 @@
           $scope.initTooltip(originSide);
         });
 
-        if (attr.tooltipTitle) {
-          $scope.$watch(function() {
-            return $scope.tooltipTitle;
-          }, function() {
-            $scope.initTooltip(side);
-          });
-        }
-        if (attr.tooltipContent) {
-          $scope.$watch(function() {
-            return $scope.tooltipContent;
-          }, function() {
-            $scope.initTooltip(side);
-          });
-        }
+        //if (attr.tooltipTitle) {
+        //  attr.$observe('tooltipTitle', function(val) {
+        //    $scope.title = val;
+        //    $scope.initTooltip(side);
+        //  });
+        //} else {
+        //  if (attr.title) {
+        //    attr.$observe('title', function(val) {
+        //      $scope.title = val;
+        //      $scope.initTooltip(side);
+        //    });
+        //  }
+        //}
+
+        //if (attr.tooltipContent) {
+        //  attr.$observe('tooltipContent', function(val) {
+        //    $scope.content = val;
+        //    $scope.initTooltip(side);
+        //  });
+        //}
       }
     };
   }]);
