@@ -277,15 +277,20 @@
             }
         };
 
-        //destroy the tooltip when the directive is destroyed
-        $scope.$on('$destroy', function() {
-          theTooltip.remove();
-        });
-
-        angular.element($window).bind('resize', function onResize() {
-
+        function onResize() {
           $scope.hideTooltip();
           $scope.initTooltip(originSide);
+        }
+
+        angular.element($window).bind('resize', onResize);
+
+        // destroy the tooltip when the directive is destroyed
+        // unbind all dom event handlers
+        $scope.$on('$destroy', function() {
+          angular.element($window).unbind('resize', onResize);
+          theTooltip.unbind(showTriggers);
+          theTooltip.unbind(hideTriggers);
+          theTooltip.remove();
         });
       }
     };
