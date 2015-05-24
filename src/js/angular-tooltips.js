@@ -290,26 +290,26 @@
           $scope.initTooltip(originSide);
         });
 
-        //if (attr.tooltipTitle) {
-        //  attr.$observe('tooltipTitle', function(val) {
-        //    $scope.title = val;
-        //    $scope.initTooltip(side);
-        //  });
-        //} else {
-        //  if (attr.title) {
-        //    attr.$observe('title', function(val) {
-        //      $scope.title = val;
-        //      $scope.initTooltip(side);
-        //    });
-        //  }
-        //}
+        if (attr.tooltipTitle) {
+          attr.$observe('tooltipTitle', function(val) {
+            $scope.title = val;
+            $scope.initTooltip(side);
+          });
+        } else {
+          if (attr.title) {
+            attr.$observe('title', function(val) {
+              $scope.title = val;
+              $scope.initTooltip(side);
+            });
+          }
+        }
 
-        //if (attr.tooltipContent) {
-        //  attr.$observe('tooltipContent', function(val) {
-        //    $scope.content = val;
-        //    $scope.initTooltip(side);
-        //  });
-        //}
+        if (attr.tooltipContent) {
+          attr.$observe('tooltipContent', function(val) {
+            $scope.content = val;
+            $scope.initTooltip(side);
+          });
+        }
       }
     };
   }]);
