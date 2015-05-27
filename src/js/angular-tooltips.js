@@ -85,7 +85,7 @@
 
         $scope.initTooltip = function initTooltip (tooltipSide) {
           if (!$scope.isTooltipEmpty()) {
-            $scope.bindShowTriggers();
+            theTooltip.css('visibility', '');
 
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
@@ -98,9 +98,7 @@
             $scope.parseSpeed();
             $scope.tooltipPositioning(tooltipSide);
           } else {
-            theTooltip.removeClass(CSS_PREFIX + 'open');
-            theTooltip.css('transition', '');
-            $scope.clearTriggers();
+            theTooltip.css('visibility', 'hidden');
           }
         };
 
