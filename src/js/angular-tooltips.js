@@ -84,20 +84,25 @@
         };
 
         $scope.initTooltip = function initTooltip (tooltipSide) {
+           if (!$scope.isTooltipEmpty()) {
+              $scope.bindShowTriggers();
 
-          if (!$scope.isTooltipEmpty()) {
+              height = thisElement[0].offsetHeight;
+              width = thisElement[0].offsetWidth;
+              offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
+              offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
+              //get tooltip dimension
+              theTooltipHeight = theTooltip[0].offsetHeight;
+              theTooltipWidth = theTooltip[0].offsetWidth;
 
-            height = thisElement[0].offsetHeight;
-            width = thisElement[0].offsetWidth;
-            offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
-            offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
-            //get tooltip dimension
-            theTooltipHeight = theTooltip[0].offsetHeight;
-            theTooltipWidth = theTooltip[0].offsetWidth;
-
-            $scope.parseSpeed();
-            $scope.tooltipPositioning(tooltipSide);
-          }
+              $scope.parseSpeed();
+              $scope.tooltipPositioning(tooltipSide);
+            }
+            else {
+              theTooltip.removeClass(CSS_PREFIX + 'open');
+              theTooltip.css('transition', '');
+              $scope.clearTriggers();
+            }
         };
 
         $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
