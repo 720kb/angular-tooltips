@@ -45,10 +45,12 @@
           htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
-        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + title + '</div>' +
-                                      content + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + '{{title}}' + '</div>' +
+                                      '{{content}}' + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
                                       '</div>';
 
+        $scope.title = title;
+        $scope.content = content;
         //parse the animation speed of tooltips
         $scope.parseSpeed = function parseSpeed () {
 
@@ -75,7 +77,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!title && !content) {
+          if (!$scope.title && !$scope.content) {
 
             return true;
           }
@@ -292,6 +294,27 @@
           theTooltip.unbind(hideTriggers);
           theTooltip.remove();
         });
+
+        if (attr.tooltipTitle) {
+          attr.$observe('tooltipTitle', function(val) {
+            $scope.title = val;
+            $scope.initTooltip(side);
+          });
+        } else {
+          if (attr.title) {
+            attr.$observe('title', function(val) {
+              $scope.title = val;
+              $scope.initTooltip(side);
+            });
+          }
+        }
+
+        if (attr.tooltipContent) {
+          attr.$observe('tooltipContent', function(val) {
+            $scope.content = val;
+            $scope.initTooltip(side);
+          });
+        }
       }
     };
   }]);
