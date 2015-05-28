@@ -100,24 +100,12 @@
           }
         };
 
-        $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
-
-          if (elem.offsetParent === null){
-
-            return val + elem.offsetTop;
-          }
-
-          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop);
+        $scope.getRootOffsetTop = function getRootOffsetTop (elem){
+          return elem.getBoundingClientRect().top;
         };
 
-        $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
-
-          if (elem.offsetParent === null){
-
-            return val + elem.offsetLeft;
-          }
-
-          return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft);
+        $scope.getRootOffsetLeft = function getRootOffsetLeft (elem){
+          return elem.getBoundingClientRect().left;
         };
 
         $scope.bindShowTriggers = function() {
