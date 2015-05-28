@@ -84,8 +84,8 @@
         };
 
         $scope.initTooltip = function initTooltip (tooltipSide) {
-
           if (!$scope.isTooltipEmpty()) {
+            theTooltip.css('visibility', '');
 
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
@@ -97,6 +97,8 @@
 
             $scope.parseSpeed();
             $scope.tooltipPositioning(tooltipSide);
+          } else {
+            theTooltip.css('visibility', 'hidden');
           }
         };
 
@@ -288,13 +290,11 @@
             $scope.title = val;
             $scope.initTooltip(side);
           });
-        } else {
-          if (attr.title) {
-            attr.$observe('title', function(val) {
-              $scope.title = val;
-              $scope.initTooltip(side);
-            });
-          }
+        } else if (attr.title) {
+          attr.$observe('title', function(val) {
+            $scope.title = val;
+            $scope.initTooltip(side);
+          });
         }
 
         if (attr.tooltipContent) {
