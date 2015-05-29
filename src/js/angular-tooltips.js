@@ -284,8 +284,7 @@
         // unbind all dom event handlers
         $scope.$on('$destroy', function() {
           angular.element($window).unbind('resize', onResize);
-          theTooltip.unbind(showTriggers);
-          theTooltip.unbind(hideTriggers);
+          $scope.clearTriggers();
           theTooltip.remove();
         });
 
