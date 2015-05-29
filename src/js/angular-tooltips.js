@@ -102,12 +102,24 @@
           }
         };
 
-        $scope.getRootOffsetTop = function getRootOffsetTop (elem){
-          return elem.getBoundingClientRect().top;
+        $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
+
+          if (elem.offsetParent === null){
+
+            return val + elem.offsetTop;
+          }
+
+          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop);
         };
 
-        $scope.getRootOffsetLeft = function getRootOffsetLeft (elem){
-          return elem.getBoundingClientRect().left;
+        $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
+
+          if (elem.offsetParent === null){
+
+            return val + elem.offsetLeft;
+          }
+
+          return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft);
         };
 
         $scope.bindShowTriggers = function() {
