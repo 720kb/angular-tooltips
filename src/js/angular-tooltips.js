@@ -110,30 +110,34 @@
           return elem.getBoundingClientRect().left;
         };
 
+        function onMouseEnterAndMouseOver() {
+          if (!lazyMode || !initialized) {
+
+            initialized = true;
+            $scope.initTooltip(side);
+          }
+          if (tryPosition) {
+
+            $scope.tooltipTryPosition();
+          }
+          $scope.showTooltip();
+        }
+
         $scope.bindShowTriggers = function() {
-          thisElement.bind(showTriggers, function onMouseEnterAndMouseOver() {
-            if (!lazyMode || !initialized) {
-
-              initialized = true;
-              $scope.initTooltip(side);
-            }
-            if (tryPosition) {
-
-              $scope.tooltipTryPosition();
-            }
-            $scope.showTooltip();
-          });
+          thisElement.bind(showTriggers, onMouseEnterAndMouseOver);
         };
 
+        function onMouseLeaveAndMouseOut() {
+          $scope.hideTooltip();
+        }
+
         $scope.bindHideTriggers = function() {
-          thisElement.bind(hideTriggers, function onMouseLeaveAndMouseOut() {
-            $scope.hideTooltip();
-          });
+          thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
         };
 
         $scope.clearTriggers = function() {
-          thisElement.unbind(showTriggers);
-          thisElement.unbind(hideTriggers);
+          thisElement.unbind(showTriggers, onMouseEnterAndMouseOver);
+          thisElement.unbind(hideTriggers, onMouseLeaveAndMouseOut);
         };
 
         $scope.bindShowTriggers();
