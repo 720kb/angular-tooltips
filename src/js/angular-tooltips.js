@@ -34,6 +34,7 @@
           , side = originSide
           , size = attr.tooltipSize || 'medium'
           , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : true
+          , bindHtml = typeof attr.tooltipBindHtml !== 'undefined' && attr.tooltipBindHtml !== null ? $scope.$eval(attr.tooltipBindHtml) : false
           , className = attr.tooltipClass || ''
           , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
@@ -42,12 +43,13 @@
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
         if (hasCloseButton) {
-          htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
+          htmlTemplate += '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
-        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + '{{title}}' + '</div>' +
-                                      '{{content}}' + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
-                                      '</div>';
+        htmlTemplate += '<div class="' + CSS_PREFIX + 'title"> ' + '{{title}}</div>';
+        htmlTemplate += bindHtml ? '<span ng-bind-html="content"></span>' : '{{content}}';
+        htmlTemplate += '<span class="' + CSS_PREFIX + 'caret"></span>' + '</div>';
+
 
         $scope.title = title;
         $scope.content = content;
