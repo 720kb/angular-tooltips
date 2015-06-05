@@ -4,12 +4,14 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', function manageDirective($window, $compile) {
+  .directive('tooltips', ['$window', '$compile', '$interpolate', function manageDirective($window, $compile, $interpolate) {
 
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
       , TOOLTIP_LARGE_MARGIN = 10 //px
-      , CSS_PREFIX = '_720kb-tooltip-';
+      , CSS_PREFIX = '_720kb-tooltip-'
+      , INTERPOLATE_START_SYM = $interpolate.startSymbol()
+      , INTERPOLATE_END_SYM = $interpolate.endSymbol();
     return {
       'restrict': 'A',
       'scope': {},
@@ -45,8 +47,8 @@
           htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
-        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + '{{title}}' + '</div>' +
-                                      '{{content}}' + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + INTERPOLATE_START_SYM + 'title' + INTERPOLATE_END_SYM + '</div>' +
+                                      INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
                                       '</div>';
 
         $scope.title = title;
