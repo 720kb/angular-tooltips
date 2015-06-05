@@ -4,7 +4,7 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', function manageDirective($window, $compile, $interpolate) {
+  .directive('tooltips', ['$window', '$compile', '$interpolate', function manageDirective($window, $compile, $interpolate) {
 
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
