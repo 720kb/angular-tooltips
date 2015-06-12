@@ -3,6 +3,7 @@
   "version": "0.1.9",
   "description": "A tooltips directive for angularjs.",
   "homepage": "http://720kb.github.io/angular-tooltips",
+  "main": "index.js",
   "keywords": [
     "date",
     "tooltips",
