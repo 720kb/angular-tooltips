@@ -125,6 +125,13 @@ using the `tooltip-speed=""` attribute
 <a href="#" tooltips tooltip-speed="slow" tooltip-title="tip">Tooltip slow</a>
 <a href="#" tooltips tooltip-speed="950" tooltip-title="tip">Tooltip custom</a>
 ```
+####Tooltip delay
+You can set the tooltip transition delay (ms)
+using the `tooltip-delay=""` attribute
+
+```html
+<a href="#" tooltips tooltip-delay="800" tooltip-title="tip">Tooltip in 800ms</a>
+```
 ####Tooltip try
 If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) 
 using the `tooltip-try=""` attribute
