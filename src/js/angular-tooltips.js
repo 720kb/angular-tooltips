@@ -37,7 +37,8 @@
           , size = attr.tooltipSize || 'medium'
           , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : true
           , className = attr.tooltipClass || ''
-          , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
+          , speed = (attr.tooltipSpeed || 'medium').toLowerCase(),
+          , delay = attr.tooltipDelay || 0
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
           , hasCloseButton = typeof attr.tooltipCloseButton !== 'undefined' && attr.tooltipCloseButton !== null
           , closeButtonContent = attr.tooltipCloseButton || ''
@@ -159,6 +160,13 @@
         $scope.showTooltip = function showTooltip () {
           theTooltip.addClass(CSS_PREFIX + 'open');
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
+
+          if (delay) {
+
+            theTooltip.css('transition-delay', delay + 'ms' );
+
+          }
+
           $scope.clearTriggers();
           $scope.bindHideTriggers();
         };
