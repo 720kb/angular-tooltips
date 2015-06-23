@@ -112,7 +112,7 @@
             return val + elem.offsetTop;
           }
 
-          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop);
+          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop - elem.scrollTop);
         };
 
         $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
@@ -122,7 +122,7 @@
             return val + elem.offsetLeft;
           }
 
-          return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft);
+          return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft - elem.scrollLeft);
         };
 
         function onMouseEnterAndMouseOver() {
