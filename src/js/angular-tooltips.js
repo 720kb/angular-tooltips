@@ -30,6 +30,7 @@
           , offsetLeft
           , title = attr.tooltipTitle || attr.title || ''
           , content = attr.tooltipContent || ''
+          , html = attr.tooltipHtml || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
           , originSide = attr.tooltipSide || 'top'
@@ -45,15 +46,17 @@
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
         if (hasCloseButton) {
+
           htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
         }
 
         htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + INTERPOLATE_START_SYM + 'title' + INTERPOLATE_END_SYM + '</div>' +
-                                      INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
+                                      INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + html + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
                                       '</div>';
 
         $scope.title = title;
         $scope.content = content;
+        $scope.html = html;
         //parse the animation speed of tooltips
         $scope.parseSpeed = function parseSpeed () {
 
@@ -80,7 +83,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip () {
 
-          if (!$scope.title && !$scope.content) {
+          if (!$scope.title && !$scope.content && !$scope.html) {
 
             return true;
           }
