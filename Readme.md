@@ -99,11 +99,19 @@ using the `tooltip-title=""` attribute or simply via `title=""` html attribute
 ```
 
 ####Tooltip content
-You can set your tooltip content (text/html doesn't matter)
+You can set your tooltip content
 using the `tooltip-content=""` attribute
 
 ```html
-<a href="#" tooltips tooltip-title="tip" tooltip-content="<i>Woa!</i>">Tooltip me</a>
+<a href="#" tooltips tooltip-title="tip" tooltip-content="Woa!">Tooltip me</a>
+```
+
+####Tooltip HTML content
+You can set your tooltip html content
+using the `tooltip-html=""` attribute
+
+```html
+<a href="#" tooltips tooltip-title="tip" tooltip-html="<i>Woa!</i>">Tooltip me</a>
 ```
 
 ####Tooltip size
