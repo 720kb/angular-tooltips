@@ -318,7 +318,9 @@
             $scope.title = val;
             $scope.initTooltip(side);
           });
-        } else if (attr.title) {
+        }
+
+        if (attr.title) {
           attr.$observe('title', function(val) {
             $scope.title = val;
             $scope.initTooltip(side);
@@ -328,6 +330,13 @@
         if (attr.tooltipContent) {
           attr.$observe('tooltipContent', function(val) {
             $scope.content = val;
+            $scope.initTooltip(side);
+          });
+        }
+
+        if (attr.tooltipHtml) {
+          attr.$observe('tooltipHtml', function(val) {
+            $scope.html = val;
             $scope.initTooltip(side);
           });
         }
