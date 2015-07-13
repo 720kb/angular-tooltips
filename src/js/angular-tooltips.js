@@ -110,7 +110,7 @@
 
         $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
 
-          if (elem.offsetParent === null){
+          if (!elem.offsetParent){
 
             return val + elem.offsetTop;
           }
@@ -120,7 +120,7 @@
 
         $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
 
-          if (elem.offsetParent === null){
+          if (!elem.offsetParent){
 
             return val + elem.offsetLeft;
           }
