@@ -105,13 +105,26 @@ using the `tooltip-content=""` attribute
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-content="Woa!">Tooltip me</a>
 ```
-
 ####Tooltip HTML content
 You can set your tooltip html content
 using the `tooltip-html=""` attribute
 
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-html="<i>Woa!</i>">Tooltip me</a>
+```
+###Tooltip view
+You can use your own view inside the tooltip
+using the `tooltip-view=""` attribute
+
+```html
+<a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html">Tooltip me</a>
+```
+###Tooltip view controller
+You can set a controller for your tooltip view
+using the `tooltip-view=""` togheter with `tooltip-view-ctrl=""`  attribute
+
+```html
+<a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html" tooltip-view-ctrl="MyCtrl">Tooltip me</a>
 ```
 
 ####Tooltip size
