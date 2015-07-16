@@ -268,8 +268,8 @@
             , theTooltipW = theTooltip[0].offsetWidth
             , topOffset = theTooltip[0].offsetTop
             , leftOffset = theTooltip[0].offsetLeft
-            , winWidth = $window.outerWidth
-            , winHeight = $window.outerHeight
+            , winWidth = $window.innerWidth
+            , winHeight = $window.innerHeight
             , rightOffset = winWidth - (theTooltipW + leftOffset)
             , bottomOffset = winHeight - (theTooltipH + topOffset)
             //element OFFSETS (not tooltip offsets)
