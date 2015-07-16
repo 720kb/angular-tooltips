@@ -112,14 +112,14 @@ using the `tooltip-html=""` attribute
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-html="<i>Woa!</i>">Tooltip me</a>
 ```
-###Tooltip view
+####Tooltip view
 You can use your own view inside the tooltip
 using the `tooltip-view=""` attribute
 
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html">Tooltip me</a>
 ```
-###Tooltip view controller
+####Tooltip view controller
 You can set a controller for your tooltip view
 using the `tooltip-view=""` togheter with `tooltip-view-ctrl=""`  attribute
 
