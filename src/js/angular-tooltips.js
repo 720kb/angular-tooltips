@@ -106,8 +106,8 @@
 
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
-            offsetTop = $scope.getRootOffsetTop(thisElement[0], 0);
-            offsetLeft = $scope.getRootOffsetLeft(thisElement[0], 0);
+            offsetTop = $scope.getOffsetTop(thisElement[0]);
+            offsetLeft = $scope.getOffsetLeft(thisElement[0]);
             //get tooltip dimension
             theTooltipHeight = theTooltip[0].offsetHeight;
             theTooltipWidth = theTooltip[0].offsetWidth;
@@ -119,24 +119,12 @@
           }
         };
 
-        $scope.getRootOffsetTop = function getRootOffsetTop (elem, val){
-
-          if (!elem.offsetParent){
-
-            return val + elem.offsetTop;
-          }
-
-          return $scope.getRootOffsetTop(elem.offsetParent, val + elem.offsetTop - elem.scrollTop);
+        $scope.getOffsetTop = function getOffsetTop (elem){
+          return elem.getBoundingClientRect().top + $window.scrollY;
         };
 
-        $scope.getRootOffsetLeft = function getRootOffsetLeft (elem, val){
-
-          if (!elem.offsetParent){
-
-            return val + elem.offsetLeft;
-          }
-
-          return $scope.getRootOffsetLeft(elem.offsetParent, val + elem.offsetLeft - elem.scrollLeft);
+        $scope.getOffsetLeft = function getOffsetLeft (elem){
+          return elem.getBoundingClientRect().left + $window.scrollX;
         };
 
         function onMouseEnterAndMouseOver() {
