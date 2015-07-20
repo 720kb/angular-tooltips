@@ -198,6 +198,15 @@ I will show a tooltip with class="tooltip-custom tooltip-for-me"
 </a>
 ```
 
+
+####Tooltip positioning check
+In case your tooltip target element moves (either by scrolling or by use of .js) you can enable tooltip positioning check using `tooltip-scroll="true"` attribute. When this is enabled, tooltip element position is checked every 20ms and tooltip is updated when necessary. This comes extra handy when using close triggers and you need to keep tooltip besides the target element.
+```html
+<a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="I move along with my element" tooltip-scroll="true">
+I will show a tooltip with class="tooltip-custom tooltip-for-me"
+</a>
+```
+
 ## Example
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)

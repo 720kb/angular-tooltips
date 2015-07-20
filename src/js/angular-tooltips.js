@@ -10,7 +10,7 @@
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
       , TOOLTIP_LARGE_MARGIN = 10 //px
-      , POSITION_CHECK_INTERVAL = 25 // ms
+      , POSITION_CHECK_INTERVAL = 20 // ms
       , CSS_PREFIX = '_720kb-tooltip-'
       , INTERPOLATE_START_SYM = $interpolate.startSymbol()
       , INTERPOLATE_END_SYM = $interpolate.endSymbol();
@@ -33,6 +33,7 @@
           , positionInterval
           , oldBoundingRect
           , title = attr.tooltipTitle || attr.title || ''
+          , tooltipScroll = attr.tooltipScroll || false
           , content = attr.tooltipContent || ''
           , html = attr.tooltipHtml || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
@@ -168,17 +169,18 @@
 
         $scope.showTooltip = function showTooltip () {
 
-            // TODO: Only check position on fixed tooltips
+          if (tooltipScroll) {
             oldBoundingRect = thisElement[0].getBoundingClientRect();
             positionInterval = $interval(function () {
-                var newBoundingRect = thisElement[0].getBoundingClientRect();
+              var newBoundingRect = thisElement[0].getBoundingClientRect();
 
-                if (!angular.equals(oldBoundingRect, newBoundingRect)) {
-                    $scope.tooltipPositioning(side);
-                }
+              if (!angular.equals(oldBoundingRect, newBoundingRect)) {
+                  $scope.tooltipPositioning(side);
+              }
 
-                oldBoundingRect = newBoundingRect;
+              oldBoundingRect = newBoundingRect;
             }, POSITION_CHECK_INTERVAL);
+          }
 
           theTooltip.addClass(CSS_PREFIX + 'open');
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
