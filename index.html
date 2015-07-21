@@ -57,250 +57,22 @@
 </div>
 </div>
 
-<div class="separator30"></div>
-<h2>Usage</h2>
-<div class="separator15"></div>
-<h4>Html</h4>
-<small class="font-medium font-small color-muted">
-  Add the <b>tooltips</b> attribute to any of your elements
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="" tooltips tooltip-title="tip">Hover me</a>
-
-</code>
-<div class="separator15"></div>
-<h4>Javascript</h4>
-<small class="font-medium font-small color-muted">
-  Add the tooltips module dependency
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  angular.module('app', [
-  '720kb.tooltips'
-  ]);
-
-</code>
-<div class="separator30"></div>
-<h2>Options</h2>
-<div class="separator15"></div>
-<h4>Tooltip position</h4>
-<small class=" font-small color-muted">
-  You can set your tooltip to show on
-  <i class="font-bold">left</i> or
-  <i class="font-bold">right</i> or
-  <i class="font-bold">top</i> or
-  <i class="font-bold">bottom</i>
-  position using the <b>tooltip-side=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-side="top">Top</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-side="bottom">Bottom</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-side="left">Left</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-side="right">Right</a>
-
-</code>
-<div class="separator15"></div>
-<h4>Tooltip title</h4>
-<small class=" font-small color-muted">
-  You can set your tooltip title (text/html doesn't matter) using the <b>tooltip-title=""</b> attribute or simply via <b>title=""</b> html attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip">Tooltip me</a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip content
-</h4>
-<small class="font-small color-muted">
-  You can set your tooltip content
-  using the <b>tooltip-content=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-content="Woa!">
-   Hover me
- </a>
-
-</code>
-
-<div class="separator15"></div>
-<h4>
-  Tooltip HTML content
-</h4>
-<small class="font-small color-muted">
-  You can set your tooltip html content
-  using the <b>tooltip-html=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-html="<i>Woa!</i>">
-   Hover me
- </a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip view
-</h4>
-<small class="font-small color-muted">
-  You can use your own view inside the tooltip using the <b>tooltip-view=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html">
-   Hover me
- </a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip view controller
-</h4>
-<small class="font-small color-muted">
-  You can set a controller for your tooltip view using the <b>tooltip-view=""</b> togheter with <b>tooltip-view-ctrl=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html" tooltip-view-ctrl="MyCtrl">
-   Hover me
- </a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip size
-</h4>
-<small class="font-small color-muted">
-  You can set your tooltip size  (
-  <i class="font-bold">small</i> or
-  <i class="font-bold">medium</i> or
-  <i class="font-bold">large</i>
-  )
-  using the <b>tooltip-size=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-size="small">Small</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-size="medium">Medium</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-size="large">Large</a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-    Tooltip speed
-</h4>
-<small class="font-small color-muted">
-    You can set the tooltip transition speed  (
-    <i class="font-bold">fast</i> or
-    <i class="font-bold">medium</i> or
-    <i class="font-bold">slow</i>   or
-    <i class="font-bold">int()milliseconds)</i>
-    )
-    using the <b>tooltip-speed=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
- <a href="#" tooltips tooltip-speed="fast" tooltip-title="tip">Tooltip fast</a>
- <a href="#" tooltips tooltip-speed="medium" tooltip-title="tip">Tooltip medium</a>
- <a href="#" tooltips tooltip-speed="slow" tooltip-title="tip">Tooltip slow</a>
- <a href="#" tooltips tooltip-speed="950" tooltip-title="tip">Tooltip custom</a>
-
-</code>
-
-<div class="separator15"></div>
-<h4>
-    Tooltip delay
-</h4>
-<small class="font-small color-muted">
-    You can set the tooltip transition delay (ms)
-    using the <b>tooltip-delay=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
- <a href="#" tooltips tooltip-delay="800" tooltip-title="tip">Tooltip in 800ms</a>
-
-</code>
-
-<div class="separator15"></div>
-<h4>
-  Tooltip try
-</h4>
-<small class="font-small color-muted">
-  If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) using the <b>tooltip-try=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-try="1">Tooltip me</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-try="0">Tooltip me</a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip lazy
-</h4>
-<small class="font-small color-muted">
- If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false) using the <b>tooltip-lazy=""</b> attribute
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  //I will re-init my position everytime the mouseover event is fired
-  <a href="#" tooltips tooltip-lazy="false" tooltip-content="Hi" tooltip-show-trigger="mouseover">Not Lazy</a>
-
-  //I will init my position on mouseover only the first time event is fired
-  <a href="#" tooltips tooltip-lazy="true" tooltip-content="Hi" tooltip-show-trigger="mouseover">Lazy</a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip triggers
-</h4>
-<small class="font-small color-muted">
-  You can set your tooltip to <i class="font-bold">show/hide</i> on specific event/events, you can use the <b>tooltip-show-trigger=""</b> and the <b>tooltip-hide-trigger=""</b> attribute for this scope
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click</a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-  Tooltip close button
-</h4>
-<small class="font-small color-muted">
-  If you want to hide on click, you can configure a close button (<b>tooltip-close-button=""</b>) using text or HTML. This allows your users to click the button inside the tooltip instead of clicking on the original trigger.
-</small>
-<div class="separator10"></div>
-<code hljs="">
-  <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button="x" tooltip-side="left">Click button to hide</a>
-  <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button="<button type='button'>Close Me!</button>" tooltip-side="left">Click HTML button to hide</a>
-
-</code>
-<div class="separator15"></div>
-<h4>
-    Tooltip CSS class
-</h4>
-<small class="font-small color-muted">
-    You can set a custom CSS class or a set of, using the  <i class="font-bold">tooltip-class=""</i> attribute:
-</small>
-<div class="separator10"></div>
-<code hljs="">
- <a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
-    I will show a tooltip with class="tooltip-custom tooltip-for-me"
- </a>
-
-</code>
-</div>
-</div>
-<!--Github fork me ribbon-->
-<a href="https://github.com/720kb/angular-tooltips">
-  <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Github Source" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png">
+<div class="separator50"></div>
+<div class="line-compress center-content">
+<a class="btn btn-default" href="//github.com/720kb/angular-tooltips#angular-tooltips" target="_blank">
+  <i class="fa fa-github-alt"></i>
+  See on Github
 </a>
+<div class="separator50"></div>
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/720kb/angular-tooltips" data-icon="octicon-star" data-count-href="/720kb/angular-tooltips/stargazers" data-count-api="/repos/720kb/angular-tooltips#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star 720kb/angular-tooltips on GitHub">Star</a>
+&nbsp;&nbsp;
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/720kb/angular-tooltips/fork" data-icon="octicon-git-branch" data-count-href="/720kb/angular-tooltips/network" data-count-api="/repos/720kb/angular-tooltips#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork 720kb/angular-tooltips on GitHub">Fork</a>
+&nbsp;&nbsp;
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/720kb/angular-tooltips/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download 720kb/angular-tooltips on GitHub">Download</a>
+</div>
 <!--footer-->
 <div class="separator100"></div>
 <div class="hr"></div>
@@ -313,6 +85,8 @@
 <script src="//yandex.st/highlightjs/8.0/highlight.min.js"></script>
 <script type="text/javascript" src="//pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
 <script type="text/javascript" src="assets/js/index.js"></script>
+<!-- Place this tag right after the last button or just before your close body tag. -->
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 <!--G analytics-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
