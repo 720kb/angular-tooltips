@@ -4,12 +4,13 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', '$interpolate',
-   function manageDirective($window, $compile, $interpolate) {
+  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval',
+   function manageDirective($window, $compile, $interpolate, $interval) {
 
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
       , TOOLTIP_LARGE_MARGIN = 10 //px
+      , POSITION_CHECK_INTERVAL = 20 // ms
       , CSS_PREFIX = '_720kb-tooltip-'
       , INTERPOLATE_START_SYM = $interpolate.startSymbol()
       , INTERPOLATE_END_SYM = $interpolate.endSymbol();
@@ -29,7 +30,10 @@
           , width
           , offsetTop
           , offsetLeft
+          , positionInterval
+          , oldBoundingRect
           , title = attr.tooltipTitle || attr.title || ''
+          , tooltipScroll = attr.tooltipScroll || false
           , content = attr.tooltipContent || ''
           , html = attr.tooltipHtml || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
@@ -106,8 +110,7 @@
 
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
-            offsetTop = $scope.getOffsetTop(thisElement[0]);
-            offsetLeft = $scope.getOffsetLeft(thisElement[0]);
+
             //get tooltip dimension
             theTooltipHeight = theTooltip[0].offsetHeight;
             theTooltipWidth = theTooltip[0].offsetWidth;
@@ -117,6 +120,11 @@
           } else {
             theTooltip.css('visibility', 'hidden');
           }
+        };
+
+        $scope.getOffsets = function getRootOffsets () {
+          offsetTop = $scope.getOffsetTop(thisElement[0]);
+          offsetLeft = $scope.getOffsetLeft(thisElement[0]);
         };
 
         $scope.getOffsetTop = function getOffsetTop (elem){
@@ -160,6 +168,20 @@
         $scope.bindShowTriggers();
 
         $scope.showTooltip = function showTooltip () {
+
+          if (tooltipScroll) {
+            oldBoundingRect = thisElement[0].getBoundingClientRect();
+            positionInterval = $interval(function () {
+              var newBoundingRect = thisElement[0].getBoundingClientRect();
+
+              if (!angular.equals(oldBoundingRect, newBoundingRect)) {
+                  $scope.tooltipPositioning(side);
+              }
+
+              oldBoundingRect = newBoundingRect;
+            }, POSITION_CHECK_INTERVAL);
+          }
+
           theTooltip.addClass(CSS_PREFIX + 'open');
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
 
@@ -178,6 +200,11 @@
           theTooltip.css('transition', '');
           $scope.clearTriggers();
           $scope.bindShowTriggers();
+
+          if (angular.isDefined($scope.positionInterval)) {
+              $interval.cancel(positionInterval);
+              positionInterval = undefined;
+          }
         };
 
         $scope.removePosition = function removeTooltipPosition () {
@@ -192,6 +219,7 @@
         $scope.tooltipPositioning = function tooltipPositioning (tooltipSide) {
 
           $scope.removePosition();
+          $scope.getOffsets();
 
           var topValue
             , leftValue;
