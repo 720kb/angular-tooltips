@@ -199,11 +199,11 @@ I will show a tooltip with class="tooltip-custom tooltip-for-me"
 ```
 
 
-####Tooltip positioning check
-In case your tooltip target element moves (either by scrolling or by use of .js) you can enable tooltip positioning check using `tooltip-scroll="true"` attribute. When this is enabled, tooltip element position is checked every 20ms and tooltip is updated when necessary. This comes extra handy when using close triggers and you need to keep tooltip besides the target element.
+####Tooltip scroll
+In case your tooltip target element moves (either by scrolling or by use of .js) you can enable tooltip positioning check using `tooltip-scroll="true"` attribute. When this is enabled, tooltip element position is checked every 20ms and tooltip position is updated when necessary. This comes extra handy when using close triggers and you need to keep tooltip besides the target element.
 ```html
-<a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="I move along with my element" tooltip-scroll="true">
-I will show a tooltip with class="tooltip-custom tooltip-for-me"
+<a href="#" tooltips tooltip-title="I move along with my element" tooltip-scroll="true">
+I will follow my element movements
 </a>
 ```
 
