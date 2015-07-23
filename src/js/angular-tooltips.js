@@ -196,8 +196,8 @@
         };
 
         $scope.hideTooltip = function hideTooltip () {
+          theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
           theTooltip.removeClass(CSS_PREFIX + 'open');
-          theTooltip.css('transition', '');
           $scope.clearTriggers();
           $scope.bindShowTriggers();
 
