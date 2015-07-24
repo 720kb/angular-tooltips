@@ -5,11 +5,10 @@
   z-index:9;
   padding:0.4% 1%;
   opacity:0;
-  visibility: hidden;
+  display:none;
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:3px;
-  left: -200%;
   top: 0;
 }
 ._720kb-tooltip-title{

@@ -33,7 +33,7 @@
           , positionInterval
           , oldBoundingRect
           , title = attr.tooltipTitle || attr.title || ''
-          , tooltipScroll = attr.tooltipScroll || false
+          , tooltipScroll = attr.tooltipTry || false
           , content = attr.tooltipContent || ''
           , html = attr.tooltipHtml || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
@@ -106,7 +106,7 @@
 
         $scope.initTooltip = function initTooltip (tooltipSide) {
           if (!$scope.isTooltipEmpty()) {
-            theTooltip.css('visibility', '');
+            theTooltip.css('display', 'initial');
 
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
@@ -118,7 +118,7 @@
             $scope.parseSpeed();
             $scope.tooltipPositioning(tooltipSide);
           } else {
-            theTooltip.css('visibility', 'hidden');
+            theTooltip.css('display', 'none');
           }
         };
 
@@ -196,7 +196,7 @@
         };
 
         $scope.hideTooltip = function hideTooltip () {
-          theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
+          theTooltip.css('transition', 'opacity ' + speed + 'ms linear, display 0s linear ' + speed + 'ms');
           theTooltip.removeClass(CSS_PREFIX + 'open');
           $scope.clearTriggers();
           $scope.bindShowTriggers();
