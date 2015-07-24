@@ -5,10 +5,11 @@
   z-index:9;
   padding:0.4% 1%;
   opacity:0;
-  display:none;
+visibility:hidden;
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:3px;
+  left:-200%;
   top: 0;
 }
 ._720kb-tooltip-title{
@@ -30,7 +31,7 @@
   font-size: 14px;
 }
 ._720kb-tooltip._720kb-tooltip-open {
-  display:initial;
+  visiblity:'';
   opacity: 1;
 }
 ._720kb-tooltip-caret:before {

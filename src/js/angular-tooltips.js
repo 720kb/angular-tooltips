@@ -106,7 +106,8 @@
 
         $scope.initTooltip = function initTooltip (tooltipSide) {
           if (!$scope.isTooltipEmpty()) {
-            theTooltip.css('display', 'initial');
+
+            theTooltip.css('visibility', 'visible');
 
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
@@ -118,7 +119,7 @@
             $scope.parseSpeed();
             $scope.tooltipPositioning(tooltipSide);
           } else {
-            theTooltip.css('display', 'none');
+            theTooltip.css('visibility', 'hidden');
           }
         };
 
@@ -127,13 +128,32 @@
           offsetLeft = $scope.getOffsetLeft(thisElement[0]);
         };
 
-        $scope.getOffsetTop = function getOffsetTop (elem){
+        /*$scope.getOffsetTop = function getOffsetTop (elem){
           return elem.getBoundingClientRect().top + $window.scrollY;
         };
 
         $scope.getOffsetLeft = function getOffsetLeft (elem){
           return elem.getBoundingClientRect().left + $window.scrollX;
-        };
+        };*/
+        $scope.getOffsetTop = function getOffsetTop (elem){
+          var offtop = elem.getBoundingClientRect().top + $window.scrollY;
+          //IE8 - 11 fix - window.scrollY is undefied, and offtop is NaN.
+          if(isNaN(offtop)) {
+            //get the offset on old properties
+            offtop = elem.getBoundingClientRect().top + $window.pageYOffset;
+          }
+         return offtop;
+       };
+
+       $scope.getOffsetLeft = function getOffsetLeft (elem){
+          var offleft = elem.getBoundingClientRect().left + $window.scrollX;
+          //IE8 - 11 fix - window.scrollX is undefied, and offtop is NaN.
+          if(isNaN(offleft)) {
+            //get the offset on old properties
+            offleft = elem.getBoundingClientRect().left + $window.pageXOffset;
+          }
+         return offleft;
+       };
 
         function onMouseEnterAndMouseOver() {
           if (!lazyMode || !initialized) {
@@ -196,7 +216,7 @@
         };
 
         $scope.hideTooltip = function hideTooltip () {
-          theTooltip.css('transition', 'opacity ' + speed + 'ms linear, display 0s linear ' + speed + 'ms');
+          theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
           theTooltip.removeClass(CSS_PREFIX + 'open');
           $scope.clearTriggers();
           $scope.bindShowTriggers();
