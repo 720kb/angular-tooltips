@@ -30,8 +30,7 @@
   font-size: 14px;
 }
 ._720kb-tooltip._720kb-tooltip-open {
-  visibility: visible;
-  visibility: initial;
+  display:initial;
   opacity: 1;
 }
 ._720kb-tooltip-caret:before {
