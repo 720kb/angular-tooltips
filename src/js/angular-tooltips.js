@@ -138,7 +138,7 @@
         $scope.getOffsetTop = function getOffsetTop (elem){
           var offtop = elem.getBoundingClientRect().top + $window.scrollY;
           //IE8 - 11 fix - window.scrollY is undefied, and offtop is NaN.
-          if(isNaN(offtop)) {
+          if (isNaN(offtop)) {
             //get the offset on old properties
             offtop = elem.getBoundingClientRect().top + $window.pageYOffset;
           }
@@ -148,7 +148,7 @@
        $scope.getOffsetLeft = function getOffsetLeft (elem){
           var offleft = elem.getBoundingClientRect().left + $window.scrollX;
           //IE8 - 11 fix - window.scrollX is undefied, and offtop is NaN.
-          if(isNaN(offleft)) {
+          if (isNaN(offleft)) {
             //get the offset on old properties
             offleft = elem.getBoundingClientRect().left + $window.pageXOffset;
           }
