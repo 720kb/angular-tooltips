@@ -33,7 +33,7 @@
           , positionInterval
           , oldBoundingRect
           , title = attr.tooltipTitle || attr.title || ''
-          , tooltipScroll = attr.tooltipTry || false
+          , tooltipScroll = attr.tooltipScroll || false
           , content = attr.tooltipContent || ''
           , html = attr.tooltipHtml || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
