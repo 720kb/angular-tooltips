@@ -190,6 +190,12 @@ If you want to hide on click, you can configure a close button using text or HTM
 <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button='<button type="button">Close Me!</button>' tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click, with option to click on HTML button</a>
 ```
 
+####Tooltip hide trigger target
+You can specify if the target of the hide trigget is the element or the tooltip itself
+The only value are "onElement" (default) and "onTooltip"
+<a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="mouseleave" tooltip-hide-target="onTooltip" tooltip-close-button="x" tooltip-side="left">
+			Show tooltip on click and mouseover and hide tooltip only on click on the tooltip itself., with option to click on the X</a>
+
 ####Tooltip CSS class
 You can set a custom CSS class or a set of, using the  `tooltip-class=""` attribute:
 ```html

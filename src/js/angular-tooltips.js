@@ -38,6 +38,7 @@
           , html = attr.tooltipHtml || ''
           , showTriggers = attr.tooltipShowTrigger || 'mouseover'
           , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
+		  , hideTarget = typeof attr.tooltipHideTarget !== 'undefined' && attr.tooltipHideTarget !== null ? attr.tooltipHideTarget : 'onElement'
           , originSide = attr.tooltipSide || 'top'
           , side = originSide
           , size = attr.tooltipSize || 'medium'
@@ -50,6 +51,10 @@
           , closeButtonContent = attr.tooltipCloseButton || ''
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
+		  
+		if(hideTarget != 'onElement' && hideTarget != 'onTooltip'){
+			hideTarget = 'onElement';
+		}		  
         if (hasCloseButton) {
 
           htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
@@ -177,7 +182,11 @@
         }
 
         $scope.bindHideTriggers = function() {
-          thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
+			if(hideTarget == 'onTooltip'){
+			   theTooltip.bind(hideTriggers, onMouseLeaveAndMouseOut);
+			}else{
+			   thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
+			}
         };
 
         $scope.clearTriggers = function() {
