@@ -5,8 +5,10 @@
   "homepage": "http://720kb.github.io/angular-tooltips",
   "main": "dist/angular-tooltips.min.js",
   "keywords": [
-    "date",
+    "tiptip",
+    "tooltip",
     "tooltips",
+    "popover",
     "input"
   ],
   "repository": {
