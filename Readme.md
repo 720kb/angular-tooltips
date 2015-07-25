@@ -28,7 +28,7 @@ Safari ![ok](http://i.imgur.com/CK8qxk1.png)
 
 Opera ![ok](http://i.imgur.com/CK8qxk1.png)
 
-IE    ![uhmmmm...](http://i.imgur.com/CK8qxk1.png)
+IE > 8    ![uhmmmm...](http://i.imgur.com/CK8qxk1.png)
 
 
 ## Load
