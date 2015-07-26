@@ -154,7 +154,7 @@ using the `tooltip-delay=""` attribute
 <a href="#" tooltips tooltip-delay="800" tooltip-title="tip">Tooltip in 800ms</a>
 ```
 ####Tooltip try
-If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0) 
+If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0)
 using the `tooltip-try=""` attribute
 
 ```html
@@ -162,7 +162,7 @@ using the `tooltip-try=""` attribute
 <a href="#" tooltips tooltip-title="tip" tooltip-try="0">Tooltip me</a>
 ```
 ####Tooltip lazy
-If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false) 
+If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false)
 using the `tooltip-lazy=""` attribute
 
 ```html
@@ -191,10 +191,14 @@ If you want to hide on click, you can configure a close button using text or HTM
 ```
 
 ####Tooltip hide trigger target
-You can specify if the target of the hide trigget is the element or the tooltip itself
-The only value are "onElement" (default) and "onTooltip"
-<a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="mouseleave" tooltip-hide-target="onTooltip" tooltip-close-button="x" tooltip-side="left">
-			Show tooltip on click and mouseover and hide tooltip only on click on the tooltip itself., with option to click on the X</a>
+You can use ```tooltip-hide-target=""``` to specify if the target of the ```tooltip-hide-trigger=""``` is the element or the tooltip itself.
+Values are "element" (default) or "tooltip".
+
+```html
+<a href="#" tooltips tooltip-title="tooltip" tooltip-hide-trigger="click" tooltip-hide-target="tooltip">
+Click on the tooltip to hide tooltip
+</a>
+```
 
 ####Tooltip CSS class
 You can set a custom CSS class or a set of, using the  `tooltip-class=""` attribute:

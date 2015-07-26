@@ -12,15 +12,15 @@
    <div>
     <a class="btn btn-medium bg-info color-white font-bold"
      tooltip-delay="400"
-     tooltips
      tooltip-scroll="true"
      tooltip-content="Yeo man!"
      tooltip-view="views/index.html"
      tooltip-view-ctrl="Ctrl"
      tooltip-size="small"
      tooltip-side="left"
-	 tooltip-hide-trigger="mouseleave"
-	 tooltip-hide-target="onTooltip"
+     tooltips
+	   tooltip-hide-trigger="click"
+	   tooltip-hide-target="tooltip"
      tooltip-title="hey!">
       Small left
     </a>
@@ -114,6 +114,20 @@
       Close button: click to open and close
     </a>
   </div>
+  <div class="separator30"></div>
+  <div>
+   <a class="btn btn-medium bg-info color-white font-bold"
+    tooltips
+    tooltip-delay="400"
+    tooltip-scroll="true"
+    tooltip-content="Yeo man!"
+    tooltip-size="large"
+    tooltip-hide-trigger="click"
+    tooltip-hide-target="tooltip"
+    tooltip-title="Click tooltip to hide tooltip">
+     Hide Target = tooltip
+   </a>
+ </div>
   <div class="separator100"></div>
   <div style="height:300px; overflow-y:scroll">
     <div style="height:600px;">
