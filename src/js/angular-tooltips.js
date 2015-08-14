@@ -4,7 +4,7 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .provider('tooltipsConfig', function() {
+  .provider('tooltipsConfig', function TooltipsConfigProvider() {
     var options = {
       'scroll': false
       , 'showTrigger': 'mouseover'
@@ -19,14 +19,14 @@
       , 'lazy': true
       , 'closeButton': null
     };
-    this.options = function() {
-      if(arguments.length === 1) {
-        angular.extend(options, arguments[0])
+    this.options = function optionsAccessor() {
+      if (arguments.length === 1) {
+        angular.extend(options, arguments[0]);
       }
       return angular.copy(options);
     };
 
-    this.$get = function() {
+    this.$get = function getTooltipsConfig() {
       return options;
     };
   })
