@@ -81,7 +81,7 @@ Angular tooltips allows you to use some options via `attribute` data
 
 ####Tooltip position
 You can set your tooltip to show on `left` or `right` or `top` or `bottom` position
-using the `tooltip-side=""` attribute
+using the `tooltip-side=""` attribute. Default: `top`
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-side="top">Tooltip me</a>
 <a href="#" tooltips tooltip-title="tip" tooltip-side="bottom">Tooltip me</a>
@@ -128,8 +128,8 @@ using the `tooltip-view=""` togheter with `tooltip-view-ctrl=""`  attribute
 ```
 
 ####Tooltip size
-You can set your tooltip size (small || medium || large)
-using the `tooltip-size=""` attribute
+You can set your tooltip size (small || medium (default) || large)
+using the `tooltip-size=""` attribute. Default: `medium`
 
 ```html
 <a href="#" tooltips tooltip-title="tip"  tooltip-size="small">Tooltip me</a>
@@ -138,7 +138,7 @@ using the `tooltip-size=""` attribute
 ```
 ####Tooltip speed
 You can set the tooltip transition speed ('fast' || 'medium' || 'slow' || int(milliseconds))
-using the `tooltip-speed=""` attribute
+using the `tooltip-speed=""` attribute. Default: `medium`
 
 ```html
 <a href="#" tooltips tooltip-speed="fast" tooltip-title="tip">Tooltip fast</a>
@@ -148,22 +148,22 @@ using the `tooltip-speed=""` attribute
 ```
 ####Tooltip delay
 You can set the tooltip transition delay (ms)
-using the `tooltip-delay=""` attribute
+using the `tooltip-delay=""` attribute. Default: `0`
 
 ```html
 <a href="#" tooltips tooltip-delay="800" tooltip-title="tip">Tooltip in 800ms</a>
 ```
 ####Tooltip try
 If space is not available for tooltip , it will automatically search for a similar alternative position to show. You can set tooltip try (1 || 0)
-using the `tooltip-try=""` attribute
+using the `tooltip-try=""` attribute. Default: `true`
 
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-try="1">Tooltip me</a>
 <a href="#" tooltips tooltip-title="tip" tooltip-try="0">Tooltip me</a>
 ```
 ####Tooltip lazy
-If you don't want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false)
-using the `tooltip-lazy=""` attribute
+If you want to re-init the tooltip position everytime the tooltip trigger events are fired, you can set tooltip lazy mode (true || false)
+using the `tooltip-lazy=""` attribute. Default: `true`
 
 ```html
 <a href="#" tooltips tooltip-lazy="false" tooltip-content="Hi" tooltip-show-trigger="mouseover">
@@ -175,7 +175,8 @@ I will init my position on mouseover only the first time event is fired
 ```
 
 ####Tooltip triggers
-You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope
+You can set your tooltip to show/hide on specific event/events, you can use the `tooltip-show-trigger=""` and the `tooltip-hide-trigger=""` attribute for this scope.
+Defaults: `mouseover`, `mouseleave`
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="click" tooltip-side="top">Show tooltip only on click</a>
 <a href="#" tooltips tooltip-title="tip" tooltip-hide-trigger="click" tooltip-side="bottom">Hide tooltip only on click</a>
@@ -184,7 +185,7 @@ You can set your tooltip to show/hide on specific event/events, you can use the 
 
 _**Close button**_
 
-If you want to hide on click, you can configure a close button using text or HTML. This allows your users to click the button inside the tooltip instead of clicking on the original trigger.
+If you want to hide on click, you can configure a close button using text or HTML. This allows your users to click the button inside the tooltip instead of clicking on the original trigger. Default: `null` (no close button)
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button="x" tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click, with option to click on the X</a>
 <a href="#" tooltips tooltip-title="tip" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button='<button type="button">Close Me!</button>' tooltip-side="left">Show tooltip on click and mouseover and hide tooltip only on click, with option to click on HTML button</a>
@@ -192,7 +193,7 @@ If you want to hide on click, you can configure a close button using text or HTM
 
 ####Tooltip hide trigger target
 You can use ```tooltip-hide-target=""``` to specify if the target of the ```tooltip-hide-trigger=""``` is the element or the tooltip itself.
-Values are "element" (default) or "tooltip".
+Values are "element" or "tooltip". Default: `element`
 
 ```html
 <a href="#" tooltips tooltip-title="tooltip" tooltip-hide-trigger="click" tooltip-hide-target="tooltip">
@@ -201,7 +202,7 @@ Click on the tooltip to hide tooltip
 ```
 
 ####Tooltip CSS class
-You can set a custom CSS class or a set of, using the  `tooltip-class=""` attribute:
+You can set a custom CSS class or a set of, using the  `tooltip-class=""` attribute. Default: `''` (empty string)
 ```html
 <a href="#" tooltips tooltip-class="tooltip-custom tooltip-for-me" tooltip-title="tip" tooltip-side="top">
 I will show a tooltip with class="tooltip-custom tooltip-for-me"
@@ -210,12 +211,33 @@ I will show a tooltip with class="tooltip-custom tooltip-for-me"
 
 
 ####Tooltip scroll
-In case your tooltip target element moves (either by scrolling or by use of .js) you can enable tooltip positioning check using `tooltip-scroll="true"` attribute. When this is enabled, tooltip element position is checked every 20ms and tooltip position is updated when necessary. This comes extra handy when using close triggers and you need to keep tooltip besides the target element.
+In case your tooltip target element moves (either by scrolling or by use of .js) you can enable tooltip positioning check using `tooltip-scroll="true"` attribute. When this is enabled, tooltip element position is checked every 20ms and tooltip position is updated when necessary. This comes extra handy when using close triggers and you need to keep tooltip besides the target element. Default: `false`
 ```html
 <a href="#" tooltips tooltip-title="I move along with my element" tooltip-scroll="true">
 I will follow my element movements
 </a>
 ```
+
+## Global Options
+Application wide defaults for most of the options can be set using the `tooltipConfigProvider`:
+
+```js
+angular
+  .module('app')
+  .config(function(tooltipsConfigProvider) {
+    tooltipsConfigProvider.options({
+      lazy: false,
+      size: large
+    })
+  });
+```
+Options that are not specified are kept unchanged.
+Option names are the same as attribute names without the "tooltip-" prefix: `scroll`, `showTrigger`, `hideTrigger`,
+`hideTarget`, `side`, `size`, `try`, `class`, `speed`, `delay`, `lazy`, `closeButton`
+
+Of course specific tooltips can still overwrite any default using attributes.
+
+Calling `options` method without arguments returns the complete options object.
 
 ## Example
 

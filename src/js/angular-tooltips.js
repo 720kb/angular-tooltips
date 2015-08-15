@@ -4,8 +4,34 @@
   'use strict';
 
   angular.module('720kb.tooltips', [])
-  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval',
-   function manageDirective($window, $compile, $interpolate, $interval) {
+  .provider('tooltipsConfig', function TooltipsConfigProvider() {
+    var options = {
+      'scroll': false
+      , 'showTrigger': 'mouseover'
+      , 'hideTrigger': 'mouseleave'
+      , 'hideTarget': 'element'
+      , 'side': 'top'
+      , 'size': 'medium'
+      , 'try': true
+      , 'class': ''
+      , 'speed': 'medium'
+      , 'delay': 0
+      , 'lazy': true
+      , 'closeButton': null
+    };
+    this.options = function optionsAccessor() {
+      if (arguments.length === 1) {
+        angular.extend(options, arguments[0]);
+      }
+      return angular.copy(options);
+    };
+
+    this.$get = function getTooltipsConfig() {
+      return options;
+    };
+  })
+  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', 'tooltipsConfig',
+   function manageDirective($window, $compile, $interpolate, $interval, tooltipsConfig) {
 
     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
@@ -33,22 +59,22 @@
           , positionInterval
           , oldBoundingRect
           , title = attr.tooltipTitle || attr.title || ''
-          , tooltipScroll = attr.tooltipScroll || false
+          , tooltipScroll = attr.tooltipScroll || tooltipsConfig.scroll
           , content = attr.tooltipContent || ''
           , html = attr.tooltipHtml || ''
-          , showTriggers = attr.tooltipShowTrigger || 'mouseover'
-          , hideTriggers = attr.tooltipHideTrigger || 'mouseleave'
-          , hideTarget = typeof attr.tooltipHideTarget !== 'undefined' && attr.tooltipHideTarget !== null ? attr.tooltipHideTarget : 'element'
-          , originSide = attr.tooltipSide || 'top'
+          , showTriggers = attr.tooltipShowTrigger || tooltipsConfig.showTrigger
+          , hideTriggers = attr.tooltipHideTrigger || tooltipsConfig.hideTrigger
+          , hideTarget = typeof attr.tooltipHideTarget !== 'undefined' && attr.tooltipHideTarget !== null ? attr.tooltipHideTarget : tooltipsConfig.hideTarget
+          , originSide = attr.tooltipSide || tooltipsConfig.side
           , side = originSide
-          , size = attr.tooltipSize || 'medium'
-          , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : true
-          , className = attr.tooltipClass || ''
-          , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
-          , delay = attr.tooltipDelay || 0
-          , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
-          , hasCloseButton = typeof attr.tooltipCloseButton !== 'undefined' && attr.tooltipCloseButton !== null
-          , closeButtonContent = attr.tooltipCloseButton || ''
+          , size = attr.tooltipSize || tooltipsConfig.size
+          , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : tooltipsConfig.try
+          , className = attr.tooltipClass || tooltipsConfig.class
+          , speed = (attr.tooltipSpeed || tooltipsConfig.speed).toLowerCase()
+          , delay = attr.tooltipDelay || tooltipsConfig.delay
+          , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : tooltipsConfig.lazy
+          , closeButtonContent = attr.tooltipCloseButton || tooltipsConfig.closeButton
+          , hasCloseButton = typeof closeButtonContent !== 'undefined' && closeButtonContent !== null
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
         if (hideTarget !== 'element' && hideTarget !== 'tooltip') {
