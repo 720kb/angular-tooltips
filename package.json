@@ -1,7 +1,7 @@
 {
   "name": "angular-tooltips",
-  "version": "0.1.20",
-  "description": "tooltips directive for angularjs.",
+  "version": "0.1.21",
+  "description": "Angular.js tooltips module.",
   "homepage": "http://720kb.github.io/angular-tooltips",
   "main": [
     "dist/angular-tooltips.min.js",

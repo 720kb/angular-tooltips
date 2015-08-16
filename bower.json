@@ -1,7 +1,7 @@
 {
   "name": "angular-tooltips",
-  "version": "0.1.20",
-  "description": "A tooltips directive for angularjs.",
+  "version": "0.1.21",
+  "description": "Angular.js tooltips module.",
   "authors": [
     "Filippo Oretti <filippo.oretti@gmail.com",
     "Dario Andrei <wouldgo84@gmail.com>"

@@ -19,6 +19,7 @@
       , 'lazy': true
       , 'closeButton': null
     };
+
     this.options = function optionsAccessor() {
       if (arguments.length === 1) {
         angular.extend(options, arguments[0]);
@@ -33,14 +34,15 @@
   .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', 'tooltipsConfig',
    function manageDirective($window, $compile, $interpolate, $interval, tooltipsConfig) {
 
-    var TOOLTIP_SMALL_MARGIN = 8 //px
+     var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
       , TOOLTIP_LARGE_MARGIN = 10 //px
       , POSITION_CHECK_INTERVAL = 20 // ms
       , CSS_PREFIX = '_720kb-tooltip-'
       , INTERPOLATE_START_SYM = $interpolate.startSymbol()
       , INTERPOLATE_END_SYM = $interpolate.endSymbol();
-    return {
+
+     return {
       'restrict': 'A',
       'scope': {},
       'link': function linkingFunction($scope, element, attr) {
@@ -98,7 +100,6 @@
         htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + INTERPOLATE_START_SYM + 'title' + INTERPOLATE_END_SYM + '</div>' +
                                       INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + html + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
                                       '</div>';
-
         $scope.title = title;
         $scope.content = content;
         $scope.html = html;
@@ -164,7 +165,7 @@
         $scope.getOffsetTop = function getOffsetTop(elem) {
 
           var offtop = elem.getBoundingClientRect().top + $window.scrollY;
-          //IE8 - 11 fix - window.scrollY is undefied, and offtop is NaN.
+          //ie8 - 11 fix - window.scrollY is undefied, and offtop is NaN.
           if (isNaN(offtop)) {
             //get the offset on old properties
             offtop = elem.getBoundingClientRect().top + $window.pageYOffset;
@@ -172,10 +173,10 @@
           return offtop;
         };
 
-       $scope.getOffsetLeft = function getOffsetLeft(elem) {
+        $scope.getOffsetLeft = function getOffsetLeft(elem) {
 
           var offleft = elem.getBoundingClientRect().left + $window.scrollX;
-          //IE8 - 11 fix - window.scrollX is undefied, and offtop is NaN.
+          //ie8 - 11 fix - window.scrollX is undefied, and offtop is NaN.
           if (isNaN(offleft)) {
             //get the offset on old properties
             offleft = elem.getBoundingClientRect().left + $window.pageXOffset;
@@ -225,11 +226,11 @@
 
           if (tooltipScroll) {
             oldBoundingRect = thisElement[0].getBoundingClientRect();
-            positionInterval = $interval(function () {
+            positionInterval = $interval(function intervalShowTooltip() {
               var newBoundingRect = thisElement[0].getBoundingClientRect();
 
               if (!angular.equals(oldBoundingRect, newBoundingRect)) {
-                  $scope.tooltipPositioning(side);
+                $scope.tooltipPositioning(side);
               }
 
               oldBoundingRect = newBoundingRect;
@@ -256,8 +257,8 @@
           $scope.bindShowTriggers();
 
           if (angular.isDefined($scope.positionInterval)) {
-              $interval.cancel(positionInterval);
-              positionInterval = undefined;
+            $interval.cancel(positionInterval);
+            positionInterval = undefined;
           }
         };
 
@@ -360,22 +361,22 @@
               'top': elmOffsetTop,
               'bottom': elmOffsetBottom
             }
-            , bestPosition = Object.keys(posix).reduce(function (best, key) {
+            , bestPosition = Object.keys(posix).reduce(function reduceBestPositions(best, key) {
 
-                return posix[best] > posix[key] ? best : key;
+              return posix[best] > posix[key] ? best : key;
             })
-            , worstOffset = Object.keys(offsets).reduce(function (worst, key) {
+            , worstOffset = Object.keys(offsets).reduce(function reduceWorstOffset(worst, key) {
 
-                return offsets[worst] < offsets[key] ? worst : key;
+              return offsets[worst] < offsets[key] ? worst : key;
             });
 
-            if (originSide !== bestPosition && offsets[worstOffset] < 20) {
+          if (originSide !== bestPosition && offsets[worstOffset] < 20) {
 
-              side = bestPosition;
+            side = bestPosition;
 
-              $scope.tooltipPositioning(side);
-              $scope.initTooltip(bestPosition);
-            }
+            $scope.tooltipPositioning(side);
+            $scope.initTooltip(bestPosition);
+          }
         };
 
         function onResize() {
@@ -386,7 +387,7 @@
         angular.element($window).bind('resize', onResize);
         // destroy the tooltip when the directive is destroyed
         // unbind all dom event handlers
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function scopeOnDestroy() {
 
           angular.element($window).unbind('resize', onResize);
           $scope.clearTriggers();
@@ -426,5 +427,5 @@
         }
       }
     };
-  }]);
+   }]);
 }(angular));
