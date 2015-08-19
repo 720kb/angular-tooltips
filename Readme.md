@@ -186,8 +186,8 @@ If you want to hide on click, you can configure a close button using text or HTM
 ```
 
 ####Tooltip hide trigger target
-You can use ```tooltip-hide-target=""``` to specify if the target of the ```tooltip-hide-trigger=""``` is the element or the tooltip itself.
-Values are "element" or "tooltip". Default: `element`
+You can use ```tooltip-hide-target=""``` to specify if the target of the ```tooltip-hide-trigger=""``` is the element, the tooltip itself, or both. If both is selected, the tooltip will remain visible if user's mouse is over the tooltip or the element. This is useful for keeping the element visible if it contains interactive components (like links).
+Values are "element", "tooltip", or "both". Default: `element`
 
 ```html
 <a href="#" tooltips tooltip-title="tooltip" tooltip-hide-trigger="click" tooltip-hide-target="tooltip">
