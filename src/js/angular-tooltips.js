@@ -31,8 +31,8 @@
       return options;
     };
   })
-  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', 'tooltipsConfig',
-   function manageDirective($window, $compile, $interpolate, $interval, tooltipsConfig) {
+  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', '$sce', 'tooltipsConfig',
+   function manageDirective($window, $compile, $interpolate, $interval, $sce, tooltipsConfig) {
 
      var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
@@ -98,11 +98,17 @@
         }
 
         htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + INTERPOLATE_START_SYM + 'title' + INTERPOLATE_END_SYM + '</div>' +
-                                      INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + html + ' <span class="' + CSS_PREFIX + 'caret"></span>' +
-                                      '</div>';
+                                      INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM +
+                                      ' <span class="' + CSS_PREFIX + 'html_content" ng-bind-html="getHtml()"></span>' +
+                                      ' <span class="' + CSS_PREFIX + 'caret"></span>' + '</div>';
         $scope.title = title;
         $scope.content = content;
         $scope.html = html;
+
+        $scope.getHtml = function(){
+            return $sce.trustAsHtml($scope.html);
+        };
+
         //parse the animation speed of tooltips
         $scope.parseSpeed = function parseSpeed() {
 
