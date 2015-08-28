@@ -10,8 +10,12 @@
   .controller('Ctrl', [
     '$scope',
     '$timeout',
-    function ($scope, $timeout) {
+    function controllerCtrl($scope, $timeout) {
 
+    $scope.generateHTMLextra = function generateHTMLextra(item) {
+
+      return '<i>hello tooltip content' + item + '</i>';
+    };
     $scope.items = ['1','2','4','5'];
     $timeout(function () {
       $scope.items.push('7');

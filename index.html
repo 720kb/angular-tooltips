@@ -7,9 +7,12 @@
   <link rel="stylesheet" type="text/css" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
   <title>Angularjs Tooltips</title>
 </head>
-<body class="center-content">
+<body class="center-content" ng-controller="Ctrl">
   <div class="separator100"></div>
   <div class="col6 offset-left2">
+    <div ng-repeat="item in items">
+    <a tooltips tooltip-html="{{generateHTMLextra(item)}}"> item</a>
+    </div>
    <div>
       With just an icon (Hover the icon) <i class="fa fa-trash-o clickable-icon" tooltips tooltip-title="title" tooltip-size="small"></i>
 
