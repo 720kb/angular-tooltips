@@ -115,7 +115,7 @@ using the `tooltip-view=""` attribute
 ```
 ####Tooltip view controller
 You can set a controller for your tooltip view
-using the `tooltip-view=""` togheter with `tooltip-view-ctrl=""`  attribute
+using the `tooltip-view=""` together with `tooltip-view-ctrl=""`  attribute
 
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html" tooltip-view-ctrl="MyCtrl">Tooltip me</a>
