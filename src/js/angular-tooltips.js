@@ -40,7 +40,8 @@
       , POSITION_CHECK_INTERVAL = 20 // ms
       , CSS_PREFIX = '_720kb-tooltip-'
       , INTERPOLATE_START_SYM = $interpolate.startSymbol()
-      , INTERPOLATE_END_SYM = $interpolate.endSymbol();
+      , INTERPOLATE_END_SYM = $interpolate.endSymbol()
+      , DELAYED_MOUSEOUT_TIME = 250; // ms
 
      return {
       'restrict': 'A',
@@ -79,7 +80,7 @@
           , hasCloseButton = typeof closeButtonContent !== 'undefined' && closeButtonContent !== null
           , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
 
-        if (hideTarget !== 'element' && hideTarget !== 'tooltip') {
+        if (hideTarget !== 'element' && hideTarget !== 'tooltip' && hideTarget !== 'both') {
 
           hideTarget = 'element';
         }
@@ -207,6 +208,24 @@
           $scope.hideTooltip();
         }
 
+        $scope.mouseoverTooltip = false;
+        $scope.mouseoverElement = false;
+
+        function shouldHide() {
+            return !$scope.mouseoverElement && !$scope.mouseoverTooltip;
+        }
+
+        function delayedMouseLeaveAndMouseOut() {
+            // wait a tick before hiding stuff because
+            // user intention is not yet clear
+            setTimeout(function(){
+                if(shouldHide()){
+
+                    onMouseLeaveAndMouseOut();
+                }
+            }, DELAYED_MOUSEOUT_TIME);
+        }
+
         $scope.bindShowTriggers = function bindShowTriggerHandle() {
           thisElement.bind(showTriggers, onMouseEnterAndMouseOver);
         };
@@ -215,10 +234,28 @@
           if (hideTarget === 'tooltip'){
 
             theTooltip.bind(hideTriggers, onMouseLeaveAndMouseOut);
-          } else {
+          } else if(hideTarget === 'element'){
 
             thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
-          }
+          } else if(hideTarget === 'both'){
+
+            // keep track of mouseover tooltip
+            theTooltip.hover(function(){
+              $scope.mouseoverTooltip = true;
+            }, function(){
+              $scope.mouseoverTooltip = false;
+            });
+
+            // keep track of mouseover element
+            thisElement.hover(function(){
+              $scope.mouseoverElement = true;
+            }, function(){
+              $scope.mouseoverElement = false;
+            });
+
+            theTooltip.bind(hideTriggers, delayedMouseLeaveAndMouseOut);
+            thisElement.bind(hideTriggers, delayedMouseLeaveAndMouseOut);
+           }
         };
 
         $scope.clearTriggers = function clearTriggersHandle() {
@@ -244,6 +281,7 @@
           }
 
           theTooltip.addClass(CSS_PREFIX + 'open');
+          theTooltip.addClass("interactive");
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
 
           if (delay) {
@@ -259,6 +297,7 @@
 
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
           theTooltip.removeClass(CSS_PREFIX + 'open');
+          theTooltip.removeClass("interactive");
           $scope.clearTriggers();
           $scope.bindShowTriggers();
 
