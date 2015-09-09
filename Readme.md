@@ -221,7 +221,7 @@ angular
   .config(function(tooltipsConfigProvider) {
     tooltipsConfigProvider.options({
       lazy: false,
-      size: large
+      size: 'large'
     })
   });
 ```
