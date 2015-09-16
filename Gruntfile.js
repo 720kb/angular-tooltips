@@ -20,14 +20,19 @@
       'pkg': grunt.file.readJSON('package.json'),
       'confs': {
         'dist': 'dist',
-        'config': 'config',
         'css': 'src/css',
         'js': 'src/js',
         'serverPort': 8000
       },
+      'jscs': {
+        'src': '<%= confs.js %>/**/*.js',
+        'options': {
+          'config': '.jscsrc'
+        }
+      },
       'csslint': {
         'options': {
-          'csslintrc': '<%= confs.config %>/csslintrc.json'
+          'csslintrc': '.csslintrc'
         },
         'strict': {
           'src': [
@@ -37,7 +42,7 @@
       },
       'eslint': {
         'options': {
-          'config': '<%= confs.config %>/eslint.json'
+          'config': '.eslintrc'
         },
         'target': [
           'Gruntfile.js',
@@ -79,24 +84,9 @@
             'port': '<%= confs.serverPort %>',
             'base': '.',
             'keepalive': true,
-            'middleware': function manageMiddlewares(connect, options) {
-              var middlewares = []
-                , directory = options.directory || options.base[options.base.length - 1];
-
+            'middleware': function manageMiddlewares(connect, options, middlewares) {
               // enable Angular's HTML5 mode
               middlewares.push(modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif$ /index.html [L]']));
-
-              if (!Array.isArray(options.base)) {
-                options.base = [options.base];
-              }
-              options.base.forEach(function forEachOption(base) {
-                // Serve static files.
-                middlewares.push(connect.static(base));
-              });
-
-              // Make directory browse-able.
-              middlewares.push(connect.directory(directory));
-
               return middlewares;
             }
           }
@@ -134,6 +124,8 @@
 
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-eslint');
+    grunt.loadNpmTasks('grunt-jscs');
+
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
@@ -141,15 +133,19 @@
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', [
+    grunt.registerTask('lint', [
+      'jscs',
       'csslint',
-      'eslint',
+      'eslint'
+    ]);
+
+    grunt.registerTask('default', [
+      'lint',
       'concurrent:dev'
     ]);
 
     grunt.registerTask('prod', [
-      'csslint',
-      'eslint',
+      'lint',
       'cssmin',
       'uglify'
     ]);

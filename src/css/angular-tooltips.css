@@ -1,4 +1,5 @@
 ._720kb-tooltip {
+  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.8);
   color: white;
   position: absolute;
@@ -15,6 +16,7 @@
 }
 
 ._720kb-tooltip-title {
+  color: rgb(255, 255, 255);
   color: rgba(255, 255, 255, 0.95);
   font-weight: 500;
   width: 100%;
@@ -37,7 +39,7 @@
 }
 
 ._720kb-tooltip._720kb-tooltip-open {
-  visibility: '';
+  visibility: visible;
   opacity: 1;
 }
 
@@ -46,6 +48,7 @@
   position: absolute;
   width: 0;
   height: 0;
+  border: 6px solid rgb(0, 0, 0);
   border: 6px solid rgba(0, 0, 0, 0.8);
 }
 
