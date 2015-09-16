@@ -39,7 +39,7 @@
 }
 
 ._720kb-tooltip._720kb-tooltip-open {
-  visibility: '';
+  visibility: visible;
   opacity: 1;
 }
 

@@ -229,7 +229,7 @@
 
           $scope.bindHideTriggers = function bindHideTriggersHandle() {
 
-            if (hideTarget === 'tooltip') {
+            if (hideTarget === 'tooltip'){
 
               theTooltip.bind(hideTriggers, onMouseLeaveAndMouseOut);
             } else {
