@@ -3,10 +3,7 @@
   "version": "0.1.22",
   "description": "Angular.js tooltips module.",
   "homepage": "http://720kb.github.io/angular-tooltips",
-  "main": [
-    "dist/angular-tooltips.min.js",
-    "dist/angular-tooltips.min.css"
-  ],
+  "main": "index.js",
   "keywords": [
     "tiptip",
     "tooltip",
