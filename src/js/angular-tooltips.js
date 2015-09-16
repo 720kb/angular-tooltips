@@ -3,8 +3,7 @@
 (function withAngular(angular) {
   'use strict';
 
-  angular.module('720kb.tooltips', [])
-  .provider('tooltipsConfig', function TooltipsConfigProvider() {
+  var tooltipsConfigProvider = function tooltipsConfigProvider() {
 
     var options = {
       'scroll': false,
@@ -34,106 +33,53 @@
 
       return options;
     };
-  })
-  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', '$sce', 'tooltipsConfig',
-    function manageDirective($window, $compile, $interpolate, $interval, $sce, tooltipsConfig) {
+  }
+  , manageDirective = function manageDirective($window, $compile, $interpolate, $interval, $sce, tooltipsConfig) {
 
-      var TOOLTIP_SMALL_MARGIN = 8 //px
-        , TOOLTIP_MEDIUM_MARGIN = 9 //px
-        , TOOLTIP_LARGE_MARGIN = 10 //px
-        , POSITION_CHECK_INTERVAL = 20 // ms
-        , CSS_PREFIX = '_720kb-tooltip-'
-        , INTERPOLATE_START_SYM = $interpolate.startSymbol()
-        , INTERPOLATE_END_SYM = $interpolate.endSymbol()
-        , linkingFunction = function linkingFunction($scope, element, attr) {
+    var TOOLTIP_SMALL_MARGIN = 8 //px
+      , TOOLTIP_MEDIUM_MARGIN = 9 //px
+      , TOOLTIP_LARGE_MARGIN = 10 //px
+      , POSITION_CHECK_INTERVAL = 20 // ms
+      , CSS_PREFIX = '_720kb-tooltip-'
+      , INTERPOLATE_START_SYM = $interpolate.startSymbol()
+      , INTERPOLATE_END_SYM = $interpolate.endSymbol()
+      , linkingFunction = function linkingFunction($scope, element, attr) {
 
-          var initialized = false
-            , thisElement = angular.element(element[0])
-            , body = angular.element($window.document.getElementsByTagName('body')[0])
-            , theTooltip
-            , theTooltipHeight
-            , theTooltipWidth
-            , theTooltipMargin //used both for margin top left right bottom
-            , height
-            , width
-            , offsetTop
-            , offsetLeft
-            , positionInterval
-            , oldBoundingRect
-            , title = attr.tooltipTitle || attr.title || ''
-            , tooltipScroll = attr.tooltipScroll || tooltipsConfig.scroll
-            , content = attr.tooltipContent || ''
-            , html = attr.tooltipHtml || ''
-            , showTriggers = attr.tooltipShowTrigger || tooltipsConfig.showTrigger
-            , hideTriggers = attr.tooltipHideTrigger || tooltipsConfig.hideTrigger
-            , hideTarget = typeof attr.tooltipHideTarget !== 'undefined' && attr.tooltipHideTarget !== null ? attr.tooltipHideTarget : tooltipsConfig.hideTarget
-            , originSide = attr.tooltipSide || tooltipsConfig.side
-            , side = originSide
-            , size = attr.tooltipSize || tooltipsConfig.size
-            //jshint -W024
-            , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : tooltipsConfig.try
-            , className = attr.tooltipClass || tooltipsConfig.class
-            , speed = (attr.tooltipSpeed || tooltipsConfig.speed).toLowerCase()
-            //jshint +W024
-            , delay = attr.tooltipDelay || tooltipsConfig.delay
-            , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : tooltipsConfig.lazy
-            , closeButtonContent = attr.tooltipCloseButton || tooltipsConfig.closeButton
-            , hasCloseButton = typeof closeButtonContent !== 'undefined' && closeButtonContent !== null
-            , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">'
-            , onMouseEnterAndMouseOver = function onMouseEnterAndMouseOver() {
-
-              if (!lazyMode || !initialized) {
-
-                initialized = true;
-                $scope.initTooltip(side);
-              }
-              if (tryPosition) {
-
-                $scope.tooltipTryPosition();
-              }
-              $scope.showTooltip();
-            }
-            , onMouseLeaveAndMouseOut = function onMouseLeaveAndMouseOut() {
-
-              $scope.hideTooltip();
-            }
-            , onResize = function onResize() {
-
-              $scope.hideTooltip();
-              $scope.initTooltip(originSide);
-            };
-
-          if (hideTarget !== 'element' && hideTarget !== 'tooltip') {
-
-            hideTarget = 'element';
-          }
-          if (hasCloseButton) {
-
-            htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
-          }
-          if (attr.tooltipView) {
-
-            if (attr.tooltipViewCtrl) {
-
-              htmlTemplate = htmlTemplate + '<div ng-controller="' + attr.tooltipViewCtrl + '" ng-include="\'' + attr.tooltipView + '\'"></div>';
-            } else {
-
-              htmlTemplate = htmlTemplate + '<div ng-include="\'' + attr.tooltipView + '\'"></div>';
-            }
-          }
-
-          htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + INTERPOLATE_START_SYM + 'title' + INTERPOLATE_END_SYM + '</div>' + INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + ' <span class="' + CSS_PREFIX + 'html_content" ng-bind-html="getHtml()"></span>' + ' <span class="' + CSS_PREFIX + 'caret"></span>' + '</div>';
-          $scope.title = title;
-          $scope.content = content;
-          $scope.html = html;
-
-          $scope.getHtml = function getHtml() {
-
-            return $sce.trustAsHtml($scope.html);
-          };
-
+        var initialized = false
+          , thisElement = angular.element(element[0])
+          , body = angular.element($window.document.getElementsByTagName('body')[0])
+          , theTooltip
+          , theTooltipHeight
+          , theTooltipWidth
+          , theTooltipMargin //used both for margin top left right bottom
+          , height
+          , width
+          , offsetTop
+          , offsetLeft
+          , positionInterval
+          , oldBoundingRect
+          , title = attr.tooltipTitle || attr.title || ''
+          , tooltipScroll = attr.tooltipScroll || tooltipsConfig.scroll
+          , content = attr.tooltipContent || ''
+          , html = attr.tooltipHtml || ''
+          , showTriggers = attr.tooltipShowTrigger || tooltipsConfig.showTrigger
+          , hideTriggers = attr.tooltipHideTrigger || tooltipsConfig.hideTrigger
+          , hideTarget = typeof attr.tooltipHideTarget !== 'undefined' && attr.tooltipHideTarget !== null ? attr.tooltipHideTarget : tooltipsConfig.hideTarget
+          , originSide = attr.tooltipSide || tooltipsConfig.side
+          , side = originSide
+          , size = attr.tooltipSize || tooltipsConfig.size
+          //jshint -W024
+          , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : tooltipsConfig.try
+          , className = attr.tooltipClass || tooltipsConfig.class
+          , speed = (attr.tooltipSpeed || tooltipsConfig.speed).toLowerCase()
+          //jshint +W024
+          , delay = attr.tooltipDelay || tooltipsConfig.delay
+          , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : tooltipsConfig.lazy
+          , closeButtonContent = attr.tooltipCloseButton || tooltipsConfig.closeButton
+          , hasCloseButton = typeof closeButtonContent !== 'undefined' && closeButtonContent !== null
+          , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">'
           //parse the animation speed of tooltips
-          $scope.parseSpeed = function parseSpeed() {
+          , parseSpeed = function parseSpeed() {
 
             switch (speed) {
               case 'fast': {
@@ -156,49 +102,15 @@
                 speed = Number(speed);
               }
             }
-          };
-
-          //create the tooltip
-          theTooltip = $compile(htmlTemplate)($scope);
-          theTooltip.addClass(className);
-          body.append(theTooltip);
-
-          $scope.isTooltipEmpty = function checkEmptyTooltip() {
+          }
+          , isTooltipEmpty = function isTooltipEmpty() {
 
             if (!$scope.title && !$scope.content && !$scope.html) {
 
               return true;
             }
-          };
-
-          $scope.initTooltip = function initTooltip(tooltipSide) {
-
-            if ($scope.isTooltipEmpty()) {
-
-              theTooltip.css('visibility', 'hidden');
-            } else {
-
-              theTooltip.css('visibility', 'visible');
-
-              height = thisElement[0].offsetHeight;
-              width = thisElement[0].offsetWidth;
-
-              //get tooltip dimension
-              theTooltipHeight = theTooltip[0].offsetHeight;
-              theTooltipWidth = theTooltip[0].offsetWidth;
-
-              $scope.parseSpeed();
-              $scope.tooltipPositioning(tooltipSide);
-            }
-          };
-
-          $scope.getOffsets = function getRootOffsets() {
-
-            offsetTop = $scope.getOffsetTop(thisElement[0]);
-            offsetLeft = $scope.getOffsetLeft(thisElement[0]);
-          };
-
-          $scope.getOffsetTop = function getOffsetTop(elem) {
+          }
+          , getOffsetTop = function getOffsetTop(elem) {
 
             var offtop = elem.getBoundingClientRect().top + $window.scrollY;
             //ie8 - 11 fix - window.scrollY is undefied, and offtop is NaN.
@@ -208,9 +120,8 @@
               offtop = elem.getBoundingClientRect().top + $window.pageYOffset;
             }
             return offtop;
-          };
-
-          $scope.getOffsetLeft = function getOffsetLeft(elem) {
+          }
+          , getOffsetLeft = function getOffsetLeft(elem) {
 
             var offleft = elem.getBoundingClientRect().left + $window.scrollX;
             //ie8 - 11 fix - window.scrollX is undefied, and offtop is NaN.
@@ -220,88 +131,24 @@
               offleft = elem.getBoundingClientRect().left + $window.pageXOffset;
             }
             return offleft;
-          };
+          }
+          , getOffsets = function getOffsets() {
 
-          $scope.bindShowTriggers = function bindShowTriggerHandle() {
-
-            thisElement.bind(showTriggers, onMouseEnterAndMouseOver);
-          };
-
-          $scope.bindHideTriggers = function bindHideTriggersHandle() {
-
-            if (hideTarget === 'tooltip') {
-
-              theTooltip.bind(hideTriggers, onMouseLeaveAndMouseOut);
-            } else {
-
-              thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
-            }
-          };
-
-          $scope.clearTriggers = function clearTriggersHandle() {
-
-            thisElement.unbind(showTriggers, onMouseEnterAndMouseOver);
-            thisElement.unbind(hideTriggers, onMouseLeaveAndMouseOut);
-          };
-
-          $scope.bindShowTriggers();
-
-          $scope.showTooltip = function showTooltip() {
-
-            if (tooltipScroll) {
-
-              oldBoundingRect = thisElement[0].getBoundingClientRect();
-              positionInterval = $interval(function intervalShowTooltip() {
-                var newBoundingRect = thisElement[0].getBoundingClientRect();
-
-                if (!angular.equals(oldBoundingRect, newBoundingRect)) {
-
-                  $scope.tooltipPositioning(side);
-                }
-
-                oldBoundingRect = newBoundingRect;
-              }, POSITION_CHECK_INTERVAL);
-            }
-
-            theTooltip.addClass(CSS_PREFIX + 'open');
-            theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
-
-            if (delay) {
-
-              theTooltip.css('transition-delay', delay + 'ms' );
-            }
-
-            $scope.clearTriggers();
-            $scope.bindHideTriggers();
-          };
-
-          $scope.hideTooltip = function hideTooltip() {
-
-            theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
-            theTooltip.removeClass(CSS_PREFIX + 'open');
-            $scope.clearTriggers();
-            $scope.bindShowTriggers();
-
-            if (angular.isDefined($scope.positionInterval)) {
-
-              $interval.cancel(positionInterval);
-              positionInterval = undefined;
-            }
-          };
-
-          $scope.removePosition = function removeTooltipPosition() {
+            offsetTop = getOffsetTop(thisElement[0]);
+            offsetLeft = getOffsetLeft(thisElement[0]);
+          }
+          , removePosition = function removeTooltipPosition() {
 
             theTooltip
             .removeClass(CSS_PREFIX + 'left')
             .removeClass(CSS_PREFIX + 'right')
             .removeClass(CSS_PREFIX + 'top')
             .removeClass(CSS_PREFIX + 'bottom ');
-          };
+          }
+          , tooltipPositioning = function tooltipPositioning(tooltipSide) {
 
-          $scope.tooltipPositioning = function tooltipPositioning(tooltipSide) {
-
-            $scope.removePosition();
-            $scope.getOffsets();
+            removePosition();
+            getOffsets();
 
             var topValue
               , leftValue;
@@ -355,9 +202,28 @@
               theTooltip.css('left', leftValue + 'px');
               theTooltip.addClass(CSS_PREFIX + 'bottom');
             }
-          };
+          }
+          , initTooltip = function initTooltip(tooltipSide) {
 
-          $scope.tooltipTryPosition = function tooltipTryPosition() {
+            if (isTooltipEmpty()) {
+
+              theTooltip.css('visibility', 'hidden');
+            } else {
+
+              theTooltip.css('visibility', 'visible');
+
+              height = thisElement[0].offsetHeight;
+              width = thisElement[0].offsetWidth;
+
+              //get tooltip dimension
+              theTooltipHeight = theTooltip[0].offsetHeight;
+              theTooltipWidth = theTooltip[0].offsetWidth;
+
+              parseSpeed();
+              tooltipPositioning(tooltipSide);
+            }
+          }
+          , tooltipTryPosition = function tooltipTryPosition() {
 
             var theTooltipH = theTooltip[0].offsetHeight
               , theTooltipW = theTooltip[0].offsetWidth
@@ -399,62 +265,189 @@
 
               side = bestPosition;
 
-              $scope.tooltipPositioning(side);
-              $scope.initTooltip(bestPosition);
+              tooltipPositioning(side);
+              initTooltip(bestPosition);
             }
+          }
+          , onMouseEnterAndMouseOver = function onMouseEnterAndMouseOver() {
+
+            if (!lazyMode || !initialized) {
+
+              initialized = true;
+              initTooltip(side);
+            }
+            if (tryPosition) {
+
+              tooltipTryPosition();
+            }
+            /*eslint-disable no-use-before-define*/
+            showTooltip();
+            /*eslint-enable no-use-before-define*/
+          }
+          , onMouseLeaveAndMouseOut = function onMouseLeaveAndMouseOut() {
+
+            $scope.hideTooltip();
+          }
+          , clearTriggers = function clearTriggers() {
+
+            thisElement.unbind(showTriggers, onMouseEnterAndMouseOver);
+            thisElement.unbind(hideTriggers, onMouseLeaveAndMouseOut);
+          }
+          , bindShowTrigger = function bindShowTrigger() {
+
+            thisElement.bind(showTriggers, onMouseEnterAndMouseOver);
+          }
+          , bindHideTriggers = function bindHideTriggers() {
+
+            if (hideTarget === 'tooltip') {
+
+              theTooltip.bind(hideTriggers, onMouseLeaveAndMouseOut);
+            } else {
+
+              thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
+            }
+          }
+          , showTooltip = function showTooltip() {
+
+            if (tooltipScroll) {
+
+              oldBoundingRect = thisElement[0].getBoundingClientRect();
+              positionInterval = $interval(function intervalShowTooltip() {
+                var newBoundingRect = thisElement[0].getBoundingClientRect();
+
+                if (!angular.equals(oldBoundingRect, newBoundingRect)) {
+
+                  tooltipPositioning(side);
+                }
+
+                oldBoundingRect = newBoundingRect;
+              }, POSITION_CHECK_INTERVAL);
+            }
+
+            theTooltip.addClass(CSS_PREFIX + 'open');
+            theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
+
+            if (delay) {
+
+              theTooltip.css('transition-delay', delay + 'ms' );
+            }
+
+            clearTriggers();
+            bindHideTriggers();
+          }
+          , onResize = function onResize() {
+
+            $scope.hideTooltip();
+            initTooltip(originSide);
           };
 
-          angular.element($window).bind('resize', onResize);
-          // destroy the tooltip when the directive is destroyed
-          // unbind all dom event handlers
-          $scope.$on('$destroy', function scopeOnDestroy() {
+        if (hideTarget !== 'element' &&
+          hideTarget !== 'tooltip') {
 
-            angular.element($window).unbind('resize', onResize);
-            $scope.clearTriggers();
-            theTooltip.remove();
+          hideTarget = 'element';
+        }
+
+        if (hasCloseButton) {
+
+          htmlTemplate = htmlTemplate + '<span class="' + CSS_PREFIX + 'close-button" ng-click="hideTooltip()"> ' + closeButtonContent + ' </span>';
+        }
+
+        if (attr.tooltipView) {
+
+          if (attr.tooltipViewCtrl) {
+
+            htmlTemplate = htmlTemplate + '<div ng-controller="' + attr.tooltipViewCtrl + '" ng-include="\'' + attr.tooltipView + '\'"></div>';
+          } else {
+
+            htmlTemplate = htmlTemplate + '<div ng-include="\'' + attr.tooltipView + '\'"></div>';
+          }
+        }
+
+        htmlTemplate = htmlTemplate + '<div class="' + CSS_PREFIX + 'title"> ' + INTERPOLATE_START_SYM + 'title' + INTERPOLATE_END_SYM + '</div>' + INTERPOLATE_START_SYM + 'content' + INTERPOLATE_END_SYM + ' <span class="' + CSS_PREFIX + 'html_content" ng-bind-html="getHtml()"></span>' + ' <span class="' + CSS_PREFIX + 'caret"></span>' + '</div>';
+        $scope.title = title;
+        $scope.content = content;
+        $scope.html = html;
+
+        if (attr.tooltipTitle) {
+
+          attr.$observe('tooltipTitle', function observeTooltipTitle(val) {
+
+            $scope.title = val;
+            initTooltip(side);
           });
+        }
 
-          if (attr.tooltipTitle) {
+        if (attr.title) {
 
-            attr.$observe('tooltipTitle', function observeTooltipTitle(val) {
+          attr.$observe('title', function observeElementTitle(val) {
 
-              $scope.title = val;
-              $scope.initTooltip(side);
-            });
-          }
+            $scope.title = val;
+            initTooltip(side);
+          });
+        }
 
-          if (attr.title) {
+        if (attr.tooltipContent) {
 
-            attr.$observe('title', function observeElementTitle(val) {
+          attr.$observe('tooltipContent', function observeTooltipContent(val) {
 
-              $scope.title = val;
-              $scope.initTooltip(side);
-            });
-          }
+            $scope.content = val;
+            initTooltip(side);
+          });
+        }
 
-          if (attr.tooltipContent) {
+        if (attr.tooltipHtml) {
 
-            attr.$observe('tooltipContent', function observeTooltipContent(val) {
+          attr.$observe('tooltipHtml', function observeTooltipHtml(val) {
 
-              $scope.content = val;
-              $scope.initTooltip(side);
-            });
-          }
+            $scope.html = val;
+            initTooltip(side);
+          });
+        }
 
-          if (attr.tooltipHtml) {
+        $scope.getHtml = function getHtml() {
 
-            attr.$observe('tooltipHtml', function observeTooltipHtml(val) {
+          return $sce.trustAsHtml($scope.html);
+        };
 
-              $scope.html = val;
-              $scope.initTooltip(side);
-            });
+        $scope.hideTooltip = function hideTooltip() {
+
+          theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
+          theTooltip.removeClass(CSS_PREFIX + 'open');
+          clearTriggers();
+          bindShowTrigger();
+
+          if (angular.isDefined($scope.positionInterval)) {
+
+            $interval.cancel(positionInterval);
+            positionInterval = undefined;
           }
         };
 
-      return {
-        'restrict': 'A',
-        'scope': {},
-        'link': linkingFunction
+        //create the tooltip
+        theTooltip = $compile(htmlTemplate)($scope);
+        bindShowTrigger();
+        theTooltip.addClass(className);
+        body.append(theTooltip);
+
+        angular.element($window).bind('resize', onResize);
+        // destroy the tooltip when the directive is destroyed
+        // unbind all dom event handlers
+        $scope.$on('$destroy', function scopeOnDestroy() {
+
+          angular.element($window).unbind('resize', onResize);
+          clearTriggers();
+          theTooltip.remove();
+        });
       };
-    }]);
+
+    return {
+      'restrict': 'A',
+      'scope': {},
+      'link': linkingFunction
+    };
+  };
+
+  angular.module('720kb.tooltips', [])
+  .provider('tooltipsConfig', tooltipsConfigProvider)
+  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', '$sce', 'tooltipsConfig', manageDirective]);
 }(angular));
