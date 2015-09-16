@@ -17,12 +17,6 @@
     "url": "https://github.com/720kb/angular-tooltips.git"
   },
   "license": "MIT",
-  "scripts": {
-    "precommit": "grunt lint",
-    "preversion": "grunt lint",
-    "version": "grunt prod && ./tasks/bower-version-bump && git add -A .",
-    "postversion": "git push && git push --tags"
-  },
   "devDependencies": {
     "connect-modrewrite": "*",
     "grunt": "*",
@@ -32,9 +26,7 @@
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-eslint": "*",
-    "grunt-jscs": "*",
-    "husky": "*"
+    "grunt-eslint": "*"
   },
   "author": {
     "name": "Filippo Oretti",
