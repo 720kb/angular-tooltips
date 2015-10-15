@@ -44,7 +44,9 @@
 
      return {
       'restrict': 'A',
-      'scope': {},
+       'scope': {
+         tooltipViewModel: '='
+       },
       'link': function linkingFunction($scope, element, attr) {
 
         var initialized = false
@@ -138,7 +140,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip() {
 
-          if (!$scope.title && !$scope.content && !$scope.html) {
+          if (!$scope.title && !$scope.content && !$scope.html && !attr.tooltipView) {
 
             return true;
           }

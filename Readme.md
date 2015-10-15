@@ -120,6 +120,21 @@ using the `tooltip-view=""` attribute
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-view="path/to/view.html">Tooltip me</a>
 ```
+
+####Tooltip view model
+You can set a model for your tooltip view
+using the `tooltip-view-model=""`
+
+```html
+<a href="#" tooltips tooltip-title="tip" tooltip-view-model="myModel" tooltip-view="path/to/view.html">Tooltip me</a>
+```
+then use it in your tooltip html template:
+
+```html
+<!-- path/to/view.html -->
+<span>Tooltip me with data - {{ tooltipViewModel.myModel }}</span>
+```
+
 ####Tooltip view controller
 You can set a controller for your tooltip view
 using the `tooltip-view=""` together with `tooltip-view-ctrl=""`  attribute
