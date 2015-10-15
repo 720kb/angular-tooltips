@@ -132,7 +132,7 @@ then use it in your tooltip html template:
 
 ```html
 <!-- path/to/view.html -->
-<span>Tooltip me with data - {{ tooltipViewModel.myModel }}</span>
+<span>Tooltip me with data - {{ tooltipViewModel }}</span>
 ```
 
 ####Tooltip view controller
