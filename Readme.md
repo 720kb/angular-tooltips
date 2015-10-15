@@ -128,7 +128,7 @@ using the `tooltip-view-model=""`
 ```html
 <a href="#" tooltips tooltip-title="tip" tooltip-view-model="myModel" tooltip-view="path/to/view.html">Tooltip me</a>
 ```
-then us it in your tooltip html template:
+then use it in your tooltip html template:
 
 ```html
 <!-- path/to/view.html -->
