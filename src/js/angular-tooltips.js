@@ -138,7 +138,7 @@
 
         $scope.isTooltipEmpty = function checkEmptyTooltip() {
 
-          if (!$scope.title && !$scope.content && !$scope.html) {
+          if (!$scope.title && !$scope.content && !$scope.html && !$scope.tooltipView) {
 
             return true;
           }
