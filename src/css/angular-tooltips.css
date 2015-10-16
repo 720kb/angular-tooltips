@@ -8,8 +8,10 @@
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  left: -200%;
   top: 0;
+}
+._720kb-tooltip:not(._720kb-tooltip-open) {
+  visibility: hidden !important;
 }
 
 ._720kb-tooltip-title {
