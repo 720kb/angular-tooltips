@@ -1,5 +1,4 @@
 /*global angular*/
-
 (function withAngular(angular) {
   'use strict';
 
@@ -44,8 +43,8 @@
 
      return {
       'restrict': 'A',
-       'scope': {
-         tooltipViewModel: '='
+      'scope': {
+         'tooltipViewModel': '='
        },
       'link': function linkingFunction($scope, element, attr) {
 
@@ -108,7 +107,7 @@
         $scope.html = html;
 
         $scope.getHtml = function(){
-            return $sce.trustAsHtml($scope.html);
+          return $sce.trustAsHtml($scope.html);
         };
 
         //parse the animation speed of tooltips
