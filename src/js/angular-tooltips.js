@@ -50,7 +50,7 @@
 
         var initialized = false
           , thisElement = angular.element(element[0])
-          , body = angular.element($window.document.getElementsByTagName('body')[0])
+          , domParent = ($window.document.getElementById(attr.tooltipParent) ? angular.element($window.document.getElementById(attr.tooltipParent)) : null) || angular.element($window.document.getElementsByTagName('body')[0])
           , theTooltip
           , theTooltipHeight
           , theTooltipWidth
@@ -135,7 +135,7 @@
 
         theTooltip.addClass(className);
 
-        body.append(theTooltip);
+        domParent.append(theTooltip);
 
         $scope.isTooltipEmpty = function checkEmptyTooltip() {
 
