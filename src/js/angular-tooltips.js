@@ -209,22 +209,22 @@
         }
 
         $scope.bindShowTriggers = function bindShowTriggerHandle() {
-          thisElement.bind(showTriggers, onMouseEnterAndMouseOver);
+          thisElement[0].addEventListener(showTriggers, onMouseEnterAndMouseOver);
         };
 
         $scope.bindHideTriggers = function bindHideTriggersHandle() {
           if (hideTarget === 'tooltip'){
 
-            theTooltip.bind(hideTriggers, onMouseLeaveAndMouseOut);
+            theTooltip[0].addEventListener(hideTriggers, onMouseLeaveAndMouseOut);
           } else {
 
-            thisElement.bind(hideTriggers, onMouseLeaveAndMouseOut);
+            thisElement[0].addEventListener(hideTriggers, onMouseLeaveAndMouseOut);
           }
         };
 
         $scope.clearTriggers = function clearTriggersHandle() {
-          thisElement.unbind(showTriggers, onMouseEnterAndMouseOver);
-          thisElement.unbind(hideTriggers, onMouseLeaveAndMouseOut);
+          thisElement[0].removeEventListener(showTriggers, onMouseEnterAndMouseOver);
+          thisElement[0].removeEventListener(hideTriggers, onMouseLeaveAndMouseOut);
         };
 
         $scope.bindShowTriggers();
@@ -399,12 +399,12 @@
           $scope.initTooltip(originSide);
         }
 
-        angular.element($window).bind('resize', onResize);
+        $window.addEventListener('resize', onResize);
         // destroy the tooltip when the directive is destroyed
         // unbind all dom event handlers
         $scope.$on('$destroy', function scopeOnDestroy() {
 
-          angular.element($window).unbind('resize', onResize);
+          $window.removeEventListener('resize', onResize);
           $scope.clearTriggers();
           theTooltip.remove();
         });
