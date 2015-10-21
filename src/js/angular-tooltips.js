@@ -147,9 +147,6 @@
 
         $scope.initTooltip = function initTooltip(tooltipSide) {
           if (!$scope.isTooltipEmpty()) {
-
-            theTooltip.css('visibility', 'visible');
-
             height = thisElement[0].offsetHeight;
             width = thisElement[0].offsetWidth;
 
@@ -159,8 +156,6 @@
 
             $scope.parseSpeed();
             $scope.tooltipPositioning(tooltipSide);
-          } else {
-            theTooltip.css('visibility', 'hidden');
           }
         };
 
@@ -230,6 +225,7 @@
         $scope.bindShowTriggers();
 
         $scope.showTooltip = function showTooltip() {
+          theTooltip.css('visibility', 'visible');
 
           if (tooltipScroll) {
             oldBoundingRect = thisElement[0].getBoundingClientRect();
@@ -257,6 +253,7 @@
         };
 
         $scope.hideTooltip = function hideTooltip() {
+          theTooltip.css('visibility', 'hidden');
 
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
           theTooltip.removeClass(CSS_PREFIX + 'open');
