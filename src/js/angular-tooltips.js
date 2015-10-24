@@ -1,4 +1,5 @@
 /*global angular*/
+
 (function withAngular(angular) {
   'use strict';
 
@@ -43,8 +44,8 @@
 
      return {
       'restrict': 'A',
-      'scope': {
-         'tooltipViewModel': '='
+       'scope': {
+         tooltipViewModel: '='
        },
       'link': function linkingFunction($scope, element, attr) {
 
@@ -107,7 +108,7 @@
         $scope.html = html;
 
         $scope.getHtml = function(){
-          return $sce.trustAsHtml($scope.html);
+            return $sce.trustAsHtml($scope.html);
         };
 
         //parse the animation speed of tooltips
@@ -286,6 +287,10 @@
           var topValue
             , leftValue;
 
+          if (size !== 'small' && size !== 'medium' && size !== 'small') {
+            throw new Error('invalid size setting. Attribute tooltipSize can accept "small" || "medium" (default) || "large" only.');
+          }
+
           if (size === 'small') {
 
             theTooltipMargin = TOOLTIP_SMALL_MARGIN;
@@ -297,6 +302,10 @@
           } else if (size === 'large') {
 
             theTooltipMargin = TOOLTIP_LARGE_MARGIN;
+          }
+
+          if (tooltipSide !== 'left' && tooltipSide !== 'right' && tooltipSide !== 'top' && tooltipSide !== 'bottom') {
+            throw new Error('invalid tooltipSide setting. Attribute tooltipSide can accept "left" || "right" || "top" || "bottom" only.');
           }
 
           if (tooltipSide === 'left') {
