@@ -45,7 +45,7 @@
      return {
       'restrict': 'A',
        'scope': {
-         tooltipViewModel: '='
+         'tooltipViewModel': '='
        },
       'link': function linkingFunction($scope, element, attr) {
 
