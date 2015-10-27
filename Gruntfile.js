@@ -20,14 +20,13 @@
       'pkg': grunt.file.readJSON('package.json'),
       'confs': {
         'dist': 'dist',
-        'config': 'config',
         'css': 'src/css',
         'js': 'src/js',
         'serverPort': 8000
       },
       'csslint': {
         'options': {
-          'csslintrc': '<%= confs.config %>/csslintrc.json'
+          'csslintrc': '.csslintrc'
         },
         'strict': {
           'src': [
@@ -37,12 +36,34 @@
       },
       'eslint': {
         'options': {
-          'config': '<%= confs.config %>/eslint.json'
+          'config': '.eslintrc'
         },
         'target': [
           'Gruntfile.js',
           '<%= confs.js %>/**/*.js'
         ]
+      },
+      'jshint': {
+        'options': {
+          'jshintrc': true
+        },
+        'files': {
+          'src': [
+            'Gruntfile.js',
+            '<%= confs.js %>/**/*.js'
+          ]
+        }
+      },
+      'jscs': {
+        'options': {
+          'config': '.jscsrc'
+        },
+        'files': {
+          'src': [
+            'Gruntfile.js',
+            '<%= confs.js %>/**/*.js'
+          ]
+        }
       },
       'uglify': {
         'options': {
@@ -90,11 +111,11 @@
                 options.base = [options.base];
               }
               options.base.forEach(function forEachOption(base) {
-                // Serve static files.
+                // serve static files.
                 middlewares.push(connect.static(base));
               });
 
-              // Make directory browse-able.
+              // make directory browse-able.
               middlewares.push(connect.directory(directory));
 
               return middlewares;
@@ -136,21 +157,27 @@
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-jscs');
 
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', [
-      'csslint',
-      'eslint',
+      'lint',
       'concurrent:dev'
     ]);
 
-    grunt.registerTask('prod', [
+    grunt.registerTask('lint', [
       'csslint',
       'eslint',
-      'cssmin',
+      'jshint',
+      'jscs'
+    ]);
+
+    grunt.registerTask('prod', [
+      'lint',
       'uglify'
     ]);
   };
