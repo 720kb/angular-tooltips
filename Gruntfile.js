@@ -1,5 +1,5 @@
-/*global module, require*/
-(function setUp(module, require) {
+/*global module*/
+(function setUp(module) {
   'use strict';
 
   var banner = ['/*!',
@@ -11,8 +11,7 @@
       ' * Brought to you by 720kb.net',
       ' *',
       ' * <%= grunt.template.today("yyyy-mm-dd") %>',
-      ' */\n\n'].join('\n')
-    , modRewrite = require('connect-modrewrite');
+      ' */\n\n'].join('\n');
 
   module.exports = function doGrunt(grunt) {
 
@@ -99,27 +98,7 @@
           'options': {
             'port': '<%= confs.serverPort %>',
             'base': '.',
-            'keepalive': true,
-            'middleware': function manageMiddlewares(connect, options) {
-              var middlewares = []
-                , directory = options.directory || options.base[options.base.length - 1];
-
-              // enable Angular's HTML5 mode
-              middlewares.push(modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif$ /index.html [L]']));
-
-              if (!Array.isArray(options.base)) {
-                options.base = [options.base];
-              }
-              options.base.forEach(function forEachOption(base) {
-                // serve static files.
-                middlewares.push(connect.static(base));
-              });
-
-              // make directory browse-able.
-              middlewares.push(connect.directory(directory));
-
-              return middlewares;
-            }
+            'keepalive': true
           }
         }
       },
@@ -181,4 +160,4 @@
       'uglify'
     ]);
   };
-}(module, require));
+}(module));
