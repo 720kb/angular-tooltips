@@ -234,6 +234,20 @@ I will follow my element movements
 </a>
 ```
 
+
+####Tooltip DOM parent
+By default, the tooltip DOM container is BODY. Given a DIV that is displayed/hidden dynamically and one wants to create tooltips inside that DIV, one needs to register the corresponding DIV container using `tooltip-parent="<container id>"`.
+```html
+<body>
+<div id="abc"> ... </div>
+<div id="def">
+   <a href="#" tooltips tooltip-title="I want to appear!" tooltip-parent="def">Example link with tooltip</a>
+</div>
+</body>
+```
+
+
+
 ## Global Options
 Application wide defaults for most of the options can be set using the `tooltipConfigProvider`:
 
