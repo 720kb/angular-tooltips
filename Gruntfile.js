@@ -97,7 +97,7 @@
         'server': {
           'options': {
             'port': '<%= confs.serverPort %>',
-            'base': '.',
+            'base': 'spec',
             'keepalive': true
           }
         }
