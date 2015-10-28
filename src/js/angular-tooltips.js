@@ -1,53 +1,48 @@
 /*global angular*/
-
 (function withAngular(angular) {
   'use strict';
 
-  angular.module('720kb.tooltips', [])
-  .provider('tooltipsConfig', function TooltipsConfigProvider() {
+  var TooltipsConfigProvider = function TooltipsConfigProvider() {
+
     var options = {
-      'scroll': false
-      , 'showTrigger': 'mouseover'
-      , 'hideTrigger': 'mouseleave'
-      , 'hideTarget': 'element'
-      , 'side': 'top'
-      , 'size': 'medium'
-      , 'try': true
-      , 'class': ''
-      , 'speed': 'medium'
-      , 'delay': 0
-      , 'lazy': true
-      , 'closeButton': null
+      'scroll': false,
+      'showTrigger': 'mouseover',
+      'hideTrigger': 'mouseleave',
+      'hideTarget': 'element',
+      'side': 'top',
+      'size': 'medium',
+      'try': true,
+      'class': '',
+      'speed': 'medium',
+      'delay': 0,
+      'lazy': true,
+      'closeButton': null
     };
 
     this.options = function optionsAccessor() {
+
       if (arguments.length === 1) {
+
         angular.extend(options, arguments[0]);
       }
       return angular.copy(options);
     };
 
     this.$get = function getTooltipsConfig() {
+
       return options;
     };
-  })
-  .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', '$sce', 'tooltipsConfig',
-   function manageDirective($window, $compile, $interpolate, $interval, $sce, tooltipsConfig) {
+  }
+  , manageDirective = function manageDirective($window, $compile, $interpolate, $interval, $sce, tooltipsConfig) {
 
-     var TOOLTIP_SMALL_MARGIN = 8 //px
+    var TOOLTIP_SMALL_MARGIN = 8 //px
       , TOOLTIP_MEDIUM_MARGIN = 9 //px
       , TOOLTIP_LARGE_MARGIN = 10 //px
       , POSITION_CHECK_INTERVAL = 20 // ms
       , CSS_PREFIX = '_720kb-tooltip-'
       , INTERPOLATE_START_SYM = $interpolate.startSymbol()
-      , INTERPOLATE_END_SYM = $interpolate.endSymbol();
-
-     return {
-      'restrict': 'A',
-      'scope': {
-        'tooltipViewModel': '='
-      },
-      'link': function linkingFunction($scope, element, attr) {
+      , INTERPOLATE_END_SYM = $interpolate.endSymbol()
+      , linkingFunction = function linkingFunction($scope, element, attr) {
 
         var initialized = false
           , thisElement = angular.element(element[0])
@@ -79,7 +74,29 @@
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : tooltipsConfig.lazy
           , closeButtonContent = attr.tooltipCloseButton || tooltipsConfig.closeButton
           , hasCloseButton = typeof closeButtonContent !== 'undefined' && closeButtonContent !== null
-          , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
+          , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">'
+          , onMouseEnterAndMouseOver = function onMouseEnterAndMouseOver() {
+
+            if (!lazyMode || !initialized) {
+
+             initialized = true;
+             $scope.initTooltip(side);
+             }
+             if (tryPosition) {
+
+               $scope.tooltipTryPosition();
+             }
+             $scope.showTooltip();
+           }
+           , onMouseLeaveAndMouseOut = function onMouseLeaveAndMouseOut() {
+
+             $scope.hideTooltip();
+           }
+           , onResize = function onResize() {
+
+             $scope.hideTooltip();
+             $scope.initTooltip(originSide);
+           };
 
         if (hideTarget !== 'element' && hideTarget !== 'tooltip') {
 
@@ -107,8 +124,9 @@
         $scope.content = content;
         $scope.html = html;
 
-        $scope.getHtml = function(){
-            return $sce.trustAsHtml($scope.html);
+        $scope.getHtml = function getHtml(){
+
+           return $sce.trustAsHtml($scope.html);
         };
 
         //parse the animation speed of tooltips
@@ -191,23 +209,6 @@
           }
           return offleft;
         };
-
-        function onMouseEnterAndMouseOver() {
-          if (!lazyMode || !initialized) {
-
-            initialized = true;
-            $scope.initTooltip(side);
-          }
-          if (tryPosition) {
-
-            $scope.tooltipTryPosition();
-          }
-          $scope.showTooltip();
-        }
-
-        function onMouseLeaveAndMouseOut() {
-          $scope.hideTooltip();
-        }
 
         $scope.bindShowTriggers = function bindShowTriggerHandle() {
           thisElement.bind(showTriggers, onMouseEnterAndMouseOver);
@@ -395,11 +396,6 @@
           }
         };
 
-        function onResize() {
-          $scope.hideTooltip();
-          $scope.initTooltip(originSide);
-        }
-
         angular.element($window).bind('resize', onResize);
         // destroy the tooltip when the directive is destroyed
         // unbind all dom event handlers
@@ -441,7 +437,18 @@
             $scope.initTooltip(side);
           });
         }
-      }
-    };
-   }]);
+      };
+
+    return {
+     'restrict': 'A',
+     'scope': {
+       'tooltipViewModel': '='
+     },
+     'link': linkingFunction
+   };
+  };
+
+  angular.module('720kb.tooltips', [])
+    .provider('tooltipsConfig', TooltipsConfigProvider)
+    .directive('tooltips', ['$window', '$compile', '$interpolate', '$interval', '$sce', 'tooltipsConfig', manageDirective]);
 }(angular));
