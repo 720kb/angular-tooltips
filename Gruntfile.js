@@ -1,152 +1,56 @@
-/*global module*/
-(function setUp(module) {
+/*global module,require*/
+(function setUp(module, require) {
   'use strict';
 
-  var banner = ['/*!',
-      ' * Angular Tooltips v<%= pkg.version %>',
-      ' *',
-      ' * Released under the MIT license',
-      ' * www.opensource.org/licenses/MIT',
-      ' *',
-      ' * Brought to you by 720kb.net',
-      ' *',
-      ' * <%= grunt.template.today("yyyy-mm-dd") %>',
-      ' */\n\n'].join('\n');
+  var banner = require('./conf/banner')
+    , babelConfs = require('./conf/babel-confs')
+    , configuration = {
+      'dist': 'dist',
+      'css': 'src/css',
+      'js': 'src/js',
+      'demo': 'demo',
+      'serverPort': 8000
+    }
+    , connectionInfo = {
+      'port': '<%= confs.serverPort %>',
+      'base': '<%= confs.demo %>'
+    }
+    , cssFolders = [
+      '<%= confs.css %>/**/*.css'
+    ]
+    , jsFolders = [
+      'Gruntfile.js',
+      '<%= confs.js %>/**/*.js'
+    ];
 
   module.exports = function doGrunt(grunt) {
 
+    var packageInformations = grunt.file.readJSON('package.json')
+      , babel = require('./conf/tasks/babel')(grunt, babelConfs, jsFolders)
+      , csslint = require('./conf/tasks/csslint')(grunt, cssFolders)
+      , eslint = require('./conf/tasks/eslint')(grunt, jsFolders)
+      , jshint = require('./conf/tasks/jshint')(grunt, jsFolders)
+      , jscs = require('./conf/tasks/jscs')(grunt, jsFolders)
+      , cssmin = require('./conf/tasks/cssmin')(grunt, banner, cssFolders)
+      , uglify = require('./conf/tasks/uglify')(grunt, banner, jsFolders)
+      , connect = require('./conf/tasks/connect')(grunt, connectionInfo)
+      , watch = require('./conf/tasks/watch')(grunt, jsFolders, cssFolders)
+      , concurrent = require('./conf/tasks/concurrent')(grunt);
+
     grunt.initConfig({
-      'pkg': grunt.file.readJSON('package.json'),
-      'confs': {
-        'dist': 'dist',
-        'css': 'src/css',
-        'js': 'src/js',
-        'serverPort': 8000
-      },
-      'csslint': {
-        'options': {
-          'csslintrc': '.csslintrc'
-        },
-        'strict': {
-          'src': [
-            '<%= confs.css %>/**/*.css'
-          ]
-        }
-      },
-      'eslint': {
-        'options': {
-          'config': '.eslintrc'
-        },
-        'target': [
-          'Gruntfile.js',
-          '<%= confs.js %>/**/*.js'
-        ]
-      },
-      'jshint': {
-        'options': {
-          'jshintrc': true
-        },
-        'files': {
-          'src': [
-            'Gruntfile.js',
-            '<%= confs.js %>/**/*.js'
-          ]
-        }
-      },
-      'jscs': {
-        'options': {
-          'config': '.jscsrc'
-        },
-        'files': {
-          'src': [
-            'Gruntfile.js',
-            '<%= confs.js %>/**/*.js'
-          ]
-        }
-      },
-      'uglify': {
-        'options': {
-          'sourceMap': true,
-          'sourceMapName': '<%= confs.dist %>/angular-tooltips.sourcemap.map',
-          'preserveComments': false,
-          'report': 'gzip',
-          'banner': banner
-        },
-        'minifyTarget': {
-          'files': {
-            '<%= confs.dist %>/angular-tooltips.min.js': [
-              '<%= confs.js %>/angular-tooltips.js'
-            ]
-          }
-        }
-      },
-      'cssmin': {
-        'options': {
-          'report': 'gzip',
-          'banner': banner
-        },
-        'minifyTarget': {
-          'files': {
-            '<%= confs.dist %>/angular-tooltips.min.css': [
-              '<%= confs.css %>/angular-tooltips.css'
-            ]
-          }
-        }
-      },
-      'connect': {
-        'server': {
-          'options': {
-            'port': '<%= confs.serverPort %>',
-            'base': 'spec',
-            'keepalive': true
-          }
-        }
-      },
-      'watch': {
-        'dev': {
-          'files': [
-            'Gruntfile.js',
-            '<%= confs.css %>/**/*.css',
-            '<%= confs.js %>/**/*.js'
-          ],
-          'tasks': [
-            'csslint',
-            'eslint'
-          ],
-          'options': {
-            'spawn': false
-          }
-        }
-      },
-      'concurrent': {
-        'dev': {
-          'tasks': [
-            'connect:server',
-            'watch:dev'
-          ],
-          'options': {
-            'limit': '<%= concurrent.dev.tasks.length %>',
-            'logConcurrentOutput': true
-          }
-        }
-      }
+      'pkg': packageInformations,
+      'confs': configuration,
+      'babel': babel,
+      'csslint': csslint,
+      'eslint': eslint,
+      'jshint': jshint,
+      'jscs': jscs,
+      'cssmin': cssmin,
+      'uglify': uglify,
+      'connect': connect,
+      'watch': watch,
+      'concurrent': concurrent
     });
-
-    grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.loadNpmTasks('grunt-eslint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jscs');
-
-    grunt.loadNpmTasks('grunt-concurrent');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-
-    grunt.registerTask('default', [
-      'lint',
-      'concurrent:dev'
-    ]);
 
     grunt.registerTask('lint', [
       'csslint',
@@ -157,7 +61,14 @@
 
     grunt.registerTask('prod', [
       'lint',
+      'babel',
       'uglify'
     ]);
+
+    grunt.registerTask('default', [
+      'lint',
+      'babel',
+      'concurrent:dev'
+    ]);
   };
-}(module));
+}(module, require));
