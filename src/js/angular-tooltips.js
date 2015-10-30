@@ -18,6 +18,8 @@
       , 'delay': 0
       , 'lazy': true
       , 'closeButton': null
+      , 'hide': false
+
     };
 
     this.options = function optionsAccessor() {
@@ -79,7 +81,8 @@
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : tooltipsConfig.lazy
           , closeButtonContent = attr.tooltipCloseButton || tooltipsConfig.closeButton
           , hasCloseButton = typeof closeButtonContent !== 'undefined' && closeButtonContent !== null
-          , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">';
+          , htmlTemplate = '<div class="_720kb-tooltip ' + CSS_PREFIX + size + '">'
+          , hide = typeof attr.tooltipHide !== 'undefined' && attr.tooltipHide !== null ? $scope.$eval(attr.tooltipHide) : tooltipsConfig.hide;
 
         if (hideTarget !== 'element' && hideTarget !== 'tooltip') {
 
@@ -106,6 +109,7 @@
         $scope.title = title;
         $scope.content = content;
         $scope.html = html;
+        $scope.hide=hide;
 
         $scope.getHtml = function(){
             return $sce.trustAsHtml($scope.html);
@@ -147,7 +151,7 @@
         };
 
         $scope.initTooltip = function initTooltip(tooltipSide) {
-          if (!$scope.isTooltipEmpty()) {
+           if ((!$scope.isTooltipEmpty())&&(!$scope.hide)) {
 
             theTooltip.css('visibility', 'visible');
 
@@ -193,16 +197,18 @@
         };
 
         function onMouseEnterAndMouseOver() {
-          if (!lazyMode || !initialized) {
+          if (!$scope.hide) {
+            if (!lazyMode || !initialized) {
 
-            initialized = true;
-            $scope.initTooltip(side);
-          }
-          if (tryPosition) {
+             initialized = true;
+             $scope.initTooltip(side);
+            }
+            if (tryPosition) {
 
-            $scope.tooltipTryPosition();
+              $scope.tooltipTryPosition();
+            }
+           $scope.showTooltip();
           }
-          $scope.showTooltip();
         }
 
         function onMouseLeaveAndMouseOut() {
@@ -410,7 +416,7 @@
           theTooltip.remove();
         });
 
-        if (attr.tooltipTitle) {
+        if (attr.hasOwnProperty('tooltipTitle')) {
 
           attr.$observe('tooltipTitle', function observeTooltipTitle(val) {
             $scope.title = val;
@@ -418,7 +424,7 @@
           });
         }
 
-        if (attr.title) {
+        if (attr.hasOwnProperty('title')) {
 
           attr.$observe('title', function observeElementTitle(val) {
             $scope.title = val;
@@ -426,7 +432,7 @@
           });
         }
 
-        if (attr.tooltipContent) {
+        if (attr.hasOwnProperty('tooltipContent')) {
 
           attr.$observe('tooltipContent', function observeTooltipContent(val) {
             $scope.content = val;
@@ -434,11 +440,16 @@
           });
         }
 
-        if (attr.tooltipHtml) {
-
+        if (attr.hasOwnProperty('tooltipHtml')) {
           attr.$observe('tooltipHtml', function observeTooltipHtml(val) {
             $scope.html = val;
             $scope.initTooltip(side);
+          });
+        }
+
+        if (attr.hasOwnProperty('tooltipHide')) {
+          attr.$observe('tooltipHide', function observeTooltipHiden(val) {
+            $scope.hide = val === 'false' || val === '' || val ===undefined ;
           });
         }
       }
