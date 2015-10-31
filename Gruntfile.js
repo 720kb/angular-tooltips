@@ -26,7 +26,7 @@
   module.exports = function doGrunt(grunt) {
 
     var packageInformations = grunt.file.readJSON('package.json')
-      , babel = require('./conf/tasks/babel')(grunt, babelConfs, jsFolders)
+      , babel = require('./conf/tasks/babel')(grunt, babelConfs, '<%= confs.js %>/**/*.js')
       , csslint = require('./conf/tasks/csslint')(grunt, cssFolders)
       , eslint = require('./conf/tasks/eslint')(grunt, jsFolders)
       , jshint = require('./conf/tasks/jshint')(grunt, jsFolders)
