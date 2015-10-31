@@ -9,7 +9,7 @@
       'options': babelConfs,
       'dist': {
         'files': {
-          'dist/app.js': jsFolders
+          'src/es6': jsFolders
         }
       }
     };
