@@ -1,7 +1,11 @@
 {
+  "esnext": true,
+  "excludeFiles": [
+    "www/dist/**",
+    "www/lib/**"
+  ],
   "validateIndentation": 2,
   "disallowAnonymousFunctions": true,
-  "disallowCapitalizedComments": true,
   "disallowDanglingUnderscores": true,
   "disallowEmptyBlocks": true,
   "disallowFunctionDeclarations": true,
