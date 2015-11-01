@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "rules": {
     "no-cond-assign": 2,
     "no-constant-condition": 2,
@@ -64,8 +65,7 @@
       2,
       "outside"
     ],
-    "strict": [2, "never"],
-    "strict": 2,
+    "strict": [2, "function"],
     "no-catch-shadow": 2,
     "no-delete-var": 2,
     "no-label-var": 2,

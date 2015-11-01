@@ -1,24 +1,21 @@
-/*global module*/
-(function withNode(module) {
+/*global require,console*/
+(function watchTask(require, console) {
   'use strict';
 
-  module.exports = function exportingFunction(grunt, jsFolders, cssFolders) {
+  var gulp = require('gulp')
+    , paths = require('../paths')
+    , browserSync = require('browser-sync')
+    , changed = function changed(event) {
 
-    var watchingFile = [];
-    watchingFile.concat(jsFolders);
-    watchingFile.concat(cssFolders);
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    return {
-      'dev': {
-        'files': watchingFile,
-        'tasks': [
-          'csslint',
-          'eslint'
-        ],
-        'options': {
-          'spawn': false
-        }
-      }
+      /*eslint-disable no-console*/
+      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+      /*eslint-enable no-console*/
     };
-  };
-}(module));
+
+  gulp.task('watch', ['lint', 'build'], function onWatch() {
+
+    gulp.watch([paths.source], ['es6', browserSync.reload]).on('change', changed);
+    gulp.watch([paths.html], ['html', browserSync.reload]).on('change', changed);
+    gulp.watch([paths.scss.file], ['scss']).on('change', changed);
+  });
+}(require, console));
