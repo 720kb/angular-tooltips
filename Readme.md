@@ -100,7 +100,7 @@ tooltip-colse-button="" | String(HTML) | false | Set the tooltip HTML close butt
 tooltip-class="" | String() | false | Set the tooltip custom CSS class/classes
 tooltip-scroll="" | String(Boolean) | false | Set the tooltip to follow the element on scroll/move
 tooltip-parent="" | String('#id') | '<body>' | Set the tooltip DOM parent by ID
-
+tooltip-hide="" | String(Boolean) | false | Hide the tooltip
 
 ##Options
 Angular tooltips allows you to use some options via `attribute` data
