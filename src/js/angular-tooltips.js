@@ -287,7 +287,7 @@
           var topValue
             , leftValue;
 
-          if (size !== 'small' && size !== 'medium' && size !== 'small') {
+          if (size !== 'small' && size !== 'medium' && size !== 'large') {
             throw new Error('invalid size setting. Attribute tooltipSize can accept "small" || "medium" (default) || "large" only.');
           }
 
