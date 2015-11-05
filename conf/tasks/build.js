@@ -17,7 +17,14 @@
     , compilerOptions = require('../babel-confs');
 
   gulp.task('build', function onBuild(done) {
-    return runSequence('clean', ['scss', 'html', 'es6', 'move'], done);
+
+    return runSequence('clean', [
+      'scss',
+      'html',
+      'es6',
+      'move'
+    ],
+    done);
   });
 
   gulp.task('move', function onMove() {
@@ -27,28 +34,26 @@
   });
 
   gulp.task('es6', function onEs6() {
-    return gulp.src(paths.source, {
-        'base': paths.base
-      })
+
+    return gulp.src(paths.source)
       .pipe(plumber())
       .pipe(changed(paths.output, {
         'extension': '.js'
       }))
-      /*.pipe(sourcemaps.init({
-        'loadMaps': true
-      }))*/
+      .pipe(sourcemaps.init())
       .pipe(babel(compilerOptions))
       .pipe(ngAnnotate({
         'sourceMap': true,
         'gulpWarnings': false
-      }))/*
-      .pipe(sourcemaps.write('/sourcemaps', {
-        'sourceRoot': '/src'
-      }))*/
+      }))
+      .pipe(sourcemaps.write('.', {
+        'sourceRoot': paths.sourcemapLib
+      }))
       .pipe(gulp.dest(paths.output));
   });
 
   gulp.task('html', function onHTML() {
+
     return gulp.src(paths.html)
       .pipe(plumber())
       .pipe(changed(paths.output, {
@@ -72,6 +77,7 @@
   });
 
   gulp.task('scss', function onScss() {
+
     return gulp.src(paths.scss.file)
       .pipe(plumber())
       .pipe(changed(paths.output, {

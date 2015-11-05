@@ -3,6 +3,7 @@
   'use strict';
 
   var paths = {
+      'sourcemapLib': '/lib',
       'output': 'dist/',
       'source': 'lib/**/*.js',
       'html': 'lib/**/*.html',
