@@ -3,14 +3,14 @@
   <head>
     <link rel="stylesheet" type="text/css" href="https://720kb.github.io/csshelper/assets/ext/src/helper.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="angular-tooltips.css">
+    <link rel="stylesheet" type="text/css" href="lib/angular-tooltips.css">
     <title>Angularjs Tooltips</title>
   </head>
-  <body class="center-content" ng-controller="Ctrl">
+  <body class="center-content" ng-controller="DemoCtrl as demoCtrl">
     <div class="separator100"></div>
     <div class="col6 offset-left2">
       <div ng-repeat="item in items">
-        <a tooltips tooltip-html="{{generateHTMLextra(item)}}"> item</a>
+        <a tooltips tooltip-html="{{ demoCtrl.generateHTMLextra(item) }}"> item</a>
       </div>
       <div>
         With just an icon (Hover the icon) <i class="fa fa-trash-o clickable-icon" tooltips tooltip-title="title" tooltip-size="small"></i>
@@ -215,7 +215,7 @@
       </div>
     </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script type="text/javascript" src="angular-tooltips.js"></script>
+    <script type="text/javascript" src="lib/angular-tooltips.js"></script>
     <script type="text/javascript" src="assets/js/index.js"></script>
   </body>
 </html>

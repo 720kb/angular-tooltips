@@ -3,9 +3,14 @@
   'use strict';
 
   var paths = {
-      'sourcemapLib': '/lib',
+      'sourcemapRoot': '/lib',
       'output': 'dist/',
-      'source': 'lib/**/*.js',
+      'source': [
+        'lib/tooltip.linking.func.js',
+        'lib/tooltip.controller.js',
+        'lib/tooltip.directive.js',
+        'lib/tooltip.module.js'
+      ],
       'html': 'lib/**/*.html',
       'scss': {
         'file': 'lib/**/*.scss',

@@ -7,20 +7,25 @@
     '720kb.tooltips'
   ])
   .controller('Ctrl', [
-    '$scope',
     '$timeout',
-    function controllerCtrl($scope, $timeout) {
+    function controllerCtrl($timeout) {
+      var that = this;
 
-      $scope.generateHTMLextra = function generateHTMLextra(item) {
+      that.items = ['1','2','4','5'];
+      $timeout(function doTimeout() {
+
+        that.items.push('7');
+        that.items.push('9');
+      }, 5000);
+    }
+  ])
+  .controller('DemoCtrl', [
+    function controllerCtrl() {
+
+      this.generateHTMLextra = function generateHTMLextra(item) {
 
         return '<i>hello tooltip content' + item + '</i>';
       };
-      $scope.items = ['1','2','4','5'];
-      $timeout(function doTimeout() {
-
-        $scope.items.push('7');
-        $scope.items.push('9');
-      }, 5000);
     }
-    ]);
+  ]);
 }(angular));

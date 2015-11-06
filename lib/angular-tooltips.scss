@@ -1,0 +1,109 @@
+[tooltips] {
+
+  .tooltips, .tooltips > * {
+    position: relative;
+    display: inline;
+  }
+
+  .tooltips span {
+    position: absolute;
+    width:120%;
+    color: #FFFFFF;
+    background: #000000;
+    line-height: 30px;
+    text-align: center;
+    display: none;
+    border-radius: 6px;
+  }
+
+  /*Right*/
+  .right.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -8px;
+    width: 0;
+    height: 0;
+    border-right: 8px solid #000000;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+  .right.tooltips:hover span {
+    display: block;
+    opacity: 0.8;
+    left: 100%;
+    top: 50%;
+    margin-top: -15px;
+    margin-left: 15px;
+    z-index: 999;
+  }
+
+  /*Bottom*/
+  .bottom.tooltips span:after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid #000000;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+  }
+  .bottom.tooltips:hover span {
+    display: block;
+    opacity: 0.8;
+    top: 30px;
+    left: 50%;
+    margin-left: -60%;
+    z-index: 999;
+  }
+
+  /*Top*/
+  .top.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #000000;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+  }
+  .top.tooltips:hover span {
+    display: block;
+    opacity: 0.8;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -60%;
+    z-index: 999;
+  }
+
+  /*Left*/
+  .left.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid #000000;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+  .left.tooltips:hover span {
+    display: block;
+    opacity: 0.8;
+    right: 100%;
+    top: 50%;
+    margin-top: -15px;
+    margin-right: 15px;
+    z-index: 999;
+  }
+
+}
