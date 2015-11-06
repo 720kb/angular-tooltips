@@ -1,9 +1,7 @@
-'use strict';
-
 (function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define('tooltip.linking.func', ['exports'], factory);
-  } else if (typeof exports !== "undefined") {
+  if (typeof define === 'function' && define.amd) {
+    define(['exports'], factory);
+  } else if (typeof exports !== 'undefined') {
     factory(exports);
   } else {
     var mod = {
@@ -13,21 +11,22 @@
     global.tooltipLinkingFunc = mod.exports;
   }
 })(this, function (exports) {
-  Object.defineProperty(exports, "__esModule", {
+  /*global window*/
+  'use strict';
+
+  Object.defineProperty(exports, '__esModule', {
     value: true
   });
-
-  var linkingFunction = exports.linkingFunction = function linkingFunction(scope, element, attrs) {
+  var linkingFunction = function linkingFunction(scope, element, attrs) {
     'use strict';
 
     window.console.log(attrs);
   };
+  exports.linkingFunction = linkingFunction;
 });
-'use strict';
-
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define('tooltip.controller', ['exports'], factory);
+    define(["exports"], factory);
   } else if (typeof exports !== "undefined") {
     factory(exports);
   } else {
@@ -38,98 +37,104 @@
     global.tooltipController = mod.exports;
   }
 })(this, function (exports) {
+  // jscs:disable disallowAnonymousFunctions
+  // jscs:disable requireNamedUnassignedFunctions
+  // jscs:disable requireSpacesInAnonymousFunctionExpression
+  "use strict";
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  var TooltipController = exports.TooltipController = ["$log", function TooltipController($log) {
-    'ngInject';
+  var TooltipController =
 
+  /*@ngInject*/
+  ["$log", function TooltipController($log) {
     _classCallCheck(this, TooltipController);
 
     this.log = $log;
-  }];
-});
-'use strict';
+  }]
+  // jscs:enable disallowAnonymousFunctions
+  // jscs:enable requireNamedUnassignedFunctions
+  // jscs:enable requireSpacesInAnonymousFunctionExpression
+  ;
 
+  exports.TooltipController = TooltipController;
+});
 (function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define('tooltip.directive', ['exports', './tooltip.controller.js', './tooltip.linking.func.js'], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require('./tooltip.controller.js'), require('./tooltip.linking.func.js'));
+  if (typeof define === 'function' && define.amd) {
+    define(['exports', 'module', './tooltip.controller.js', './tooltip.linking.func.js'], factory);
+  } else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
+    factory(exports, module, require('./tooltip.controller.js'), require('./tooltip.linking.func.js'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.tooltipController, global.tooltipLinkingFunc);
+    factory(mod.exports, mod, global.tooltipController, global.tooltipLinkingFunc);
     global.tooltipDirective = mod.exports;
   }
-})(this, function (exports, _tooltipController, _tooltipLinkingFunc) {
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
+})(this, function (exports, module, _tooltipControllerJs, _tooltipLinkingFuncJs) {
+  'use strict';
 
-  var tooltipDirective = function tooltipDirective($log) {
+  var tooltipDirective = /*@ngInject*/["$log", function tooltipDirective($log) {
     'use strict';
 
     $log.info('Called!');
+
     return {
       'restrict': 'A',
       'scope': {},
       'bindToController': {
         'tooltipTitle': '=?',
         'tooltipSide': '=?',
-        'tooltipTemplate': '=?',
-        'tooltipTemplateUrl': '=?',
-        'tooltipModel': '=?',
-        'tooltipController': '=?',
+        'tooltipTemplate': '=?', //ex tooltipContent
+        'tooltipTemplateUrl': '=?', //ex tooltipView
+        'tooltipModel': '=?', //ex tooltipViewModel
+        'tooltipController': '=?', //ex tooltipViewController
         'tooltipSize': '=?',
         'tooltipSpeed': '=?',
         'tooltipDelay': '=?',
-        'tooltipSmart': '=?',
+        'tooltipSmart': '=?', //ex tooltipTry actual option
         'tooltipShowTrigger': '=?',
         'tooltipHideTrigger': '=?',
         'tooltipClass': '=?'
       },
       'controllerAs': 'tooltipoCtrl',
-      'controller': _tooltipController.TooltipController,
-      'link': _tooltipLinkingFunc.linkingFunction
+      'controller': _tooltipControllerJs.TooltipController,
+      'link': _tooltipLinkingFuncJs.linkingFunction
     };
-  };
+  }];
 
-  exports.default = tooltipDirective;
+  module.exports = tooltipDirective;
 });
-'use strict';
-
 (function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define('tooltip.module', ['exports', 'angular', './tooltip.directive.js'], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require('angular'), require('./tooltip.directive.js'));
+  if (typeof define === 'function' && define.amd) {
+    define(['exports', 'module', 'angular', './tooltip.directive.js'], factory);
+  } else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
+    factory(exports, module, require('angular'), require('./tooltip.directive.js'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.angular, global.tooltipDirective);
+    factory(mod.exports, mod, global.angular, global.tooltipDirective);
     global.tooltipModule = mod.exports;
   }
-})(this, function (exports, _angular, _tooltipDirective) {
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
+})(this, function (exports, module, _angular, _tooltipDirectiveJs) {
+  'use strict';
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _angular2 = _interopRequireDefault(_angular);
 
-  var _tooltipDirective2 = _interopRequireDefault(_tooltipDirective);
+  var _tooltipDirective = _interopRequireDefault(_tooltipDirectiveJs);
 
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-  var tooltipModule = _angular2.default.module('720kb.tooltips', [], {
+  var tooltipModule = _angular2['default'].module('720kb.tooltips', [], {
     'strictDi': true
   });
 
-  tooltipModule.directive('tooltips', _tooltipDirective2.default);
-  exports.default = tooltipModule;
+  tooltipModule.directive('tooltips', _tooltipDirective['default']);
+
+  module.exports = tooltipModule;
 });

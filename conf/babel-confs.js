@@ -3,13 +3,15 @@
   'use strict';
 
   module.exports = {
-    'presets': [
-      'es2015'
-    ],
-    'plugins': [
-      'transform-es2015-modules-umd'
-    ],
-    'moduleIds': true,
-    'comments': true
+    'modules': 'umd',
+    'moduleIds': false,
+    'comments': true,
+    'compact': false,
+    'stage': 2,
+    'externalHelpers': false,
+    'optional': [
+      'es7.decorators',
+      'es7.classProperties'
+    ]
   };
 }(module));
