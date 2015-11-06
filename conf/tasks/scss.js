@@ -8,7 +8,6 @@
     , sourcemaps = require('gulp-sourcemaps')
     , sass = require('gulp-sass')
     , browserSync = require('browser-sync')
-    , cssmin = require('gulp-cssmin')
     , paths = require('../paths');
 
   gulp.task('scss', function onScss() {
@@ -20,7 +19,6 @@
       }))
       .pipe(sourcemaps.init())
       .pipe(sass(paths.scss.options))
-      .pipe(cssmin())
       .pipe(sourcemaps.write('.'), {
         'sourceRoot': paths.sourcemapRoot
       })
