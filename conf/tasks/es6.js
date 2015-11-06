@@ -22,10 +22,10 @@
       }))
       //.pipe(sourcemaps.init())
       .pipe(babel(compilerOptions))
-      .pipe(ngAnnotate(/*{
+      .pipe(ngAnnotate({
         'sourceMap': true,
         'gulpWarnings': false
-      }*/))
+      }))
       //.pipe(uglify())
       .pipe(concat('angular-tooltips.js'))
       /*.pipe(sourcemaps.write('.', {
