@@ -6,10 +6,21 @@
     , jshint = require('gulp-jshint')
     , eslint = require('gulp-eslint')
     , jscs = require('gulp-jscs')
+    , sassLint = require('gulp-sass-lint')
     , stylish = require('jshint-stylish')
+    , runSequence = require('run-sequence')
     , paths = require('../paths');
 
-  gulp.task('lint', function onLint() {
+  gulp.task('scss-lint', function onScssLint() {
+
+    return gulp.src(paths.scss.file)
+    .pipe(sassLint())
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError());
+  });
+
+  gulp.task('js-lint', function onJsLint() {
+
     return gulp.src(paths.source)
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
@@ -19,5 +30,10 @@
       .pipe(jscs())
       .pipe(jscs.reporter())
       .pipe(jscs.reporter('fail'));
+  });
+
+  gulp.task('lint', function onLint(done) {
+
+    return runSequence(['scss-lint', 'js-lint'], done);
   });
 }(require));

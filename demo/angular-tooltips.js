@@ -1,1 +1,0 @@
-../src/js/angular-tooltips.js
