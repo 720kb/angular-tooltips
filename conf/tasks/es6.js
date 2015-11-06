@@ -10,7 +10,6 @@
     , ngAnnotate = require('gulp-ng-annotate')
     , paths = require('../paths')
     , concat = require('gulp-concat')
-    , uglify = require('gulp-uglify')
     , compilerOptions = require('../babel-confs');
 
   gulp.task('es6', function onEs6() {
@@ -20,17 +19,16 @@
       .pipe(changed(paths.output, {
         'extension': '.js'
       }))
-      //.pipe(sourcemaps.init())
+      .pipe(sourcemaps.init())
       .pipe(babel(compilerOptions))
       .pipe(ngAnnotate({
         'sourceMap': true,
         'gulpWarnings': false
       }))
-      //.pipe(uglify())
       .pipe(concat('angular-tooltips.js'))
-      /*.pipe(sourcemaps.write('.', {
+      .pipe(sourcemaps.write('.', {
         'sourceRoot': paths.sourcemapRoot
-      }))*/
+      }))
       .pipe(gulp.dest(paths.output));
   });
 }(require));

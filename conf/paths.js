@@ -5,6 +5,14 @@
   var paths = {
       'sourcemapRoot': '/lib',
       'output': 'dist/',
+      'toMinify': {
+        'js': [
+          'dist/angular-tooltips.js'
+        ],
+        'css': [
+          'dist/angular-tooltips.css'
+        ]
+      },
       'source': [
         'lib/tooltip.linking.func.js',
         'lib/tooltip.controller.js',
