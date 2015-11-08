@@ -9,7 +9,7 @@
 
     return runSequence('clean', [
       'scss',
-      'es6',
+      'annotate',
       'move'
     ],
     done);

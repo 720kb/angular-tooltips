@@ -1,5 +1,4 @@
 /*global angular*/
-
 (function withAngular(angular) {
   'use strict';
 

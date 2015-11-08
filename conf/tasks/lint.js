@@ -13,7 +13,7 @@
 
   gulp.task('scss-lint', function onScssLint() {
 
-    return gulp.src(paths.scss.file)
+    return gulp.src(paths.scss.files)
     .pipe(sassLint())
     .pipe(sassLint.format())
     .pipe(sassLint.failOnError());
@@ -21,7 +21,7 @@
 
   gulp.task('js-lint', function onJsLint() {
 
-    return gulp.src(paths.source)
+    return gulp.src(paths.lib + paths.files.unminified)
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
       .pipe(eslint())

@@ -12,16 +12,20 @@
 
   gulp.task('scss', function onScss() {
 
-    return gulp.src(paths.scss.file)
+    return gulp.src(paths.scss.files)
       .pipe(plumber())
       .pipe(changed(paths.output, {
         'extension': '.css'
       }))
-      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.init({
+        'loadMaps': true,
+        'debug': true
+      }))
       .pipe(sass(paths.scss.options))
-      .pipe(sourcemaps.write('.'), {
-        'sourceRoot': paths.sourcemapRoot
-      })
+      .pipe(sourcemaps.write('.', {
+        'includeContent': false,
+        'sourceRoot': '../lib'
+      }))
       .pipe(gulp.dest(paths.output))
       .pipe(browserSync.reload({
         'stream': true

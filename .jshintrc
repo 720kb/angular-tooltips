@@ -3,7 +3,6 @@
   "laxcomma": true,
   "curly": true,
   "eqeqeq": true,
-  "esnext": true,
   "forin": true,
   "freeze": true,
   "futurehostile": true,
