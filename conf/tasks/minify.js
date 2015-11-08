@@ -6,9 +6,9 @@
     , plumber = require('gulp-plumber')
     , sourcemaps = require('gulp-sourcemaps')
     , paths = require('../paths')
-    , concat = require('gulp-concat')
     , uglify = require('gulp-uglify')
     , cssmin = require('gulp-cssmin')
+    , rename = require('gulp-rename')
     , runSequence = require('run-sequence');
 
   gulp.task('minify', ['build'], function onMinify(done) {
@@ -21,27 +21,43 @@
 
   gulp.task('minify-js', function onMinifyJs() {
 
-    return gulp.src(paths.toMinify.js)
+    return gulp.src(paths.output + paths.files.unminified.js)
       .pipe(plumber())
-      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.init({
+        'loadMaps': true,
+        'debug': true
+      }))
       .pipe(uglify())
-      .pipe(concat('angular-tooltips.min.js'))
       .pipe(sourcemaps.write('.', {
-        'sourceRoot': paths.sourcemapRoot
+        'includeContent': false,
+        'sourceRoot': '../lib'
+      }))
+      .pipe(rename(function onFileRename(path) {
+
+        path.basename += '.min';
+        return path;
       }))
       .pipe(gulp.dest(paths.output));
   });
 
   gulp.task('minify-css', function onMinifyCss() {
 
-    return gulp.src(paths.toMinify.css)
+    return gulp.src(paths.output + paths.files.unminified.css)
       .pipe(plumber())
-      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.init({
+        'loadMaps': true,
+        'debug': true
+      }))
       .pipe(cssmin())
-      .pipe(concat('angular-tooltips.min.css'))
-      .pipe(sourcemaps.write('.'), {
-        'sourceRoot': paths.sourcemapRoot
-      })
+      .pipe(sourcemaps.write('.', {
+        'includeContent': false,
+        'sourceRoot': '../lib'
+      }))
+      .pipe(rename(function onFileRename(path) {
+
+        path.basename += '.min';
+        return path;
+      }))
       .pipe(gulp.dest(paths.output));
   });
 

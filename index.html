@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="https://720kb.github.io/csshelper/assets/ext/src/helper.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/angular-tooltips.css">
+    <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
     <title>Angularjs Tooltips</title>
   </head>
   <body class="center-content" ng-controller="DemoCtrl as demoCtrl">
@@ -13,8 +13,13 @@
         <a tooltips tooltip-html="{{ demoCtrl.generateHTMLextra(item) }}"> item</a>
       </div-->
       <div>
-        With just an icon (Hover the icon) <i class="fa fa-trash-o clickable-icon" tooltips tooltip-title="title" tooltip-size="small"></i>
+        With just an icon (Hover the icon)
+        <i class="fa fa-trash-o clickable-icon"
+        tooltips
+        tooltip-title="title"></i>
+      </div>
 <!--
+      <div>
         <div class="separator30"></div>
         <a class="btn btn-medium bg-info color-white font-bold"
           tooltip-delay="400"
@@ -29,10 +34,10 @@
     	    tooltip-hide-target="tooltip"
           tooltip-title="hey!">
             Small left
-        </a-->
+        </a>
       </div>
 
-      <!--div class="separator30"></div>
+      <div class="separator30"></div>
       <div>
         <a class="btn btn-medium bg-info color-white font-bold"
           tooltips
@@ -214,8 +219,8 @@
         </div>
       </div>
     </div-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script type="text/javascript" src="lib/angular-tooltips.js"></script>
-    <script type="text/javascript" src="assets/js/index.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="dist/angular-tooltips.js"></script>
+    <script type="text/javascript" src="demo/js/index.js"></script>
   </body>
 </html>

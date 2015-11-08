@@ -3,25 +3,22 @@
   'use strict';
 
   var paths = {
-      'sourcemapRoot': '/lib',
+      'lib': 'lib/',
       'output': 'dist/',
-      'toMinify': {
-        'js': [
-          'dist/angular-tooltips.js'
-        ],
-        'css': [
-          'dist/angular-tooltips.css'
-        ]
+      'files': {
+        'unminified': {
+          'js': 'angular-tooltips.js',
+          'css': 'angular-tooltips.css'
+        },
+        'minified': {
+          'js': 'angular-tooltips.min.js',
+          'css': 'angular-tooltips.min.css'
+        }
       },
-      'source': [
-        'lib/tooltip.linking.func.js',
-        'lib/tooltip.controller.js',
-        'lib/tooltip.directive.js',
-        'lib/tooltip.module.js'
-      ],
-      'html': 'lib/**/*.html',
       'scss': {
-        'file': 'lib/**/*.scss',
+        'files': [
+          'lib/**/*.scss'
+        ],
         'options': {}
       },
       'assets': [

@@ -13,7 +13,7 @@
       'ui': false,
       'port': 8100,
       'server': {
-        'baseDir': ['./demo'],
+        'baseDir': ['.'],
         'middleware': [
           historyApiFallback()
         ]
