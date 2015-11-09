@@ -6,14 +6,15 @@
 
 [tooltips].tooltips span {
   position: absolute;
+  display: none;
   width:auto;
   min-width: 80px;
-  color: #FFFFFF;
-  background: #000000;
+  padding: 0 10px;
   line-height: 30px;
   text-align: center;
-  display: none;
   border-radius: 6px;
+  color: #FFFFFF;
+  background: #000000;
 }
 
 [tooltips].top.tooltips span:after {
@@ -32,7 +33,6 @@
   display: block;
   opacity: 0.8;
   bottom: 30px;
-  left: -330%;
   z-index: 999;
 }
 
