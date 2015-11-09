@@ -3,7 +3,7 @@
   display: inline;
   color: initial; }
 
-[tooltips].tooltips span {
+[tooltips].tooltips tip {
   position: absolute;
   display: none;
   width: auto;
@@ -15,7 +15,7 @@
   color: #FFFFFF;
   background: #000000; }
 
-[tooltips].top.tooltips span:after {
+[tooltips].top.tooltips tip:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -27,13 +27,13 @@
   border-right: 8px solid transparent;
   border-left: 8px solid transparent; }
 
-[tooltips].top.tooltips.active span {
+[tooltips].top.tooltips.active tip {
   display: block;
   opacity: 0.8;
   bottom: 30px;
   z-index: 999; }
 
-[tooltips].bottom.tooltips span:after {
+[tooltips].bottom.tooltips tip:after {
   content: '';
   position: absolute;
   bottom: 100%;
@@ -45,7 +45,7 @@
   border-right: 8px solid transparent;
   border-left: 8px solid transparent; }
 
-[tooltips].bottom.tooltips.active span {
+[tooltips].bottom.tooltips.active tip {
   display: block;
   opacity: 0.8;
   top: 30px;
@@ -53,7 +53,7 @@
   margin-left: -60%;
   z-index: 999; }
 
-[tooltips].right.tooltips span:after {
+[tooltips].right.tooltips tip:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -65,7 +65,7 @@
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent; }
 
-[tooltips].right.tooltips.active span {
+[tooltips].right.tooltips.active tip {
   display: block;
   opacity: 0.8;
   left: 100%;
@@ -74,7 +74,7 @@
   margin-left: 15px;
   z-index: 999; }
 
-[tooltips].left.tooltips span:after {
+[tooltips].left.tooltips tip:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -86,7 +86,7 @@
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent; }
 
-[tooltips].left.tooltips.active span {
+[tooltips].left.tooltips.active tip {
   display: block;
   opacity: 0.8;
   right: 100%;

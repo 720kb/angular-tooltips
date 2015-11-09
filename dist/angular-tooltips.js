@@ -16,34 +16,36 @@
     el = null;
     return txt;
   }
-  , trasformTooltipContent = function trasformTooltipContent(element, tooltippedContent, tooltipContent, side) {
+  , trasformTooltipContent = function trasformTooltipContent(tooltippedContent, tooltipContent, tooltipTemplate, side) {
 
-    if (!side) {
+    var toReturn = [
+      '<a tooltips title="' + tooltipContent + '" class="' + side + ' tooltips">',
+        '<tip-cont>',
+          tooltippedContent,
+        '</tip-cont>'
+      ];
 
-      side = 'top';
+    if (tooltipTemplate) {
+
+      toReturn = toReturn.concat([
+        '<tip>',
+          tooltipTemplate,
+        '</tip>'
+      ]);
     }
-
-    return [
-      '<a tooltips class="' + side + ' tooltips">',
-        tooltippedContent,
-        '<span>',
-          tooltipContent,
-        '</span>',
-      '</a>'
-    ].join(' ');
+    toReturn.push('</a>');
+    return toReturn.join(' ');
   }
   , TooltipController = /*@ngInject*/ ["$log", function TooltipController($log) {
 
     $log.info('controller called');
   }]
-  , tooltipDirective = /*@ngInject*/ ["$log", function tooltipDirective($log) {
+  , tooltipDirective = /*@ngInject*/ ["$window", function tooltipDirective($window) {
 
-    $log.info('Called!');
     return {
       'restrict': 'A',
       'scope': {},
       'bindToController': {
-        'tooltipTemplate': '=?', //ex tooltipContent
         'tooltipTemplateUrl': '=?', //ex tooltipView
         'tooltipModel': '=?', //ex tooltipViewModel
         'tooltipController': '=?', //ex tooltipViewController
@@ -57,15 +59,46 @@
       'controller': TooltipController,
       'compile': function compiling(compileElement, compileAttributes) {
 
+        compileAttributes.tooltipTitle = compileAttributes.tooltipTitle || '';
+        compileAttributes.tooltipTemplate = compileAttributes.tooltipTemplate || '';
+        compileAttributes.tooltipSide = compileAttributes.tooltipSide || 'top';
+        compileAttributes.tooltipShowTrigger = compileAttributes.tooltipShowTrigger || 'mousemove';
+        compileAttributes.tooltipHideTrigger = compileAttributes.tooltipHideTrigger || 'mouseout';
         var initialElement = getElementHTML(compileElement)
-          , startingTooltipContent = trasformTooltipContent(compileElement, initialElement, compileAttributes.tooltipTitle, compileAttributes.tooltipSide);
+          , startingTooltipContent = trasformTooltipContent(initialElement,
+            compileAttributes.tooltipTitle,
+            compileAttributes.tooltipTemplate,
+            compileAttributes.tooltipSide);
 
         compileElement.replaceWith(startingTooltipContent);
         return function linkingFunction(scope, element, attrs) {
 
           var onTooltipShow = function onTooltipShow() {
+            var tipElement = element.find('tip')
+              , newLeft
+              , computedStyle
+              , actualWidth
+              , actualPadding;
 
             element.addClass('active');
+            if (tipElement.length > 0) {
+
+              try {
+
+                computedStyle = $window.getComputedStyle(tipElement[0], null);
+                actualWidth = computedStyle.getPropertyValue('width');
+                actualPadding = computedStyle.getPropertyValue('padding-left');
+              } catch (exp) {
+
+                actualWidth = tipElement[0].currentStyle.width;
+                actualPadding = tipElement[0].currentStyle.paddingLeft;
+              }
+
+              actualWidth = $window.parseInt(actualWidth);
+              actualPadding = $window.parseInt(actualPadding);
+              newLeft = -(actualWidth / 2 + actualPadding / 2);
+              tipElement.css('left', newLeft + 'px');
+            }
           }
           , onTooltipHide = function onTooltipHide() {
 
@@ -77,9 +110,20 @@
 
               if (oldValue) {
 
-                element.find('span').html(newValue);
+                element.find('tip').html(newValue);
               }
               scope.tooltipCtrl.tooltipTitle = newValue;
+            }
+          }
+          , onTooltipTemplateChange = function onTooltipTemplateChange(newValue, oldValue) {
+
+            if (newValue) {
+
+              if (oldValue) {
+
+                element.find('tip-cont').html(newValue);
+              }
+              scope.tooltipCtrl.tooltipTemplate = newValue;
             }
           }
           , onTooltipSideChange = function onTooltipSideChange(newValue, oldValue) {
@@ -117,18 +161,19 @@
             }
           }
           , unregisterOnTooltipTitleChangeObserver = attrs.$observe('tooltipTitle', onTooltipTitleChange)
+          , unregisterOnTooltipTemplateChange = attrs.$observe('tooltipTemplate', onTooltipTemplateChange)
           , unregisterOnTooltipSideChangeObserver = attrs.$observe('tooltipSide', onTooltipSideChange)
           , unregisterOnTooltipShowTrigger = attrs.$observe('tooltipShowTrigger', onTooltipShowTrigger)
           , unregisterOnTooltipHideTrigger = attrs.$observe('tooltipHideTrigger', onTooltipHideTrigger);
 
-          attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || 'mousemove';
-          attrs.tooltipHideTrigger = attrs.tooltipHideTrigger || 'mouseout';
           scope.$on('$destroy', function unregisterListeners() {
 
             unregisterOnTooltipTitleChangeObserver();
+            unregisterOnTooltipTemplateChange();
             unregisterOnTooltipSideChangeObserver();
             unregisterOnTooltipShowTrigger();
             unregisterOnTooltipHideTrigger();
+            element.off(attrs.tooltipShowTrigger + ' ' + attrs.tooltipHideTrigger);
           });
         };
       }
