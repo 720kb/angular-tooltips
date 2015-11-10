@@ -49,8 +49,6 @@
   display: block;
   opacity: 0.8;
   top: 30px;
-  left: 50%;
-  margin-left: -60%;
   z-index: 999; }
 
 [tooltips].right.tooltips tip:after {
@@ -68,10 +66,7 @@
 [tooltips].right.tooltips.active tip {
   display: block;
   opacity: 0.8;
-  left: 100%;
-  top: 50%;
-  margin-top: -15px;
-  margin-left: 15px;
+  left: 30px;
   z-index: 999; }
 
 [tooltips].left.tooltips tip:after {
@@ -89,10 +84,7 @@
 [tooltips].left.tooltips.active tip {
   display: block;
   opacity: 0.8;
-  right: 100%;
-  top: 50%;
-  margin-top: -15px;
-  margin-right: 15px;
+  right: 30px;
   z-index: 999; }
 
 /*# sourceMappingURL=angular-tooltips.css.map */
