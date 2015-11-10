@@ -3,6 +3,8 @@
   'use strict';
 
   var directiveName = 'tooltips'
+  , marginLeftTooltipArrow = 8
+  , deltaTooltipFromTooltipContent = 2
   , getElementHTML = function getElementHTML(element) {
     var txt
       , ax
@@ -40,7 +42,7 @@
 
     $log.info('controller called');
   }]
-  , tooltipDirective = /*@ngInject*/ ["$window", function tooltipDirective($window) {
+  , tooltipDirective = /*@ngInject*/ function tooltipDirective() {
 
     return {
       'restrict': 'A',
@@ -74,39 +76,30 @@
         return function linkingFunction(scope, element, attrs) {
 
           var onTooltipShow = function onTooltipShow() {
-            var tipElement = element.find('tip')
+            var tipContElement = element.find('tip-cont')
+              , tipElement = element.find('tip')
               , newLeft
-              , newTop
-              , computedStyle
-              , actualWidth
-              , actualHeight
-              , actualPaddingLeft
-              , actualPaddingTop;
+              , newTop;
 
             element.addClass('active');
-            if (tipElement.length > 0) {
+            if (tipContElement.length > 0 &&
+              tipElement.length > 0) {
 
-              try {
+              if (attrs.tooltipSide === 'top') {
 
-                computedStyle = $window.getComputedStyle(tipElement[0], null);
-                actualWidth = computedStyle.getPropertyValue('width');
-                actualHeight = computedStyle.getPropertyValue('height');
-                actualPaddingLeft = computedStyle.getPropertyValue('padding-left');
-                actualPaddingTop = computedStyle.getPropertyValue('padding-top');
-              } catch (exp) {
+                newLeft = tipContElement[0].offsetLeft + tipContElement[0].offsetWidth / 2 - tipElement[0].offsetWidth / 2;
+                newTop = tipContElement[0].offsetTop - marginLeftTooltipArrow - tipElement[0].offsetHeight - deltaTooltipFromTooltipContent;
+              } else if (attrs.tooltipSide === 'left') {
 
-                actualWidth = tipElement[0].currentStyle.width;
-                actualHeight = tipElement[0].currentStyle.height;
-                actualPaddingLeft = tipElement[0].currentStyle.paddingLeft;
-                actualPaddingTop = tipElement[0].currentStyle.paddingTop;
+                newLeft = tipContElement[0].offsetLeft - tipElement[0].offsetWidth - marginLeftTooltipArrow - deltaTooltipFromTooltipContent;
+                newTop = tipContElement[0].offsetTop + tipContElement[0].offsetHeight / 2 - tipElement[0].offsetHeight / 2;
               }
 
-              actualWidth = $window.parseInt(actualWidth);
-              actualHeight = $window.parseInt(actualHeight);
-              actualPaddingLeft = $window.parseInt(actualPaddingLeft);
-              actualPaddingTop = $window.parseInt(actualPaddingTop);
-
-              if (attrs.tooltipSide === 'top' || attrs.tooltipSide === 'bottom') {
+              tipElement.css({
+                'left': newLeft + 'px',
+                'top': newTop + 'px'
+              });
+              /*if (attrs.tooltipSide === 'top' || attrs.tooltipSide === 'bottom') {
 
                 newLeft = -(actualWidth / 2 + actualPaddingLeft / 2);
                 tipElement.css('left', newLeft + 'px');
@@ -114,7 +107,7 @@
 
                 newTop = -(actualHeight / 2 + actualPaddingTop / 2);
                 tipElement.css('top', newTop + 'px');
-              }
+              }*/
             }
           }
           , onTooltipHide = function onTooltipHide() {
@@ -195,7 +188,7 @@
         };
       }
     };
-  }];
+  };
 
   angular.module('720kb.tooltips', [])
   .directive(directiveName, tooltipDirective);
