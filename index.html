@@ -2,30 +2,90 @@
 <html ng-app="720kb">
   <head>
     <link rel="stylesheet" type="text/css" href="https://720kb.github.io/csshelper/assets/ext/src/helper.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
     <title>Angularjs Tooltips</title>
   </head>
   <body class="center-content" ng-controller="DemoCtrl as demoCtrl">
     <div class="separator100"></div>
     <div class="col6 offset-left2">
-      <!--div ng-repeat="item in items">
-        <a tooltips tooltip-html="{{ demoCtrl.generateHTMLextra(item) }}"> item</a>
-      </div-->
       <div>
-        With just an icon (Hover the icon)
-        <i class="fa fa-trash-o"
+        Title, hover the icon
+        <i class="fa fa-trash"
         tooltips
         tooltip-title="title"></i>
       </div>
       <div class="separator30"></div>
       <div>
-        With just an icon (Hover the icon)
-        <i class="fa fa-file-o"
+        Top, hover the icon
+        <i class="fa fa-file"
         tooltips
         tooltip-template="I'm a tooltip!"></i>
       </div>
+      <div class="separator30"></div>
+      <div>
+        Left, hover the icon
+        <i class="fa fa-list"
+        tooltips
+        tooltip-side="left"
+        tooltip-template="I'm another tooltip!"></i>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        Bottom, hover the icon
+        <i class="fa fa-hourglass-end"
+        tooltips
+        tooltip-side="bottom"
+        tooltip-template="I'm another tooltip!"></i>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        Right, hover the icon
+        <i class="fa fa-map"
+        tooltips
+        tooltip-side="right"
+        tooltip-template="I'm another tooltip!"></i>
+      </div>
+
+      <div class="separator50"></div>
+
+      <div>
+        Top, hover the icon
+        <span tooltips
+          tooltip-template="I'm a tooltip!">
+          I'm a very very very very long text this is like:
+        </span>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        Left, hover the icon
+        <i class="fa fa-list"
+        tooltips
+        tooltip-side="left"
+        tooltip-template="I'm another tooltip!"></i>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        Bottom, hover the icon
+        <i class="fa fa-hourglass-end"
+        tooltips
+        tooltip-side="bottom"
+        tooltip-template="I'm another tooltip!"></i>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        Right, hover the icon
+        <i class="fa fa-map"
+        tooltips
+        tooltip-side="right"
+        tooltip-template="I'm another tooltip!"></i>
+      </div>
+
 <!--
+
+  <div ng-repeat="item in items">
+    <a tooltips tooltip-html="{{ demoCtrl.generateHTMLextra(item) }}"> item</a>
+  </div>
       <div>
         <div class="separator30"></div>
         <a class="btn btn-medium bg-info color-white font-bold"

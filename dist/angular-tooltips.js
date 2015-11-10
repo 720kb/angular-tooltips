@@ -76,9 +76,12 @@
           var onTooltipShow = function onTooltipShow() {
             var tipElement = element.find('tip')
               , newLeft
+              , newTop
               , computedStyle
               , actualWidth
-              , actualPadding;
+              , actualHeight
+              , actualPaddingLeft
+              , actualPaddingTop;
 
             element.addClass('active');
             if (tipElement.length > 0) {
@@ -87,17 +90,31 @@
 
                 computedStyle = $window.getComputedStyle(tipElement[0], null);
                 actualWidth = computedStyle.getPropertyValue('width');
-                actualPadding = computedStyle.getPropertyValue('padding-left');
+                actualHeight = computedStyle.getPropertyValue('height');
+                actualPaddingLeft = computedStyle.getPropertyValue('padding-left');
+                actualPaddingTop = computedStyle.getPropertyValue('padding-top');
               } catch (exp) {
 
                 actualWidth = tipElement[0].currentStyle.width;
-                actualPadding = tipElement[0].currentStyle.paddingLeft;
+                actualHeight = tipElement[0].currentStyle.height;
+                actualPaddingLeft = tipElement[0].currentStyle.paddingLeft;
+                actualPaddingTop = tipElement[0].currentStyle.paddingTop;
               }
 
               actualWidth = $window.parseInt(actualWidth);
-              actualPadding = $window.parseInt(actualPadding);
-              newLeft = -(actualWidth / 2 + actualPadding / 2);
-              tipElement.css('left', newLeft + 'px');
+              actualHeight = $window.parseInt(actualHeight);
+              actualPaddingLeft = $window.parseInt(actualPaddingLeft);
+              actualPaddingTop = $window.parseInt(actualPaddingTop);
+
+              if (attrs.tooltipSide === 'top' || attrs.tooltipSide === 'bottom') {
+
+                newLeft = -(actualWidth / 2 + actualPaddingLeft / 2);
+                tipElement.css('left', newLeft + 'px');
+              } else if (attrs.tooltipSide === 'left' || attrs.tooltipSide === 'right') {
+
+                newTop = -(actualHeight / 2 + actualPaddingTop / 2);
+                tipElement.css('top', newTop + 'px');
+              }
             }
           }
           , onTooltipHide = function onTooltipHide() {
