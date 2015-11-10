@@ -1,9 +1,3 @@
-[tooltips].tooltips, [tooltips].tooltips > * {
-  position: relative;
-  display: inline;
-  color: initial;
-}
-
 [tooltips].tooltips tip {
   position: absolute;
   display: none;
@@ -32,7 +26,6 @@
 [tooltips].top.tooltips.active tip {
   display: block;
   opacity: 0.8;
-  bottom: 30px;
   z-index: 999;
 }
 
@@ -51,7 +44,6 @@
 [tooltips].bottom.tooltips.active tip {
   display: block;
   opacity: 0.8;
-  top: 30px;
   z-index: 999;
 }
 
@@ -70,7 +62,6 @@
 [tooltips].right.tooltips.active tip {
   display: block;
   opacity: 0.8;
-  left: 30px;
   z-index: 999;
 }
 
@@ -89,6 +80,5 @@
 [tooltips].left.tooltips.active tip {
   display: block;
   opacity: 0.8;
-  right: 30px;
   z-index: 999;
 }
