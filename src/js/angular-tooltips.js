@@ -448,7 +448,7 @@
         }
 
         if (attr.hasOwnProperty('tooltipHide')) {
-          attr.$observe('tooltipHide', function observeTooltipHiden(val) {
+          attr.$observe('tooltipHide', function observeTooltipHide(val) {
             $scope.hide = val === 'false' || val === '' || val ===undefined ;
           });
         }
