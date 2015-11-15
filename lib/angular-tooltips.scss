@@ -10,11 +10,11 @@ $marginLeftTooltipArrow: 8px;
   line-height: 20px;
   text-align: center;
   border-radius: 6px;
-  color: #FFFFFF;
-  background: #000000;
+  color: #FFF;
+  background: #000;
 }
 
-[tooltips]._top.tooltips tip:after {
+[tooltips]._top.tooltips tip tip-arrow {
   content: '';
   position: absolute;
   top: 100%;
@@ -22,7 +22,7 @@ $marginLeftTooltipArrow: 8px;
   margin-left: -$marginLeftTooltipArrow;
   width: 0;
   height: 0;
-  border-top: 8px solid #000000;
+  border-top: 8px solid #000;
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
 }
@@ -32,7 +32,7 @@ $marginLeftTooltipArrow: 8px;
   z-index: 999;
 }
 
-[tooltips]._bottom.tooltips tip:after {
+[tooltips]._bottom.tooltips tip tip-arrow {
   content: '';
   position: absolute;
   bottom: 100%;
@@ -40,7 +40,7 @@ $marginLeftTooltipArrow: 8px;
   margin-left: -$marginLeftTooltipArrow;
   width: 0;
   height: 0;
-  border-bottom: 8px solid #000000;
+  border-bottom: 8px solid #000;
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
 }
@@ -50,7 +50,7 @@ $marginLeftTooltipArrow: 8px;
   z-index: 999;
 }
 
-[tooltips]._right.tooltips tip:after {
+[tooltips]._right.tooltips tip tip-arrow {
   content: '';
   position: absolute;
   top: 50%;
@@ -58,7 +58,7 @@ $marginLeftTooltipArrow: 8px;
   margin-top: -$marginLeftTooltipArrow;
   width: 0;
   height: 0;
-  border-right: 8px solid #000000;
+  border-right: 8px solid #000;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -68,7 +68,7 @@ $marginLeftTooltipArrow: 8px;
   z-index: 999;
 }
 
-[tooltips]._left.tooltips tip:after {
+[tooltips]._left.tooltips tip tip-arrow {
   content: '';
   position: absolute;
   top: 50%;
@@ -76,7 +76,7 @@ $marginLeftTooltipArrow: 8px;
   margin-top: -$marginLeftTooltipArrow;
   width: 0;
   height: 0;
-  border-left: 8px solid #000000;
+  border-left: 8px solid #000;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
