@@ -5,23 +5,23 @@
   angular.module('720kb', [
     '720kb.tooltips'
   ])
-  .controller('Ctrl', [
+  .controller('DemoCtrl', [
     '$timeout',
     function controllerCtrl($timeout) {
       var that = this;
 
-      that.items = ['1','2','4','5'];
-      $timeout(function doTimeout() {
+      that.tooltipContentText = 'I\'m a content text from module controller';
+      that.tooltipText = 'I\'m a text from module controller';
+      $timeout(function changeTooltipText() {
 
-        that.items.push('7');
-        that.items.push('9');
+        that.tooltipText = 'C, C, C, Changed....';
       }, 5000);
-    }
-  ])
-  .controller('DemoCtrl', [
-    function controllerCtrl() {
+      $timeout(function changeTooltipText() {
 
-      this.generateHTMLextra = function generateHTMLextra(item) {
+        that.tooltipContentText = 'Content C, C, C, Changed....';
+      }, 5000);
+
+      that.generateHTMLextra = function generateHTMLextra(item) {
 
         return '<i>hello tooltip content' + item + '</i>';
       };

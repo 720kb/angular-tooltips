@@ -4,6 +4,11 @@
     <link rel="stylesheet" type="text/css" href="https://720kb.github.io/csshelper/assets/ext/src/helper.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
+    <style media="screen">
+      .a-class {
+        font-size: 2em;
+      }
+    </style>
     <title>Angularjs Tooltips</title>
   </head>
   <body class="center-content" ng-controller="DemoCtrl as demoCtrl">
@@ -137,6 +142,31 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
       </span>
     </div>
+
+    <div class="separator50"></div -->
+
+    <div>
+      <span tooltips
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        I'm a tooltip content.
+      </span>
+    </div>
+    <div class="separator30"></div>
+    <div>
+      <span tooltips
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+    <div class="separator30"></div>
+    <div>
+      <span tooltips
+        tooltip-class="a-class"
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+    <div class="separator30"></div>
 <!--
 
   <div ng-repeat="item in items">
