@@ -166,7 +166,23 @@
         {{ demoCtrl.tooltipContentText }}
       </span>
     </div>
+
+    <div class="separator50"></div>
+
+    <div>
+      <span tooltips
+        tooltip-template-url="demo/views/index-with-embedded-controller.html">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
     <div class="separator30"></div>
+    <div>
+      <span tooltips
+        tooltip-template-url="demo/views/index-without-embedded-controller.html"
+        tooltip-controller="Ctrl as ctrl">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
 <!--
 
   <div ng-repeat="item in items">

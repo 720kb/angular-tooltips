@@ -26,5 +26,10 @@
         return '<i>hello tooltip content' + item + '</i>';
       };
     }
-  ]);
+  ])
+  .controller('Ctrl', [function controller() {
+    var that = this;
+
+    that.items = [1, 2, 3, 4, 5];
+  }]);
 }(angular));
