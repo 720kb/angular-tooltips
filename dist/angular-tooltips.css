@@ -11,6 +11,13 @@
   color: #FFF;
   background: #000; }
 
+[tooltips].tooltips tip-tip #close-button {
+  position: relative;
+  float: right;
+  margin-top: -10%;
+  left: 5%;
+  cursor: pointer; }
+
 [tooltips]._top.tooltips tip tip-arrow {
   content: '';
   position: absolute;
