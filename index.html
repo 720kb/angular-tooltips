@@ -143,45 +143,65 @@
       </span>
     </div>
 
-    <div class="separator50"></div -->
-
-    <div>
-      <span tooltips
-        tooltip-template="{{ demoCtrl.tooltipText }}">
-        I'm a tooltip content.
-      </span>
-    </div>
-    <div class="separator30"></div>
-    <div>
-      <span tooltips
-        tooltip-template="{{ demoCtrl.tooltipText }}">
-        {{ demoCtrl.tooltipContentText }}
-      </span>
-    </div>
-    <div class="separator30"></div>
-    <div>
-      <span tooltips
-        tooltip-class="a-class"
-        tooltip-template="{{ demoCtrl.tooltipText }}">
-        {{ demoCtrl.tooltipContentText }}
-      </span>
-    </div>
-
     <div class="separator50"></div>
 
-    <div>
-      <span tooltips
-        tooltip-template-url="demo/views/index-with-embedded-controller.html">
-        {{ demoCtrl.tooltipContentText }}
-      </span>
-    </div>
-    <div class="separator30"></div>
-    <div>
-      <span tooltips
-        tooltip-template-url="demo/views/index-without-embedded-controller.html"
-        tooltip-controller="Ctrl as ctrl">
-        {{ demoCtrl.tooltipContentText }}
-      </span>
+    <div class="col6 offset-left2">
+      <div>
+        <span tooltips
+          tooltip-template="{{ demoCtrl.tooltipText }}">
+          I'm a tooltip content.
+        </span>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        <span tooltips
+          tooltip-template="{{ demoCtrl.tooltipText }}">
+          {{ demoCtrl.tooltipContentText }}
+        </span>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        <span tooltips
+          tooltip-class="a-class"
+          tooltip-template="{{ demoCtrl.tooltipText }}">
+          {{ demoCtrl.tooltipContentText }}
+        </span>
+      </div>
+
+      <div class="separator50"></div>
+
+      <div>
+        <span tooltips
+          tooltip-template-url="demo/views/index-with-embedded-controller.html">
+          {{ demoCtrl.tooltipContentText }}
+        </span>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        <span tooltips
+          tooltip-template-url="demo/views/index-without-embedded-controller.html"
+          tooltip-controller="Ctrl as ctrl">
+          {{ demoCtrl.tooltipContentText }}
+        </span>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        <span tooltips
+          tooltip-close-button="true"
+          tooltip-template="a tooltip text"
+          tooltip-hide-trigger="resize">
+          Tooltip
+        </span>
+      </div>
+      <div class="separator30"></div>
+      <div>
+        <span tooltips
+          tooltip-close-button="{{ demoCtrl.closeFromModel }}"
+          tooltip-template="a tooltip text"
+          tooltip-hide-trigger="resize">
+          Tooltip
+        </span>
+      </div>
     </div>
 <!--
 
