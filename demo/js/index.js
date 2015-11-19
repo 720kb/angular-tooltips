@@ -12,6 +12,7 @@
 
       that.tooltipContentText = 'I\'m a content text from module controller';
       that.tooltipText = 'I\'m a text from module controller';
+      that.class = 'a-class';
       that.closeFromModel = false;
       $timeout(function changeTooltipText() {
 
@@ -25,6 +26,10 @@
 
         that.closeFromModel = true;
       }, 7000);
+      $timeout(function changeTooltipText() {
+
+        that.class = 'another-class';
+      }, 8000);
 
       that.generateHTMLextra = function generateHTMLextra(item) {
 

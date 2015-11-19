@@ -1,89 +1,89 @@
 [tooltips].tooltips tip {
-  position: absolute;
-  display: none;
-  width: auto;
-  min-width: 80px;
-  max-width: 300px;
-  padding: 10px;
-  line-height: 20px;
-  text-align: center;
+  background: #000;
   border-radius: 6px;
-  color: #FFF;
-  background: #000; }
+  color: #fff;
+  display: none;
+  line-height: 20px;
+  max-width: 300px;
+  min-width: 80px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  width: auto; }
 
 [tooltips].tooltips tip-tip #close-button {
-  position: relative;
+  cursor: pointer;
   float: right;
-  margin-top: -10%;
   left: 5%;
-  cursor: pointer; }
+  margin-top: -10%;
+  position: relative; }
 
-[tooltips]._top.tooltips tip tip-arrow {
+[tooltips].tooltips._top tip tip-arrow {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #000;
   content: '';
+  height: 0;
+  left: 50%;
+  margin-left: -8px;
   position: absolute;
   top: 100%;
-  left: 50%;
-  margin-left: -8px;
-  width: 0;
-  height: 0;
-  border-top: 8px solid #000;
-  border-right: 8px solid transparent;
-  border-left: 8px solid transparent; }
+  width: 0; }
 
-[tooltips]._top.tooltips.active tip {
+[tooltips].tooltips._top.active tip {
   display: block;
-  opacity: 0.8;
+  opacity: .8;
   z-index: 999; }
 
-[tooltips]._bottom.tooltips tip tip-arrow {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -8px;
-  width: 0;
-  height: 0;
+[tooltips].tooltips._bottom tip tip-arrow {
   border-bottom: 8px solid #000;
+  border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-left: 8px solid transparent; }
+  bottom: 100%;
+  content: '';
+  height: 0;
+  left: 50%;
+  margin-left: -8px;
+  position: absolute;
+  width: 0; }
 
-[tooltips]._bottom.tooltips.active tip {
+[tooltips].tooltips._bottom.active tip {
   display: block;
-  opacity: 0.8;
+  opacity: .8;
   z-index: 999; }
 
-[tooltips]._right.tooltips tip tip-arrow {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -8px;
-  width: 0;
-  height: 0;
+[tooltips].tooltips._right tip tip-arrow {
+  border-bottom: 8px solid transparent;
   border-right: 8px solid #000;
   border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent; }
+  content: '';
+  height: 0;
+  margin-top: -8px;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 0; }
 
-[tooltips]._right.tooltips.active tip {
+[tooltips].tooltips._right.active tip {
   display: block;
-  opacity: 0.8;
+  opacity: .8;
   z-index: 999; }
 
-[tooltips]._left.tooltips tip tip-arrow {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -8px;
-  width: 0;
-  height: 0;
+[tooltips].tooltips._left tip tip-arrow {
+  border-bottom: 8px solid transparent;
   border-left: 8px solid #000;
   border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent; }
+  content: '';
+  height: 0;
+  left: 100%;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 0; }
 
-[tooltips]._left.tooltips.active tip {
+[tooltips].tooltips._left.active tip {
   display: block;
-  opacity: 0.8;
+  opacity: .8;
   z-index: 999; }
 
 /*# sourceMappingURL=angular-tooltips.css.map */
