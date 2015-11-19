@@ -82,44 +82,23 @@ Call the directive wherever you want in your html page
 Option | Type | Default | Description
 ------------- | ------------- | ------------- | -------------
 tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` position
-tooltip-title="" | String() | false | Set your tooltip title
-tooltip-template="" | String() | false | Set your tooltip template it could be HTML or just Text
-tooltip-template-url="" | String() | false | Set your  external tooltip template PATH
-tooltip-show-trigger="" | String('event1 event2') | 'mouseover' | Show the tooltip on specific event/events
-tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tooltip on specific event/events
-tooltip-close-button="" | String(HTML) | false | Set the tooltip HTML close button
-tooltip-class="" | String() | false | Set the tooltip custom CSS class/classes
+tooltip-template="" | String() | false | Set your tooltip template (HTML or just Text)
+tooltip-template-url="" | String() | false | Set your external tooltip template PATH
+tooltip-show-trigger="" | String('event1 event2') | 'mouseenter' | Show the tooltip on specific event/events
+tooltip-hide-trigger="" | String('event1 event2') | 'mouseout' | Hide the tooltip on specific event/events
+tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
+tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
+tooltip-speed="" | String() | 'medium' | Set your tooltip show & hide transition speed
 
 ##Options
 Angular tooltips allows you to use some options via `attribute` data
-
-####Globals
-Application wide defaults for most of the options can be set using the `tooltipConfigProvider`:
-
-```js
-angular
-  .module('app')
-  .config(function(tooltipsConfigProvider) {
-    tooltipsConfigProvider.options({
-      lazy: false,
-      size: 'large'
-    })
-  });
-```
-Options that are not specified are kept unchanged.
-Option names are the same as attribute names without the "tooltip-" prefix: `scroll`, `showTrigger`, `hideTrigger`,
-`hideTarget`, `side`, `size`, `try`, `class`, `speed`, `delay`, `lazy`, `closeButton`
-
-Of course specific tooltips can still overwrite any default using attributes.
-
-Calling `options` method without arguments returns the complete options object.
 
 ## Example
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)
 
 ##Theming
-You can edit the default Css file `angular-tooltips.css` if you want to make a new theme for the tooltips.
+You can create your own theme by editing the default SASS file `lib/angular-tooltips.scss` or just editing the default CSS file `dist/angular-tooltips.css`.
 
 ##Contributing
 
