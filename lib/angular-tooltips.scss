@@ -7,7 +7,7 @@ $tooltip-slow-transition: .65s;
 $tooltip-medium-transition: .35s;
 
 @mixin opacity-transition($speed) {
-  transition: opacity $speed linear;
+  transition: opacity $speed ease-in-out;
 }
 @mixin border-radius($radius) {
   border-radius: $radius;
