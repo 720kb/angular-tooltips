@@ -1,21 +1,32 @@
 $margin-left-tooltip-arrow: 8px;
-$tooltip-background-color: #000;
+$tooltip-background-color: rgba(0, 0, 0, .85);
 $tooltip-color: #fff;
+$tooltip-border-radius: 3px;
+$tooltip-fast-transition: .15s;
+$tooltip-slow-transition: .65s;
+$tooltip-medium-transition: .35s;
+
+@mixin opacity-transition($speed) {
+  transition: opacity $speed linear;
+}
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
 
 [tooltips] {
 
   &.tooltips {
 
     tip {
-
+      @include border-radius($tooltip-border-radius);
+      @include opacity-transition($tooltip-medium-transition);
       background: $tooltip-background-color;
-      border-radius: 6px;
       color: $tooltip-color;
       display: none;
-      line-height: 20px;
+      font-size: 13px;
       max-width: 300px;
-      min-width: 80px;
-      padding: 10px;
+      opacity: 0;
+      padding: 6px 12px;
       position: absolute;
       text-align: center;
       width: auto;
@@ -54,7 +65,7 @@ $tooltip-color: #fff;
 
         tip {
           display: block;
-          opacity: .8;
+          opacity: 1;
           z-index: 999;
         }
       }
@@ -82,7 +93,7 @@ $tooltip-color: #fff;
 
         tip {
           display: block;
-          opacity: .8;
+          opacity: 1;
           z-index: 999;
         }
       }
@@ -110,7 +121,7 @@ $tooltip-color: #fff;
 
         tip {
           display: block;
-          opacity: .8;
+          opacity: 1;
           z-index: 999;
         }
       }
@@ -138,10 +149,58 @@ $tooltip-color: #fff;
 
         tip {
           display: block;
-          opacity: .8;
+          opacity: 1;
           z-index: 999;
         }
       }
+    }
+  }
+
+  &._large {
+
+    tip {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+  }
+
+  &._small {
+    tip {
+      font-size: 12px;
+      padding: 4.5px 10px;
+    }
+  }
+
+  &._opening {
+    tip {
+      opacity: 1;
+    }
+  }
+
+  &._closing {
+    tip {
+      opacity: 0;
+    }
+  }
+
+  &._slow {
+
+    tip {
+      @include opacity-transition($tooltip-slow-transition);
+    }
+  }
+
+  &._fast {
+
+    tip {
+      @include opacity-transition($tooltip-fast-transition);
+    }
+  }
+
+  &._steady {
+
+    tip {
+      @include opacity-transition($tooltip-medium-transition);
     }
   }
 }
