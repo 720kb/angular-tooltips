@@ -1,4 +1,6 @@
-$margin-left-tooltip-arrow: 8px;
+$margin-tooltip-arrow: 8px;
+$padding-top-bottom-tooltip: 6px;
+$padding-rigth-left-tooltip: 12px;
 $tooltip-background-color: rgba(0, 0, 0, .85);
 $tooltip-color: #fff;
 $tooltip-border-radius: 3px;
@@ -16,6 +18,7 @@ $tooltip-medium-transition: .35s;
 [tooltips] {
 
   &.tooltips {
+    position: relative;
 
     tip {
       @include border-radius($tooltip-border-radius);
@@ -23,10 +26,11 @@ $tooltip-medium-transition: .35s;
       background: $tooltip-background-color;
       color: $tooltip-color;
       display: none;
-      font-size: 13px;
-      max-width: 300px;
+      font-size: 1em;
+      max-width: 500px;
+      min-width: 100px;
       opacity: 0;
-      padding: 6px 12px;
+      padding: $padding-top-bottom-tooltip $padding-rigth-left-tooltip;
       position: absolute;
       text-align: center;
       width: auto;
@@ -54,7 +58,7 @@ $tooltip-medium-transition: .35s;
           content: '';
           height: 0;
           left: 50%;
-          margin-left: -$margin-left-tooltip-arrow;
+          margin-left: -$margin-tooltip-arrow;
           position: absolute;
           top: 100%;
           width: 0;
@@ -83,7 +87,7 @@ $tooltip-medium-transition: .35s;
           content: '';
           height: 0;
           left: 50%;
-          margin-left: -$margin-left-tooltip-arrow;
+          margin-left: -$margin-tooltip-arrow;
           position: absolute;
           width: 0;
         }
@@ -109,7 +113,7 @@ $tooltip-medium-transition: .35s;
           border-top: 8px solid transparent;
           content: '';
           height: 0;
-          margin-top: -$margin-left-tooltip-arrow;
+          margin-top: -$margin-tooltip-arrow;
           position: absolute;
           right: 100%;
           top: 50%;
@@ -138,7 +142,7 @@ $tooltip-medium-transition: .35s;
           content: '';
           height: 0;
           left: 100%;
-          margin-top: -$margin-left-tooltip-arrow;
+          margin-top: -$margin-tooltip-arrow;
           position: absolute;
           top: 50%;
           width: 0;
@@ -159,15 +163,13 @@ $tooltip-medium-transition: .35s;
   &._large {
 
     tip {
-      font-size: 14px;
-      padding: 10px 20px;
+      font-size: 1.5em;
     }
   }
 
   &._small {
     tip {
-      font-size: 12px;
-      padding: 4.5px 10px;
+      font-size: .5em;
     }
   }
 
