@@ -4,12 +4,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
     <style media="screen">
-      body {
-        text-align: center;
-      }
 
-      div {
-        padding: 10% 0;
+      #demo-container > div {
+        margin: 10% 0;
+        text-align: center;
       }
 
       .a-class {
@@ -22,7 +20,7 @@
     </style>
     <title>Angularjs Tooltips</title>
   </head>
-  <body class="center-content" ng-controller="DemoCtrl as demoCtrl">
+  <body id="demo-container" ng-controller="DemoCtrl as demoCtrl">
     <div>
       <i class="fa fa-file"
       tooltips
