@@ -14,6 +14,9 @@
     position: absolute;
     text-align: center;
     width: auto; }
+    [tooltips].tooltips tip._hidden {
+      display: block;
+      opacity: 0; }
   [tooltips].tooltips tip-tip #close-button {
     cursor: pointer;
     float: right;
