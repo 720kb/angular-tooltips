@@ -34,6 +34,12 @@ $tooltip-medium-transition: .35s;
       position: absolute;
       text-align: center;
       width: auto;
+
+      &._hidden {
+
+        display: block;
+        opacity: 0;
+      }
     }
 
     tip-tip {

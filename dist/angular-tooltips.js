@@ -166,7 +166,7 @@
       isTemplateUrl) {
 
       toReturn = toReturn.concat([
-        '<tip>',
+        '<tip class="_hidden">',
           '<tip-tip>',
             '<span id="close-button">&times;</span>',
             tooltipTemplate,
@@ -180,60 +180,29 @@
   }
   , calculateTop = function calculateTop(theTipElement, theTipContElement) {
     var tipStyle
-      , height
-      , paddingTop
       , paddingBottom
-      , top
-      , left;
+      , bottom
+      , left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2);
 
     try {
-
       tipStyle = window.getComputedStyle(theTipElement[0], null);
 
-      height = parseInt(tipStyle.getPropertyValue('height'), 10);
-      paddingTop = parseInt(tipStyle.getPropertyValue('padding-top'), 10);
       paddingBottom = parseInt(tipStyle.getPropertyValue('padding-bottom'), 10);
     } catch (e) {
 
-      height = parseInt(theTipElement[0].currentStyle.height, 10);
-      paddingTop = parseInt(theTipElement[0].currentStyle.paddingTop, 10);
       paddingBottom = parseInt(theTipElement[0].currentStyle.paddingBottom, 10);
     }
-
-    top = Math.floor(-(paddingBottom + height + paddingTop + marginTooltipArrow));
-    left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2);
+    bottom = Math.floor(theTipContElement[0].offsetHeight + marginTooltipArrow + paddingBottom);
 
     theTipElement.css({
-      'top': top + 'px',
+      'bottom': bottom + 'px',
       'left': left + 'px'
     });
   }
   , calculateLeft = function calculateLeft(theTipElement, theTipContElement) {
-    var tipStyle
-      , height
-      , paddingTop
-      , paddingBottom
-      , bottom
-      , right = 0;
+    var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
+      , right = Math.floor(theTipContElement[0].offsetWidth + marginTooltipArrow);
 
-    try {
-
-      tipStyle = window.getComputedStyle(theTipElement[0], null);
-
-      height = parseInt(tipStyle.getPropertyValue('height'), 10);
-
-      paddingTop = parseInt(tipStyle.getPropertyValue('padding-top'), 10);
-      paddingBottom = parseInt(tipStyle.getPropertyValue('padding-bottom'), 10);
-    } catch (e) {
-
-      height = parseInt(theTipElement[0].currentStyle.height, 10);
-
-      paddingTop = parseInt(theTipElement[0].currentStyle.paddingTop, 10);
-      paddingBottom = parseInt(theTipElement[0].currentStyle.paddingBottom, 10);
-    }
-
-    bottom = Math.floor(-(height - paddingTop - paddingBottom) / 2);
-    right = Math.floor(theTipContElement[0].offsetWidth + marginTooltipArrow);
     theTipElement.css({
       'bottom': bottom + 'px',
       'right': right + 'px'
@@ -241,58 +210,29 @@
   }
   , calculateBottom = function calculateBottom(theTipElement, theTipContElement) {
     var tipStyle
-      , height
       , paddingTop
-      , paddingBottom
       , left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2)
-      , bottom;
+      , top;
 
     try {
-
       tipStyle = window.getComputedStyle(theTipElement[0], null);
 
-      height = parseInt(tipStyle.getPropertyValue('height'), 10);
       paddingTop = parseInt(tipStyle.getPropertyValue('padding-top'), 10);
-      paddingBottom = parseInt(tipStyle.getPropertyValue('padding-bottom'), 10);
     } catch (e) {
 
-      height = parseInt(theTipElement[0].currentStyle.height, 10);
       paddingTop = parseInt(theTipElement[0].currentStyle.paddingTop, 10);
-      paddingBottom = parseInt(theTipElement[0].currentStyle.paddingBottom, 10);
     }
 
-    bottom = Math.floor(-(paddingBottom + height + marginTooltipArrow + paddingTop));
+    top = Math.floor(theTipContElement[0].offsetHeight + paddingTop + marginTooltipArrow);
 
     theTipElement.css({
-      'bottom': bottom + 'px',
+      'top': top + 'px',
       'left': left + 'px'
     });
   }
   , calculateRight = function calculateRight(theTipElement, theTipContElement) {
-    var tipStyle
-      , height
-      , paddingTop
-      , paddingBottom
-      , bottom
+    var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
       , left = theTipContElement[0].offsetWidth + marginTooltipArrow;
-
-    try {
-
-      tipStyle = window.getComputedStyle(theTipElement[0], null);
-
-      height = parseInt(tipStyle.getPropertyValue('height'), 10);
-
-      paddingTop = parseInt(tipStyle.getPropertyValue('padding-top'), 10);
-      paddingBottom = parseInt(tipStyle.getPropertyValue('padding-bottom'), 10);
-    } catch (e) {
-
-      height = parseInt(theTipElement[0].currentStyle.height, 10);
-
-      paddingTop = parseInt(theTipElement[0].currentStyle.paddingTop, 10);
-      paddingBottom = parseInt(theTipElement[0].currentStyle.paddingBottom, 10);
-    }
-
-    bottom = Math.floor(-(height - paddingTop - paddingBottom) / 2);
 
     theTipElement.css({
       'bottom': bottom + 'px',
@@ -327,7 +267,7 @@
 
     throw new Error('You must provide a position');
   }
-  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", function tooltipDirective($log, $http, $compile) {
+  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", "$timeout", function tooltipDirective($log, $http, $compile, $timeout) {
 
     var linkingFunction = function linkingFunction(scope, element, attrs) {
 
@@ -342,6 +282,12 @@
 
         if (attrs.tooltipSmart) {
 
+          tipElement.css({
+            'top': '',
+            'left': '',
+            'bottom': '',
+            'right': ''
+          });
           switch (attrs.tooltipSide) {
             case 'top': {
 
@@ -504,11 +450,12 @@
 
         element.removeClass('active');
       }
-      , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
+      , onTooltipTemplateChange = function onTooltipTemplateChange(newValue, oldValue) {
 
-        if (newValue) {
+        if (newValue &&
+          oldValue) {
 
-          scope.$applyAsync(function doAsycn() {
+          $timeout(function doLater() {
 
             onTooltipShow();
           });
@@ -525,7 +472,7 @@
               var tipElement = getElementHTML(element.find('tip-tip').append(response.data)).text;
 
               element.find('tip-tip').replaceWith($compile(tipElement)(scope));
-              scope.$applyAsync(function doAsycn() {
+              $timeout(function doLater() {
 
                 onTooltipShow();
               });
@@ -638,6 +585,12 @@
       resizeObserver.add(function registerResize() {
 
         onTooltipShow();
+      });
+
+      $timeout(function doLater() {
+
+        onTooltipShow();
+        element.find('tip').removeClass('_hidden');
       });
 
       scope.$on('$destroy', function unregisterListeners() {
