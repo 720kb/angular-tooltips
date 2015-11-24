@@ -34,11 +34,11 @@ To use the directive, include the angular tooltips's javascript and css files in
 <!DOCTYPE HTML>
 <html>
 <head>
-  <link href="src/css/angular-tooltips.css" rel="stylesheet" type="text/css" />
+  <link href="dist/angular-tooltips.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body ng-app="app">
   //.....
-  <script src="src/js/angular-tooltips.js"></script>
+  <script src="dist/angular-tooltips.min.js"></script>
 </body>
 </html>
 ```
