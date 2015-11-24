@@ -74,7 +74,7 @@ Call the directive wherever you want in your html page
 
 ```html
 
-<a href="#" tooltips tooltip-title="tooltip">Tooltip me</a>
+<a href="#" tooltips tooltip-template="tooltip">Tooltip me</a>
 
 ```
 
@@ -86,8 +86,8 @@ tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your toolt
 tooltip-template="" | String() | false | Set your tooltip template (HTML or just Text)
 tooltip-template-url="" | String() | false | Set your external tooltip template PATH
 tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
-tooltip-show-trigger="" | String('event1 event2') | 'mouseenter' | Show the tooltip on specific event/events
-tooltip-hide-trigger="" | String('event1 event2') | 'mouseout' | Hide the tooltip on specific event/events
+tooltip-show-trigger="" | String('event1 event2') | 'mouseover' | Show the tooltip on specific event/events
+tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tooltip on specific event/events
 tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
 tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
 tooltip-speed="" | String() | 'medium' | Set your tooltip show & hide transition speed
