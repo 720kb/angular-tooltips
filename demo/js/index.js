@@ -14,6 +14,8 @@
       that.tooltipText = 'I\'m a text from module controller';
       that.class = 'a-class';
       that.closeFromModel = false;
+      that.sizeFromModel = 'small';
+      that.speedFromModel = 'fast';
       $timeout(function changeTooltipText() {
 
         that.tooltipText = 'C, C, C, Changed....';
@@ -30,6 +32,15 @@
 
         that.class = 'another-class';
       }, 8000);
+      $timeout(function () {
+
+        that.sizeFromModel = 'large';
+      }, 9000);
+      $timeout(function () {
+
+        that.speedFromModel = 'slow';
+      }, 10000);
+
 
       that.generateHTMLextra = function generateHTMLextra(item) {
 

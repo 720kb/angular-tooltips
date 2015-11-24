@@ -1,8 +1,22 @@
+[tooltips] ._large {
+  font-size: 1.5em; }
+
+[tooltips] ._small {
+  font-size: .5em; }
+
+[tooltips]._slow tip {
+  transition: opacity 0.65s ease-in-out; }
+
+[tooltips]._fast tip {
+  transition: opacity 0.15s ease-in-out; }
+
+[tooltips]._steady tip {
+  transition: opacity 0.35s ease-in-out; }
+
 [tooltips].tooltips {
   position: relative; }
   [tooltips].tooltips tip {
     border-radius: 3px;
-    transition: opacity 0.35s ease-in-out;
     background: rgba(0, 0, 0, 0.85);
     color: #fff;
     display: none;
@@ -23,6 +37,10 @@
     left: 8%;
     margin-top: -8%;
     position: relative; }
+  [tooltips].tooltips.active tip {
+    display: block;
+    opacity: 1;
+    z-index: 999; }
   [tooltips].tooltips._top tip tip-arrow {
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
@@ -34,10 +52,6 @@
     position: absolute;
     top: 100%;
     width: 0; }
-  [tooltips].tooltips._top.active tip {
-    display: block;
-    opacity: 1;
-    z-index: 999; }
   [tooltips].tooltips._bottom tip tip-arrow {
     border-bottom: 8px solid rgba(0, 0, 0, 0.85);
     border-left: 8px solid transparent;
@@ -49,10 +63,6 @@
     margin-left: -8px;
     position: absolute;
     width: 0; }
-  [tooltips].tooltips._bottom.active tip {
-    display: block;
-    opacity: 1;
-    z-index: 999; }
   [tooltips].tooltips._right tip tip-arrow {
     border-bottom: 8px solid transparent;
     border-right: 8px solid rgba(0, 0, 0, 0.85);
@@ -64,10 +74,6 @@
     right: 100%;
     top: 50%;
     width: 0; }
-  [tooltips].tooltips._right.active tip {
-    display: block;
-    opacity: 1;
-    z-index: 999; }
   [tooltips].tooltips._left tip tip-arrow {
     border-bottom: 8px solid transparent;
     border-left: 8px solid rgba(0, 0, 0, 0.85);
@@ -79,30 +85,5 @@
     position: absolute;
     top: 50%;
     width: 0; }
-  [tooltips].tooltips._left.active tip {
-    display: block;
-    opacity: 1;
-    z-index: 999; }
-
-[tooltips]._large tip {
-  font-size: 1.5em; }
-
-[tooltips]._small tip {
-  font-size: .5em; }
-
-[tooltips]._opening tip {
-  opacity: 1; }
-
-[tooltips]._closing tip {
-  opacity: 0; }
-
-[tooltips]._slow tip {
-  transition: opacity 0.65s ease-in-out; }
-
-[tooltips]._fast tip {
-  transition: opacity 0.15s ease-in-out; }
-
-[tooltips]._steady tip {
-  transition: opacity 0.35s ease-in-out; }
 
 /*# sourceMappingURL=angular-tooltips.css.map */

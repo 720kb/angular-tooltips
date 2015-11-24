@@ -135,6 +135,15 @@
       element.removeAttr('tooltip-close-button');
     }
 
+    if (element.attr('tooltip-size') !== undefined) {
+
+      attributesToAdd.push({
+        'key': 'tooltip-size',
+        'value': element.attr('tooltip-size')
+      });
+      element.removeAttr('tooltip-size');
+    }
+
     el.appendChild(element.clone()[0]);
     txt = el.innerHTML;
     el = null;
@@ -271,7 +280,13 @@
 
     var linkingFunction = function linkingFunction(scope, element, attrs) {
 
-      var onTooltipShow = function onTooltipShow(event) {
+      var oldTooltipSide
+      , oldTooltipShowTrigger
+      , oldTooltipHideTrigger
+      , oldTooltipClass
+      , oldSize
+      , oldSpeed
+      , onTooltipShow = function onTooltipShow(event) {
         var tipContElement = element.find('tip-cont')
           , tipElement = element.find('tip');
 
@@ -450,10 +465,9 @@
 
         element.removeClass('active');
       }
-      , onTooltipTemplateChange = function onTooltipTemplateChange(newValue, oldValue) {
+      , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
 
-        if (newValue &&
-          oldValue) {
+        if (newValue) {
 
           $timeout(function doLater() {
 
@@ -490,67 +504,74 @@
           /*eslint-enable no-use-before-define*/
         }
       }
-      , onTooltipSideChange = function onTooltipSideChange(newValue, oldValue) {
+      , onTooltipSideChange = function onTooltipSideChange(newValue) {
 
         if (newValue) {
 
-          if (oldValue) {
+          if (oldTooltipSide) {
 
-            element.removeAttr('_' + oldValue);
+            element.removeAttr('_' + oldTooltipSide);
           } else {
 
             element.removeAttr('_top');
           }
           element.addClass('_' + newValue);
+          oldTooltipSide = newValue;
         } else {
 
           element.addClass('_top');
+          oldTooltipSide = '_top';
         }
       }
-      , onTooltipShowTrigger = function onTooltipShowTrigger(newValue, oldValue) {
+      , onTooltipShowTrigger = function onTooltipShowTrigger(newValue) {
 
         if (newValue) {
 
-          if (oldValue) {
+          if (oldTooltipShowTrigger) {
 
-            element.off(oldValue);
+            element.off(oldTooltipShowTrigger);
           } else {
 
-            element.off('mouseenter');
+            element.off('mouseover');
           }
           element.on(newValue, onTooltipShow);
+          oldTooltipShowTrigger = newValue;
         } else {
 
-          element.on('mouseenter', onTooltipShow);
+          element.on('mouseover', onTooltipShow);
+          oldTooltipShowTrigger = 'mouseover';
         }
       }
-      , onTooltipHideTrigger = function onTooltipHideTrigger(newValue, oldValue) {
+      , onTooltipHideTrigger = function onTooltipHideTrigger(newValue) {
 
         if (newValue) {
 
-          if (oldValue) {
+          if (oldTooltipHideTrigger) {
 
-            element.off(oldValue);
+            element.off(oldTooltipHideTrigger);
           } else {
 
             element.off('mouseout');
           }
           element.on(newValue, onTooltipHide);
+          oldTooltipHideTrigger = newValue;
         } else {
 
           element.on('mouseout', onTooltipHide);
+          oldTooltipHideTrigger = 'mouseout';
         }
       }
-      , onTooltipClassChange = function onTooltipClassChange(newValue, oldValue) {
+      , onTooltipClassChange = function onTooltipClassChange(newValue) {
         var tipElement = element.find('tip-tip');
 
         if (newValue) {
 
-          if (oldValue) {
+          if (oldTooltipClass) {
 
-            tipElement.removeClass(oldValue);
+            tipElement.removeClass(oldTooltipClass);
           }
           tipElement.addClass(newValue);
+          oldTooltipClass = newValue;
         }
       }
       , onTooltipCloseButtonChange = function onTooltipCloseButtonChange(newValue) {
@@ -567,6 +588,38 @@
           theXButton.css('display', 'none');
         }
       }
+      , onTooltipSizeChange = function onTooltipSizeChange(newValue) {
+        var tipElement = element.find('tip-tip');
+
+        if (newValue) {
+
+          if (oldSize) {
+
+            tipElement.removeClass('_' + oldSize);
+          }
+          tipElement.addClass('_' + newValue);
+          oldSize = newValue;
+        }
+      }
+      , onTooltipSpeedChange = function onTooltipSpeedChange(newValue) {
+
+        if (newValue) {
+
+          if (oldSpeed) {
+
+            element.removeClass('_' + oldSpeed);
+          } else {
+
+            element.removeClass('_steady');
+          }
+          element.addClass('_' + newValue);
+          oldSpeed = newValue;
+        } else {
+
+          element.addClass('_steady');
+          oldTooltipSide = '_steady';
+        }
+      }
       , unregisterOnTooltipTemplateChange = attrs.$observe('tooltipTemplate', onTooltipTemplateChange)
       , unregisterOnTooltipTemplateUrlChange = attrs.$observe('tooltipTemplateUrl', onTooltipTemplateUrlChange)
       , unregisterOnTooltipControllerChange = attrs.$observe('tooltipController', onTooltipTemplateControllerChange)
@@ -574,14 +627,17 @@
       , unregisterOnTooltipShowTrigger = attrs.$observe('tooltipShowTrigger', onTooltipShowTrigger)
       , unregisterOnTooltipHideTrigger = attrs.$observe('tooltipHideTrigger', onTooltipHideTrigger)
       , unregisterOnTooltipClassChange = attrs.$observe('tooltipClass', onTooltipClassChange)
-      , unregisterOnTooltipCloseButtonChange = attrs.$observe('tooltipCloseButton', onTooltipCloseButtonChange);
+      , unregisterOnTooltipCloseButtonChange = attrs.$observe('tooltipCloseButton', onTooltipCloseButtonChange)
+      , unregisterOnTooltipSizeChange = attrs.$observe('tooltipSize', onTooltipSizeChange)
+      , unregisterOnTooltipSpeedChange = attrs.$observe('tooltipSpeed', onTooltipSpeedChange);
 
       attrs.tooltipSide = attrs.tooltipSide || 'top';
-      attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || 'mouseenter';
+      attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || 'mouseover';
       attrs.tooltipHideTrigger = attrs.tooltipHideTrigger || 'mouseout';
       attrs.tooltipClass = attrs.tooltipClass || '';
       attrs.tooltipSmart = attrs.tooltipSmart === 'true';
       attrs.tooltipCloseButton = attrs.tooltipCloseButton === 'true';
+      attrs.tooltipSpeed = attrs.tooltipSpeed || 'steady';
       resizeObserver.add(function registerResize() {
 
         onTooltipShow();
@@ -602,6 +658,8 @@
         unregisterOnTooltipHideTrigger();
         unregisterOnTooltipClassChange();
         unregisterOnTooltipCloseButtonChange();
+        unregisterOnTooltipSizeChange();
+        unregisterOnTooltipSpeedChange();
         element.off(attrs.tooltipShowTrigger + ' ' + attrs.tooltipHideTrigger);
       });
     };
@@ -609,12 +667,6 @@
     return {
       'restrict': 'A',
       'scope': true,
-      /*'bindToController': {
-        'tooltipModel': '=?' //ex tooltipViewModel
-        'tooltipSize': '=?', // These are css classes...
-        'tooltipSpeed': '=?',
-        'tooltipDelay': '=?',
-      },*/
       'compile': function compiling(compileElement, compileAttributes) {
 
         if (compileAttributes.tooltipTemplate &&

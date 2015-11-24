@@ -208,6 +208,47 @@
       </span>
     </div>
 
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-size="small">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-size="large">
+        Tooltip
+      </span>
+    </div>
+
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-size="{{ demoCtrl.sizeFromModel }}">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-speed="fast">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-speed="{{ demoCtrl.speedFromModel }}">
+        Tooltip
+      </span>
+    </div>
+
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="dist/angular-tooltips.js"></script>
     <script type="text/javascript" src="demo/js/index.js"></script>
