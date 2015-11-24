@@ -84,6 +84,7 @@ Option | Type | Default | Description
 tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` position
 tooltip-template="" | String() | false | Set your tooltip template (HTML or just Text)
 tooltip-template-url="" | String() | false | Set your external tooltip template PATH
+tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
 tooltip-show-trigger="" | String('event1 event2') | 'mouseenter' | Show the tooltip on specific event/events
 tooltip-hide-trigger="" | String('event1 event2') | 'mouseout' | Hide the tooltip on specific event/events
 tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
