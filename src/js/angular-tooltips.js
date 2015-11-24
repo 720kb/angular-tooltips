@@ -1,5 +1,4 @@
 /*global angular*/
-
 (function withAngular(angular) {
   'use strict';
 
@@ -44,14 +43,14 @@
 
      return {
       'restrict': 'A',
-       'scope': {
+      'scope': {
          'tooltipViewModel': '='
        },
       'link': function linkingFunction($scope, element, attr) {
 
         var initialized = false
           , thisElement = angular.element(element[0])
-          , domParent = ($window.document.getElementById(attr.tooltipParent) ? angular.element($window.document.getElementById(attr.tooltipParent)) : null) || angular.element($window.document.getElementsByTagName('body')[0])
+          , body = angular.element($window.document.getElementsByTagName('body')[0])
           , theTooltip
           , theTooltipHeight
           , theTooltipWidth
@@ -108,7 +107,7 @@
         $scope.html = html;
 
         $scope.getHtml = function(){
-            return $sce.trustAsHtml($scope.html);
+          return $sce.trustAsHtml($scope.html);
         };
 
         //parse the animation speed of tooltips
@@ -136,7 +135,7 @@
 
         theTooltip.addClass(className);
 
-        domParent.append(theTooltip);
+        body.append(theTooltip);
 
         $scope.isTooltipEmpty = function checkEmptyTooltip() {
 
@@ -247,6 +246,7 @@
 
           theTooltip.addClass(CSS_PREFIX + 'open');
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear');
+          theTooltip.css("display", "block");
 
           if (delay) {
 
@@ -261,6 +261,7 @@
 
           theTooltip.css('transition', 'opacity ' + speed + 'ms linear, visibility 0s linear ' + speed + 'ms');
           theTooltip.removeClass(CSS_PREFIX + 'open');
+          theTooltip.css("display", "none");
           $scope.clearTriggers();
           $scope.bindShowTriggers();
 
@@ -287,10 +288,6 @@
           var topValue
             , leftValue;
 
-          if (size !== 'small' && size !== 'medium' && size !== 'large') {
-            throw new Error('invalid size setting. Attribute tooltipSize can accept "small" || "medium" (default) || "large" only.');
-          }
-
           if (size === 'small') {
 
             theTooltipMargin = TOOLTIP_SMALL_MARGIN;
@@ -302,10 +299,6 @@
           } else if (size === 'large') {
 
             theTooltipMargin = TOOLTIP_LARGE_MARGIN;
-          }
-
-          if (tooltipSide !== 'left' && tooltipSide !== 'right' && tooltipSide !== 'top' && tooltipSide !== 'bottom') {
-            throw new Error('invalid tooltipSide setting. Attribute tooltipSide can accept "left" || "right" || "top" || "bottom" only.');
           }
 
           if (tooltipSide === 'left') {
