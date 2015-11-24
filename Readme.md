@@ -90,10 +90,8 @@ tooltip-show-trigger="" | String('event1 event2') | 'mouseover' | Show the toolt
 tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tooltip on specific event/events
 tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
 tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
+tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
 tooltip-speed="" | String() | 'medium' | Set your tooltip show & hide transition speed
-
-##Options
-Angular tooltips allows you to use some options via `attribute` data
 
 ## Example
 
