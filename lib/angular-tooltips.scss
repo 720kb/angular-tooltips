@@ -8,9 +8,31 @@ $tooltip-fast-transition: .15s;
 $tooltip-slow-transition: .65s;
 $tooltip-medium-transition: .35s;
 
+@mixin opacity-transition($speed) {
+  animation: animate-tooltip $speed;
+}
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
 [tooltips] {
 
-  @keyframes animate-tooltip {
+  @include keyframes(animate-tooltip) {
     0% {
 
       opacity: 0;
@@ -35,13 +57,6 @@ $tooltip-medium-transition: .35s;
 
       opacity: 1;
     }
-  }
-
-  @mixin opacity-transition($speed) {
-    animation: animate-tooltip $speed;
-  }
-  @mixin border-radius($radius) {
-    border-radius: $radius;
   }
 
   ._large {
