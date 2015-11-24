@@ -1,3 +1,15 @@
+@keyframes animate-tooltip {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: .5; }
+  60% {
+    opacity: .8; }
+  70% {
+    opacity: .9; }
+  90% {
+    opacity: 1; } }
+
 [tooltips] ._large {
   font-size: 1.5em; }
 
@@ -5,13 +17,13 @@
   font-size: .5em; }
 
 [tooltips]._slow tip {
-  transition: opacity 0.65s ease-in-out; }
+  animation: animate-tooltip 0.65s; }
 
 [tooltips]._fast tip {
-  transition: opacity 0.15s ease-in-out; }
+  animation: animate-tooltip 0.15s; }
 
 [tooltips]._steady tip {
-  transition: opacity 0.35s ease-in-out; }
+  animation: animate-tooltip 0.35s; }
 
 [tooltips].tooltips {
   position: relative; }

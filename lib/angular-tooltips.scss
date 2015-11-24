@@ -8,14 +8,32 @@ $tooltip-fast-transition: .15s;
 $tooltip-slow-transition: .65s;
 $tooltip-medium-transition: .35s;
 
-@mixin opacity-transition($speed) {
-  transition: opacity $speed ease-in-out;
-}
-@mixin border-radius($radius) {
-  border-radius: $radius;
-}
-
 [tooltips] {
+
+  @keyframes animate-tooltip {
+    0% {
+      opacity: 0
+    }
+    50% {
+      opacity: .5
+    }
+    60% {
+      opacity: .8
+    }
+    70% {
+      opacity: .9
+    }
+    90% {
+      opacity: 1
+    }
+  }
+
+  @mixin opacity-transition($speed) {
+    animation: animate-tooltip $speed;
+  }
+  @mixin border-radius($radius) {
+    border-radius: $radius;
+  }
 
   ._large {
 
