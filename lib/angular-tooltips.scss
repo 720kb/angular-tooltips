@@ -17,12 +17,42 @@ $tooltip-medium-transition: .35s;
 
 [tooltips] {
 
+  ._large {
+
+    font-size: 1.5em;
+  }
+
+  ._small {
+
+    font-size: .5em;
+  }
+
+  &._slow {
+
+    tip {
+      @include opacity-transition($tooltip-slow-transition);
+    }
+  }
+
+  &._fast {
+
+    tip {
+      @include opacity-transition($tooltip-fast-transition);
+    }
+  }
+
+  &._steady {
+
+    tip {
+      @include opacity-transition($tooltip-medium-transition);
+    }
+  }
+
   &.tooltips {
     position: relative;
 
     tip {
       @include border-radius($tooltip-border-radius);
-      @include opacity-transition($tooltip-medium-transition);
       background: $tooltip-background-color;
       color: $tooltip-color;
       display: none;
@@ -53,6 +83,15 @@ $tooltip-medium-transition: .35s;
       }
     }
 
+    &.active {
+
+      tip {
+        display: block;
+        opacity: 1;
+        z-index: 999;
+      }
+    }
+
     &._top {
 
       tip {
@@ -68,15 +107,6 @@ $tooltip-medium-transition: .35s;
           position: absolute;
           top: 100%;
           width: 0;
-        }
-      }
-
-      &.active {
-
-        tip {
-          display: block;
-          opacity: 1;
-          z-index: 999;
         }
       }
     }
@@ -98,15 +128,6 @@ $tooltip-medium-transition: .35s;
           width: 0;
         }
       }
-
-      &.active {
-
-        tip {
-          display: block;
-          opacity: 1;
-          z-index: 999;
-        }
-      }
     }
 
     &._right {
@@ -124,15 +145,6 @@ $tooltip-medium-transition: .35s;
           right: 100%;
           top: 50%;
           width: 0;
-        }
-      }
-
-      &.active {
-
-        tip {
-          display: block;
-          opacity: 1;
-          z-index: 999;
         }
       }
     }
@@ -154,61 +166,6 @@ $tooltip-medium-transition: .35s;
           width: 0;
         }
       }
-
-      &.active {
-
-        tip {
-          display: block;
-          opacity: 1;
-          z-index: 999;
-        }
-      }
-    }
-  }
-
-  &._large {
-
-    tip {
-      font-size: 1.5em;
-    }
-  }
-
-  &._small {
-    tip {
-      font-size: .5em;
-    }
-  }
-
-  &._opening {
-    tip {
-      opacity: 1;
-    }
-  }
-
-  &._closing {
-    tip {
-      opacity: 0;
-    }
-  }
-
-  &._slow {
-
-    tip {
-      @include opacity-transition($tooltip-slow-transition);
-    }
-  }
-
-  &._fast {
-
-    tip {
-      @include opacity-transition($tooltip-fast-transition);
-    }
-  }
-
-  &._steady {
-
-    tip {
-      @include opacity-transition($tooltip-medium-transition);
     }
   }
 }
