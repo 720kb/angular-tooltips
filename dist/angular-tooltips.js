@@ -2,7 +2,8 @@
 (function withAngular(angular, window) {
   'use strict';
 
-  var directiveName = 'tooltips'
+  var defaultTipTolleranceMargin = 1 //in px
+  , directiveName = 'tooltips'
   , marginTooltipArrow = 8
   , resizeObserver = (function resizeObserver() {
 
@@ -144,6 +145,15 @@
       element.removeAttr('tooltip-size');
     }
 
+    if (element.attr('tooltip-speed') !== undefined) {
+
+      attributesToAdd.push({
+        'key': 'tooltip-speed',
+        'value': element.attr('tooltip-speed')
+      });
+      element.removeAttr('tooltip-speed');
+    }
+
     el.appendChild(element.clone()[0]);
     txt = el.innerHTML;
     el = null;
@@ -204,7 +214,7 @@
     bottom = Math.floor(theTipContElement[0].offsetHeight + marginTooltipArrow + paddingBottom);
 
     theTipElement.css({
-      'bottom': bottom + 'px',
+      'bottom': bottom + defaultTipTolleranceMargin + 'px',
       'left': left + 'px'
     });
   }
@@ -214,7 +224,7 @@
 
     theTipElement.css({
       'bottom': bottom + 'px',
-      'right': right + 'px'
+      'right': right + defaultTipTolleranceMargin + 'px'
     });
   }
   , calculateBottom = function calculateBottom(theTipElement, theTipContElement) {
@@ -235,7 +245,7 @@
     top = Math.floor(theTipContElement[0].offsetHeight + paddingTop + marginTooltipArrow);
 
     theTipElement.css({
-      'top': top + 'px',
+      'top': top + defaultTipTolleranceMargin + 'px',
       'left': left + 'px'
     });
   }
@@ -245,7 +255,7 @@
 
     theTipElement.css({
       'bottom': bottom + 'px',
-      'left': left + 'px'
+      'left': left + defaultTipTolleranceMargin + 'px'
     });
   }
   , isOutOfPage = function isOutOfPage(theTipElement) {
@@ -280,12 +290,12 @@
 
     var linkingFunction = function linkingFunction(scope, element, attrs) {
 
-      var oldTooltipSide
-      , oldTooltipShowTrigger
-      , oldTooltipHideTrigger
+      var oldTooltipSide = '_top'
+      , oldTooltipShowTrigger = 'mouseover'
+      , oldTooltipHideTrigger = 'mouseleave'
       , oldTooltipClass
       , oldSize
-      , oldSpeed
+      , oldSpeed = '_steady'
       , onTooltipShow = function onTooltipShow(event) {
         var tipContElement = element.find('tip-cont')
           , tipElement = element.find('tip');
@@ -511,16 +521,9 @@
           if (oldTooltipSide) {
 
             element.removeAttr('_' + oldTooltipSide);
-          } else {
-
-            element.removeAttr('_top');
           }
           element.addClass('_' + newValue);
           oldTooltipSide = newValue;
-        } else {
-
-          element.addClass('_top');
-          oldTooltipSide = '_top';
         }
       }
       , onTooltipShowTrigger = function onTooltipShowTrigger(newValue) {
@@ -530,16 +533,9 @@
           if (oldTooltipShowTrigger) {
 
             element.off(oldTooltipShowTrigger);
-          } else {
-
-            element.off('mouseover');
           }
           element.on(newValue, onTooltipShow);
           oldTooltipShowTrigger = newValue;
-        } else {
-
-          element.on('mouseover', onTooltipShow);
-          oldTooltipShowTrigger = 'mouseover';
         }
       }
       , onTooltipHideTrigger = function onTooltipHideTrigger(newValue) {
@@ -549,16 +545,9 @@
           if (oldTooltipHideTrigger) {
 
             element.off(oldTooltipHideTrigger);
-          } else {
-
-            element.off('mouseout');
           }
           element.on(newValue, onTooltipHide);
           oldTooltipHideTrigger = newValue;
-        } else {
-
-          element.on('mouseout', onTooltipHide);
-          oldTooltipHideTrigger = 'mouseout';
         }
       }
       , onTooltipClassChange = function onTooltipClassChange(newValue) {
@@ -608,16 +597,9 @@
           if (oldSpeed) {
 
             element.removeClass('_' + oldSpeed);
-          } else {
-
-            element.removeClass('_steady');
           }
           element.addClass('_' + newValue);
           oldSpeed = newValue;
-        } else {
-
-          element.addClass('_steady');
-          oldTooltipSide = '_steady';
         }
       }
       , unregisterOnTooltipTemplateChange = attrs.$observe('tooltipTemplate', onTooltipTemplateChange)
@@ -633,7 +615,7 @@
 
       attrs.tooltipSide = attrs.tooltipSide || 'top';
       attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || 'mouseover';
-      attrs.tooltipHideTrigger = attrs.tooltipHideTrigger || 'mouseout';
+      attrs.tooltipHideTrigger = attrs.tooltipHideTrigger || 'mouseleave';
       attrs.tooltipClass = attrs.tooltipClass || '';
       attrs.tooltipSmart = attrs.tooltipSmart === 'true';
       attrs.tooltipCloseButton = attrs.tooltipCloseButton === 'true';
