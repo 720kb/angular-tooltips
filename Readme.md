@@ -91,7 +91,7 @@ tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tool
 tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
 tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
 tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
-tooltip-speed="" | String() | 'medium' | Set your tooltip show & hide transition speed
+tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
 
 ## Example
 
