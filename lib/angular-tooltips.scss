@@ -12,19 +12,28 @@ $tooltip-medium-transition: .35s;
 
   @keyframes animate-tooltip {
     0% {
-      opacity: 0
+
+      opacity: 0;
     }
+
     50% {
-      opacity: .5
+
+      opacity: .5;
     }
+
     60% {
-      opacity: .8
+
+      opacity: .8;
     }
+
     70% {
-      opacity: .9
+
+      opacity: .9;
     }
+
     90% {
-      opacity: 1
+
+      opacity: 1;
     }
   }
 
@@ -82,6 +91,7 @@ $tooltip-medium-transition: .35s;
       position: absolute;
       text-align: center;
       width: auto;
+      will-change: top, left, bottom, right;
 
       &._hidden {
 
