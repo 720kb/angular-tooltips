@@ -47,18 +47,18 @@
     opacity: 1; } }
 
 [tooltips] ._large {
-  font-size: 1.1em; }
+  font-size: 1em; }
 
 [tooltips] ._small {
   font-size: .85em; }
 
-[tooltips]._slow tip {
+[tooltips]._slow._ready tip {
   animation: animate-tooltip 0.65s; }
 
-[tooltips]._fast tip {
+[tooltips]._fast._ready tip {
   animation: animate-tooltip 0.15s; }
 
-[tooltips]._steady tip {
+[tooltips]._steady._ready tip {
   animation: animate-tooltip 0.35s; }
 
 [tooltips].tooltips {
