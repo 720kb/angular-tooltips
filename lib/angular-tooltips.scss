@@ -111,7 +111,7 @@ $tooltip-medium-transition: .35s;
       &._hidden {
 
         display: block;
-        opacity: 0;
+        visibility: hidden;
       }
     }
 
