@@ -61,7 +61,7 @@ $tooltip-medium-transition: .35s;
 
   ._large {
 
-    font-size: 1.1em;
+    font-size: 1em;
   }
 
   ._small {
@@ -69,21 +69,21 @@ $tooltip-medium-transition: .35s;
     font-size: .85em;
   }
 
-  &._slow {
+  &._slow._ready {
 
     tip {
       @include opacity-transition($tooltip-slow-transition);
     }
   }
 
-  &._fast {
+  &._fast._ready {
 
     tip {
       @include opacity-transition($tooltip-fast-transition);
     }
   }
 
-  &._steady {
+  &._steady._ready {
 
     tip {
       @include opacity-transition($tooltip-medium-transition);
