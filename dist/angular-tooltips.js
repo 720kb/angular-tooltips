@@ -288,11 +288,7 @@
         var tipContElement = element.find('tip-cont')
           , tipElement = element.find('tip');
 
-        if (event) {
-
-          element.addClass('active');
-        }
-
+        tipElement.addClass('_hidden');
         if (attrs.tooltipSmart) {
 
           tipElement.css({
@@ -457,6 +453,12 @@
               throw new Error('Position not supported');
             }
           }
+        }
+
+        tipElement.removeClass('_hidden');
+        if (event) {
+
+          element.addClass('active');
         }
       }
       , onTooltipHide = function onTooltipHide() {

@@ -79,7 +79,7 @@
     will-change: top, left, bottom, right; }
     [tooltips].tooltips tip._hidden {
       display: block;
-      opacity: 0; }
+      visibility: hidden; }
   [tooltips].tooltips tip-tip #close-button {
     cursor: pointer;
     float: right;
