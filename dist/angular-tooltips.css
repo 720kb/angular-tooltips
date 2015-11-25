@@ -47,10 +47,10 @@
     opacity: 1; } }
 
 [tooltips] ._large {
-  font-size: 1.5em; }
+  font-size: 1.1em; }
 
 [tooltips] ._small {
-  font-size: .5em; }
+  font-size: .85em; }
 
 [tooltips]._slow tip {
   animation: animate-tooltip 0.65s; }
