@@ -12,6 +12,12 @@
     "angularjs",
     "angular"
   ],
+  "scripts": {
+    "precommit": "gulp lint",
+    "preversion": "gulp lint",
+    "version": "gulp minify && ./tasks/bower-version-bump && git add -A .",
+    "postversion": "git push && git push --tags"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/720kb/angular-tooltips.git"
@@ -34,6 +40,7 @@
     "gulp-sass-lint": "^1.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2",
+    "husky": "^0.10.2",
     "jshint-stylish": "^2.0.1",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
