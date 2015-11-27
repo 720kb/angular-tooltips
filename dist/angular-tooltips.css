@@ -1,3 +1,6 @@
+[tooltips] {
+  position: relative; }
+
 @-webkit-keyframes animate-tooltip {
   0% {
     opacity: 0; }
@@ -45,24 +48,16 @@
     opacity: .9; }
   90% {
     opacity: 1; } }
-
-[tooltips] ._large {
-  font-size: 1em; }
-
-[tooltips] ._small {
-  font-size: .85em; }
-
-[tooltips]._slow._ready tip {
-  animation: animate-tooltip 0.65s; }
-
-[tooltips]._fast._ready tip {
-  animation: animate-tooltip 0.15s; }
-
-[tooltips]._steady._ready tip {
-  animation: animate-tooltip 0.35s; }
-
-[tooltips].tooltips {
-  position: relative; }
+  [tooltips] ._large {
+    font-size: 1em; }
+  [tooltips] ._small {
+    font-size: .85em; }
+  [tooltips]._slow._ready tip {
+    animation: animate-tooltip 0.65s; }
+  [tooltips]._fast._ready tip {
+    animation: animate-tooltip 0.15s; }
+  [tooltips]._steady._ready tip {
+    animation: animate-tooltip 0.35s; }
   [tooltips].tooltips tip {
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.85);
@@ -90,49 +85,65 @@
     display: block;
     opacity: 1;
     z-index: 999; }
-  [tooltips].tooltips._top tip tip-arrow {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid rgba(0, 0, 0, 0.85);
-    content: '';
-    height: 0;
+  [tooltips].tooltips._top tip {
     left: 50%;
-    margin-left: -6px;
-    position: absolute;
+    top: -6px;
+    transform: translateX(-50%) translateY(-100%); }
+    [tooltips].tooltips._top tip tip-arrow {
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid rgba(0, 0, 0, 0.85);
+      content: '';
+      height: 0;
+      left: 50%;
+      margin-left: -6px;
+      position: absolute;
+      top: 100%;
+      width: 0; }
+  [tooltips].tooltips._bottom tip {
+    right: 50%;
     top: 100%;
-    width: 0; }
-  [tooltips].tooltips._bottom tip tip-arrow {
-    border-bottom: 6px solid rgba(0, 0, 0, 0.85);
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    bottom: 100%;
-    content: '';
-    height: 0;
-    left: 50%;
-    margin-left: -6px;
-    position: absolute;
-    width: 0; }
-  [tooltips].tooltips._right tip tip-arrow {
-    border-bottom: 6px solid transparent;
-    border-right: 6px solid rgba(0, 0, 0, 0.85);
-    border-top: 6px solid transparent;
-    content: '';
-    height: 0;
-    margin-top: -6px;
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    width: 0; }
-  [tooltips].tooltips._left tip tip-arrow {
-    border-bottom: 6px solid transparent;
-    border-left: 6px solid rgba(0, 0, 0, 0.85);
-    border-top: 6px solid transparent;
-    content: '';
-    height: 0;
+    transform: translateY(6px) translateX(50%); }
+    [tooltips].tooltips._bottom tip tip-arrow {
+      border-bottom: 6px solid rgba(0, 0, 0, 0.85);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      bottom: 100%;
+      content: '';
+      height: 0;
+      left: 50%;
+      margin-left: -6px;
+      position: absolute;
+      width: 0; }
+  [tooltips].tooltips._right tip {
     left: 100%;
-    margin-top: -6px;
-    position: absolute;
     top: 50%;
-    width: 0; }
+    transform: translateX(6px) translateY(-50%); }
+    [tooltips].tooltips._right tip tip-arrow {
+      border-bottom: 6px solid transparent;
+      border-right: 6px solid rgba(0, 0, 0, 0.85);
+      border-top: 6px solid transparent;
+      content: '';
+      height: 0;
+      margin-top: -6px;
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      width: 0; }
+  [tooltips].tooltips._left tip {
+    left: -6px;
+    top: 50%;
+    transform: translateX(-100%) translateY(-50%); }
+    [tooltips].tooltips._left tip tip-arrow {
+      border-bottom: 6px solid transparent;
+      border-left: 6px solid rgba(0, 0, 0, 0.85);
+      border-top: 6px solid transparent;
+      content: '';
+      height: 0;
+      left: 100%;
+      margin-top: -6px;
+      position: absolute;
+      top: 50%;
+      width: 0; }
 
 /*# sourceMappingURL=angular-tooltips.css.map */
