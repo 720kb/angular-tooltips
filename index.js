@@ -2,7 +2,7 @@
 (function commonJS(require, module) {
   'use strict';
 
-  require('./src/js/angular-tooltips');
+  require('./src/lib/angular-tooltips');
 
   module.exports = '720kb.tooltips';
 }(require, module));

@@ -177,9 +177,9 @@
 
     toReturn = [
       '<tooltip ' + attributes + ' class="tooltips">',
-        '<tip-cont>',
-          tooltippedContent.text,
-        '</tip-cont>'
+        //'<tip-cont>',
+          tooltippedContent.text//,
+        //'</tip-cont>'
       ];
     if (tooltipTemplate ||
       isTemplateUrl) {
@@ -198,25 +198,25 @@
     return toReturn.join(' ');
   }
   , calculateTop = function calculateTop(theTipElement, theTipContElement) {
-    var top = -Math.floor(theTipElement[0].offsetHeight + marginTooltipArrow)
+    /*var top = -Math.floor(theTipElement[0].offsetHeight + marginTooltipArrow)
       , left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2);
 
     theTipElement.css({
       'top': top - defaultTipTolleranceMargin + 'px',
       'left': left + 'px'
-    });
+    });*/
   }
   , calculateLeft = function calculateLeft(theTipElement, theTipContElement) {
-    var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
+    /*var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
       , left = -Math.floor(theTipElement[0].offsetWidth + marginTooltipArrow);
 
     theTipElement.css({
       'top': bottom + 'px',
       'left': left - defaultTipTolleranceMargin + 'px'
-    });
+    });*/
   }
   , calculateBottom = function calculateBottom(theTipElement, theTipContElement) {
-    var tipStyle
+    /*var tipStyle
       , paddingTop
       , left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2)
       , top;
@@ -235,16 +235,16 @@
     theTipElement.css({
       'top': top + defaultTipTolleranceMargin + 'px',
       'left': left + 'px'
-    });
+    });*/
   }
   , calculateRight = function calculateRight(theTipElement, theTipContElement) {
-    var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
+    /*var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
       , left = theTipContElement[0].offsetWidth + marginTooltipArrow;
 
     theTipElement.css({
       'bottom': bottom + 'px',
       'left': left + defaultTipTolleranceMargin + 'px'
-    });
+    });*/
   }
   , isOutOfPage = function isOutOfPage(theTipElement) {
 
