@@ -1,5 +1,7 @@
 [tooltips] {
-  position: relative; }
+  position: relative;
+  display: inline-block;
+  width: auto; }
 
 @-webkit-keyframes animate-tooltip {
   0% {
@@ -48,10 +50,6 @@
     opacity: .9; }
   90% {
     opacity: 1; } }
-  [tooltips] ._large {
-    font-size: 1em; }
-  [tooltips] ._small {
-    font-size: .85em; }
   [tooltips]._slow._ready tip {
     animation: animate-tooltip 0.65s; }
   [tooltips]._fast._ready tip {
@@ -63,7 +61,6 @@
     background: rgba(0, 0, 0, 0.85);
     color: #fff;
     display: none;
-    font-size: 1em;
     max-width: 500px;
     min-width: 100px;
     opacity: 0;
@@ -75,12 +72,18 @@
     [tooltips].tooltips tip._hidden {
       display: block;
       visibility: hidden; }
-  [tooltips].tooltips tip-tip #close-button {
-    cursor: pointer;
-    float: right;
-    left: 8%;
-    margin-top: -8%;
-    position: relative; }
+  [tooltips].tooltips tip-tip {
+    font-size: .95em; }
+    [tooltips].tooltips tip-tip._large {
+      font-size: 1.1em; }
+    [tooltips].tooltips tip-tip._small {
+      font-size: .8em; }
+    [tooltips].tooltips tip-tip #close-button {
+      cursor: pointer;
+      float: right;
+      left: 8%;
+      margin-top: -8%;
+      position: relative; }
   [tooltips].tooltips.active tip {
     display: block;
     opacity: 1;
