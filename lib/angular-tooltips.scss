@@ -35,7 +35,7 @@ $tooltip-medium-transition: .35s;
   position: relative;
   display:inline-block;
   width:auto;
-  
+
   @include keyframes(animate-tooltip) {
     0% {
 
@@ -61,16 +61,6 @@ $tooltip-medium-transition: .35s;
 
       opacity: 1;
     }
-  }
-
-  ._large {
-
-    font-size: 1em;
-  }
-
-  ._small {
-
-    font-size: .85em;
   }
 
   &._slow._ready {
@@ -101,7 +91,6 @@ $tooltip-medium-transition: .35s;
       background: $tooltip-background-color;
       color: $tooltip-color;
       display: none;
-      font-size: 1em;
       max-width: 500px;
       min-width: 100px;
       opacity: 0;
@@ -119,6 +108,18 @@ $tooltip-medium-transition: .35s;
     }
 
     tip-tip {
+
+      font-size:.95em;
+
+      &._large {
+
+        font-size: 1.1em;
+      }
+
+      &._small {
+
+        font-size: .8em;
+      }
 
       #close-button {
         cursor: pointer;
