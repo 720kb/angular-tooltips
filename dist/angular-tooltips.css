@@ -5,12 +5,10 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * 2015-11-30T21:04:28.478Z
+ * 2015-11-30T20:57:07.081Z
  */
 [tooltips] {
-  display: inline-block;
-  position: relative;
-  width: auto; }
+  position: relative; }
 
 @-webkit-keyframes animate-tooltip {
   0% {
@@ -59,6 +57,8 @@
     opacity: .9; }
   90% {
     opacity: 1; } }
+  [tooltips]._multiline {
+    display: block; }
   [tooltips]._slow._ready tip {
     animation: animate-tooltip 0.65s; }
   [tooltips]._fast._ready tip {
