@@ -5,7 +5,7 @@ Angular Tooltips
 [![Join the chat at https://gitter.im/720kb/angular-tooltips](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/720kb/angular-tooltips?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-Angular Tooltips is an angularjs directive that generates a tooltip on your element.
+Angular Tooltips is an AngularJS directive that generates a tooltip on your element.
 
 
 The angular tooltips is developed by [720kb](http://720kb.net).
@@ -13,7 +13,7 @@ The angular tooltips is developed by [720kb](http://720kb.net).
 ##Requirements
 
 
-AngularJS v1.2+
+AngularJS v1.3+
 
 ##Screen
 ![Angular tooltips](http://i.imgur.com/2rOwAbQ.png)
@@ -28,7 +28,7 @@ AngularJS v1.2+
 
 ## Load
 
-To use the directive, include the angular tooltips's javascript and css files in your web page:
+To use the directive, include the Angular Tooltips javascript and css files in your web page:
 
 ```html
 <!DOCTYPE HTML>
@@ -74,7 +74,7 @@ Call the directive wherever you want in your html page
 
 ```html
 
-<a href="#" tooltips title="tooltip">Tooltip me</a>
+<a href="#" tooltips tooltip-template="tooltip">Tooltip me</a>
 
 ```
 
@@ -83,56 +83,22 @@ Call the directive wherever you want in your html page
 Option | Type | Default | Description
 ------------- | ------------- | ------------- | -------------
 tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` position
-tooltip-size="" | String('medium','small','large') | 'medium' | Set your tooltip size
-tooltip-speed="" | String('fast','medium','slow', Int(ms)) | 'medium' | Set your tooltip transition speed
-tooltip-delay="" | Int(ms)) | 0 | Set your tooltip transition delay
-tooltip-title="" | String() | false | Set your tooltip title
-tooltip-content="" | String() | false | Set your tooltip content
-tooltip-html="" | String() | false | Set your tooltip HTML content
-tooltip-view="" | String() | false | Set your tooltip view PATH
-tooltip-view-model="" | String() | false | Set your tooltip view model
-tooltip-view-ctrl="" | String() | false | Set your tooltip view controller
-tooltip-try="" | String(Boolean) | true | Set your tooltip to automatically search for an alternative position
-tooltip-lazy="" | String(Boolean) | true | Re-init the tooltip position everytime is shown
+tooltip-template="" | String() | false | Set your tooltip template (HTML or just Text)
+tooltip-template-url="" | String() | false | Set your external tooltip template PATH
+tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
 tooltip-show-trigger="" | String('event1 event2') | 'mouseover' | Show the tooltip on specific event/events
 tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tooltip on specific event/events
-tooltip-hide-trigger-target="" | String('element', 'tooltip') | 'element' | Hide the tooltip on specific target event/events
-tooltip-close-button="" | String(HTML) | false | Set the tooltip HTML close button
-tooltip-class="" | String() | false | Set the tooltip custom CSS class/classes
-tooltip-scroll="" | String(Boolean) | false | Set the tooltip to follow the element on scroll/move
-tooltip-parent="" | String('#id') | '<body>' | Set the tooltip DOM parent by ID
-
-
-##Options
-Angular tooltips allows you to use some options via `attribute` data
-
-####Globals
-Application wide defaults for most of the options can be set using the `tooltipConfigProvider`:
-
-```js
-angular
-  .module('app')
-  .config(function(tooltipsConfigProvider) {
-    tooltipsConfigProvider.options({
-      lazy: false,
-      size: 'large'
-    })
-  });
-```
-Options that are not specified are kept unchanged.
-Option names are the same as attribute names without the "tooltip-" prefix: `scroll`, `showTrigger`, `hideTrigger`,
-`hideTarget`, `side`, `size`, `try`, `class`, `speed`, `delay`, `lazy`, `closeButton`
-
-Of course specific tooltips can still overwrite any default using attributes.
-
-Calling `options` method without arguments returns the complete options object.
+tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
+tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
+tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
+tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
 
 ## Example
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)
 
 ##Theming
-You can edit the default Css file `angular-tooltips.css` if you want to make a new theme for the tooltips.
+You can create your own theme by editing the default SASS file `lib/angular-tooltips.scss` or just editing the default CSS file `dist/angular-tooltips.css`.
 
 ##Contributing
 
