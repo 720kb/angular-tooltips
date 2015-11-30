@@ -8,7 +8,8 @@
     , sourcemaps = require('gulp-sourcemaps')
     , sass = require('gulp-sass')
     , browserSync = require('browser-sync')
-    , paths = require('../paths');
+    , paths = require('../paths')
+    , header = require('gulp-header');
 
   gulp.task('scss', function onScss() {
 
@@ -22,6 +23,7 @@
         'debug': true
       }))
       .pipe(sass(paths.scss.options))
+      .pipe(header(paths.banner))
       .pipe(sourcemaps.write('.', {
         'includeContent': false,
         'sourceRoot': '../lib'

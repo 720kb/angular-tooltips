@@ -1,10 +1,17 @@
+/*
+ * angular-tooltips
+ *
+ * Angular.js tooltips module.
+ * http://720kb.github.io/angular-tooltips
+ * 
+ * MIT license
+ * 2015-11-30T15:38:10.444Z
+ */
 /*global angular,window*/
 (function withAngular(angular, window) {
   'use strict';
 
-  var defaultTipTolleranceMargin = 1 //in px
-  , directiveName = 'tooltips'
-  , marginTooltipArrow = 8
+  var directiveName = 'tooltips'
   , resizeObserver = (function resizeObserver() {
 
     var callbacks = []
@@ -177,9 +184,7 @@
 
     toReturn = [
       '<tooltip ' + attributes + ' class="tooltips">',
-        //'<tip-cont>',
-          tooltippedContent.text//,
-        //'</tip-cont>'
+        tooltippedContent.text
       ];
     if (tooltipTemplate ||
       isTemplateUrl) {
@@ -196,55 +201,6 @@
     }
     toReturn.push('</tooltip>');
     return toReturn.join(' ');
-  }
-  , calculateTop = function calculateTop(theTipElement, theTipContElement) {
-    /*var top = -Math.floor(theTipElement[0].offsetHeight + marginTooltipArrow)
-      , left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2);
-
-    theTipElement.css({
-      'top': top - defaultTipTolleranceMargin + 'px',
-      'left': left + 'px'
-    });*/
-  }
-  , calculateLeft = function calculateLeft(theTipElement, theTipContElement) {
-    /*var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
-      , left = -Math.floor(theTipElement[0].offsetWidth + marginTooltipArrow);
-
-    theTipElement.css({
-      'top': bottom + 'px',
-      'left': left - defaultTipTolleranceMargin + 'px'
-    });*/
-  }
-  , calculateBottom = function calculateBottom(theTipElement, theTipContElement) {
-    /*var tipStyle
-      , paddingTop
-      , left = Math.floor(theTipContElement[0].offsetWidth / 2 - theTipElement[0].offsetWidth / 2)
-      , top;
-
-    try {
-      tipStyle = window.getComputedStyle(theTipElement[0], null);
-
-      paddingTop = parseInt(tipStyle.getPropertyValue('padding-top'), 10);
-    } catch (e) {
-
-      paddingTop = parseInt(theTipElement[0].currentStyle.paddingTop, 10);
-    }
-
-    top = Math.floor(theTipContElement[0].offsetHeight + paddingTop + marginTooltipArrow);
-
-    theTipElement.css({
-      'top': top + defaultTipTolleranceMargin + 'px',
-      'left': left + 'px'
-    });*/
-  }
-  , calculateRight = function calculateRight(theTipElement, theTipContElement) {
-    /*var bottom = Math.floor(-theTipElement[0].offsetHeight / 2 + theTipContElement[0].offsetHeight / 2)
-      , left = theTipContElement[0].offsetWidth + marginTooltipArrow;
-
-    theTipElement.css({
-      'bottom': bottom + 'px',
-      'left': left + defaultTipTolleranceMargin + 'px'
-    });*/
   }
   , isOutOfPage = function isOutOfPage(theTipElement) {
 
@@ -285,41 +241,29 @@
       , oldSize
       , oldSpeed = '_steady'
       , onTooltipShow = function onTooltipShow(event) {
-        var tipContElement = element.find('tip-cont')
-          , tipElement = element.find('tip');
+        var tipElement = element.find('tip');
 
         tipElement.addClass('_hidden');
         if (attrs.tooltipSmart) {
 
-          tipElement.css({
-            'top': '',
-            'left': '',
-            'bottom': '',
-            'right': ''
-          });
           switch (attrs.tooltipSide) {
             case 'top': {
 
-              calculateTop(tipElement, tipContElement);
               if (isOutOfPage(tipElement)) {
 
                 element.removeClass('_top');
-                calculateLeft(tipElement, tipContElement);
                 element.addClass('_left');
                 if (isOutOfPage(tipElement)) {
 
                   element.removeClass('_left');
-                  calculateBottom(tipElement, tipContElement);
                   element.addClass('_bottom');
                   if (isOutOfPage(tipElement)) {
 
                     element.removeClass('_bottom');
-                    calculateRight(tipElement, tipContElement);
                     element.addClass('_right');
                     if (isOutOfPage(tipElement)) {
 
                       element.removeClass('_right');
-                      calculateTop(tipElement, tipContElement);
                       element.addClass('_top');
                     }
                   }
@@ -330,26 +274,21 @@
 
             case 'left': {
 
-              calculateLeft(tipElement, tipContElement);
               if (isOutOfPage(tipElement)) {
 
                 element.removeClass('_left');
-                calculateBottom(tipElement, tipContElement);
                 element.addClass('_bottom');
                 if (isOutOfPage(tipElement)) {
 
                   element.removeClass('_bottom');
-                  calculateRight(tipElement, tipContElement);
                   element.addClass('_right');
                   if (isOutOfPage(tipElement)) {
 
                     element.removeClass('_right');
-                    calculateTop(tipElement, tipContElement);
                     element.addClass('_top');
                     if (isOutOfPage(tipElement)) {
 
                       element.removeClass('_top');
-                      calculateLeft(tipElement, tipContElement);
                       element.addClass('_left');
                     }
                   }
@@ -360,26 +299,21 @@
 
             case 'bottom': {
 
-              calculateBottom(tipElement, tipContElement);
               if (isOutOfPage(tipElement)) {
 
                 element.removeClass('_bottom');
-                calculateLeft(tipElement, tipContElement);
                 element.addClass('_left');
                 if (isOutOfPage(tipElement)) {
 
                   element.removeClass('_left');
-                  calculateTop(tipElement, tipContElement);
                   element.addClass('_top');
                   if (isOutOfPage(tipElement)) {
 
                     element.removeClass('_top');
-                    calculateRight(tipElement, tipContElement);
                     element.addClass('_right');
                     if (isOutOfPage(tipElement)) {
 
                       element.removeClass('_right');
-                      calculateBottom(tipElement, tipContElement);
                       element.addClass('_bottom');
                     }
                   }
@@ -390,62 +324,26 @@
 
             case 'right': {
 
-              calculateRight(tipElement, tipContElement);
               if (isOutOfPage(tipElement)) {
 
                 element.removeClass('_right');
-                calculateTop(tipElement, tipContElement);
                 element.addClass('_top');
                 if (isOutOfPage(tipElement)) {
 
                   element.removeClass('_top');
-                  calculateLeft(tipElement, tipContElement);
                   element.addClass('_left');
                   if (isOutOfPage(tipElement)) {
 
                     element.removeClass('_left');
-                    calculateBottom(tipElement, tipContElement);
                     element.addClass('_bottom');
                     if (isOutOfPage(tipElement)) {
 
                       element.removeClass('_bottom');
-                      calculateRight(tipElement, tipContElement);
                       element.addClass('_right');
                     }
                   }
                 }
               }
-              break;
-            }
-            default: {
-
-              throw new Error('Position not supported');
-            }
-          }
-        } else {
-
-          switch (attrs.tooltipSide) {
-            case 'top': {
-
-              calculateTop(tipElement, tipContElement);
-              break;
-            }
-
-            case 'left': {
-
-              calculateLeft(tipElement, tipContElement);
-              break;
-            }
-
-            case 'bottom': {
-
-              calculateBottom(tipElement, tipContElement);
-              break;
-            }
-
-            case 'right': {
-
-              calculateRight(tipElement, tipContElement);
               break;
             }
             default: {

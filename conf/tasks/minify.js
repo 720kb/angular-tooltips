@@ -6,6 +6,7 @@
     , plumber = require('gulp-plumber')
     , sourcemaps = require('gulp-sourcemaps')
     , paths = require('../paths')
+    , header = require('gulp-header')
     , uglify = require('gulp-uglify')
     , cssmin = require('gulp-cssmin')
     , rename = require('gulp-rename')
@@ -28,6 +29,7 @@
         'debug': true
       }))
       .pipe(uglify())
+      .pipe(header(paths.banner))
       .pipe(sourcemaps.write('.', {
         'includeContent': false,
         'sourceRoot': '../lib'
@@ -49,6 +51,7 @@
         'debug': true
       }))
       .pipe(cssmin())
+      .pipe(header(paths.banner))
       .pipe(sourcemaps.write('.', {
         'includeContent': false,
         'sourceRoot': '../lib'
