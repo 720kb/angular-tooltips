@@ -32,10 +32,6 @@ $tooltip-medium-transition: .35s;
 
 [tooltips] {
 
-  position: relative;
-  display:inline-block;
-  width:auto;
-
   @include keyframes(animate-tooltip) {
     0% {
 
@@ -63,24 +59,37 @@ $tooltip-medium-transition: .35s;
     }
   }
 
-  &._slow._ready {
+  display: inline-block;
+  position: relative;
+  width: auto;
 
-    tip {
-      @include opacity-transition($tooltip-slow-transition);
+  &._slow {
+
+    &._ready {
+
+      tip {
+        @include opacity-transition($tooltip-slow-transition);
+      }
     }
   }
 
-  &._fast._ready {
+  &._fast {
 
-    tip {
-      @include opacity-transition($tooltip-fast-transition);
+    &._ready {
+
+      tip {
+        @include opacity-transition($tooltip-fast-transition);
+      }
     }
   }
 
-  &._steady._ready {
+  &._steady {
 
-    tip {
-      @include opacity-transition($tooltip-medium-transition);
+    &._ready {
+
+      tip {
+        @include opacity-transition($tooltip-medium-transition);
+      }
     }
   }
 
@@ -109,7 +118,7 @@ $tooltip-medium-transition: .35s;
 
     tip-tip {
 
-      font-size:.95em;
+      font-size: .95em;
 
       &._large {
 
