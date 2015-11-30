@@ -1,152 +1,258 @@
 <!doctype html>
 <html ng-app="720kb">
-<head>
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="http://720kb.github.io/csshelper/assets/ext/src/helper.css">
-  <link rel="stylesheet" type="text/css" href="src/css/angular-tooltips.css">
-  <link rel="stylesheet" type="text/css" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
-  <title>Angularjs Tooltips</title>
-</head>
-<body class="center-content" ng-controller="Ctrl">
-  <div class="separator100"></div>
-  <div class="col6 offset-left2">
-    <div ng-repeat="item in items">
-    <a tooltips tooltip-html="{{generateHTMLextra(item)}}"> item</a>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
+    <style media="screen">
+    body {
+      margin: 100px;
+    }
+      #demo-container > div {
+        margin: 10% 0;
+        text-align: center;
+      }
+
+      .a-class {
+        font-size: 2em;
+      }
+
+      .another-class {
+        color: violet;
+      }
+    </style>
+    <title>Angularjs Tooltips</title>
+  </head>
+  <body id="demo-container" ng-controller="DemoCtrl as demoCtrl">
+    <div>
+      <i class="fa fa-file"
+      tooltips
+      tooltip-template="I'm a tooltip!"></i>
     </div>
-   <div>
-      With just an icon (Hover the icon) <i class="fa fa-trash-o clickable-icon" tooltips tooltip-title="title" tooltip-size="small"></i>
 
-    <div class="separator30"></div>
-    <a class="btn btn-medium bg-info color-white font-bold"
-     tooltip-delay="400"
-     tooltip-scroll="true"
-     tooltip-content="Yeo man!"
-     tooltip-view="views/index.html"
-     tooltip-view-ctrl="Ctrl"
-     tooltip-size="small"
-     tooltip-side="left"
-     tooltips
-	   tooltip-hide-trigger="click"
-	   tooltip-hide-target="tooltip"
-     tooltip-title="hey!">
-      Small left
-    </a>
-  </div>
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-hide-trigger="click" tooltip-size="medium" tooltip-side="left" title="Title attr" >
-      Medium left
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="large" tooltip-side="left" >
-      Large left
-    </a>
-  </div>
-
-  <div class="separator100"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="small" tooltip-side="right" >
-      Small right
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="medium" tooltip-side="right" >
-      Medium right
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="large" tooltip-side="right" >
-      Large right
-    </a>
-  </div>
-  <div class="separator100"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="small" tooltip-side="top" >
-      Small top
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="medium" tooltip-side="top" >
-      Medium top
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="large" tooltip-side="top" >
-      Large top
-    </a>
-  </div>
-  <div class="separator100"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="small" tooltip-side="bottom" >
-      Small bottom
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="medium" tooltip-side="bottom" >
-      Medium bottom
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-size="large" tooltip-side="bottom" >
-      Large bottom
-    </a>
-  </div>
-  <div class="separator100"></div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man!" tooltip-show-trigger="mouseover click" tooltip-hide-trigger="click" tooltip-close-button='<button type="button">Close Me!</button>' tooltip-side="top">
-      Close button: hover to open, click to close
-    </a>
-  </div>
-
-  <div class="separator30"></div>
-  <div>
-    <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-content="Yeo man! I have some more to say to show the positioning of the close button" tooltip-show-trigger="click" tooltip-hide-trigger="click" tooltip-close-button='<button type="button">Close Me!</button>' tooltip-side="bottom">
-      Close button: click to open and close
-    </a>
-  </div>
-  <div class="separator30"></div>
-  <div>
-   <a class="btn btn-medium bg-info color-white font-bold"
-    tooltips
-    tooltip-delay="400"
-    tooltip-scroll="true"
-    tooltip-content="Yeo man!"
-    tooltip-size="large"
-    tooltip-hide-trigger="click"
-    tooltip-hide-target="tooltip"
-    tooltip-title="Click tooltip to hide tooltip">
-     Hide Target = tooltip
-   </a>
- </div>
-  <div class="separator100"></div>
-  <div style="height:300px; overflow-y:scroll">
-    <div style="height:600px;">
-      <a class="btn btn-medium bg-info color-white font-bold" tooltips tooltip-scroll="true" tooltip-content="Yeo man!" tooltip-hide-trigger="click" tooltip-size="medium" tooltip-side="left" title="Title attr">
-        Scrollable
-       </a>
+    <div>
+      <i class="fa fa-list"
+      tooltips
+      tooltip-side="left"
+      tooltip-template="I'm another tooltip!"></i>
     </div>
-  </div>
-</div>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>
-<script type="text/javascript" src="src/js/angular-tooltips.js"></script>
-<script type="text/javascript" src="assets/js/index.js"></script>
-</body>
+
+    <div>
+      <i class="fa fa-hourglass-end"
+      tooltips
+      tooltip-side="bottom"
+      tooltip-template="I'm another tooltip!"></i>
+    </div>
+
+    <div>
+      <i class="fa fa-map"
+      tooltips
+      tooltip-side="right"
+      tooltip-template="I'm another tooltip!"></i>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.">
+        I'm a tooltip content.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="left"
+        tooltip-template="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.">
+        I'm a tooltip content.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="bottom"
+        tooltip-template="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.">
+        I'm a tooltip content.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="right"
+        tooltip-template="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.">
+        I'm a tooltip content.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="left"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="bottom"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="right"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="left"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="bottom"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="right"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        I'm a tooltip content.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-class="a-class"
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-class="{{ demoCtrl.class }}"
+        tooltip-template="{{ demoCtrl.tooltipText }}">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template-url="demo/views/index-with-embedded-controller.html">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template-url="demo/views/index-without-embedded-controller.html"
+        tooltip-controller="Ctrl as ctrl">
+        {{ demoCtrl.tooltipContentText }}
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-close-button="true"
+        tooltip-template="a tooltip text"
+        tooltip-hide-trigger="resize">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-close-button="{{ demoCtrl.closeFromModel }}"
+        tooltip-template="a tooltip text"
+        tooltip-hide-trigger="resize">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-size="small">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-size="large">
+        Tooltip
+      </span>
+    </div>
+
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-size="{{ demoCtrl.sizeFromModel }}">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-speed="fast">
+        Tooltip
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-template="a tooltip text"
+        tooltip-speed="{{ demoCtrl.speedFromModel }}">
+        Tooltip
+      </span>
+    </div>
+
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="dist/angular-tooltips.js"></script>
+    <script type="text/javascript" src="demo/js/index.js"></script>
+  </body>
 </html>
