@@ -29,7 +29,11 @@ $tooltip-medium-transition: .35s;
     @content;
   }
 }
-
+tooltip {
+  position:relative;
+  display:inline-block;
+  width:auto;
+}
 [tooltips] {
 
   @include keyframes(animate-tooltip) {
