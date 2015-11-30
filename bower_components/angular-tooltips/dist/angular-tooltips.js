@@ -5,7 +5,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * 2015-11-30T21:04:28.478Z
+ * 2015-11-30T22:04:40.270Z
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -184,7 +184,9 @@
 
     toReturn = [
       '<tooltip ' + attributes + ' class="tooltips">',
-        tooltippedContent.text
+        '<tip-cont>',
+          tooltippedContent.text,
+        '</tip-cont>'
       ];
     if (tooltipTemplate ||
       isTemplateUrl) {
@@ -514,6 +516,11 @@
       });
 
       $timeout(function doLater() {
+
+        if (element.find('tip-cont')[0].getClientRects().length > 1) {
+
+          element.addClass('_multiline');
+        }
 
         onTooltipShow();
         element.find('tip').removeClass('_hidden');

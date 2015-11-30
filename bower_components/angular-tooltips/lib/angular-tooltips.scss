@@ -59,10 +59,12 @@ $tooltip-medium-transition: .35s;
     }
   }
 
-  display: inline-block;
-  position: relative;
-  width: auto;
+  position:relative;
+  
+  &._multiline{
 
+    display:block;
+  }
   &._slow {
 
     &._ready {
