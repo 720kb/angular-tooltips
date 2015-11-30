@@ -29,13 +29,13 @@ $tooltip-medium-transition: .35s;
     @content;
   }
 }
-tooltip {
-  position:relative;
-  display:inline-block;
-  width:auto;
-}
+
 [tooltips] {
 
+  position: relative;
+  display:inline-block;
+  width:auto;
+  
   @include keyframes(animate-tooltip) {
     0% {
 
@@ -62,7 +62,6 @@ tooltip {
       opacity: 1;
     }
   }
-  position: relative;
 
   ._large {
 
