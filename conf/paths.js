@@ -1,8 +1,21 @@
-/*global module*/
-(function pathConfiguration(module) {
+/*global require,module*/
+(function pathConfiguration(require, module) {
   'use strict';
 
-  var paths = {
+  var infos = require('../package.json')
+    , today = new Date()
+    , banner = ['/*',
+      ' * ' + infos.name,
+      ' *',
+      ' * ' + infos.description,
+      ' * ' + infos.homepage,
+      ' * ',
+      ' * ' + infos.license + ' license',
+      ' * ' + today.toISOString(),
+      ' */',
+      ''].join('\n')
+    , paths = {
+      'banner': banner,
       'lib': 'lib/',
       'output': 'dist/',
       'files': {
@@ -35,4 +48,4 @@
     };
 
   module.exports = paths;
-}(module));
+}(require,module));

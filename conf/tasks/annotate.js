@@ -6,7 +6,8 @@
     , changed = require('gulp-changed')
     , plumber = require('gulp-plumber')
     , ngAnnotate = require('gulp-ng-annotate')
-    , paths = require('../paths');
+    , paths = require('../paths')
+    , header = require('gulp-header');
 
   gulp.task('annotate', function onEs6() {
 
@@ -18,6 +19,7 @@
       .pipe(ngAnnotate({
         'gulpWarnings': false
       }))
+      .pipe(header(paths.banner))
       .pipe(gulp.dest(paths.output));
   });
 }(require));
