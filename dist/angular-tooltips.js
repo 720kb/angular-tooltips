@@ -5,7 +5,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * 2015-11-30T22:04:40.270Z
+ * 2015-12-01T10:17:20.014Z
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -242,6 +242,20 @@
       , oldTooltipClass
       , oldSize
       , oldSpeed = '_steady'
+      , whenActivateMultilineCalculation = function whenActivateMultilineCalculation() {
+
+        return element.find('tip-cont').html();
+      }
+      , calculateIfMultiLine = function calculateIfMultiLine() {
+
+        if (element.find('tip-cont')[0].getClientRects().length > 1) {
+
+          element.addClass('_multiline');
+        } else {
+
+          element.removeClass('_multiline');
+        }
+      }
       , onTooltipShow = function onTooltipShow(event) {
         var tipElement = element.find('tip');
 
@@ -501,7 +515,8 @@
       , unregisterOnTooltipClassChange = attrs.$observe('tooltipClass', onTooltipClassChange)
       , unregisterOnTooltipCloseButtonChange = attrs.$observe('tooltipCloseButton', onTooltipCloseButtonChange)
       , unregisterOnTooltipSizeChange = attrs.$observe('tooltipSize', onTooltipSizeChange)
-      , unregisterOnTooltipSpeedChange = attrs.$observe('tooltipSpeed', onTooltipSpeedChange);
+      , unregisterOnTooltipSpeedChange = attrs.$observe('tooltipSpeed', onTooltipSpeedChange)
+      , unregisterTipContentChangeWatcher = scope.$watch(whenActivateMultilineCalculation, calculateIfMultiLine);
 
       attrs.tooltipSide = attrs.tooltipSide || 'top';
       attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || 'mouseover';
@@ -512,15 +527,11 @@
       attrs.tooltipSpeed = attrs.tooltipSpeed || 'steady';
       resizeObserver.add(function registerResize() {
 
+        calculateIfMultiLine();
         onTooltipShow();
       });
 
       $timeout(function doLater() {
-
-        if (element.find('tip-cont')[0].getClientRects().length > 1) {
-
-          element.addClass('_multiline');
-        }
 
         onTooltipShow();
         element.find('tip').removeClass('_hidden');
@@ -538,6 +549,7 @@
         unregisterOnTooltipCloseButtonChange();
         unregisterOnTooltipSizeChange();
         unregisterOnTooltipSpeedChange();
+        unregisterTipContentChangeWatcher();
         element.off(attrs.tooltipShowTrigger + ' ' + attrs.tooltipHideTrigger);
       });
     };
