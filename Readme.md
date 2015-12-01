@@ -93,6 +93,19 @@ tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
 tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
 tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
 
+##Globals
+Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipConfProvider` like this:
+
+```javascript
+.config(['tooltipsConfProvider', function configConf(tooltipsConfProvider) {
+  tooltipsConfProvider.configure({
+    'smart':true,
+    'size':'large',
+    'speed': 'slow'
+  });
+}])
+```
+
 ## Example
 
 ###[Live demo](https://720kb.github.io/angular-tooltips)
