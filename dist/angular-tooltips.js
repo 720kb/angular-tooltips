@@ -242,6 +242,7 @@
       'class': '',
       'smart': false,
       'closeButton': false,
+      'size': '',
       'speed': 'steady'
     };
 
@@ -277,7 +278,7 @@
       , oldTooltipShowTrigger = tooltipsConf.showTrigger
       , oldTooltipHideTrigger = tooltipsConf.hideTrigger
       , oldTooltipClass
-      , oldSize
+      , oldSize = tooltipsConf.size
       , oldSpeed = '_' + tooltipsConf.speed
       , whenActivateMultilineCalculation = function whenActivateMultilineCalculation() {
 
@@ -561,6 +562,7 @@
       attrs.tooltipClass = attrs.tooltipClass || tooltipsConf.class;
       attrs.tooltipSmart = attrs.tooltipSmart === 'true' || tooltipsConf.smart;
       attrs.tooltipCloseButton = attrs.tooltipCloseButton === 'true' || tooltipsConf.closeButton;
+      attrs.tooltipSize = attrs.tooltipSize || tooltipsConf.size;
       attrs.tooltipSpeed = attrs.tooltipSpeed || tooltipsConf.speed;
       resizeObserver.add(function registerResize() {
 
