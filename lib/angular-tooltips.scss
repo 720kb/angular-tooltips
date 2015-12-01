@@ -109,6 +109,7 @@ $tooltip-medium-transition: .35s;
       padding: $padding-top-bottom-tooltip $padding-rigth-left-tooltip;
       position: absolute;
       text-align: center;
+      line-height: normal;
       width: auto;
       will-change: top, left, bottom, right;
 

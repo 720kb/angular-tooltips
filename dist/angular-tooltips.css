@@ -77,6 +77,7 @@
     padding: 8px 16px;
     position: absolute;
     text-align: center;
+    line-height: normal;
     width: auto;
     will-change: top, left, bottom, right; }
     [tooltips].tooltips tip._hidden {
