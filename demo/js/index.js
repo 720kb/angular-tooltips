@@ -17,6 +17,7 @@
     function controllerCtrl($timeout) {
       var that = this;
 
+      that.isHidden = true;
       that.tooltipContentText = 'I\'m a content text from module controller';
       that.tooltipText = 'I\'m a text from module controller';
       that.class = 'a-class';
@@ -39,15 +40,18 @@
 
         that.class = 'another-class';
       }, 8000);
-      $timeout(function () {
+      $timeout(function changeSize() {
 
         that.sizeFromModel = 'large';
       }, 9000);
-      $timeout(function () {
+      $timeout(function changeSpeed() {
 
         that.speedFromModel = 'slow';
       }, 10000);
+      $timeout(function changeIsHidden() {
 
+        that.isHidden = false;
+      }, 11000);
 
       that.generateHTMLextra = function generateHTMLextra(item) {
 

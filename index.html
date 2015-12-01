@@ -4,9 +4,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
     <style media="screen">
-    body {
-      margin: 100px;
-    }
+      body {
+        margin: 100px;
+      }
+
       #demo-container > div {
         margin: 10% 0;
         text-align: center;
@@ -23,6 +24,13 @@
     <title>Angularjs Tooltips</title>
   </head>
   <body id="demo-container" ng-controller="DemoCtrl as demoCtrl">
+    <div>
+      <i class="fa fa-code"
+      tooltips
+      tooltip-hidden="{{ demoCtrl.isHidden }}"
+      tooltip-template="I'm a tooltip that was hidden!"></i>
+    </div>
+
     <div>
       <i class="fa fa-file"
       tooltips

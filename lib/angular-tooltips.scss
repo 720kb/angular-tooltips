@@ -60,12 +60,13 @@ $tooltip-medium-transition: .35s;
     }
   }
 
-  position:relative;
+  position: relative;
 
-  &._multiline{
+  &._multiline {
 
-    display:block;
+    display: block;
   }
+
   &._slow {
 
     &._ready {
@@ -103,13 +104,13 @@ $tooltip-medium-transition: .35s;
       background: $tooltip-background-color;
       color: $tooltip-color;
       display: none;
+      line-height: normal;
       max-width: 500px;
       min-width: 100px;
       opacity: 0;
       padding: $padding-top-bottom-tooltip $padding-rigth-left-tooltip;
       position: absolute;
       text-align: center;
-      line-height: normal;
       width: auto;
       will-change: top, left, bottom, right;
 

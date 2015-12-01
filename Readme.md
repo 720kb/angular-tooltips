@@ -83,18 +83,20 @@ Call the directive wherever you want in your html page
 Option | Type | Default | Description
 ------------- | ------------- | ------------- | -------------
 tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` position
-tooltip-template="" | String() | false | Set your tooltip template (HTML or just Text)
-tooltip-template-url="" | String() | false | Set your external tooltip template PATH
+tooltip-template="" | String() | '' | Set your tooltip template (HTML or just Text)
+tooltip-template-url="" | String() | '' | Set your external tooltip template PATH
 tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
 tooltip-show-trigger="" | String('event1 event2') | 'mouseover' | Show the tooltip on specific event/events
 tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tooltip on specific event/events
 tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close button
-tooltip-class="" | String() | false | Set custom tooltip CSS class/classes
+tooltip-class="" | String() | '' | Set custom tooltip CSS class/classes
 tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
 tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
+tooltip-hidden="" | String(Boolean) | false | hides at all the tooltip from element
+
 
 ##Globals
-Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipConfProvider` like this:
+Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipsConfProvider` like this:
 
 ```javascript
 .config(['tooltipsConfProvider', function configConf(tooltipsConfProvider) {

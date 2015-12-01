@@ -248,11 +248,12 @@
 
     return {
       'configure': function configure(configuration) {
+        var configurationKeys = Object.keys(tooltipConfiguration)
+          , configurationIndex = 0
+          , aConfigurationKey;
 
         if (configuration) {
-          var configurationKeys = Object.keys(tooltipConfiguration)
-            , configurationIndex = 0
-            , aConfigurationKey;
+
           for (; configurationIndex < configurationKeys.length; configurationIndex += 1) {
 
             aConfigurationKey = configurationKeys[configurationIndex];
@@ -408,7 +409,8 @@
         }
 
         tipElement.removeClass('_hidden');
-        if (event) {
+        if (event &&
+          attrs.tooltipHidden !== 'true') {
 
           element.addClass('active');
         }
@@ -505,6 +507,13 @@
           oldTooltipClass = newValue;
         }
       }
+      , onTooltipSmartChange = function onTooltipSmartChange() {
+
+        if (typeof attrs.tooltipSmart !== 'boolean') {
+
+          attrs.tooltipSmart = attrs.tooltipSmart === 'true';
+        }
+      }
       , onTooltipCloseButtonChange = function onTooltipCloseButtonChange(newValue) {
         var theXButton = angular.element(element.find('tip-tip').children()[0])
           , enableButton = newValue === 'true';
@@ -551,6 +560,7 @@
       , unregisterOnTooltipShowTrigger = attrs.$observe('tooltipShowTrigger', onTooltipShowTrigger)
       , unregisterOnTooltipHideTrigger = attrs.$observe('tooltipHideTrigger', onTooltipHideTrigger)
       , unregisterOnTooltipClassChange = attrs.$observe('tooltipClass', onTooltipClassChange)
+      , unregisterOnTooltipSmartChange = attrs.$observe('tooltipSmart', onTooltipSmartChange)
       , unregisterOnTooltipCloseButtonChange = attrs.$observe('tooltipCloseButton', onTooltipCloseButtonChange)
       , unregisterOnTooltipSizeChange = attrs.$observe('tooltipSize', onTooltipSizeChange)
       , unregisterOnTooltipSpeedChange = attrs.$observe('tooltipSpeed', onTooltipSpeedChange)
@@ -585,6 +595,7 @@
         unregisterOnTooltipShowTrigger();
         unregisterOnTooltipHideTrigger();
         unregisterOnTooltipClassChange();
+        unregisterOnTooltipSmartChange();
         unregisterOnTooltipCloseButtonChange();
         unregisterOnTooltipSizeChange();
         unregisterOnTooltipSpeedChange();
