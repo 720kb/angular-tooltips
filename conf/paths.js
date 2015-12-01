@@ -6,12 +6,13 @@
     , today = new Date()
     , banner = ['/*',
       ' * ' + infos.name,
-      ' *',
+      ' * ' + infos.version,
+      ' * ',
       ' * ' + infos.description,
       ' * ' + infos.homepage,
       ' * ',
       ' * ' + infos.license + ' license',
-      ' * ' + today.toISOString(),
+      ' * ' + today.toDateString('yyyy-MM-dd'),
       ' */',
       ''].join('\n')
     , paths = {

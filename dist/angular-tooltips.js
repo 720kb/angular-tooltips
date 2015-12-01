@@ -1,11 +1,12 @@
 /*
  * angular-tooltips
- *
+ * 1.0.1
+ * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * 2015-12-01T10:34:20.259Z
+ * Tue Dec 01 2015
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -232,16 +233,51 @@
 
     throw new Error('You must provide a position');
   }
-  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", "$timeout", function tooltipDirective($log, $http, $compile, $timeout) {
+  , tooltipConfigurationProvider = function tooltipConfigurationProvider() {
+
+    var tooltipConfiguration = {
+      'side': 'top',
+      'showTrigger': 'mouseover',
+      'hideTrigger': 'mouseleave',
+      'class': '',
+      'smart': false,
+      'closeButton': false,
+      'speed': 'steady'
+    };
+
+    return {
+      'configure': function configure(configuration) {
+
+        if (configuration) {
+          var configurationKeys = Object.keys(tooltipConfiguration)
+            , configurationIndex = 0
+            , aConfigurationKey;
+          for (; configurationIndex < configurationKeys.length; configurationIndex += 1) {
+
+            aConfigurationKey = configurationKeys[configurationIndex];
+            if (aConfigurationKey) {
+
+              tooltipConfiguration[aConfigurationKey] = configuration[aConfigurationKey];
+            }
+          }
+        }
+      },
+      '$get': /*@ngInject*/ function instantiateProvider() {
+
+        return tooltipConfiguration;
+      }
+    };
+  }
+  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", "$timeout", "tooltipsConf", function tooltipDirective($log, $http, $compile, $timeout, tooltipsConf) {
 
     var linkingFunction = function linkingFunction(scope, element, attrs) {
 
-      var oldTooltipSide = '_top'
-      , oldTooltipShowTrigger = 'mouseover'
-      , oldTooltipHideTrigger = 'mouseleave'
+      var oldTooltipSide = '_' + tooltipsConf.side
+      , oldTooltipShowTrigger = tooltipsConf.showTrigger
+      , oldTooltipHideTrigger = tooltipsConf.hideTrigger
       , oldTooltipClass
       , oldSize
-      , oldSpeed = '_steady'
+      , oldSpeed = '_' + tooltipsConf.speed
       , whenActivateMultilineCalculation = function whenActivateMultilineCalculation() {
 
         return element.find('tip-cont').html();
@@ -518,13 +554,13 @@
       , unregisterOnTooltipSpeedChange = attrs.$observe('tooltipSpeed', onTooltipSpeedChange)
       , unregisterTipContentChangeWatcher = scope.$watch(whenActivateMultilineCalculation, calculateIfMultiLine);
 
-      attrs.tooltipSide = attrs.tooltipSide || 'top';
-      attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || 'mouseover';
-      attrs.tooltipHideTrigger = attrs.tooltipHideTrigger || 'mouseleave';
-      attrs.tooltipClass = attrs.tooltipClass || '';
-      attrs.tooltipSmart = attrs.tooltipSmart === 'true';
-      attrs.tooltipCloseButton = attrs.tooltipCloseButton === 'true';
-      attrs.tooltipSpeed = attrs.tooltipSpeed || 'steady';
+      attrs.tooltipSide = attrs.tooltipSide || tooltipsConf.side;
+      attrs.tooltipShowTrigger = attrs.tooltipShowTrigger || tooltipsConf.showTrigger;
+      attrs.tooltipHideTrigger = attrs.tooltipHideTrigger || tooltipsConf.hideTrigger;
+      attrs.tooltipClass = attrs.tooltipClass || tooltipsConf.class;
+      attrs.tooltipSmart = attrs.tooltipSmart === 'true' || tooltipsConf.smart;
+      attrs.tooltipCloseButton = attrs.tooltipCloseButton === 'true' || tooltipsConf.closeButton;
+      attrs.tooltipSpeed = attrs.tooltipSpeed || tooltipsConf.speed;
       resizeObserver.add(function registerResize() {
 
         calculateIfMultiLine();
@@ -583,5 +619,6 @@
   }];
 
   angular.module('720kb.tooltips', [])
+  .provider(directiveName + 'Conf', tooltipConfigurationProvider)
   .directive(directiveName, tooltipDirective);
 }(angular, window));
