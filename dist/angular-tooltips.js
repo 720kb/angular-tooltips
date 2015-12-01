@@ -255,7 +255,8 @@
           for (; configurationIndex < configurationKeys.length; configurationIndex += 1) {
 
             aConfigurationKey = configurationKeys[configurationIndex];
-            if (aConfigurationKey) {
+            if (aConfigurationKey &&
+              configuration[aConfigurationKey]) {
 
               tooltipConfiguration[aConfigurationKey] = configuration[aConfigurationKey];
             }
