@@ -5,7 +5,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * 2015-11-30T22:04:40.270Z
+ * 2015-12-01T08:46:25.602Z
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
