@@ -495,7 +495,7 @@
         }
       }
       , onTooltipClassChange = function onTooltipClassChange(newValue) {
-        var tipElement = element.find('tip-tip');
+        var tipElement = element.find('tip');
 
         if (newValue) {
 

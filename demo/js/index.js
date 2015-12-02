@@ -7,8 +7,7 @@
   ])
   .config(['tooltipsConfProvider', function configConf(tooltipsConfProvider) {
     tooltipsConfProvider.configure({
-      'smart':true,
-      'size':'large',
+      'size': 'large',
       'speed': 'slow'
     });
   }])
