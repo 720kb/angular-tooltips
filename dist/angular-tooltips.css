@@ -6,10 +6,11 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue Dec 01 2015
+ * Wed Dec 02 2015
  */
 [tooltips] {
-  position: relative; }
+  position: relative;
+  display: inline-block; }
 
 @-webkit-keyframes animate-tooltip {
   0% {
