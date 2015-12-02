@@ -92,7 +92,7 @@ tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close but
 tooltip-class="" | String() | '' | Set custom tooltip CSS class/classes
 tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
 tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
-tooltip-hidden="" | String(Boolean) | false | hides at all the tooltip from element
+tooltip-hidden="" | String(Boolean) | false | Hide (at all) the tooltip
 
 
 ##Globals
@@ -103,7 +103,8 @@ Sometimes you may need to set all of your tooltips options in one place, you can
   tooltipsConfProvider.configure({
     'smart':true,
     'size':'large',
-    'speed': 'slow'
+    'speed': 'slow',
+    //etc...
   });
 }])
 ```
