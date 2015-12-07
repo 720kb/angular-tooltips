@@ -234,8 +234,8 @@
           , tipArrowElement = angular.element(window.document.createElement('tip-arrow'))
           , whenActivateMultilineCalculation = function whenActivateMultilineCalculation() {
 
-              return tipContElement.html();
-            }
+            return tipContElement.html();
+          }
           , calculateIfMultiLine = function calculateIfMultiLine(newValue) {
 
             if (newValue !== undefined &&
@@ -583,6 +583,8 @@
     return {
       'restrict': 'A',
       'transclude': 'element',
+      'priority': 1001,
+      'terminal': true,
       'link': linkingFunction
     };
   }];
