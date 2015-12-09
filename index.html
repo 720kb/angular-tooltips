@@ -29,6 +29,13 @@
   </head>
   <body id="demo-container" ng-controller="DemoCtrl as demoCtrl">
     <div>
+      <i class="fa fa-bolt"
+      tooltips
+      tooltip-append-to-body="true"
+      tooltip-template="I'm a tooltip that is bounded on body!"></i>
+    </div>
+
+    <div>
       <i class="fa fa-code"
       tooltips
       tooltip-hidden="{{ demoCtrl.isHidden }}"
@@ -270,16 +277,27 @@
     </div>
     <div class="scroll-area">
       <p>
-        <button tooltips tooltip-side="top" tooltip-template="A tooltip with text">Tooltip Top</button>
+        <button tooltips
+          tooltip-append-to-body="true"
+          tooltip-template="A tooltip with text">Tooltip Top</button>
       </p>
       <p>
-        <button tooltips tooltip-side="left" tooltip-template="A tooltip with text">Tooltip Left</button>
+        <button tooltips
+          tooltip-side="left"
+          tooltip-append-to-body="true"
+          tooltip-template="A tooltip with text">Tooltip Left</button>
       </p>
       <p>
-        <button tooltips tooltip-side="right" tooltip-template="A tooltip with text">Tooltip Right</button>
+        <button tooltips
+          tooltip-side="right"
+          tooltip-append-to-body="true"
+          tooltip-template="A tooltip with text">Tooltip Right</button>
       </p>
       <p>
-        <button tooltips tooltip-side="bottom" tooltip-template="A tooltip with text">Tooltip Bottom</button>
+        <button tooltips
+          tooltip-side="bottom"
+          tooltip-append-to-body="true"
+          tooltip-template="A tooltip with text">Tooltip Bottom</button>
       </p>
     </div>
 
