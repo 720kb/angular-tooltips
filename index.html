@@ -5,23 +5,39 @@
     <link rel="stylesheet" type="text/css" href="dist/angular-tooltips.css">
     <style media="screen">
       body {
+
         margin: 100px;
       }
-      .scroll-area{
-        max-height:100px;
-        overflow:hidden;
-        overflow-y:scroll;
-        background:grey;
+
+      .scroll-area {
+
+        max-height: 90px;
+        overflow: hidden;
+        overflow-y: scroll;
+        background: grey;
       }
+
+      .scroll-area-horizontal {
+        padding: 10px;
+        max-width: 90px;
+        overflow: hidden;
+        overflow-x: scroll;
+        background: grey;
+        display: flex;
+      }
+
       #demo-container > div {
+
         margin: 10% 0;
       }
 
       .a-class {
+
         font-size: 2em;
       }
 
       .another-class {
+
         color: violet;
       }
     </style>
@@ -275,6 +291,7 @@
         Tooltip
       </span>
     </div>
+
     <div class="scroll-area">
       <p>
         <button tooltips
@@ -299,6 +316,24 @@
           tooltip-append-to-body="true"
           tooltip-template="A tooltip with text">Tooltip Bottom</button>
       </p>
+    </div>
+
+    <div class="scroll-area-horizontal">
+      <button tooltips
+        tooltip-append-to-body="true"
+        tooltip-template="A tooltip with text">Tooltip Top</button>
+      <button tooltips
+        tooltip-side="left"
+        tooltip-append-to-body="true"
+        tooltip-template="A tooltip with text">Tooltip Left</button>
+      <button tooltips
+        tooltip-side="right"
+        tooltip-append-to-body="true"
+        tooltip-template="A tooltip with text">Tooltip Right</button>
+      <button tooltips
+        tooltip-side="bottom"
+        tooltip-append-to-body="true"
+        tooltip-template="A tooltip with text">Tooltip Bottom</button>
     </div>
 
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
