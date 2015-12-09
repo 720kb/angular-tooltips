@@ -6,8 +6,14 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Mon Dec 07 2015
+ * Wed Dec 09 2015
  */
+._exradicated-tooltip {
+  position: absolute;
+  display: block;
+  opacity: 1;
+  z-index: 999; }
+
 tooltip {
   display: inline-block;
   position: relative; }

@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Mon Dec 07 2015
+ * Wed Dec 09 2015
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -126,6 +126,45 @@
 
     return attributesToAdd;
   }
+  , getStyle = function getStyle(anElement) {
+
+    if (window.getComputedStyle) {
+
+      return window.getComputedStyle(anElement, '');
+    } else if (anElement.currentStyle) {
+
+      return anElement.currentStyle;
+    }
+  }
+  , getAppendedTip = function getAppendedTip(theTooltipElement) {
+    var tipsInBody = window.document.querySelectorAll('._exradicated-tooltip')
+      , aTipInBody
+      , tipsInBodyIndex = 0
+      , tipsInBodyLength = tipsInBody.length
+      , angularizedElement;
+
+    for (; tipsInBodyIndex < tipsInBodyLength; tipsInBodyIndex += 1) {
+
+      aTipInBody = tipsInBody.item(tipsInBodyIndex);
+      if (aTipInBody) {
+
+        angularizedElement = angular.element(aTipInBody);
+        if (angularizedElement.data('_tooltip-parent') &&
+          angularizedElement.data('_tooltip-parent') === theTooltipElement) {
+
+          return angularizedElement;
+        }
+      }
+    }
+  }
+  , removeAppendedTip = function removeAppendedTip(theTooltipElement) {
+    var tipElement = getAppendedTip(theTooltipElement);
+
+    if (tipElement) {
+
+      tipElement.remove();
+    }
+  }
   , isOutOfPage = function isOutOfPage(theTipElement) {
 
     if (theTipElement) {
@@ -223,6 +262,7 @@
       $attrs.tooltipCloseButton = $attrs.tooltipCloseButton || tooltipsConf.closeButton.toString();
       $attrs.tooltipSize = $attrs.tooltipSize || tooltipsConf.size;
       $attrs.tooltipSpeed = $attrs.tooltipSpeed || tooltipsConf.speed;
+      $attrs.tooltipAppendToBody = $attrs.tooltipAppendToBody === 'true';
 
       $transcludeFunc($scope, function onTransclusionDone(element, scope) {
         var attributes = getAttributesToAdd(element)
@@ -358,16 +398,153 @@
               }
             }
 
-            tipElement.removeClass('_hidden');
-            if (event &&
-              $attrs.tooltipHidden !== 'true') {
+            if ($attrs.tooltipAppendToBody) {
 
-              tooltipElement.addClass('active');
+              var tipTipElementStyle = getStyle(tipTipElement[0])
+                , tipArrowElementStyle = getStyle(tipArrowElement[0])
+                , tipElementStyle = getStyle(tipElement[0])
+                , tipElementBoundingClientRect = tipElement[0].getBoundingClientRect()
+                , exradicatedTipElement = angular.copy(tipElement)
+                , tipTipStyleIndex = 0
+                , tipTipStyleLength = tipTipElementStyle.length
+                , tipArrowStyleIndex = 0
+                , tipArrowStyleLength = tipArrowElementStyle.length
+                , tipStyleIndex = 0
+                , tipStyleLength = tipElementStyle.length
+                , aStyleKey
+                , tipTipCssToSet = {}
+                , tipCssToSet = {}
+                , tipArrowCssToSet = {}
+                , paddingTopValue
+                , paddingBottomValue
+                , paddingLeftValue
+                , paddingRightValue;
+
+              tipElement.removeClass('_hidden');
+              exradicatedTipElement.removeClass('_hidden');
+              exradicatedTipElement.data('_tooltip-parent', tooltipElement);
+              removeAppendedTip(tooltipElement);
+
+              for (; tipTipStyleIndex < tipTipStyleLength; tipTipStyleIndex += 1) {
+
+                aStyleKey = tipTipElementStyle[tipTipStyleIndex];
+                if (aStyleKey &&
+                  tipTipElementStyle.getPropertyValue(aStyleKey)) {
+
+                  tipTipCssToSet[aStyleKey] = tipTipElementStyle.getPropertyValue(aStyleKey);
+                }
+              }
+
+              for (; tipArrowStyleIndex < tipArrowStyleLength; tipArrowStyleIndex += 1) {
+
+                aStyleKey = tipArrowElementStyle[tipArrowStyleIndex];
+                if (aStyleKey &&
+                  tipArrowElementStyle.getPropertyValue(aStyleKey)) {
+
+                  tipArrowCssToSet[aStyleKey] = tipArrowElementStyle.getPropertyValue(aStyleKey);
+                }
+              }
+
+              for (; tipStyleIndex < tipStyleLength; tipStyleIndex += 1) {
+
+                aStyleKey = tipElementStyle[tipStyleIndex];
+                if (aStyleKey &&
+                    aStyleKey !== 'position' &&
+                    aStyleKey !== 'display' &&
+                    aStyleKey !== 'opacity' &&
+                    aStyleKey !== 'z-index' &&
+                    aStyleKey !== 'bottom' &&
+                    aStyleKey !== 'height' &&
+                    aStyleKey !== 'left' &&
+                    aStyleKey !== 'right' &&
+                    aStyleKey !== 'top' &&
+                    aStyleKey !== 'width' &&
+                  tipElementStyle.getPropertyValue(aStyleKey)) {
+
+                  tipCssToSet[aStyleKey] = tipElementStyle.getPropertyValue(aStyleKey);
+                }
+              }
+              paddingTopValue = window.parseInt(tipElementStyle.getPropertyValue('padding-top'), 10);
+              paddingBottomValue = window.parseInt(tipElementStyle.getPropertyValue('padding-bottom'), 10);
+              paddingLeftValue = window.parseInt(tipElementStyle.getPropertyValue('padding-left'), 10);
+              paddingRightValue = window.parseInt(tipElementStyle.getPropertyValue('padding-right'), 10);
+
+              tipCssToSet.top = tipElementBoundingClientRect.top + window.scrollY + 'px';
+              tipCssToSet.left = tipElementBoundingClientRect.left + window.scrollX + 'px';
+              tipCssToSet.height = tipElementBoundingClientRect.height - (paddingTopValue + paddingBottomValue) + 'px';
+              tipCssToSet.width = tipElementBoundingClientRect.width - (paddingLeftValue + paddingRightValue) + 'px';
+
+              exradicatedTipElement.css(tipCssToSet);
+
+              exradicatedTipElement.children().css(tipTipCssToSet);
+              exradicatedTipElement.children().next().css(tipArrowCssToSet);
+              if (event &&
+                $attrs.tooltipHidden !== 'true') {
+
+                exradicatedTipElement.addClass('_exradicated-tooltip');
+                angular.element(window.document.body).append(exradicatedTipElement);
+              }
+            } else {
+
+              tipElement.removeClass('_hidden');
+              if (event &&
+                $attrs.tooltipHidden !== 'true') {
+
+                tooltipElement.addClass('active');
+              }
             }
           }
           , onTooltipHide = function onTooltipHide() {
 
-            tooltipElement.removeClass('active');
+            if ($attrs.tooltipAppendToBody) {
+
+              removeAppendedTip(tooltipElement);
+            } else {
+
+              tooltipElement.removeClass('active');
+            }
+          }
+          , registerOnScrollFrom = function registerOnScrollFrom(theElement) {
+            var parentElement = theElement.parent()
+              , timer;
+
+            if (theElement[0] &&
+              (theElement[0].scrollHeight > theElement[0].clientHeight ||
+              theElement[0].scrollWidth > theElement[0].clientWidth)) {
+
+              theElement.on('scroll', function onScroll() {
+                var that = this;
+
+                if (timer) {
+
+                  $timeout.cancel(timer);
+                }
+
+                timer = $timeout(function doLater() {
+
+                  var theTipElement = getAppendedTip(tooltipElement)
+                    , tooltipBoundingRect = tooltipElement[0].getBoundingClientRect()
+                    , thatBoundingRect = that.getBoundingClientRect();
+
+                  if (tooltipBoundingRect.top < thatBoundingRect.top ||
+                    tooltipBoundingRect.bottom > thatBoundingRect.bottom ||
+                    tooltipBoundingRect.left < thatBoundingRect.left ||
+                    tooltipBoundingRect.right > thatBoundingRect.right) {
+
+                    removeAppendedTip(tooltipElement);
+                  } else if (theTipElement) {
+
+                    onTooltipShow(true);
+                  }
+                });
+              });
+            }
+
+            if (parentElement &&
+              parentElement.length) {
+
+              registerOnScrollFrom(parentElement);
+            }
           }
           , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
 
@@ -554,6 +731,15 @@
         tooltipElement.append(tipContElement);
         tooltipElement.append(tipElement);
         $element.after(tooltipElement);
+
+        if ($attrs.tooltipAppendToBody) {
+
+          resizeObserver.add(function onResize() {
+
+            registerOnScrollFrom(tooltipElement);
+          });
+          registerOnScrollFrom(tooltipElement);
+        }
 
         resizeObserver.add(function registerResize() {
 

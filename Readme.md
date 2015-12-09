@@ -93,6 +93,7 @@ tooltip-class="" | String() | '' | Set custom tooltip CSS class/classes
 tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
 tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
 tooltip-hidden="" | String(Boolean) | false | Hide (at all) the tooltip
+tooltip-append-to-body="" | String(Boolean) | false | This attribute clones the tooltip and append this directly on body. This enables the tooltip position also, for instance, if you have an scrolling area. **This option does heavy javascript calculation.**
 
 
 ##Globals
