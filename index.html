@@ -7,10 +7,14 @@
       body {
         margin: 100px;
       }
-
+      .scroll-area{
+        max-height:100px;
+        overflow:hidden;
+        overflow-y:scroll;
+        background:grey;
+      }
       #demo-container > div {
         margin: 10% 0;
-        text-align: center;
       }
 
       .a-class {
@@ -263,6 +267,20 @@
         tooltip-speed="{{ demoCtrl.speedFromModel }}">
         Tooltip
       </span>
+    </div>
+    <div class="scroll-area">
+      <p>
+        <button tooltips tooltip-side="top" tooltip-template="A tooltip with text">Tooltip Top</button>
+      </p>
+      <p>
+        <button tooltips tooltip-side="left" tooltip-template="A tooltip with text">Tooltip Left</button>
+      </p>
+      <p>
+        <button tooltips tooltip-side="right" tooltip-template="A tooltip with text">Tooltip Right</button>
+      </p>
+      <p>
+        <button tooltips tooltip-side="bottom" tooltip-template="A tooltip with text">Tooltip Bottom</button>
+      </p>
     </div>
 
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
