@@ -21,7 +21,7 @@
 
   gulp.task('js-lint', function onJsLint() {
 
-    return gulp.src(paths.lib + paths.files.unminified)
+    return gulp.src(paths.lib + paths.files.unminified.js)
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
       .pipe(eslint())

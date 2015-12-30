@@ -49,4 +49,4 @@
     };
 
   module.exports = paths;
-}(require,module));
+}(require, module));
