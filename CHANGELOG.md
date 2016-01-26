@@ -19,10 +19,10 @@ Actual status from last release: [Unreleased]
 - Fixed [#125].
 - Fixed [#126].
 
-[Unreleased]: https://github.com/720kb/angular-tooltips/compare/1.0.7...HEAD
-[1.0.7]: https://github.com/720kb/angular-tooltips/compare/1.0.6...1.0.7
-[1.0.6]: https://github.com/720kb/angular-tooltips/compare/1.0.5...1.0.6
-[1.0.5]: https://github.com/720kb/angular-tooltips/compare/1.0.4...1.0.5
+[Unreleased]: https://github.com/720kb/angular-tooltips/compare/v1.0.7...HEAD
+[1.0.7]: https://github.com/720kb/angular-tooltips/compare/v1.0.6...v1.0.7
+[1.0.6]: https://github.com/720kb/angular-tooltips/compare/v1.0.5...v1.0.6
+[1.0.5]: https://github.com/720kb/angular-tooltips/compare/v1.0.4...v1.0.5
 
 [#138]: https://github.com/720kb/angular-tooltips/issues/138
 [#126]: https://github.com/720kb/angular-tooltips/issues/126
