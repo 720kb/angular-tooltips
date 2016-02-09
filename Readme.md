@@ -16,7 +16,7 @@ The angular tooltips is developed by [720kb](http://720kb.net).
 AngularJS v1.3+
 
 ##Screen
-![Angular tooltips](http://i.imgur.com/2rOwAbQ.png)
+![Angular tooltips](http://i.imgur.com/OfZqttG.png)
 
 ###Browser support
 
