@@ -1,10 +1,11 @@
 {
   "name": "angular-tooltips",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Angular.js tooltips module.",
   "authors": [
     "Filippo Oretti <filippo.oretti@gmail.com",
-    "Dario Andrei <wouldgo84@gmail.com>"
+    "Dario Andrei <wouldgo84@gmail.com>",
+    "720kb"
   ],
   "keywords": [
     "tiptip",
