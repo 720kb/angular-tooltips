@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue Jan 26 2016
+ * Thu Mar 24 2016
  */
 ._exradicated-tooltip {
   position: absolute;
@@ -100,15 +100,10 @@ tooltip {
       font-size: 1.1em; }
     tooltip tip-tip._small {
       font-size: .8em; }
-    tooltip tip-tip #close-button {
-      cursor: pointer;
-      float: right;
-      left: 8%;
-      margin-top: -7%;
-      position: relative; }
   tooltip._top tip {
     left: 50%;
     top: -9px;
+    -webkit-transform: translateX(-50%) translateY(-100%);
     transform: translateX(-50%) translateY(-100%); }
     tooltip._top tip tip-arrow {
       border-left: 6px solid transparent;
@@ -124,7 +119,8 @@ tooltip {
   tooltip._bottom tip {
     right: 50%;
     top: 100%;
-    transform: translateY(9px) translateX(50%); }
+    -webkit-transform: translateX(50%) translateY(9px);
+    transform: translateX(50%) translateY(9px); }
     tooltip._bottom tip tip-arrow {
       border-bottom: 6px solid rgba(0, 0, 0, 0.85);
       border-left: 6px solid transparent;
@@ -139,6 +135,7 @@ tooltip {
   tooltip._right tip {
     left: 100%;
     top: 50%;
+    -webkit-transform: translateX(9px) translateY(-50%);
     transform: translateX(9px) translateY(-50%); }
     tooltip._right tip tip-arrow {
       border-bottom: 6px solid transparent;
@@ -154,6 +151,7 @@ tooltip {
   tooltip._left tip {
     left: -9px;
     top: 50%;
+    -webkit-transform: translateX(-100%) translateY(-50%);
     transform: translateX(-100%) translateY(-50%); }
     tooltip._left tip tip-arrow {
       border-bottom: 6px solid transparent;
@@ -166,5 +164,13 @@ tooltip {
       position: absolute;
       top: 50%;
       width: 0; }
+
+tip-tip #close-button {
+  cursor: pointer;
+  float: right;
+  left: 8%;
+  margin-top: -7%;
+  padding: 3px;
+  position: relative; }
 
 /*# sourceMappingURL=angular-tooltips.css.map */
