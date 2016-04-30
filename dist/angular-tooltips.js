@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.0.9
+ * 1.0.10
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Wed Apr 13 2016
+ * Sat Apr 30 2016
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -238,7 +238,7 @@
       if ($attrs.tooltipTemplate &&
         $attrs.tooltipTemplateUrl) {
 
-        throw new Error('You can not define tooltip-template and tooltip-url together');
+        throw new Error('You can not define tooltip-template and tooltip-template-url together');
       }
 
       if (!($attrs.tooltipTemplateUrl || $attrs.tooltipTemplate) &&
@@ -288,6 +288,7 @@
             }
           }
           , onTooltipShow = function onTooltipShow(event) {
+
             tipElement.addClass('_hidden');
             if ($attrs.tooltipSmart) {
 
@@ -549,14 +550,18 @@
           , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
 
             if (newValue) {
-
+              tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
               tipTipElement.empty();
               tipTipElement.append(closeButtonElement);
               tipTipElement.append(newValue);
-              $timeout(function doLater() {
+              $timeout(function doLaterShow() {
 
                 onTooltipShow();
               });
+            } else {
+              //hide tooltip because is empty
+              tipTipElement.empty();
+              tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
             }
           }
           , onTooltipTemplateUrlChange = function onTooltipTemplateUrlChange(newValue) {
@@ -568,6 +573,7 @@
                 if (response &&
                   response.data) {
 
+                  tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
                   tipTipElement.empty();
                   tipTipElement.append(closeButtonElement);
                   tipTipElement.append($compile(response.data)(scope));
@@ -577,6 +583,10 @@
                   });
                 }
               });
+            } else {
+              //hide tooltip because is empty
+              tipTipElement.empty();
+              tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
             }
           }
           , onTooltipSideChange = function onTooltipSideChange(newValue) {

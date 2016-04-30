@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.0.9
+ * 1.0.10
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Wed Apr 13 2016
+ * Sat Apr 30 2016
  */
 ._exradicated-tooltip {
   position: absolute;
@@ -90,7 +90,7 @@ tooltip {
     tooltip tip._hidden {
       display: block;
       visibility: hidden; }
-  tooltip.active tip {
+  tooltip.active:not(._force-hidden) tip {
     display: block;
     opacity: 1;
     z-index: 999; }

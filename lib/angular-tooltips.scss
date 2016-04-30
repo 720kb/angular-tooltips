@@ -131,13 +131,14 @@ tooltip {
     }
   }
 
-  &.active {
+  &.active:not(._force-hidden) {
 
     tip {
       display: block;
       opacity: 1;
       z-index: 999;
     }
+
   }
 
   tip-tip {
