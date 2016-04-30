@@ -84,7 +84,7 @@ Option | Type | Default | Description
 ------------- | ------------- | ------------- | -------------
 tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` position
 tooltip-template="" | String() | '' | Set your tooltip template (HTML or just Text)
-|  |  | **to know**: don't use it togheter with `tooltip-template-url` attribute, use only one of them
+ |  |  | **to know**: don't use it togheter with `tooltip-template-url` attribute, use only one of them
 tooltip-template-url="" | String() | '' | Set your external tooltip template PATH
  |  |  | **to know**: don't use it togheter with `tooltip-template` attribute, use only one of them 
 tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
