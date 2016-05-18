@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.0
+ * 1.1.1
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Wed May 11 2016
+ * Wed May 18 2016
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -31,9 +31,12 @@
           window.console.log('Skipped!');
         }
       }
+      , resizeTimeout
       , resize = function resize() {
-
-        window.requestAnimationFrame(runCallbacks);
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(function onResizeTimeout() {
+          window.requestAnimationFrame(runCallbacks);
+        }, 500);
       }
       , addCallback = function addCallback(callback) {
 
@@ -51,6 +54,12 @@
           window.addEventListener('resize', resize);
         }
         addCallback(callback);
+      },
+      'remove': function remove() {
+        if (!callbacks.length) {
+          window.clearTimeout(resizeTimeout);
+          window.removeEventListener('resize', resize);
+        }
       }
     };
   }())
@@ -777,6 +786,7 @@
           unregisterOnTooltipSizeChange();
           unregisterOnTooltipSpeedChange();
           unregisterTipContentChangeWatcher();
+          resizeObserver.remove();
           element.off($attrs.tooltipShowTrigger + ' ' + $attrs.tooltipHideTrigger);
         });
       });
