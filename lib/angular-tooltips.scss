@@ -37,11 +37,12 @@ $tooltip-medium-transition: .35s;
 }
 
 ._exradicated-tooltip {
-  position: absolute;
   display: block;
   opacity: 1;
+  position: absolute;
   z-index: 999;
 }
+
 tooltip {
 
   @include keyframes(animate-tooltip) {
@@ -144,6 +145,7 @@ tooltip {
   tip-tip {
 
     font-size: .95em;
+
     &._large {
 
       font-size: 1.1em;
@@ -207,7 +209,7 @@ tooltip {
 
       left: 100%;
       top: 50%;
-      @include transform( $margin-tooltip-arrow + $tolerance, -50%);
+      @include transform($margin-tooltip-arrow + $tolerance, -50%);
 
       tip-arrow {
         border-bottom: 6px solid transparent;
@@ -255,7 +257,7 @@ tip-tip {
     float: right;
     left: 8%;
     margin-top: -7%;
-    padding:3px;
+    padding: 3px;
     position: relative;
     }
   }

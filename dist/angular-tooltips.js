@@ -479,8 +479,8 @@
               paddingLeftValue = window.parseInt(tipElementStyle.getPropertyValue('padding-left'), 10);
               paddingRightValue = window.parseInt(tipElementStyle.getPropertyValue('padding-right'), 10);
 
-              tipCssToSet.top = tipElementBoundingClientRect.top + window.scrollY + 'px';
-              tipCssToSet.left = tipElementBoundingClientRect.left + window.scrollX + 'px';
+              tipCssToSet.top = tipElementBoundingClientRect.top + window.pageYOffset + 'px';
+              tipCssToSet.left = tipElementBoundingClientRect.left + window.pageXOffset + 'px';
               tipCssToSet.height = tipElementBoundingClientRect.height - (paddingTopValue + paddingBottomValue) + 'px';
               tipCssToSet.width = tipElementBoundingClientRect.width - (paddingLeftValue + paddingRightValue) + 'px';
 
