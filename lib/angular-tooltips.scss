@@ -1,7 +1,7 @@
 $tolerance: 3px;
 $margin-tooltip-arrow: 6px;
 $padding-top-bottom-tooltip: 8px;
-$padding-rigth-left-tooltip: 16px;
+$padding-right-left-tooltip: 16px;
 $tooltip-background-color: rgba(0, 0, 0, .85);
 $tooltip-color: #fff;
 $tooltip-border-radius: 3px;
@@ -119,7 +119,7 @@ tooltip {
     max-width: 500px;
     min-width: 100px;
     opacity: 0;
-    padding: $padding-top-bottom-tooltip $padding-rigth-left-tooltip;
+    padding: $padding-top-bottom-tooltip $padding-right-left-tooltip;
     position: absolute;
     text-align: center;
     width: auto;
