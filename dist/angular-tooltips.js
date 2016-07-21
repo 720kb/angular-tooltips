@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Mon Jun 06 2016
+ * Thu Jul 21 2016
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -131,6 +131,18 @@
 
       attributesToAdd['tooltip-speed'] = element.attr('tooltip-speed');
       element.removeAttr('tooltip-speed');
+    }
+
+    if (element.attr('tooltip-show-delay') !== undefined) {
+
+      attributesToAdd['tooltip-show-delay'] = element.attr('tooltip-show-delay');
+      element.removeAttr('tooltip-show-delay');
+    }
+
+    if (element.attr('tooltip-hide-delay') !== undefined) {
+
+      attributesToAdd['tooltip-hide-delay'] = element.attr('tooltip-hide-delay');
+      element.removeAttr('tooltip-hide-delay');
     }
 
     return attributesToAdd;
@@ -272,6 +284,8 @@
       $attrs.tooltipSize = $attrs.tooltipSize || tooltipsConf.size;
       $attrs.tooltipSpeed = $attrs.tooltipSpeed || tooltipsConf.speed;
       $attrs.tooltipAppendToBody = $attrs.tooltipAppendToBody === 'true';
+      $attrs.tooltipShowDelay = $attrs.tooltipShowDelay || tooltipsConf.tooltipShowDelay;
+      $attrs.tooltipHideDelay = $attrs.tooltipHideDelay || tooltipsConf.tooltipHideDelay;
 
       $transcludeFunc($scope, function onTransclusionDone(element, scope) {
         var attributes = getAttributesToAdd(element)
@@ -500,7 +514,10 @@
               if (event &&
                 $attrs.tooltipHidden !== 'true') {
 
-                tooltipElement.addClass('active');
+                $timeout(function addActiveClass() {
+                  tooltipElement.addClass('active');
+                }, $attrs.tooltipShowDelay);
+                
               }
             }
           }
@@ -510,8 +527,10 @@
 
               removeAppendedTip(tooltipElement);
             } else {
-
-              tooltipElement.removeClass('active');
+              $timeout(function removeActiveClass() {
+                tooltipElement.removeClass('active');
+              }, $attrs.tooltipHideDelay);
+              
             }
           }
           , registerOnScrollFrom = function registerOnScrollFrom(theElement) {
