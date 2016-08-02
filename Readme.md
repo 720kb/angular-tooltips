@@ -87,7 +87,7 @@ tooltip-template="" | String() | '' | Set your tooltip template (HTML or just Te
  |  |  | **to know**: don't use it together with `tooltip-template-url` attribute, use only one of them
 tooltip-template-url="" | String() | '' | Set your external tooltip template PATH
  |  |  | **to know**: don't use it together with `tooltip-template` attribute, use only one of them 
-tooltip-controller="" | String() | '' | Set a controller to your external tooltip template
+tooltip-template-url-cache="" | String(Boolean) | false | This attribute stores and retrieves the template from the cache
 tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
 tooltip-show-trigger="" | String('event1 event2') | 'mouseover' | Show the tooltip on specific event/events
 tooltip-hide-trigger="" | String('event1 event2') | 'mouseleave' | Hide the tooltip on specific event/events
