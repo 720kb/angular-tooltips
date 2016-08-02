@@ -606,23 +606,20 @@
           , onTooltipTemplateUrlCacheChange = function onTooltipTemplateUrlCacheChange(newValue) {
             if (newValue) {
 
-              var applyTemplate = function(template) {
-                tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
-                tipTipElement.empty();
-                tipTipElement.append(closeButtonElement);
-                tipTipElement.append($compile(response.data)(scope));
-                $timeout(function doLater() {
-                  onTooltipShow();
-                });
-              }
-
               if ($attrs.tooltipTemplateUrl) {
                 var template = $templateCache.get($attrs.tooltipTemplateUrl);
 
                 if (typeof template !== 'undefined') {
-                  applyTemplate(cachedTemplate)
-                  return;
+                  tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
+                  tipTipElement.empty();
+                  tipTipElement.append(closeButtonElement);
+                  tipTipElement.append($compile(response.data)(scope));
+                  $timeout(function doLater() {
+
+                    onTooltipShow();
+                  });
                 }
+              };
             } else {
               //hide tooltip because is empty
               tipTipElement.empty();
@@ -822,7 +819,7 @@
           resizeObserver.remove();
           element.off($attrs.tooltipShowTrigger + ' ' + $attrs.tooltipHideTrigger);
         });
-      };
+      });
     };
 
     return {
@@ -831,7 +828,7 @@
       'priority': 1,
       'terminal': true,
       'link': linkingFunction
-    });
+    };
   }];
 
   angular.module('720kb.tooltips', [])
