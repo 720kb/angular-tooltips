@@ -580,37 +580,30 @@
             }
           }
           , onTooltipTemplateUrlChange = function onTooltipTemplateUrlChange(newValue) {
-            /* tslint:disable */
-            console.log('======inside on tooltip url fn');
             if (newValue) {
 
-              var applyTemplate = function(template) {
-                tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
-                tipTipElement.empty();
-                tipTipElement.append(closeButtonElement);
-                tipTipElement.append($compile(response.data)(scope));
-                $timeout(function doLater() {
-                  onTooltipShow();
-                });
-              }
-
               $http.get(newValue).then(function onResponse(response) {
-                if (response && response.data) {
-                  var template = $templateCache.put(newValue, response.data);
-                  applyTemplate(template);
+
+                if (response &&
+                  response.data) {
+
+                  tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
+                  tipTipElement.empty();
+                  tipTipElement.append(closeButtonElement);
+                  tipTipElement.append($compile(response.data)(scope));
+                  $timeout(function doLater() {
+
+                    onTooltipShow();
+                  });
                 }
               });
-                
             } else {
               //hide tooltip because is empty
               tipTipElement.empty();
               tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
             }
           }
-
           , onTooltipTemplateUrlCacheChange = function onTooltipTemplateUrlCacheChange(newValue) {
-
-            console.log('SUCCESS!!! === inside on tooltip cache change function');
             if (newValue) {
 
               var applyTemplate = function(template) {
@@ -625,20 +618,17 @@
 
               if ($attrs.tooltipTemplateUrl) {
                 var template = $templateCache.get($attrs.tooltipTemplateUrl);
-                console.log('template is .... ', template);
 
                 if (typeof template !== 'undefined') {
                   applyTemplate(cachedTemplate)
                   return;
                 }
-                
             } else {
               //hide tooltip because is empty
               tipTipElement.empty();
               tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
             }
           }
-
           , onTooltipSideChange = function onTooltipSideChange(newValue) {
 
             if (newValue) {
@@ -841,7 +831,7 @@
       'priority': 1,
       'terminal': true,
       'link': linkingFunction
-    };
+    });
   }];
 
   angular.module('720kb.tooltips', [])
