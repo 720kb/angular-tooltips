@@ -604,22 +604,21 @@
             }
           }
           , onTooltipTemplateUrlCacheChange = function onTooltipTemplateUrlCacheChange(newValue) {
-            if (newValue) {
+            if (newValue && $attrs.tooltipTemplateUrl) {
 
-              if ($attrs.tooltipTemplateUrl) {
-                var template = $templateCache.get($attrs.tooltipTemplateUrl);
+              var template = $templateCache.get($attrs.tooltipTemplateUrl);
 
-                if (typeof template !== 'undefined') {
-                  tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
-                  tipTipElement.empty();
-                  tipTipElement.append(closeButtonElement);
-                  tipTipElement.append($compile(response.data)(scope));
-                  $timeout(function doLater() {
+              if (typeof template !== 'undefined') {
+                
+                tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
+                tipTipElement.empty();
+                tipTipElement.append(closeButtonElement);
+                tipTipElement.append($compile(response.data)(scope));
+                $timeout(function doLater() {
 
-                    onTooltipShow();
-                  });
-                }
-              };
+                  onTooltipShow();
+                });
+              }
             } else {
               //hide tooltip because is empty
               tipTipElement.empty();
