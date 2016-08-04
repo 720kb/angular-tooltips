@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.4
+ * 1.1.5
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Mon Jun 06 2016
+ * Thu Aug 04 2016
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -247,7 +247,7 @@
       }
     };
   }
-  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", "$timeout", "$controller", "$injector", "tooltipsConf", "$templateCache", function tooltipDirective($log, $http, $compile, $timeout, $controller, $injector, tooltipsConf) {
+  , tooltipDirective = /*@ngInject*/ ['$log', '$http', '$compile', '$timeout', '$controller', '$injector', 'tooltipsConf', '$templateCache', function tooltipDirective($log, $http, $compile, $timeout, $controller, $injector, tooltipsConf, $templateCache) {
 
     var linkingFunction = function linkingFunction($scope, $element, $attrs, $controllerDirective, $transcludeFunc) {
 
@@ -609,14 +609,21 @@
               var template = $templateCache.get($attrs.tooltipTemplateUrl);
 
               if (typeof template !== 'undefined') {
-                
+
                 tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
                 tipTipElement.empty();
                 tipTipElement.append(closeButtonElement);
-                tipTipElement.append($compile(response.data)(scope));
-                $timeout(function doLater() {
+                $http.get(newValue).then(function onResponse(response) {
 
-                  onTooltipShow();
+                  if (response &&
+                    response.data) {
+
+                    tipTipElement.append($compile(response.data)(scope));
+                    $timeout(function doLater() {
+
+                      onTooltipShow();
+                    });
+                  }
                 });
               }
             } else {
