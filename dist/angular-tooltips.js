@@ -79,6 +79,12 @@
       element.removeAttr('tooltip-template-url');
     }
 
+    if (element.attr('tooltip-template-url-cache') !== undefined) {
+
+      attributesToAdd['tooltip-template-url-cache'] = element.attr('tooltip-template-url-cache');
+      element.removeAttr('tooltip-template-url-cache');
+    }
+
     if (element.attr('tooltip-controller') !== undefined) {
 
       attributesToAdd['tooltip-controller'] = element.attr('tooltip-controller');
@@ -212,7 +218,8 @@
       'smart': false,
       'closeButton': false,
       'size': '',
-      'speed': 'steady'
+      'speed': 'steady',
+      'tooltipTemplateUrlCache': false
     };
 
     return {
@@ -240,7 +247,7 @@
       }
     };
   }
-  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", "$timeout", "$controller", "$injector", "tooltipsConf", function tooltipDirective($log, $http, $compile, $timeout, $controller, $injector, tooltipsConf) {
+  , tooltipDirective = /*@ngInject*/ ["$log", "$http", "$compile", "$timeout", "$controller", "$injector", "tooltipsConf", "$templateCache", function tooltipDirective($log, $http, $compile, $timeout, $controller, $injector, tooltipsConf) {
 
     var linkingFunction = function linkingFunction($scope, $element, $attrs, $controllerDirective, $transcludeFunc) {
 
@@ -557,7 +564,6 @@
             }
           }
           , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
-
             if (newValue) {
               tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
               tipTipElement.empty();
@@ -574,7 +580,6 @@
             }
           }
           , onTooltipTemplateUrlChange = function onTooltipTemplateUrlChange(newValue) {
-
             if (newValue) {
 
               $http.get(newValue).then(function onResponse(response) {
@@ -592,6 +597,28 @@
                   });
                 }
               });
+            } else {
+              //hide tooltip because is empty
+              tipTipElement.empty();
+              tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
+            }
+          }
+          , onTooltipTemplateUrlCacheChange = function onTooltipTemplateUrlCacheChange(newValue) {
+            if (newValue && $attrs.tooltipTemplateUrl) {
+
+              var template = $templateCache.get($attrs.tooltipTemplateUrl);
+
+              if (typeof template !== 'undefined') {
+                
+                tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
+                tipTipElement.empty();
+                tipTipElement.append(closeButtonElement);
+                tipTipElement.append($compile(response.data)(scope));
+                $timeout(function doLater() {
+
+                  onTooltipShow();
+                });
+              }
             } else {
               //hide tooltip because is empty
               tipTipElement.empty();
@@ -718,6 +745,7 @@
           }
           , unregisterOnTooltipTemplateChange = $attrs.$observe('tooltipTemplate', onTooltipTemplateChange)
           , unregisterOnTooltipTemplateUrlChange = $attrs.$observe('tooltipTemplateUrl', onTooltipTemplateUrlChange)
+          , unregisterOnTooltipTemplateUrlCacheChange = $attrs.$observe('tooltipTemplateUrlCache', onTooltipTemplateUrlCacheChange)
           , unregisterOnTooltipSideChangeObserver = $attrs.$observe('tooltipSide', onTooltipSideChange)
           , unregisterOnTooltipShowTrigger = $attrs.$observe('tooltipShowTrigger', onTooltipShowTrigger)
           , unregisterOnTooltipHideTrigger = $attrs.$observe('tooltipHideTrigger', onTooltipHideTrigger)
@@ -777,6 +805,7 @@
 
           unregisterOnTooltipTemplateChange();
           unregisterOnTooltipTemplateUrlChange();
+          unregisterOnTooltipTemplateUrlCacheChange();
           unregisterOnTooltipSideChangeObserver();
           unregisterOnTooltipShowTrigger();
           unregisterOnTooltipHideTrigger();
