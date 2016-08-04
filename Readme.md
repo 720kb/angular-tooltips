@@ -86,7 +86,7 @@ tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your toolt
 tooltip-template="" | String() | '' | Set your tooltip template (HTML or just Text)
  |  |  | **to know**: don't use it together with `tooltip-template-url` attribute, use only one of them
 tooltip-template-url="" | String() | '' | Set your external tooltip template PATH
- |  |  | **to know**: don't use it together with `tooltip-template` attribute, use only one of them 
+ |  |  | **to know**: don't use it together with `tooltip-template` attribute, use only one of them
 tooltip-template-url-cache="" | String(Boolean) | false | This attribute stores and retrieves the template from the cache
 tooltip-controller="" | String() | '' | Set a controller to your external tooltip template
 tooltip-smart="" | String(Boolean) | false | Set the tooltip to automatically search the best position on the screen
@@ -109,6 +109,7 @@ Sometimes you may need to set all of your tooltips options in one place, you can
     'smart':true,
     'size':'large',
     'speed': 'slow',
+    'tooltipTemplateUrlCache': true
     //etc...
   });
 }])
