@@ -1,13 +1,13 @@
-$tolerance: 3px;
-$margin-tooltip-arrow: 6px;
-$padding-top-bottom-tooltip: 8px;
-$padding-right-left-tooltip: 16px;
-$tooltip-background-color: rgba(0, 0, 0, .85);
-$tooltip-color: #fff;
-$tooltip-border-radius: 3px;
-$tooltip-fast-transition: .15s;
-$tooltip-slow-transition: .65s;
-$tooltip-medium-transition: .35s;
+$tolerance: 3px !default;
+$margin-tooltip-arrow: 6px !default;
+$padding-top-bottom-tooltip: 8px !default;
+$padding-right-left-tooltip: 16px !default;
+$tooltip-background-color: rgba(0, 0, 0, .85) !default;
+$tooltip-color: #fff !default;
+$tooltip-border-radius: 3px !default;
+$tooltip-fast-transition: .15s !default;
+$tooltip-slow-transition: .65s !default;
+$tooltip-medium-transition: .35s !default;
 
 @mixin opacity-transition($speed) {
   animation: animate-tooltip $speed;
