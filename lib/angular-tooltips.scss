@@ -8,6 +8,9 @@ $tooltip-border-radius: 3px !default;
 $tooltip-fast-transition: .15s !default;
 $tooltip-slow-transition: .65s !default;
 $tooltip-medium-transition: .35s !default;
+$tooltip-font-size-small: .8em !default;
+$tooltip-font-size-medium: .95em !default;
+$tooltip-font-size-large: 1.1em !default;
 
 @mixin opacity-transition($speed) {
   animation: animate-tooltip $speed;
@@ -144,16 +147,16 @@ tooltip {
 
   tip-tip {
 
-    font-size: .95em;
+    font-size: $tooltip-font-size-medium;
 
     &._large {
 
-      font-size: 1.1em;
+      font-size: $tooltip-font-size-large;
     }
 
     &._small {
 
-      font-size: .8em;
+      font-size: $tooltip-font-size-small;
     }
   }
 
