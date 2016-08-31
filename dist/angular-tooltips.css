@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.6
+ * 1.1.7
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Fri Aug 05 2016
+ * Wed Aug 31 2016
  */
 ._exradicated-tooltip {
   display: block;
@@ -95,11 +95,11 @@ tooltip {
     opacity: 1;
     z-index: 999; }
   tooltip tip-tip {
-    font-size: .95em; }
+    font-size: 0.95em; }
     tooltip tip-tip._large {
       font-size: 1.1em; }
     tooltip tip-tip._small {
-      font-size: .8em; }
+      font-size: 0.8em; }
   tooltip._top tip {
     left: 50%;
     top: -9px;
