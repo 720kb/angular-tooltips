@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.7
+ * 1.1.8
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Wed Aug 31 2016
+ * Tue Nov 08 2016
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
