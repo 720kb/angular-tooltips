@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue Nov 08 2016
+ * Sat Jan 21 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -756,9 +756,7 @@
           , unregisterOnTooltipSpeedChange = $attrs.$observe('tooltipSpeed', onTooltipSpeedChange)
           , unregisterTipContentChangeWatcher = scope.$watch(whenActivateMultilineCalculation, calculateIfMultiLine);
 
-        closeButtonElement.attr({
-          'id': 'close-button'
-        });
+        closeButtonElement.addClass('close-button');
         closeButtonElement.html('&times;');
 
         tipElement.addClass('_hidden');
