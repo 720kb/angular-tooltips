@@ -1,6 +1,6 @@
 {
   "name": "angular-tooltips",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Angular.js tooltips module.",
   "homepage": "http://720kb.github.io/angular-tooltips",
   "main": "index.js",
@@ -16,7 +16,9 @@
     "precommit": "gulp lint",
     "preversion": "gulp lint",
     "version": "gulp minify && ./tasks/bower-version-bump && git add -A .",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prod": "gulp minify",
+    "lint": "gulp lint"
   },
   "repository": {
     "type": "git",
