@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue Nov 08 2016
+ * Sat Jan 21 2017
  */
 @-webkit-keyframes animate-tooltip {
   0% {
@@ -165,12 +165,10 @@ tooltip {
       top: 50%;
       width: 0; }
 
-tip-tip #close-button {
+tip-tip .close-button {
   cursor: pointer;
   float: right;
   left: 8%;
   margin-top: -7%;
   padding: 3px;
   position: relative; }
-
-/*# sourceMappingURL=angular-tooltips.css.map */

@@ -18,16 +18,8 @@
       .pipe(changed(paths.output, {
         'extension': '.css'
       }))
-      .pipe(sourcemaps.init({
-        'loadMaps': true,
-        'debug': true
-      }))
       .pipe(sass(paths.scss.options))
       .pipe(header(paths.banner))
-      .pipe(sourcemaps.write('.', {
-        'includeContent': false,
-        'sourceRoot': '../lib'
-      }))
       .pipe(gulp.dest(paths.output))
       .pipe(browserSync.reload({
         'stream': true
