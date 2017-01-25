@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.9
+ * 1.1.10
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Sat Jan 21 2017
+ * Wed Jan 25 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -212,7 +212,7 @@
 
     var tooltipConfiguration = {
       'side': 'top',
-      'showTrigger': 'mouseover',
+      'showTrigger': 'mouseenter',
       'hideTrigger': 'mouseleave',
       'class': '',
       'smart': false,
