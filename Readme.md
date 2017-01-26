@@ -100,11 +100,11 @@ tooltip-append-to-body="" | String(Boolean) | false | This attribute clones the 
 
 
 ##Globals
-Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipsConfProvider` like this:
+Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipsConfigProvider` like this:
 
 ```javascript
-.config(['tooltipsConfProvider', function configConf(tooltipsConfProvider) {
-  tooltipsConfProvider.configure({
+.config(['tooltipsConfigProvider', function configConf(tooltipsConfigProvider) {
+  tooltipsConfigProvider.options({
     'smart':true,
     'size':'large',
     'speed': 'slow',
