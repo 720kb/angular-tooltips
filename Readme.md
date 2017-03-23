@@ -10,15 +10,15 @@ Angular Tooltips is an AngularJS directive that generates a tooltip on your elem
 
 The angular tooltips is developed by [720kb](http://720kb.net).
 
-##Requirements
+## Requirements
 
 
 AngularJS v1.3+
 
-##Screen
+## Screen
 ![Angular tooltips](http://i.imgur.com/GjUwCat.png)
 
-###Browser support
+### Browser support
 
 Chrome | Firefox | IE | Opera | Safari
 --- | --- | --- | --- | --- |
@@ -42,15 +42,15 @@ To use the directive, include the Angular Tooltips javascript and css files in y
 </html>
 ```
 
-##Installation
+## Installation
 
-####Bower
+#### Bower
 
 ```
 $ bower install angular-tooltips --save
 ```
 
-####Npm
+#### npm
 
 ```
 $ npm install angular-tooltips --save
@@ -58,7 +58,7 @@ $ npm install angular-tooltips --save
 
 _then load the js files in your html_
 
-####Add module dependency
+#### Add module dependency
 
 Add the 720kb.tooltips module dependency
 
@@ -77,7 +77,7 @@ Call the directive wherever you want in your html page
 
 ```
 
-##Doc
+## Doc
 
 Option | Type | Default | Description
 ------------- | ------------- | ------------- | -------------
@@ -99,7 +99,7 @@ tooltip-hidden="" | String(Boolean) | false | Hide (at all) the tooltip
 tooltip-append-to-body="" | String(Boolean) | false | This attribute clones the tooltip and append this directly on body. This enables the tooltip position also, for instance, if you have an scrolling area. **This option does heavy javascript calculation.**
 
 
-##Globals
+## Globals
 Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipsConfProvider` like this:
 
 ```javascript
@@ -116,12 +116,12 @@ Sometimes you may need to set all of your tooltips options in one place, you can
 
 ## Example
 
-###[Live demo](https://720kb.github.io/angular-tooltips)
+### [Live demo](https://720kb.github.io/angular-tooltips)
 
-##Theming
+## Theming
 You can create your own theme by editing the default SASS file `lib/angular-tooltips.scss` or just editing the default CSS file `dist/angular-tooltips.css`.
 
-##Contributing
+## Contributing
 
 We will be much grateful if you help us making this project to grow up.
 Feel free to contribute by forking, opening issues, pull requests etc.
