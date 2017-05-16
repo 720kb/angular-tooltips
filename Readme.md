@@ -95,6 +95,8 @@ tooltip-close-button="" | String(Boolean) | false | Enable the tooltip close but
 tooltip-class="" | String() | '' | Set custom tooltip CSS class/classes
 tooltip-size="" | String('large', 'small') | 'medium' | Set your tooltip dimensions
 tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your tooltip show & hide transition speed
+tooltip-viewport="" | String('.selector') | '' | Set the viewport for your tooltip to an element other than the body (only when smart is enabled)
+tooltip-show-on-truncate="" | String(Boolean) | false | Set the tooltip to only show up when the tooltip is wider / taller than it's parent element
 tooltip-hidden="" | String(Boolean) | false | Hide (at all) the tooltip
 tooltip-append-to-body="" | String(Boolean) | false | This attribute clones the tooltip and append this directly on body. This enables the tooltip position also, for instance, if you have an scrolling area. **This option does heavy javascript calculation.**
 
