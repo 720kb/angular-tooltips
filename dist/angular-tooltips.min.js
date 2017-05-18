@@ -1,6 +1,6 @@
 /*
  * angular-tooltips
- * 1.1.2
+ * 1.1.11
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
