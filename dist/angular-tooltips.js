@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.10
+ * 1.1.2
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Wed Jan 25 2017
+ * Thu May 18 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -121,6 +121,12 @@
       element.removeAttr('tooltip-class');
     }
 
+    if (element.attr('tooltip-show') !== undefined) {
+
+      attributesToAdd['tooltip-show'] = element.attr('tooltip-show');
+      element.removeAttr('tooltip-show');
+    }
+
     if (element.attr('tooltip-close-button') !== undefined) {
 
       attributesToAdd['tooltip-close-button'] = element.attr('tooltip-close-button');
@@ -219,7 +225,8 @@
       'closeButton': false,
       'size': '',
       'speed': 'steady',
-      'tooltipTemplateUrlCache': false
+      'tooltipTemplateUrlCache': false,
+      'show': null
     };
 
     return {
@@ -273,6 +280,7 @@
       $attrs.tooltipSide = $attrs.tooltipSide || tooltipsConf.side;
       $attrs.tooltipShowTrigger = $attrs.tooltipShowTrigger || tooltipsConf.showTrigger;
       $attrs.tooltipHideTrigger = $attrs.tooltipHideTrigger || tooltipsConf.hideTrigger;
+      $attrs.tooltipShow = $attrs.tooltipShow || tooltipsConf.show;
       $attrs.tooltipClass = $attrs.tooltipClass || tooltipsConf.class;
       $attrs.tooltipSmart = $attrs.tooltipSmart === 'true' || tooltipsConf.smart;
       $attrs.tooltipCloseButton = $attrs.tooltipCloseButton || tooltipsConf.closeButton.toString();
@@ -660,6 +668,15 @@
               oldTooltipHideTrigger = newValue;
             }
           }
+          , onTooltipShowTooltip = function onTooltipShowTooltip(newValue) {
+
+            if (newValue === 'true') {
+
+              tooltipElement.addClass('active');
+            } else {
+              tooltipElement.removeClass('active');
+            }
+          }
           , onTooltipClassChange = function onTooltipClassChange(newValue) {
 
             if (newValue) {
@@ -748,6 +765,7 @@
           , unregisterOnTooltipSideChangeObserver = $attrs.$observe('tooltipSide', onTooltipSideChange)
           , unregisterOnTooltipShowTrigger = $attrs.$observe('tooltipShowTrigger', onTooltipShowTrigger)
           , unregisterOnTooltipHideTrigger = $attrs.$observe('tooltipHideTrigger', onTooltipHideTrigger)
+          , unregisterOnTooltipShowTooltip = $attrs.$observe('tooltipShow', onTooltipShowTooltip)
           , unregisterOnTooltipClassChange = $attrs.$observe('tooltipClass', onTooltipClassChange)
           , unregisterOnTooltipSmartChange = $attrs.$observe('tooltipSmart', onTooltipSmartChange)
           , unregisterOnTooltipCloseButtonChange = $attrs.$observe('tooltipCloseButton', onTooltipCloseButtonChange)
@@ -806,6 +824,7 @@
           unregisterOnTooltipSideChangeObserver();
           unregisterOnTooltipShowTrigger();
           unregisterOnTooltipHideTrigger();
+          unregisterOnTooltipShowTooltip();
           unregisterOnTooltipClassChange();
           unregisterOnTooltipSmartChange();
           unregisterOnTooltipCloseButtonChange();
