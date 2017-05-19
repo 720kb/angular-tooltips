@@ -40,6 +40,10 @@
 
         color: violet;
       }
+
+      .fa-rotate-45 {
+          transform: rotate(45deg);
+      }
     </style>
     <title>Angularjs Tooltips</title>
   </head>
@@ -95,6 +99,34 @@
     </div>
 
     <div>
+      <i class="fa fa-arrow-left fa-rotate-45"
+      tooltips
+      tooltip-side="top left"
+      tooltip-template="I'm another tooltip!"></i>
+    </div>
+
+    <div>
+      <i class="fa fa-arrow-up fa-rotate-45"
+      tooltips
+      tooltip-side="top right"
+      tooltip-template="I'm another tooltip!"></i>
+    </div>
+
+    <div>
+      <i class="fa fa-arrow-down fa-rotate-45"
+      tooltips
+      tooltip-side="bottom left"
+      tooltip-template="I'm another tooltip!"></i>
+    </div>
+
+    <div>
+      <i class="fa fa-arrow-right fa-rotate-45"
+      tooltips
+      tooltip-side="bottom right"
+      tooltip-template="I'm another tooltip!"></i>
+    </div>
+
+    <div>
       <span tooltips
         tooltip-template="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.">
         I'm a tooltip content.
@@ -185,6 +217,42 @@
     <div>
       <span tooltips
         tooltip-side="right"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="top left"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="top right"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="bottom left"
+        tooltip-smart="true"
+        tooltip-template="I'm a tooltip!">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
+      </span>
+    </div>
+
+    <div>
+      <span tooltips
+        tooltip-side="bottom right"
         tooltip-smart="true"
         tooltip-template="I'm a tooltip!">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt dolor eu nunc interdum vulputate. Integer non lorem nec libero consequat faucibus eu vitae sem. Etiam sit amet nulla aliquam erat pellentesque dictum non quis dui. Phasellus in lorem sed magna condimentum accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec rutrum tristique scelerisque. Nam lorem neque, feugiat quis odio sed, dignissim commodo massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sapien sem, lobortis non erat eu, convallis finibus ante.
@@ -339,8 +407,8 @@
         tooltip-template="A tooltip with text">Tooltip Bottom</button>
     </div>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.0/angular.min.js"></script>
-    <script type="text/javascript" src="dist/angular-tooltips.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.0/angular.js"></script>
+    <script type="text/javascript" src="dist/angular-tooltips.js"></script>
     <script type="text/javascript" src="demo/js/index.js"></script>
   </body>
 </html>
