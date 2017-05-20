@@ -106,8 +106,8 @@ Sometimes you may need to set all of your tooltips options in one place, you can
 ```javascript
 .config(['tooltipsConfProvider', function configConf(tooltipsConfProvider) {
   tooltipsConfProvider.configure({
-    'smart':true,
-    'size':'large',
+    'smart': true,
+    'size': 'large',
     'speed': 'slow',
     'tooltipTemplateUrlCache': true
     //etc...
