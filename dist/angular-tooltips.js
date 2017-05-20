@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.1.11
+ * 1.1.12
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Thu May 18 2017
+ * Sat May 20 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -571,65 +571,79 @@
               registerOnScrollFrom(parentElement);
             }
           }
-          , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
-            if (newValue) {
-              tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
-              tipTipElement.empty();
-              tipTipElement.append(closeButtonElement);
-              tipTipElement.append(newValue);
-              $timeout(function doLaterShow() {
+          , showTemplate = function showTemplate(template) {
+          
+            tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
+            tipTipElement.empty();
+            tipTipElement.append(closeButtonElement);
+            tipTipElement.append(template);
+            $timeout(function doLater() {
+              
+              onTooltipShow();
+            });
+          }
+          , hideTemplate = function hideTemplate() {
+          
+            //hide tooltip because is empty
+            tipTipElement.empty();
+            tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
+          }
+          , getTemplate = function getTemplate(tooltipTemplateUrl) {
+          
+            var template = $templateCache.get(tooltipTemplateUrl);
 
-                onTooltipShow();
+            if (typeof template === 'undefined') {
+              
+              // How should failing to load the template be handled?
+              template = $http.get(tooltipTemplateUrl).then(function onGetTemplateSuccess(response) {
+                
+                return response.data;
               });
+              $templateCache.put(tooltipTemplateUrl, template);
+            }
+            
+            return template;
+          }
+          , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
+          
+            if (newValue) {
+              
+              showTemplate(newValue);
             } else {
-              //hide tooltip because is empty
-              tipTipElement.empty();
-              tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
+              
+              hideTemplate();
             }
           }
           , onTooltipTemplateUrlChange = function onTooltipTemplateUrlChange(newValue) {
+          
             if (newValue && !$attrs.tooltipTemplateUrlCache) {
-
-              $http.get(newValue).then(function onResponse(response) {
-
-                if (response &&
-                  response.data) {
-
-                  tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
-                  tipTipElement.empty();
-                  tipTipElement.append(closeButtonElement);
-                  tipTipElement.append($compile(response.data)(scope));
-                  $timeout(function doLater() {
-
-                    onTooltipShow();
-                  });
-                }
+              
+              getTemplate(newValue).then(function onGetTemplateSuccess(template) {
+                
+                showTemplate($compile(template)(scope));
+              }).catch(function onGetTemplateFailure(reason) {
+                
+                $log.error(reason);
               });
             } else {
-              //hide tooltip because is empty
-              tipTipElement.empty();
-              tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
+              
+              hideTemplate();
             }
           }
           , onTooltipTemplateUrlCacheChange = function onTooltipTemplateUrlCacheChange(newValue) {
+          
             if (newValue && $attrs.tooltipTemplateUrl) {
+              
+              getTemplate($attrs.tooltipTemplateUrl).then(function onGetTemplateSuccess(template) {
+                
+                showTemplate($compile(template)(scope));
+              }).catch(function onGetTemplateFailure(reason) {
 
-              var template = $templateCache.get($attrs.tooltipTemplateUrl);
-
-              if (typeof template !== 'undefined') {
-
-                tooltipElement.removeClass('_force-hidden'); //see lines below, this forces to hide tooltip when is empty
-                tipTipElement.empty();
-                tipTipElement.append(closeButtonElement);
-                tipTipElement.append($compile(template)(scope));
-                $timeout(function doLater() {
-                  onTooltipShow();
-                });
-              }
+                $log.error(reason);
+              });
             } else {
-              //hide tooltip because is empty
-              tipTipElement.empty();
-              tooltipElement.addClass('_force-hidden'); //force to be hidden if empty
+              
+              hideTemplate();
             }
           }
           , onTooltipSideChange = function onTooltipSideChange(newValue) {
