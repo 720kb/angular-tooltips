@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Fri May 19 2017
+ * Thu May 18 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -214,31 +214,6 @@
 
     throw new Error('You must provide a position');
   }
-  , getSideClasses = function getSideClasses(sides) {
-    
-    return sides.split(' ').map(function mapSideClasses(side) {
-      
-      return '_' + side;
-    }).join(' ');
-  }
-  , directions = ['_top', '_left', '_bottom', '_right', '_top _left', '_top _right', '_bottom _left', '_bottom _right']
-  , smartPosition = function smartPosition(tipElement, tooltipElement, startSide) {
-    
-    var directionsIndex = directions.indexOf(getSideClasses(startSide))
-      , directionsLength = directions.length
-      , directionsCount = 0;
-    
-    for (; directionsCount < directionsLength && isOutOfPage(tipElement); directionsCount += 1) {
-      
-      directionsIndex += 1;
-      if (directionsIndex >= directions.length) {
-        
-        directionsIndex = 0;
-      }
-      tooltipElement.removeClass('_top _left _bottom _right');
-      tooltipElement.addClass(directions[directionsIndex]);
-    }
-  }
   , tooltipConfigurationProvider = function tooltipConfigurationProvider() {
 
     var tooltipConfiguration = {
@@ -295,7 +270,7 @@
         throw new Error('You can not have a controller without a template or templateUrl defined');
       }
 
-      var oldTooltipSide = getSideClasses(tooltipsConf.side)
+      var oldTooltipSide = '_' + tooltipsConf.side
         , oldTooltipShowTrigger = tooltipsConf.showTrigger
         , oldTooltipHideTrigger = tooltipsConf.hideTrigger
         , oldTooltipClass
@@ -342,19 +317,105 @@
             if ($attrs.tooltipSmart) {
 
               switch ($attrs.tooltipSide) {
-                case 'top':
-                case 'left':
-                case 'bottom':
-                case 'right':
-                case 'top left':
-                case 'top right':
-                case 'bottom left':
-                case 'bottom right': {
+                case 'top': {
 
-                  smartPosition(tipElement, tooltipElement, $attrs.tooltipSide);
+                  if (isOutOfPage(tipElement)) {
+
+                    tooltipElement.removeClass('_top');
+                    tooltipElement.addClass('_left');
+                    if (isOutOfPage(tipElement)) {
+
+                      tooltipElement.removeClass('_left');
+                      tooltipElement.addClass('_bottom');
+                      if (isOutOfPage(tipElement)) {
+
+                        tooltipElement.removeClass('_bottom');
+                        tooltipElement.addClass('_right');
+                        if (isOutOfPage(tipElement)) {
+
+                          tooltipElement.removeClass('_right');
+                          tooltipElement.addClass('_top');
+                        }
+                      }
+                    }
+                  }
                   break;
                 }
-                
+
+                case 'left': {
+
+                  if (isOutOfPage(tipElement)) {
+
+                    tooltipElement.removeClass('_left');
+                    tooltipElement.addClass('_bottom');
+                    if (isOutOfPage(tipElement)) {
+
+                      tooltipElement.removeClass('_bottom');
+                      tooltipElement.addClass('_right');
+                      if (isOutOfPage(tipElement)) {
+
+                        tooltipElement.removeClass('_right');
+                        tooltipElement.addClass('_top');
+                        if (isOutOfPage(tipElement)) {
+
+                          tooltipElement.removeClass('_top');
+                          tooltipElement.addClass('_left');
+                        }
+                      }
+                    }
+                  }
+                  break;
+                }
+
+                case 'bottom': {
+
+                  if (isOutOfPage(tipElement)) {
+
+                    tooltipElement.removeClass('_bottom');
+                    tooltipElement.addClass('_left');
+                    if (isOutOfPage(tipElement)) {
+
+                      tooltipElement.removeClass('_left');
+                      tooltipElement.addClass('_top');
+                      if (isOutOfPage(tipElement)) {
+
+                        tooltipElement.removeClass('_top');
+                        tooltipElement.addClass('_right');
+                        if (isOutOfPage(tipElement)) {
+
+                          tooltipElement.removeClass('_right');
+                          tooltipElement.addClass('_bottom');
+                        }
+                      }
+                    }
+                  }
+                  break;
+                }
+
+                case 'right': {
+
+                  if (isOutOfPage(tipElement)) {
+
+                    tooltipElement.removeClass('_right');
+                    tooltipElement.addClass('_top');
+                    if (isOutOfPage(tipElement)) {
+
+                      tooltipElement.removeClass('_top');
+                      tooltipElement.addClass('_left');
+                      if (isOutOfPage(tipElement)) {
+
+                        tooltipElement.removeClass('_left');
+                        tooltipElement.addClass('_bottom');
+                        if (isOutOfPage(tipElement)) {
+
+                          tooltipElement.removeClass('_bottom');
+                          tooltipElement.addClass('_right');
+                        }
+                      }
+                    }
+                  }
+                  break;
+                }
                 default: {
 
                   throw new Error('Position not supported');
@@ -577,9 +638,9 @@
 
               if (oldTooltipSide) {
 
-                tooltipElement.removeClass(oldTooltipSide);
+                tooltipElement.removeAttr('_' + oldTooltipSide);
               }
-              tooltipElement.addClass(getSideClasses(newValue));
+              tooltipElement.addClass('_' + newValue);
               oldTooltipSide = newValue;
             }
           }
