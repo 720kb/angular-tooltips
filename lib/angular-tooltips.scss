@@ -160,7 +160,7 @@ tooltip {
     }
   }
 
-  &._top {
+  &._top:not(._left):not(._right) {
 
     tip {
 
@@ -182,8 +182,8 @@ tooltip {
       }
     }
   }
-
-  &._bottom {
+ 
+  &._bottom:not(._left):not(._right) {
 
     tip {
 
@@ -206,7 +206,7 @@ tooltip {
     }
   }
 
-  &._right {
+  &._right:not(._top):not(._bottom) {
 
     tip {
 
@@ -229,7 +229,7 @@ tooltip {
     }
   }
 
-  &._left {
+  &._left:not(._top):not(._bottom) {
 
     tip {
 
@@ -247,6 +247,98 @@ tooltip {
         margin-top: -$margin-tooltip-arrow;
         position: absolute;
         top: 50%;
+        width: 0;
+      }
+    }
+  }
+
+  &._top._left {
+
+    tip {
+
+      left: -($margin-tooltip-arrow + $tolerance);
+      top: -($margin-tooltip-arrow + $tolerance);
+      @include transform(-100%, -100%);
+
+      tip-arrow {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid $tooltip-background-color;
+        content: '';
+        height: 0;
+        left: 90%;
+        margin-left: -$margin-tooltip-arrow;
+        position: absolute;
+        top: 100%;
+        width: 0;
+      }
+    }
+  }
+
+  &._top._right {
+
+    tip {
+
+      left: 100%;
+      top: -($margin-tooltip-arrow + $tolerance);
+      @include transform($margin-tooltip-arrow + $tolerance, -100%);
+
+      tip-arrow {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid $tooltip-background-color;
+        content: '';
+        height: 0;
+        left: 10%;
+        margin-left: -$margin-tooltip-arrow;
+        position: absolute;
+        top: 100%;
+        width: 0;
+      }
+    }
+  }
+
+  &._bottom._left {
+
+    tip {
+
+      left: -($margin-tooltip-arrow + $tolerance);
+      top: 100%;
+      @include transform(-100%, $margin-tooltip-arrow + $tolerance);
+
+      tip-arrow {
+        border-bottom: 6px solid $tooltip-background-color;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        bottom: 100%;
+        content: '';
+        height: 0;
+        left: 90%;
+        margin-left: -$margin-tooltip-arrow;
+        position: absolute;
+        width: 0;
+      }
+    }
+  }
+
+  &._bottom._right {
+
+    tip {
+
+      left: 100%;
+      top: 100%;
+      @include transform($margin-tooltip-arrow + $tolerance, $margin-tooltip-arrow + $tolerance);
+
+      tip-arrow {
+        border-bottom: 6px solid $tooltip-background-color;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        bottom: 100%;
+        content: '';
+        height: 0;
+        left: 10%;
+        margin-left: -$margin-tooltip-arrow;
+        position: absolute;
         width: 0;
       }
     }

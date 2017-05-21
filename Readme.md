@@ -81,7 +81,7 @@ Call the directive wherever you want in your html page
 
 Option | Type | Default | Description
 ------------- | ------------- | ------------- | -------------
-tooltip-side="" | String('left','right','top','bottom') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` position
+tooltip-side="" | String('left','right','top','bottom','top left','top right','bottom left','bottom right') | 'top' | Set your tooltip to show on `left` or `right` or `top` or `bottom` or `top left` or `top right` or `bottom left` or `bottom right` position
 tooltip-template="" | String() | '' | Set your tooltip template (HTML or just Text)
  |  |  | **to know**: don't use it together with `tooltip-template-url` attribute, use only one of them
 tooltip-template-url="" | String() | '' | Set your external tooltip template PATH
