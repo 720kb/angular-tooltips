@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.2.0
+ * 1.2.1
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Sun May 21 2017
+ * Tue May 23 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -338,6 +338,11 @@
           }
           , onTooltipShow = function onTooltipShow(event) {
 
+            if (event && !tooltipElement.hasClass('active')) {
+              
+              event.stopImmediatePropagation();
+            }
+
             tipElement.addClass('_hidden');
             if ($attrs.tooltipSmart) {
 
@@ -458,7 +463,12 @@
               }
             }
           }
-          , onTooltipHide = function onTooltipHide() {
+          , onTooltipHide = function onTooltipHide(event) {
+
+            if (event && tooltipElement.hasClass('active')) {
+  
+              event.stopImmediatePropagation();
+            }
 
             if ($attrs.tooltipAppendToBody) {
 
