@@ -1,12 +1,12 @@
 /*
  * angular-tooltips
- * 1.2.1
+ * 1.2.2
  * 
  * Angular.js tooltips module.
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue May 23 2017
+ * Tue Jun 20 2017
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -279,7 +279,7 @@
       }
     };
   }
-  , tooltipDirective = /*@ngInject*/ ['$log', '$http', '$compile', '$timeout', '$controller', '$injector', 'tooltipsConf', '$templateCache', function tooltipDirective($log, $http, $compile, $timeout, $controller, $injector, tooltipsConf, $templateCache) {
+  , tooltipDirective = /*@ngInject*/ ['$log', '$http', '$compile', '$timeout', '$controller', '$injector', 'tooltipsConf', '$templateCache', '$q', function tooltipDirective($log, $http, $compile, $timeout, $controller, $injector, tooltipsConf, $templateCache, $q) {
 
     var linkingFunction = function linkingFunction($scope, $element, $attrs, $controllerDirective, $transcludeFunc) {
 
@@ -541,17 +541,17 @@
           
             var template = $templateCache.get(tooltipTemplateUrl);
 
-            if (typeof template === 'undefined') {
-              
-              // How should failing to load the template be handled?
-              template = $http.get(tooltipTemplateUrl).then(function onGetTemplateSuccess(response) {
-                
-                return response.data;
-              });
-              $templateCache.put(tooltipTemplateUrl, template);
+            if (typeof template !== 'undefined') {
+              // Wrap template in a Promise so that getTemplate always returns a Promise
+              return $q.resolve(template);
             }
-            
-            return template;
+
+            // How should failing to load the template be handled?
+            return $http.get(tooltipTemplateUrl).then(function onGetTemplateSuccess(response) {
+              $templateCache.put(tooltipTemplateUrl, response.data);
+
+              return response.data;
+            });
           }
           , onTooltipTemplateChange = function onTooltipTemplateChange(newValue) {
           
