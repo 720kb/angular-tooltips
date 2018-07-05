@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue Jun 20 2017
+ * Fri Jul 06 2018
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -143,6 +143,12 @@
 
       attributesToAdd['tooltip-speed'] = element.attr('tooltip-speed');
       element.removeAttr('tooltip-speed');
+    }
+
+    if (element.attr('tooltip-flash-time') !== undefined) {
+
+      attributesToAdd['tooltip-flash-time'] = element.attr('tooltip-flash-time');
+      element.removeAttr('tooltip-flash-time');
     }
 
     return attributesToAdd;
@@ -321,6 +327,7 @@
           , tipTipElement = angular.element(window.document.createElement('tip-tip'))
           , closeButtonElement = angular.element(window.document.createElement('span'))
           , tipArrowElement = angular.element(window.document.createElement('tip-arrow'))
+          , flashTimer
           , whenActivateMultilineCalculation = function whenActivateMultilineCalculation() {
 
             return tipContElement.html();
@@ -336,8 +343,22 @@
               tooltipElement.removeClass('_multiline');
             }
           }
-          , onTooltipShow = function onTooltipShow(event) {
+          , onTooltipHide = function onTooltipHide(event) {
 
+            if (event && tooltipElement.hasClass('active')) {
+  
+              event.stopImmediatePropagation();
+            }
+
+            if ($attrs.tooltipAppendToBody) {
+
+              removeAppendedTip(tooltipElement);
+            } else {
+
+              tooltipElement.removeClass('active');
+            }
+          }
+          , onTooltipShow = function onTooltipShow(event) {
             if (event && !tooltipElement.hasClass('active')) {
               
               event.stopImmediatePropagation();
@@ -462,20 +483,20 @@
                 tooltipElement.addClass('active');
               }
             }
-          }
-          , onTooltipHide = function onTooltipHide(event) {
 
-            if (event && tooltipElement.hasClass('active')) {
-  
-              event.stopImmediatePropagation();
-            }
+            if ($attrs.tooltipFlashTime) {
 
-            if ($attrs.tooltipAppendToBody) {
+              if (flashTimer) {
 
-              removeAppendedTip(tooltipElement);
-            } else {
+                $timeout.cancel(flashTimer);
+              }
 
-              tooltipElement.removeClass('active');
+              flashTimer = $timeout(function hideTooltip() {
+
+                onTooltipHide(event);
+
+              }, parseInt($attrs.tooltipFlashTime, 10));
+
             }
           }
           , registerOnScrollFrom = function registerOnScrollFrom(theElement) {
