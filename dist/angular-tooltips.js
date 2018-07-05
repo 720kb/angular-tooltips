@@ -257,7 +257,8 @@
       'size': '',
       'speed': 'steady',
       'tooltipTemplateUrlCache': false,
-      'show': null
+      'show': null,
+      'flashTime': null
     };
 
     return {
@@ -318,6 +319,7 @@
       $attrs.tooltipSize = $attrs.tooltipSize || tooltipsConf.size;
       $attrs.tooltipSpeed = $attrs.tooltipSpeed || tooltipsConf.speed;
       $attrs.tooltipAppendToBody = $attrs.tooltipAppendToBody === 'true';
+      $attrs.tooltipFlashTime = $attrs.tooltipFlashTime || tooltipsConf.flashTime;
 
       $transcludeFunc($scope, function onTransclusionDone(element, scope) {
         var attributes = getAttributesToAdd(element)

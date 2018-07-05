@@ -110,6 +110,7 @@ Sometimes you may need to set all of your tooltips options in one place, you can
     'size': 'large',
     'speed': 'slow',
     'tooltipTemplateUrlCache': true
+    'flashTime': '2000'
     //etc...
   });
 }])
