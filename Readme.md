@@ -98,7 +98,7 @@ tooltip-speed="" | String('fast', 'slow', 'medium') | 'medium' | Set your toolti
 tooltip-hidden="" | String(Boolean) | false | Hide (at all) the tooltip
 tooltip-append-to-body="" | String(Boolean) | false | This attribute clones the tooltip and append this directly on body. This enables the tooltip position also, for instance, if you have an scrolling area. **This option does heavy javascript calculation.**
 tooltip-show="" | String(Boolean) | false | Show/Hide the tooltip "manually"
-
+tooltip-flash-time="" | String(Integer) | null | Number of milliseconds before the tooltip automatically dissapears
 
 ## Globals
 Sometimes you may need to set all of your tooltips options in one place, you can achieve this using `tooltipsConfProvider` like this:
@@ -110,6 +110,7 @@ Sometimes you may need to set all of your tooltips options in one place, you can
     'size': 'large',
     'speed': 'slow',
     'tooltipTemplateUrlCache': true
+    'flashTime': '2000'
     //etc...
   });
 }])
