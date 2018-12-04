@@ -6,7 +6,7 @@
  * http://720kb.github.io/angular-tooltips
  * 
  * MIT license
- * Tue Jun 20 2017
+ * Tue Dec 04 2018
  */
 /*global angular,window*/
 (function withAngular(angular, window) {
@@ -55,7 +55,9 @@
         }
         addCallback(callback);
       },
-      'remove': function remove() {
+      'remove': function remove(callback) {
+        callbacks.splice(callbacks.indexOf(callback), 1);
+
         if (!callbacks.length) {
           window.clearTimeout(resizeTimeout);
           window.removeEventListener('resize', resize);
@@ -722,6 +724,15 @@
               oldSpeed = newValue;
             }
           }
+          , onResize = function onResize() {
+
+            registerOnScrollFrom(tooltipElement);
+          }
+          , registerResize = function registerResize() {
+
+            calculateIfMultiLine();
+            onTooltipShow();
+          }
           , unregisterOnTooltipTemplateChange = $attrs.$observe('tooltipTemplate', onTooltipTemplateChange)
           , unregisterOnTooltipTemplateUrlChange = $attrs.$observe('tooltipTemplateUrl', onTooltipTemplateUrlChange)
           , unregisterOnTooltipTemplateUrlCacheChange = $attrs.$observe('tooltipTemplateUrlCache', onTooltipTemplateUrlCacheChange)
@@ -759,18 +770,11 @@
 
         if ($attrs.tooltipAppendToBody) {
 
-          resizeObserver.add(function onResize() {
-
-            registerOnScrollFrom(tooltipElement);
-          });
+          resizeObserver.add(onResize);
           registerOnScrollFrom(tooltipElement);
         }
 
-        resizeObserver.add(function registerResize() {
-
-          calculateIfMultiLine();
-          onTooltipShow();
-        });
+        resizeObserver.add(registerResize);
 
         $timeout(function doLater() {
 
@@ -794,7 +798,10 @@
           unregisterOnTooltipSizeChange();
           unregisterOnTooltipSpeedChange();
           unregisterTipContentChangeWatcher();
-          resizeObserver.remove();
+
+          resizeObserver.remove(onResize);
+          resizeObserver.remove(registerResize);
+
           element.off($attrs.tooltipShowTrigger + ' ' + $attrs.tooltipHideTrigger);
         });
       });
